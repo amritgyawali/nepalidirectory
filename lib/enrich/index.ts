@@ -22,6 +22,8 @@ export {
   seedListingsFromData,
   slugify,
 } from "./listing-repo";
+export { PostgresEmbeddingRepository, PostgresListingRepository } from "./postgres-repo";
+export { createEmbeddingRepository, createListingRepository } from "./factory";
 export { buildFactsJson, buildTaxonomyJson, validateEnrichment } from "./facts";
 export { buildTaxonomy } from "./taxonomy";
 export { makeEnrichListingHandler } from "./enrich-listing";

@@ -2,6 +2,7 @@
 
 import {
   BarChart3,
+  BrainCircuit,
   Building2,
   ClipboardList,
   Gauge,
@@ -27,6 +28,7 @@ const navItems = [
   { label: "Users", href: routes.superAdminUsers, icon: UsersRound },
   { label: "Referrals", href: routes.superAdminReferrals, icon: BarChart3 },
   { label: "Controls", href: routes.superAdminControls, icon: SlidersHorizontal },
+  { label: "AI Console", href: routes.adminAi, icon: BrainCircuit },
   { label: "Audit Log", href: routes.superAdminAudit, icon: ClipboardList },
   { label: "Settings", href: routes.superAdminSettings, icon: Settings2 }
 ];

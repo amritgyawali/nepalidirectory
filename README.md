@@ -4,12 +4,47 @@ Nepal business directory — a Next.js 15 (App Router) + React 19 + TypeScript a
 being transformed into an AI-native local discovery platform per
 [`NEPALIDIRECTORY_AI_BUILD_PROMPT.md`](./NEPALIDIRECTORY_AI_BUILD_PROMPT.md), phase by phase.
 
+Repo: [github.com/amritgyawali/nepalidirectory](https://github.com/amritgyawali/nepalidirectory)
+
 ## Getting started
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
+cp .env.example .env.local   # fill in Supabase + any AI keys
+npm run dev                  # http://localhost:3000
 ```
+
+## Database — Supabase
+
+The database is **Supabase (Postgres)**. Client helpers follow the Supabase SSR pattern:
+
+- `utils/supabase/server.ts` — server client (Server Components / Route Handlers / Actions).
+- `utils/supabase/client.ts` — browser client for Client Components.
+- `utils/supabase/middleware.ts` + root `middleware.ts` — refresh the auth session per request.
+
+Env (`.env.local`, gitignored):
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://<ref>.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...   # anon, browser-safe (RLS-protected)
+SUPABASE_SERVICE_ROLE_KEY=...     # server-only; background jobs/imports (bypasses RLS)
+DATABASE_URL=postgres://...       # Postgres conn string; migrations + queue + pgvector
+```
+
+Usage:
+
+```ts
+import { cookies } from "next/headers";
+import { createClient } from "@/utils/supabase/server";
+
+const supabase = createClient(await cookies());
+const { data } = await supabase.from("listings").select();
+```
+
+Applying the SQL schema: run `db/migrations/*.sql` (V1…V6) against Supabase — via the SQL
+Editor, `supabase db push`, or `psql "$DATABASE_URL" -f db/migrations/V1__ai_core.sql`. The
+in-memory stores (queue, listings, embeddings, …) remain the default until `DATABASE_URL` is set,
+so the app and tests run with zero DB today.
 
 Scripts:
 

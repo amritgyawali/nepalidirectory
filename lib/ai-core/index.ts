@@ -41,7 +41,21 @@ export { InMemoryCacheRepository } from "./stores/cache-repo";
 export { InMemoryUsageLogRepository } from "./stores/usage-repo";
 export { InMemoryBudgetTracker } from "./stores/budget-tracker";
 export { PromptRegistry } from "./prompts/registry";
-export { SEED_TEMPLATES, LISTING_ENRICH_V1 } from "./prompts/seed";
+export {
+  SEED_TEMPLATES,
+  LISTING_ENRICH_V1,
+  MERGE_ADJUDICATE_V1,
+  ATTRIBUTE_EXTRACT_V1,
+  TREND_SELECTOR_V1,
+  BLOG_WRITER_V1,
+  BLOG_FACTCHECK_V1,
+  NL_QUERY_PARSER_V1,
+  CONCIERGE_V1,
+  REVIEW_SUMMARIZER_V1,
+  REVIEW_REPLY_DRAFTER_V1,
+  CATEGORY_INTRO_V1,
+  TRANSLATE_NE_V1,
+} from "./prompts/seed";
 export {
   AllProvidersExhaustedError,
   JsonValidationError,
@@ -54,6 +68,7 @@ export { sha256 } from "./hash";
 export { InMemoryJobRepository } from "./queue/memory-repo";
 export { PostgresJobRepository } from "./queue/pg-repo";
 export { createJobRepository } from "./queue/factory";
+export { createPgSqlExecutor } from "./queue/pg-client";
 export { Worker } from "./worker";
 export { noopHandler } from "./handlers/noop";
 

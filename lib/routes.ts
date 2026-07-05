@@ -41,6 +41,7 @@ export const routes = {
   superAdminControls: "/super-admin/controls",
   superAdminAudit: "/super-admin/audit",
   superAdminSettings: "/super-admin/settings",
+  adminAi: "/admin/ai",
   deals: "/deals",
   events: "/events",
   pricing: "/pricing",

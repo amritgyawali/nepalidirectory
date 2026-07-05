@@ -57,6 +57,18 @@ export { InMemoryCrawlCacheRepository } from "./stores/crawl-cache";
 export type { CrawlCacheRepository, CrawlCacheEntry } from "./stores/crawl-cache";
 export { InMemoryClaimRepository } from "./stores/claims";
 export type { Claim, ClaimRepository, ClaimMethod, ClaimStatus } from "./stores/claims";
+export {
+  PostgresClaimRepository,
+  PostgresCrawlCacheRepository,
+  PostgresIngestBatchRepository,
+  PostgresMergeCandidateRepository,
+} from "./stores/postgres";
+export {
+  createClaimRepository,
+  createCrawlCacheRepository,
+  createIngestBatchRepository,
+  createMergeCandidateRepository,
+} from "./stores/factory";
 
 export { makeMergeAdjudicateHandler } from "./handlers/merge-adjudicate";
 export type { MergeAdjudicateDeps } from "./handlers/merge-adjudicate";

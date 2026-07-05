@@ -4,7 +4,7 @@
  */
 import { createAiCore, type AiCore, type FetchFn } from "../ai-core";
 import type { EmbeddingRepository, ListingRepository } from "./types";
-import { InMemoryEmbeddingRepository, InMemoryListingRepository } from "./listing-repo";
+import { createEmbeddingRepository, createListingRepository } from "./factory";
 import { makeEnrichListingHandler } from "./enrich-listing";
 import { makeEmbedListingHandler } from "./embed-listing";
 import { buildTaxonomy } from "./taxonomy";
@@ -23,8 +23,8 @@ export type EnrichmentRuntimeOverrides = {
 
 export function createEnrichmentRuntime(overrides: EnrichmentRuntimeOverrides = {}): EnrichmentRuntime {
   const core = createAiCore({ fetchFn: overrides.fetchFn });
-  const listings = overrides.listings ?? new InMemoryListingRepository();
-  const embeddings = overrides.embeddings ?? new InMemoryEmbeddingRepository();
+  const listings = overrides.listings ?? createListingRepository();
+  const embeddings = overrides.embeddings ?? createEmbeddingRepository();
   const taxonomy = buildTaxonomy();
 
   core.worker

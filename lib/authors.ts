@@ -10,6 +10,14 @@ export type ContentAuthor = {
 
 export const contentAuthors: ContentAuthor[] = [
   {
+    name: "NepaliDirectory Team",
+    slug: "team",
+    role: "AI-assisted editorial team",
+    description:
+      "NepaliDirectory Team publishes AI-assisted articles that are grounded in cited sources, fact-checked and controlled by configured quality gates. See the editorial policy for the full process.",
+    knowsAbout: ["Local trends", "Nepal business directory", "Editorial review", "Fact-checking"]
+  },
+  {
     name: "Nepali Directory Travel Desk",
     slug: "travel-desk",
     role: "Travel and city guide editors",

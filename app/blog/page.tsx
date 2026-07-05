@@ -6,10 +6,15 @@ import { PageHero } from "@/components/directory/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { getBlogCategories, getBlogPostUrl, getLatestBlogModifiedAt, getSortedBlogPosts, siteUrl } from "@/lib/blog";
+import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { routes } from "@/lib/routes";
 import { buildBlogKeywords, buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
 
-const sortedBlogPosts = getSortedBlogPosts();
+// AI-generated posts publish after a human editorial review (prompt §8.5); revalidate
+// periodically so a freshly-published post appears in the index without a full redeploy.
+export const revalidate = 300;
+
+const curatedPosts = getSortedBlogPosts();
 const categories = getBlogCategories();
 const blogKeywords = uniqueKeywords([
   "Nepal blog",
@@ -20,7 +25,7 @@ const blogKeywords = uniqueKeywords([
   "Nepal local SEO",
   "Nepal hotels guide",
   "Kathmandu home services",
-  ...sortedBlogPosts.flatMap((post) => buildBlogKeywords(post))
+  ...curatedPosts.flatMap((post) => buildBlogKeywords(post))
 ]);
 
 export const metadata: Metadata = {
@@ -52,7 +57,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: sortedBlogPosts[0].image,
+        url: curatedPosts[0].image,
         width: 1200,
         height: 675,
         alt: "Nepali Directory local guide articles"
@@ -63,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nepal Blog: Local Guides and Business Advice",
     description: "Practical Nepal guides for travel, food, services, hotels and business growth.",
-    images: [sortedBlogPosts[0].image]
+    images: [curatedPosts[0].image]
   },
   other: {
     "content-language": "en",
@@ -73,13 +78,15 @@ export const metadata: Metadata = {
   }
 };
 
-export default function BlogPage() {
-  const [featuredPost, ...remainingPosts] = sortedBlogPosts;
+export default async function BlogPage() {
+  const enginePosts = await getPublishedEnginePosts();
+  const allPosts = [...curatedPosts, ...enginePosts].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  const [featuredPost, ...remainingPosts] = allPosts;
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Nepali Directory Blog Posts",
-    itemListElement: sortedBlogPosts.map((post, index) => ({
+    itemListElement: allPosts.map((post, index) => ({
       "@type": "ListItem",
       position: index + 1,
       url: getBlogPostUrl(post),
@@ -95,7 +102,7 @@ export default function BlogPage() {
       "Practical Nepal guides for travel, restaurants, home services, healthcare and local business growth.",
     publisher,
     keywords: blogKeywords.join(", "),
-    blogPost: sortedBlogPosts.map((post) => ({
+    blogPost: allPosts.map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
       url: getBlogPostUrl(post),

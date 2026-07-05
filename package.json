@@ -12,18 +12,40 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.110.0",
     "lucide-react": "^0.468.0",
     "next": "^15.1.0",
+    "pg": "^8.13.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
+    "@types/pg": "^8.11.11",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
     "eslint": "^9.17.0",
     "eslint-config-next": "^15.1.0",
     "typescript": "^5.7.2",
     "vitest": "^4.1.9"
-  }
+  },
+  "description": "Nepal business directory — a Next.js 15 (App Router) + React 19 + TypeScript app. This repo is being transformed into an AI-native local discovery platform per [`NEPALIDIRECTORY_AI_BUILD_PROMPT.md`](./NEPALIDIRECTORY_AI_BUILD_PROMPT.md), phase by phase.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amritgyawali/nepalidirectory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/amritgyawali/nepalidirectory/issues"
+  },
+  "homepage": "https://github.com/amritgyawali/nepalidirectory#readme"
 }

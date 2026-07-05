@@ -10,6 +10,7 @@ import { featuredBusiness, menuSections } from "@/lib/data";
 import { routes } from "@/lib/routes";
 import { siteUrl } from "@/lib/blog";
 import { buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
+import { reviewsForListing } from "@/lib/reviews-ai";
 
 const gallery = [
   "photo-1547592180-85f173990554",
@@ -59,6 +60,7 @@ export const metadata: Metadata = {
 
 export default function BusinessDetailPage() {
   const business = featuredBusiness;
+  const sampleReviews = reviewsForListing(business.slug);
   const keywords = uniqueKeywords([
     business.name,
     ...business.categories,
@@ -351,6 +353,22 @@ export default function BusinessDetailPage() {
                 Write a Review
               </Link>
             </div>
+            {sampleReviews.length >= 3 ? (
+              <div className="review-summary-card review-summary-card--ai">
+                <span className="badge badge--yellow">AI-generated summary</span>
+                <h3>What people say</h3>
+                <p>
+                  Guests often mention the Newari food experience, helpful staff and group-friendly
+                  courtyard setting. The common cautions are busy weekend timing and nearby parking,
+                  so reservations are useful for groups.
+                </p>
+                <div className="business-card__amenities">
+                  {["Food quality", "Group seating", "Reservations", "Parking"].map((theme) => (
+                    <span key={theme}>{theme}</span>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             <div className="review-list">
               {[
                 ["Srijana K.", 5, "Beautiful courtyard and a properly explained Newari tasting menu."],

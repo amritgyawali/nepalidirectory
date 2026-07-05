@@ -15,7 +15,12 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/dashboard/"]
       }
     ],
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: [
+      `${siteUrl}/sitemap.xml`,
+      `${siteUrl}/sitemap-listings-1.xml`,
+      `${siteUrl}/sitemap-blog.xml`,
+      `${siteUrl}/sitemap-categories.xml`,
+    ],
     host: siteUrl
   };
 }

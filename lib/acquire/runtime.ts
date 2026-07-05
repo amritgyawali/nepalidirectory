@@ -4,10 +4,16 @@
  * client. Registers the MERGE_ADJUDICATE handler on the shared worker.
  */
 import { createEnrichmentRuntime, type EnrichmentRuntime, type EnrichmentRuntimeOverrides } from "../enrich";
-import { InMemoryMergeCandidateRepository, type MergeCandidateRepository } from "./stores/merge-candidates";
-import { InMemoryIngestBatchRepository, type IngestBatchRepository } from "./stores/ingest-batches";
-import { InMemoryCrawlCacheRepository, type CrawlCacheRepository } from "./stores/crawl-cache";
-import { InMemoryClaimRepository, type ClaimRepository } from "./stores/claims";
+import type { MergeCandidateRepository } from "./stores/merge-candidates";
+import type { IngestBatchRepository } from "./stores/ingest-batches";
+import type { CrawlCacheRepository } from "./stores/crawl-cache";
+import type { ClaimRepository } from "./stores/claims";
+import {
+  createClaimRepository,
+  createCrawlCacheRepository,
+  createIngestBatchRepository,
+  createMergeCandidateRepository,
+} from "./stores/factory";
 import { EntityResolver } from "./dedup/resolver";
 import { GeographyResolver } from "./geo/resolver";
 import { AcquisitionService } from "./service";
@@ -38,10 +44,10 @@ export function createAcquisitionRuntime(
 ): AcquisitionRuntime {
   const enrich = createEnrichmentRuntime(overrides);
 
-  const mergeCandidates = new InMemoryMergeCandidateRepository();
-  const ingestBatches = new InMemoryIngestBatchRepository();
-  const crawlCache = new InMemoryCrawlCacheRepository();
-  const claimsRepo = new InMemoryClaimRepository();
+  const mergeCandidates = createMergeCandidateRepository();
+  const ingestBatches = createIngestBatchRepository();
+  const crawlCache = createCrawlCacheRepository();
+  const claimsRepo = createClaimRepository();
 
   const resolver = new EntityResolver((text) => enrich.providers.embedder().embed(text));
   const geo = new GeographyResolver();

@@ -6,6 +6,9 @@ dist/
 .env*
 !.env.example
 
+# Supabase CLI local link cache (project ref/pooler URL metadata, not secrets, but local-only)
+supabase/.temp/
+
 *.log
 tsconfig.tsbuildinfo
 .DS_Store

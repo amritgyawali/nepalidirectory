@@ -29,6 +29,9 @@ export type Listing = {
   // --- enrichment / provenance (§7, §13) ---
   description?: string;
   descriptionSource?: string; // 'owner' | 'ai_v1' | ...  (owner is never overwritten)
+  /** Nepali translation of `description` (prompt sec. 10/11, job TRANSLATE_NE). Drives hreflang. */
+  descriptionNe?: string;
+  descriptionNeUpdatedAt?: Date | null;
   metaTitle?: string;
   metaDescription?: string;
   tags: string[];

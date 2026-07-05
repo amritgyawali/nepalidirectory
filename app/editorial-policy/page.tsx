@@ -39,6 +39,10 @@ const standards = [
   {
     title: "No paid ranking claim",
     body: "Sponsored placements and advertising should not be presented as independent editorial rankings."
+  },
+  {
+    title: "AI-assisted articles with publish gates",
+    body: "Posts bylined \"NepaliDirectory Team\" start as an AI draft grounded only in cited source articles, run through automated fact-checking, and publish only when the configured quality gate passes. Editors can still review, update or reject AI-assisted posts after generation."
   }
 ];
 

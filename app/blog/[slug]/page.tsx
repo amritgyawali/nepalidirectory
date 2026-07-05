@@ -6,7 +6,8 @@ import { GuideCard } from "@/components/content/GuideCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { getAuthorByName, getAuthorUrl } from "@/lib/authors";
-import { blogPosts, getBlogPost, getBlogPostUrl, getSortedBlogPosts, siteUrl } from "@/lib/blog";
+import { blogPosts, getBlogPost, getBlogPostUrl, getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
+import { ENGINE_AUTHOR, getPublishedEnginePost, getPublishedEnginePosts } from "@/lib/blog-engine";
 import { routes } from "@/lib/routes";
 import {
   buildBlogKeywords,
@@ -20,13 +21,21 @@ type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
 
+// AI-generated posts publish after a human editorial review (prompt §8.5); revalidate periodically
+// so a freshly-published post shows up without a full redeploy.
+export const revalidate = 300;
+
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
+async function getPost(slug: string): Promise<BlogPost | null> {
+  return getBlogPost(slug) ?? (await getPublishedEnginePost(slug));
+}
+
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getPost(slug);
 
   if (!post) {
     return {
@@ -99,7 +108,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();
@@ -108,7 +117,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const keywords = buildBlogKeywords(post);
   const quickAnswer = getBlogQuickAnswer(post);
   const author = getAuthorByName(post.author);
-  const relatedPosts = getSortedBlogPosts()
+  const isEngineAuthored = post.author === ENGINE_AUTHOR;
+  const enginePosts = await getPublishedEnginePosts();
+  const relatedPosts = [...getSortedBlogPosts(), ...enginePosts]
     .filter((candidate) => candidate.slug !== post.slug)
     .filter((candidate) => candidate.category === post.category || candidate.tags.some((tag) => post.tags.includes(tag)))
     .slice(0, 3);
@@ -218,7 +229,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <h1>{post.title}</h1>
           <p>{post.excerpt}</p>
           <div className="article-meta">
-            <Link href={`/authors/${author.slug}`}>{post.author}</Link>
+            <Link href={isEngineAuthored ? routes.editorialPolicy : `/authors/${author.slug}`}>{post.author}</Link>
             <time dateTime={post.publishedAt}>{post.date}</time>
             <span>
               <Clock size={14} aria-hidden />
@@ -260,11 +271,45 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <h2 id="fact-panel-title">Source and fact notes</h2>
             <p>
               This guide is maintained by{" "}
-              <Link href={`/authors/${author.slug}`}>{post.author}</Link>. It was last reviewed on{" "}
+              <Link href={isEngineAuthored ? routes.editorialPolicy : `/authors/${author.slug}`}>
+                {post.author}
+              </Link>
+              . It was last reviewed on{" "}
               <time dateTime={post.modifiedAt}>{post.modifiedAt}</time> for local search clarity,
               answer accuracy and practical Nepal context.
+              {isEngineAuthored ? (
+                <>
+                  {" "}
+                  This article is AI-assisted and human-reviewed — see the{" "}
+                  <Link href={routes.editorialPolicy}>editorial policy</Link>.
+                </>
+              ) : null}
             </p>
           </section>
+          {isEngineAuthored ? (
+            <section className="answer-summary" aria-labelledby="ai-page-metadata-title">
+              <h2 id="ai-page-metadata-title">AI page metadata</h2>
+              <p>{post.description}</p>
+              <dl className="metadata-list">
+                <div>
+                  <dt>SEO title</dt>
+                  <dd>{post.seoTitle}</dd>
+                </div>
+                <div>
+                  <dt>Meta description</dt>
+                  <dd>{post.description}</dd>
+                </div>
+                <div>
+                  <dt>Primary keywords</dt>
+                  <dd>{post.keywords.join(", ")}</dd>
+                </div>
+                <div>
+                  <dt>Page sections</dt>
+                  <dd>{post.sections.map((section) => section.heading).join(", ")}</dd>
+                </div>
+              </dl>
+            </section>
+          ) : null}
           <section className="answer-summary" aria-labelledby="continue-research-title">
             <h2 id="continue-research-title">Continue researching</h2>
             <p>
