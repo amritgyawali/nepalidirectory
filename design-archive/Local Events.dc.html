@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; line-height: 1.45; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    h1, h2, h3, p { margin: 0; padding: 0; }
+  </style>
+</helmet>
+<!-- HEADER -->
+<header style="background:#fff;border-bottom:1px solid #e3e5e8;position:sticky;top:0;z-index:50;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<nav style="display:flex;gap:20px;font-size:14px;font-weight:600;">
+<a href="Home.dc.html" style="color:#1a1a1a;">Back to Directory</a>
+</nav>
+</div>
+</header>
+<!-- PAGE HEAD -->
+<section style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:40px 24px;">
+<h1 style="font-size:36px;font-weight:800;letter-spacing:-1px;margin-bottom:12px;">Local Events</h1>
+<p style="color:#6b7280;font-size:16px;max-width:600px;">Discover what's happening near you. Live music, cultural festivals, and community gatherings.</p>
+<div style="display:flex;gap:12px;margin-top:24px;">
+<select style="padding:10px 14px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;font-weight:600;outline:0;">
+<option>Kathmandu</option>
+<option>Pokhara</option>
+<option>Chitwan</option>
+</select>
+<select style="padding:10px 14px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;font-weight:600;outline:0;">
+<option>This Week</option>
+<option>This Weekend</option>
+<option>Next Month</option>
+</select>
+</div>
+</div>
+</section>
+<!-- EVENTS LIST -->
+<main style="max-width:1180px;margin:0 auto;padding:40px 24px 80px;display:flex;flex-direction:column;gap:32px;">
+<!-- Event 1 -->
+<article style="display:flex;gap:24px;border:1px solid #e3e5e8;border-radius:12px;padding:24px;background:#fff;">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fffbe6;color:#1a1a1a;border:1px solid #ffe9a8;border-radius:8px;min-width:80px;padding:12px;">
+<span style="font-size:12px;font-weight:800;text-transform:uppercase;color:#d97706;">JUL</span>
+<span style="font-size:28px;font-weight:800;line-height:1;">12</span>
+</div>
+<div style="flex:1;">
+<div style="font-size:12px;color:#6b7280;font-weight:700;margin-bottom:4px;">MUSIC • 7:00 PM</div>
+<h2 style="font-size:20px;font-weight:800;margin-bottom:8px;"><a href="Business Detail.dc.html" style="color:#1a6dcc;">Live Acoustic Night at Purple Haze</a></h2>
+<p style="font-size:14px;color:#4b5563;margin-bottom:12px;">Join us for a relaxing evening of live acoustic music featuring local bands. Entry is free before 8 PM.</p>
+<div style="font-size:13px;color:#1a1a1a;font-weight:600;">📍 Purple Haze Rock Bar, Thamel</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;justify-content:center;flex-shrink:0;">
+<button onclick="alert('Saved to your calendar!')" style="background:#f7f8fa;border:1px solid #d3d6db;color:#1a1a1a;padding:8px 16px;border-radius:4px;font-weight:700;font-size:13px;">Save Event</button>
+</div>
+</article>
+<!-- Event 2 -->
+<article style="display:flex;gap:24px;border:1px solid #e3e5e8;border-radius:12px;padding:24px;background:#fff;">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fffbe6;color:#1a1a1a;border:1px solid #ffe9a8;border-radius:8px;min-width:80px;padding:12px;">
+<span style="font-size:12px;font-weight:800;text-transform:uppercase;color:#d97706;">JUL</span>
+<span style="font-size:28px;font-weight:800;line-height:1;">15</span>
+</div>
+<div style="flex:1;">
+<div style="font-size:12px;color:#6b7280;font-weight:700;margin-bottom:4px;">FOOD &amp; DRINK • 12:00 PM</div>
+<h2 style="font-size:20px;font-weight:800;margin-bottom:8px;"><a href="Business Detail.dc.html" style="color:#1a6dcc;">Newari Food Festival</a></h2>
+<p style="font-size:14px;color:#4b5563;margin-bottom:12px;">Experience authentic Newari cuisine from top chefs. Over 20 stalls offering Yomari, Bara, and Chhoila.</p>
+<div style="font-size:13px;color:#1a1a1a;font-weight:600;">📍 Patan Durbar Square, Lalitpur</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;justify-content:center;flex-shrink:0;">
+<button onclick="alert('Saved to your calendar!')" style="background:#f7f8fa;border:1px solid #d3d6db;color:#1a1a1a;padding:8px 16px;border-radius:4px;font-weight:700;font-size:13px;">Save Event</button>
+</div>
+</article>
+<!-- Event 3 -->
+<article style="display:flex;gap:24px;border:1px solid #e3e5e8;border-radius:12px;padding:24px;background:#fff;">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fffbe6;color:#1a1a1a;border:1px solid #ffe9a8;border-radius:8px;min-width:80px;padding:12px;">
+<span style="font-size:12px;font-weight:800;text-transform:uppercase;color:#d97706;">AUG</span>
+<span style="font-size:28px;font-weight:800;line-height:1;">02</span>
+</div>
+<div style="flex:1;">
+<div style="font-size:12px;color:#6b7280;font-weight:700;margin-bottom:4px;">CULTURE • 9:00 AM</div>
+<h2 style="font-size:20px;font-weight:800;margin-bottom:8px;"><a href="City Landing.dc.html" style="color:#1a6dcc;">Gai Jatra Parade</a></h2>
+<p style="font-size:14px;color:#4b5563;margin-bottom:12px;">Annual festival of cows. Join the procession and celebrate this unique cultural heritage.</p>
+<div style="font-size:13px;color:#1a1a1a;font-weight:600;">📍 Basantapur Durbar Square, Kathmandu</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;justify-content:center;flex-shrink:0;">
+<button onclick="alert('Saved to your calendar!')" style="background:#f7f8fa;border:1px solid #d3d6db;color:#1a1a1a;padding:8px 16px;border-radius:4px;font-weight:700;font-size:13px;">Save Event</button>
+</div>
+</article>
+<div style="text-align:center;margin-top:20px;">
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:10px 24px;border-radius:4px;font-weight:700;font-size:14px;">Load More Events</button>
+</div>
+</main>
+<footer style="text-align:center;padding:40px 24px;font-size:12px;color:#6b7280;border-top:1px solid #e3e5e8;">
+<a href="Home.dc.html" style="color:#6b7280;">Home</a> · <a href="Content Page.dc.html" style="color:#6b7280;">Privacy</a> · <a href="Content Page.dc.html" style="color:#6b7280;">Terms</a> · <a href="Help.dc.html" style="color:#6b7280;">Help</a> · © 2026 NepaliDirectory
+</footer>
+</x-dc>
+</body>
+</html>

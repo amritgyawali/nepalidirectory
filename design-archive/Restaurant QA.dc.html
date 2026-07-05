@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurants Q&amp;A - Nepali Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#005cb4",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#a9c7ff",
+                    "surface-container": "#eceef1",
+                    "outline-variant": "#d0c6ab",
+                    "on-background": "#191c1e",
+                    "outline": "#7f775f",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#ebc300",
+                    "surface-variant": "#e1e3e6",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "tertiary-fixed": "#d6e3ff",
+                    "background": "#f8f9fc",
+                    "surface-container-high": "#e6e8eb",
+                    "surface": "#f8f9fc",
+                    "secondary-container": "#e2dfde",
+                    "primary-container": "#ffd400",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-dim": "#d8dadd",
+                    "on-secondary-container": "#636262",
+                    "on-primary-container": "#705c00",
+                    "inverse-surface": "#2d3133",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-primary-fixed": "#231b00",
+                    "surface-tint": "#715d00",
+                    "inverse-on-surface": "#eff1f4",
+                    "surface-container-low": "#f2f4f7",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#ffe177",
+                    "tertiary-container": "#c5d8ff",
+                    "secondary": "#5f5e5e",
+                    "on-tertiary-fixed-variant": "#00468b",
+                    "surface-bright": "#f8f9fc",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#554500",
+                    "tertiary": "#005db6",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-surface-variant": "#4d4632",
+                    "inverse-primary": "#ebc300",
+                    "on-surface": "#191c1e",
+                    "surface-container-highest": "#e1e3e6",
+                    "on-tertiary-fixed": "#001b3d",
+                    "primary": "#715d00",
+                    "on-error-container": "#93000a",
+                    
+                    // Specific brand overrides from prompt to ensure accuracy if config colors differ slightly from prompt hexes
+                    "brand-yellow": "#FFD400",
+                    "brand-yellow-tint": "#fff7d1",
+                    "brand-black": "#1a1a1a",
+                    "brand-gray-dark": "#4b5563",
+                    "brand-gray-muted": "#6b7280",
+                    "brand-border": "#e3e5e8",
+                    "brand-link": "#1a6dcc",
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "display": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #f7f8fa; color: #1a1a1a; }
+        .hero-gradient { background: linear-gradient(135deg, rgba(255,212,0,0.1) 0%, rgba(255,255,255,0) 100%); }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-inverse-surface fixed top-0 w-full z-50 border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="max-w-[1180px] mx-auto px-6 h-16 flex items-center justify-between">
+<!-- Brand -->
+<a class="flex items-center gap-2 group" href="../Home.dc.html">
+<div class="bg-primary-container text-on-primary-container font-headline font-black px-2 py-1 rounded-[3px] text-xl tracking-tighter transition-transform group-hover:scale-105">ND</div>
+<div class="font-headline font-bold text-on-surface dark:text-on-surface-variant text-lg leading-tight">
+                    Nepali <br/><span class="text-brand-gray-muted text-sm font-medium">Directory</span>
+</div>
+</a>
+<!-- Search (Header Dual Search per Design System) -->
+<div class="hidden md:flex flex-1 max-w-2xl mx-8 bg-white border border-brand-border rounded-lg overflow-hidden shadow-sm focus-within:ring-2 focus-within:ring-brand-yellow focus-within:border-brand-yellow transition-all">
+<div class="flex-1 flex items-center px-4 border-r border-brand-border">
+<span class="material-symbols-outlined text-brand-gray-muted mr-2" style="font-variation-settings: 'FILL' 0;">search</span>
+<input class="w-full border-none focus:ring-0 text-sm py-2 text-brand-black placeholder-brand-gray-muted font-body" placeholder="Find a business (e.g. momo, cafe)" type="text"/>
+</div>
+<div class="w-1/3 flex items-center px-4">
+<span class="material-symbols-outlined text-brand-gray-muted mr-2" style="font-variation-settings: 'FILL' 0;">location_on</span>
+<input class="w-full border-none focus:ring-0 text-sm py-2 text-brand-black placeholder-brand-gray-muted font-body" placeholder="Location" type="text"/>
+</div>
+<button class="bg-brand-yellow text-brand-black font-bold px-6 py-2 hover:bg-yellow-400 transition-colors text-sm tracking-wide" onclick="window.location.href='../Search Results.dc.html';">FIND</button>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden lg:flex items-center gap-6 font-body font-medium text-on-surface dark:text-on-surface-variant">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 transition-transform" href="../Advertise.dc.html">Advertise</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 transition-transform" href="../Write Review.dc.html">Write a Review</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 transition-transform" href="../Login.dc.html">Log In</a>
+<a class="bg-brand-black text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-800 transition-colors" href="../Register.dc.html">Sign Up</a>
+</nav>
+<!-- Mobile Menu Toggle -->
+<button class="lg:hidden text-brand-black" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Breadcrumb -->
+<div class="w-full bg-[#f7f8fa] border-b border-brand-border mt-16 sticky top-16 z-40">
+<div class="max-w-[1180px] mx-auto px-6 py-2">
+<nav aria-label="Breadcrumb" class="flex text-[12px] font-normal text-brand-gray-muted font-body">
+<ol class="inline-flex items-center space-x-1 md:space-x-2">
+<li class="inline-flex items-center">
+<a class="hover:text-brand-link transition-colors" href="../Home.dc.html">Home</a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[14px] mx-1">chevron_right</span>
+<a class="hover:text-brand-link transition-colors" href="QA Hub.dc.html">Community Q&amp;A</a>
+</div>
+</li>
+<li aria-current="page">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[14px] mx-1">chevron_right</span>
+<span class="text-brand-black font-medium">Restaurants</span>
+</div>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+<!-- Main Content Area -->
+<main class="flex-grow max-w-[1180px] mx-auto w-full px-6 py-8 flex flex-col md:flex-row gap-8">
+<!-- SideNavBar -->
+<aside class="w-full md:w-64 flex-shrink-0">
+<div class="bg-transparent w-full md:w-64 sticky top-32 flex flex-col gap-2 p-4">
+<div class="mb-4">
+<h3 class="font-label font-bold text-sm tracking-wide uppercase text-brand-black mb-1">Categories</h3>
+<p class="text-xs text-brand-gray-muted">Browse by Topic</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 p-2 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer font-label font-bold text-sm tracking-wide uppercase" href="QA Hub.dc.html">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">forum</span>
+                        All Questions
+                    </a>
+<a class="flex items-center gap-3 p-2 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer font-label font-bold text-sm tracking-wide uppercase" href="../Home.dc.html">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">build</span>
+                        Local Services
+                    </a>
+<a class="flex items-center gap-3 p-2 text-on-primary-fixed-variant bg-tertiary-fixed rounded-xl font-bold cursor-pointer font-label text-sm tracking-wide uppercase" href="../restaurants_category_nepali_directory/code.html">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+                        Restaurants
+                    </a>
+<a class="flex items-center gap-3 p-2 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer font-label font-bold text-sm tracking-wide uppercase" href="../Home.dc.html">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">shopping_bag</span>
+                        Shopping
+                    </a>
+<a class="flex items-center gap-3 p-2 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer font-label font-bold text-sm tracking-wide uppercase" href="../Home.dc.html">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">explore</span>
+                        Travel
+                    </a>
+<a class="flex items-center gap-3 p-2 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer font-label font-bold text-sm tracking-wide uppercase" href="../Home.dc.html">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">groups</span>
+                        Community
+                    </a>
+</nav>
+<div class="mt-8 mb-4">
+<h3 class="font-label font-bold text-sm tracking-wide uppercase text-brand-black mb-1">Discover</h3>
+</div>
+<nav class="flex flex-col gap-1 border-t border-brand-border pt-4">
+<a class="flex items-center gap-3 p-2 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer font-label font-bold text-sm tracking-wide uppercase" href="../Home.dc.html">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">trending_up</span>
+                        Trending
+                    </a>
+<a class="flex items-center gap-3 p-2 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer font-label font-bold text-sm tracking-wide uppercase" href="../Home.dc.html">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">quiz</span>
+                        Unanswered
+                    </a>
+</nav>
+<button class="mt-8 bg-brand-yellow text-brand-black font-bold py-3 px-4 rounded-[4px] hover:bg-yellow-400 transition-colors w-full shadow-sm flex items-center justify-center gap-2" onclick="window.location.href='../q_a_hub_nepali_directory/code.html';">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+                    Ask a Question
+                </button>
+</div>
+</aside>
+<!-- Main Q&A Feed -->
+<section class="flex-1 w-full max-w-3xl">
+<!-- Header -->
+<div class="mb-8 hero-gradient p-8 rounded-xl border border-brand-border relative overflow-hidden">
+<div class="relative z-10">
+<h1 class="font-display font-extrabold text-[40px] md:text-[52px] leading-none tracking-[-1.5px] text-brand-black mb-4">Dining in Nepal</h1>
+<p class="text-lg text-brand-gray-dark font-body max-w-xl">Ask locals for restaurant recommendations, hidden gems, and honest opinions about dining out in Kathmandu, Pokhara, and beyond.</p>
+</div>
+<!-- Decorative Element -->
+<div class="absolute -bottom-10 -right-10 opacity-10">
+<span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+</div>
+<!-- Sub-category Filters (Pills) -->
+<div class="flex flex-wrap gap-2 mb-8">
+<button class="bg-brand-black text-white px-4 py-1.5 rounded-[20px] text-xs font-bold border border-brand-black transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">All Types</button>
+<button class="bg-white text-brand-black px-4 py-1.5 rounded-[20px] text-xs font-bold border border-brand-border hover:border-brand-yellow hover:bg-brand-yellow-tint transition-colors" onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';">Newari Cuisine</button>
+<button class="bg-white text-brand-black px-4 py-1.5 rounded-[20px] text-xs font-bold border border-brand-border hover:border-brand-yellow hover:bg-brand-yellow-tint transition-colors" onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';">Thakali Khana</button>
+<button class="bg-white text-brand-black px-4 py-1.5 rounded-[20px] text-xs font-bold border border-brand-border hover:border-brand-yellow hover:bg-brand-yellow-tint transition-colors" onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';">Cafes &amp; Bakeries</button>
+<button class="bg-white text-brand-black px-4 py-1.5 rounded-[20px] text-xs font-bold border border-brand-border hover:border-brand-yellow hover:bg-brand-yellow-tint transition-colors" onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';">Fine Dining</button>
+<button class="bg-white text-brand-black px-4 py-1.5 rounded-[20px] text-xs font-bold border border-brand-border hover:border-brand-yellow hover:bg-brand-yellow-tint transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">Street Food</button>
+</div>
+<!-- Sorting/Filter Bar -->
+<div class="flex justify-between items-center mb-6 pb-2 border-b border-brand-border">
+<span class="font-bold text-sm text-brand-black">2,481 Questions</span>
+<div class="flex items-center gap-4 text-sm font-medium">
+<button class="flex items-center gap-1 text-brand-black" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined text-[18px]">sort</span> Top</button>
+<button class="flex items-center gap-1 text-brand-gray-muted hover:text-brand-black" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined text-[18px]">schedule</span> Newest</button>
+</div>
+</div>
+<!-- Q&A List -->
+<div class="space-y-4">
+<!-- Question Card 1 (Hot/Answered) -->
+<article class="bg-white border border-brand-border rounded-[8px] p-6 hover:shadow-md transition-shadow flex gap-4">
+<!-- Voting/Stats -->
+<div class="flex flex-col items-center gap-2 min-w-[60px]">
+<button class="text-brand-gray-muted hover:text-brand-yellow" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined">expand_less</span></button>
+<span class="font-bold text-lg text-brand-black">142</span>
+<button class="text-brand-gray-muted hover:text-brand-black" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined">expand_more</span></button>
+<div class="mt-2 bg-brand-yellow-tint text-[#705c00] border border-brand-yellow px-2 py-1 rounded-[4px] text-xs font-bold flex flex-col items-center">
+<span>24</span>
+<span class="font-normal text-[10px]">Answers</span>
+</div>
+</div>
+<!-- Content -->
+<div class="flex-1">
+<div class="flex gap-2 mb-2">
+<span class="bg-gray-100 text-brand-gray-dark px-2 py-0.5 rounded-[20px] text-[11px] font-bold uppercase tracking-wider">Kathmandu</span>
+<span class="bg-brand-yellow-tint text-[#705c00] px-2 py-0.5 rounded-[20px] text-[11px] font-bold uppercase tracking-wider border border-brand-yellow">Trending</span>
+</div>
+<h3 class="font-headline font-bold text-[20px] text-brand-link hover:underline mb-2 cursor-pointer leading-tight">Where can I find the most authentic Thakali Khana set in Patan area?</h3>
+<p class="text-brand-gray-dark text-sm line-clamp-2 mb-4">I'm visiting Nepal next month and staying near Patan Durbar Square. I want to try an authentic Thakali thali that locals actually eat at, not just the tourist traps. Any specific recommendations for lunch?</p>
+<!-- Top Answer Snippet -->
+<div class="bg-gray-50 border-l-4 border-brand-yellow p-3 rounded-r-[4px] mb-4">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-[#1a7d3a] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-[3px] flex items-center gap-0.5"><span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span> Local Expert</span>
+<span class="text-xs font-bold text-brand-black">Sanjay S.</span>
+<span class="text-xs text-brand-gray-muted">answered</span>
+</div>
+<p class="text-sm text-brand-black italic">"Head to Jimbu Thakali near Jhamsikhel. It's about a 15-min walk from the square. Their mutton thali is incredible and the ghee they serve on top of the rice is sourced directly from Mustang..."</p>
+</div>
+<div class="flex items-center justify-between text-xs text-brand-gray-muted">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">visibility</span> 1.2k views</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bookmark_border</span> Save</span>
+</div>
+<span>Asked 2 days ago by <span class="text-brand-link cursor-pointer">TravelerDan</span></span>
+</div>
+</div>
+</article>
+<!-- Question Card 2 -->
+<article class="bg-white border border-brand-border rounded-[8px] p-6 hover:shadow-md transition-shadow flex gap-4">
+<div class="flex flex-col items-center gap-2 min-w-[60px]">
+<button class="text-brand-gray-muted hover:text-brand-yellow" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined">expand_less</span></button>
+<span class="font-bold text-lg text-brand-black">56</span>
+<button class="text-brand-gray-muted hover:text-brand-black" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined">expand_more</span></button>
+<div class="mt-2 bg-white text-brand-gray-dark border border-brand-border px-2 py-1 rounded-[4px] text-xs font-bold flex flex-col items-center">
+<span>8</span>
+<span class="font-normal text-[10px]">Answers</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex gap-2 mb-2">
+<span class="bg-gray-100 text-brand-gray-dark px-2 py-0.5 rounded-[20px] text-[11px] font-bold uppercase tracking-wider">Pokhara</span>
+<span class="bg-gray-100 text-brand-gray-dark px-2 py-0.5 rounded-[20px] text-[11px] font-bold uppercase tracking-wider">Cafes</span>
+</div>
+<h3 class="font-headline font-bold text-[20px] text-brand-link hover:underline mb-2 cursor-pointer leading-tight">Quiet cafes with reliable Wi-Fi for remote work around Lakeside?</h3>
+<p class="text-brand-gray-dark text-sm line-clamp-2 mb-4">I need to work for a few days while in Pokhara. Looking for places with good coffee, strong internet (no constant dropouts), and comfortable seating where it's acceptable to sit for 3-4 hours with a laptop.</p>
+<div class="flex items-center justify-between text-xs text-brand-gray-muted">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">visibility</span> 450 views</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bookmark_border</span> Save</span>
+</div>
+<span>Asked 5 hours ago by <span class="text-brand-link cursor-pointer">DigitalNomadNP</span></span>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-8 flex justify-center gap-2">
+<button class="px-3 py-1 border border-brand-border rounded-[4px] text-sm font-medium text-brand-gray-muted hover:bg-gray-50 disabled:opacity-50" disabled="" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">Prev</button>
+<button class="px-3 py-1 border border-brand-yellow bg-brand-yellow-tint text-[#705c00] rounded-[4px] text-sm font-bold" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">1</button>
+<button class="px-3 py-1 border border-brand-border rounded-[4px] text-sm font-medium text-brand-black hover:bg-gray-50" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">2</button>
+<button class="px-3 py-1 border border-brand-border rounded-[4px] text-sm font-medium text-brand-black hover:bg-gray-50" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">3</button>
+<span class="px-3 py-1 text-brand-gray-muted">...</span>
+<button class="px-3 py-1 border border-brand-border rounded-[4px] text-sm font-medium text-brand-black hover:bg-gray-50" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">Next</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest w-full mt-auto">
+<div class="max-w-[1180px] mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Brand Column -->
+<div class="col-span-1">
+<div class="text-primary-container font-headline font-extrabold text-xl mb-4 flex items-center gap-2">
+<span class="bg-primary-container text-on-primary-container px-2 py-1 rounded-[3px]">ND</span>
+                    Nepali Directory
+                </div>
+<p class="font-body text-sm text-surface-variant mb-4">Nepal's trusted local business directory. Discover the best places to eat, shop, and visit.</p>
+</div>
+<!-- Links Columns -->
+<div class="col-span-1 md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
+<div class="flex flex-col gap-3 font-body text-sm text-surface-variant">
+<a class="hover:text-white transition-colors" href="About Us.dc.html">About Us</a>
+<a class="hover:text-white transition-colors" href="Contact Us.dc.html">Contact Support</a>
+<a class="hover:text-white transition-colors" href="Privacy Policy.dc.html">Privacy Policy</a>
+</div>
+<div class="flex flex-col gap-3 font-body text-sm text-surface-variant">
+<a class="hover:text-white transition-colors" href="Terms of Service.dc.html">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="../Login.dc.html">Business Login</a>
+<a class="hover:text-white transition-colors" href="../Advertise.dc.html">Advertise with Us</a>
+</div>
+<div class="flex flex-col gap-3 font-body text-sm text-surface-variant col-span-2 md:col-span-1">
+<span class="text-white font-bold mb-1">Follow Us</span>
+<div class="flex gap-4">
+<a class="hover:text-primary-container transition-colors" href="javascript:void(0)" onclick="alert('share action successful!');"><span class="material-symbols-outlined">share</span></a>
+<!-- Add actual social icons here if needed, using generic share for now -->
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-[1180px] mx-auto px-6 py-4 border-t border-gray-700 flex justify-between items-center text-xs text-surface-variant font-body">
+<p>© 2026 Nepali Directory. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

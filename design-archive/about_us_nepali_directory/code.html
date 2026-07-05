@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us - Nepali Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-dim": "#dcd9d9",
+                        "secondary": "#0062a0",
+                        "on-surface-variant": "#4d4632",
+                        "on-secondary-fixed": "#001d35",
+                        "surface-container-low": "#f6f3f2",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed": "#231b00",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#ffe177",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "outline": "#7f775f",
+                        "on-primary-container": "#705c00",
+                        "on-secondary-fixed-variant": "#00497a",
+                        "secondary-fixed": "#d0e4ff",
+                        "on-primary-fixed-variant": "#554500",
+                        "on-background": "#1c1b1b",
+                        "secondary-container": "#64b3ff",
+                        "on-secondary-container": "#004472",
+                        "surface-container": "#f0eded",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-fixed-dim": "#9ccaff",
+                        "tertiary": "#5d5f5f",
+                        "inverse-surface": "#313030",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#d8d8d8",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-container": "#ffd400",
+                        "outline-variant": "#d0c6ab",
+                        "error": "#ba1a1a",
+                        "surface": "#fcf9f8",
+                        "surface-tint": "#715d00",
+                        "on-tertiary-container": "#5c5e5e",
+                        "surface-variant": "#e5e2e1",
+                        "surface-bright": "#fcf9f8",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#eae7e7",
+                        "background": "#fcf9f8",
+                        "primary-fixed-dim": "#ebc300",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#ebc300",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-surface": "#1c1b1b",
+                        "primary": "#715d00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "stack-md": "16px",
+                        "margin-desktop": "32px",
+                        "stack-lg": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "label-bold": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "headline-sm": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-bold": ["13px", { "lineHeight": "18px", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background font-body-lg text-body-lg text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface sticky top-0 w-full z-50 border-b border-outline-variant shadow-sm hidden md:block">
+<div class="max-w-[1180px] mx-auto px-6 h-16 flex items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-xl font-extrabold text-on-surface">
+<span class="material-symbols-outlined text-primary" data-icon="book" data-weight="fill" style="font-variation-settings: 'FILL' 1;">book</span>
+                Nepali Directory
+            </div>
+<nav class="flex items-center gap-8 font-body-lg text-body-lg font-medium text-on-surface">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-high px-3 py-2 rounded-lg" href="../Advertise.dc.html">Advertise</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-high px-3 py-2 rounded-lg" href="../Write Review.dc.html">Write a Review</a>
+<a class="text-primary font-bold border-b-2 border-primary px-3 py-2 hover:bg-surface-container-high transition-colors" href="code.html">About Us</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="font-label-bold text-label-bold text-secondary hover:text-secondary-container transition-colors" onclick="window.location.href='../Login.dc.html';">Log In</button>
+<button class="bg-primary-container text-on-primary-container font-label-bold text-label-bold px-4 py-2 rounded-lg hover:bg-primary-fixed-dim transition-colors active:scale-95 duration-150" onclick="window.location.href='../Register.dc.html';">Sign Up</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="py-20 px-6 max-w-[1180px] mx-auto text-center">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-6 md:font-headline-xl font-headline-lg-mobile text-headline-lg-mobile">Nepal's Trusted Local Business Directory</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10">
+                We are dedicated to connecting the vibrant communities of Nepal with reliable, high-quality local businesses and services. Our directory is built on trust, transparency, and a commitment to fostering local economic growth.
+            </p>
+</section>
+<!-- Our Mission Section -->
+<section class="py-16 bg-surface-container-low">
+<div class="max-w-[1180px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Our Mission</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6">
+                        To empower consumers and businesses alike by providing a comprehensive, easy-to-navigate platform that bridges the gap between local needs and expert solutions. We believe in the power of community knowledge and strive to make discovering reliable services effortless and trustworthy.
+                    </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Connecting people with verified local experts.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Promoting transparency through genuine reviews.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Supporting the growth of local businesses.</span>
+</li>
+</ul>
+</div>
+<div class="h-[400px] rounded-xl overflow-hidden shadow-sm border border-outline-variant relative">
+<img class="w-full h-full object-cover" data-alt="A bright, bustling market street in a Nepali city, bathed in warm golden morning sunlight. The scene is full of vibrant colors from local produce and textiles, with a focus on a modern, clean visual aesthetic suitable for a professional business directory. The lighting emphasizes a light-mode, optimistic mood, reflecting community connection and economic vitality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6P736FUFCdvx4knrBSIkvW7sl2oupWVYvH2KnzRIGiekQlSBofs9okVFd7jHcvEUxMoUcsZHZV19A02EJDxqEj_odQr6Jf1UlbidbXQU6trHnk9VS2j6GYtEV70fOtfixZBHAXnaHhxGrczZ4HspX3kK29FK0-TIo9RAVsffvbw680aB8w8IuFljeb3IDleEyXWU3GT4NVxshGj_BlG0l3E_0eaL62jMZSDwvP_6abgH54EfmHSQYWug-c0zWGArlJv6sOkuaCp7C"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-inverse-surface w-full mt-auto">
+<div class="max-w-[1180px] mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="md:col-span-1">
+<div class="text-2xl font-black text-primary-container mb-4">Nepali Directory</div>
+<p class="font-body-sm text-body-sm text-inverse-on-surface opacity-80 mt-4">
+                    © 2026 Nepali Directory. Nepal's trusted local business directory.
+                </p>
+</div>
+<div class="flex flex-col gap-3 font-body-lg text-body-lg text-inverse-on-surface">
+<a class="text-primary-container font-bold hover:underline transition-all focus:ring-2 focus:ring-primary-container rounded" href="code.html">About Us</a>
+<a class="text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container rounded" href="../contact_us_nepali_directory/code.html">Contact Us</a>
+<a class="text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container rounded" href="../privacy_policy_nepali_directory/code.html">Privacy Policy</a>
+<a class="text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container rounded" href="../terms_of_service_nepali_directory/code.html">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-3 font-body-lg text-body-lg text-inverse-on-surface">
+<a class="text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container rounded" href="../Home.dc.html">Add Business</a>
+<a class="text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container rounded" href="../Help.dc.html">Business Support</a>
+<a class="text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container rounded" href="../Categories.dc.html">Browse Categories</a>
+<a class="text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container rounded" href="../Home.dc.html">Popular Cities</a>
+</div>
+</div>
+</footer>
+</body></html>

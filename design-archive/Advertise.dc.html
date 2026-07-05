@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; line-height: 1.45; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    img { display: block; max-width: 100%; }
+    input, textarea, select { font-family: inherit; }
+    h1, h2, h3, h4, p { margin: 0; }
+  </style>
+</helmet>
+<!-- HEADER -->
+<header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:28px;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<nav style="display:flex;align-items:center;gap:24px;font-size:14px;">
+<a href="#pricing" style="color:#1a1a1a;font-weight:600;">Pricing</a>
+<a href="#how" style="color:#1a1a1a;font-weight:600;">How it works</a>
+<a href="#faq" style="color:#1a1a1a;font-weight:600;">FAQ</a>
+<a href="tel:01-4256789" style="color:#1a1a1a;font-weight:600;display:flex;align-items:center;gap:6px;"><span>📞</span>01-4256789</a>
+<a href="Login.dc.html" style="background:#1a1a1a;color:#fff;padding:9px 16px;border-radius:4px;font-weight:600;">Log In</a>
+</nav>
+</div>
+</header>
+<!-- HERO -->
+<section style="position:relative;background:linear-gradient(180deg, #0e1116 0%, #1a1a1a 100%);color:#fff;overflow:hidden;">
+<div style="position:absolute;inset:0;background-image:radial-gradient(ellipse at 80% 20%, rgba(255,212,0,0.18) 0%, transparent 50%), radial-gradient(ellipse at 0% 100%, rgba(26,109,204,0.15) 0%, transparent 50%);"></div>
+<div style="position:relative;max-width:1180px;margin:0 auto;padding:72px 24px 80px;display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;">
+<div>
+<span style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,212,0,0.12);color:#FFD400;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1.2px;border:1px solid rgba(255,212,0,0.3);margin-bottom:24px;">
+<span style="width:6px;height:6px;border-radius:50%;background:#FFD400;"></span>
+        FOR BUSINESS OWNERS
+      </span>
+<h1 style="font-size:60px;font-weight:800;letter-spacing:-1.8px;line-height:1.05;margin:0 0 20px;">Get found by <span style="background:linear-gradient(180deg,transparent 60%,#FFD400 60%);padding:0 4px;color:#1a1a1a;">local customers</span> in Nepal.</h1>
+<p style="font-size:18px;color:#d3d6db;line-height:1.55;margin:0 0 32px;max-width:520px;">Reach 4.2 million monthly visitors searching for businesses like yours. Featured placement, verified badges, review management — starting at Rs 2,500/month.</p>
+<div style="display:flex;gap:12px;margin-bottom:36px;">
+<a href="#pricing" style="background:#FFD400;color:#1a1a1a;padding:16px 28px;border-radius:4px;font-weight:800;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+          See plans
+          <svg fill="none" height="14" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+</a>
+<a href="#lead" style="background:transparent;color:#fff;padding:16px 28px;border-radius:4px;font-weight:700;font-size:15px;text-decoration:none;border:1px solid rgba(255,255,255,0.3);">Talk to sales</a>
+</div>
+<div style="display:flex;gap:32px;font-size:13px;color:#9ca3af;flex-wrap:wrap;">
+<span style="display:flex;align-items:center;gap:6px;"><span style="color:#1a7d3a;font-weight:700;">✓</span>14-day free trial</span>
+<span style="display:flex;align-items:center;gap:6px;"><span style="color:#1a7d3a;font-weight:700;">✓</span>No setup fees</span>
+<span style="display:flex;align-items:center;gap:6px;"><span style="color:#1a7d3a;font-weight:700;">✓</span>Cancel anytime</span>
+</div>
+</div>
+<!-- Mock dashboard preview -->
+<div style="position:relative;">
+<div style="background:#fff;border-radius:14px;padding:22px;box-shadow:0 30px 70px -20px rgba(0,0,0,0.7);color:#1a1a1a;">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+<div>
+<div style="font-size:11px;color:#6b7280;font-weight:700;letter-spacing:1px;text-transform:uppercase;">This week</div>
+<div style="font-size:13px;font-weight:700;">Newa Lahana · Performance</div>
+</div>
+<div style="font-size:11px;color:#1a7d3a;font-weight:700;background:#e8f5ed;padding:4px 10px;border-radius:20px;">↑ 32% vs last week</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px;">
+<div style="background:#fff7d1;border-radius:6px;padding:12px;">
+<div style="font-size:10px;color:#6b7280;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;">Views</div>
+<div style="font-size:22px;font-weight:800;letter-spacing:-0.8px;line-height:1;margin-top:2px;">1,240</div>
+<div style="font-size:10px;color:#1a7d3a;font-weight:700;margin-top:2px;">↑ 32%</div>
+</div>
+<div style="background:#e8f4fd;border-radius:6px;padding:12px;">
+<div style="font-size:10px;color:#6b7280;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;">Calls</div>
+<div style="font-size:22px;font-weight:800;letter-spacing:-0.8px;line-height:1;margin-top:2px;">86</div>
+<div style="font-size:10px;color:#1a7d3a;font-weight:700;margin-top:2px;">↑ 24%</div>
+</div>
+<div style="background:#e8f5ed;border-radius:6px;padding:12px;">
+<div style="font-size:10px;color:#6b7280;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;">Directions</div>
+<div style="font-size:22px;font-weight:800;letter-spacing:-0.8px;line-height:1;margin-top:2px;">42</div>
+<div style="font-size:10px;color:#1a7d3a;font-weight:700;margin-top:2px;">↑ 18%</div>
+</div>
+</div>
+<!-- chart sparkline -->
+<div style="height:84px;position:relative;background:#f7f8fa;border-radius:6px;padding:8px;">
+<svg style="width:100%;height:100%;" viewbox="0 0 280 68">
+<path d="M0,52 C20,42 40,48 60,30 C80,20 100,28 120,18 C140,12 160,28 180,22 C200,16 220,8 240,12 C260,16 280,4 280,4 L280,68 L0,68 Z" fill="rgba(255,212,0,0.25)"></path>
+<path d="M0,52 C20,42 40,48 60,30 C80,20 100,28 120,18 C140,12 160,28 180,22 C200,16 220,8 240,12 C260,16 280,4 280,4" fill="none" stroke="#FFD400" stroke-width="2.5"></path>
+<circle cx="240" cy="12" fill="#1a1a1a" r="4"></circle>
+<circle cx="240" cy="12" fill="#FFD400" r="2"></circle>
+</svg>
+<div style="position:absolute;bottom:6px;left:8px;font-size:9px;color:#6b7280;">Mon</div>
+<div style="position:absolute;bottom:6px;right:8px;font-size:9px;color:#6b7280;">Sun</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:14px;border-top:1px solid #f0f2f5;">
+<div style="display:flex;align-items:center;gap:8px;">
+<span style="background:#FFD400;color:#1a1a1a;font-size:10px;padding:3px 8px;border-radius:3px;font-weight:800;letter-spacing:1px;">FEATURED</span>
+<span style="font-size:12px;color:#4b5563;">Ranked <strong>#1</strong> for "Newari restaurants"</span>
+</div>
+<svg fill="#FFD400" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+</div>
+<!-- floating badge -->
+<div style="position:absolute;top:-16px;left:-20px;background:#1a7d3a;color:#fff;padding:10px 14px;border-radius:8px;font-size:12px;font-weight:700;box-shadow:0 12px 32px rgba(0,0,0,0.4);">
+<div style="display:flex;align-items:center;gap:6px;"><span style="font-size:14px;">📞</span> Just received: incoming call</div>
+</div>
+<div style="position:absolute;bottom:-12px;right:-16px;background:#fff;color:#1a1a1a;padding:10px 14px;border-radius:8px;font-size:11px;font-weight:700;box-shadow:0 12px 32px rgba(0,0,0,0.4);">
+        ⭐ 4.7 avg · 842 reviews
+      </div>
+</div>
+</div>
+</section>
+<!-- BENEFITS GRID -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:80px 24px;">
+<div style="text-align:center;max-width:680px;margin:0 auto 48px;">
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#1a6dcc;text-transform:uppercase;margin:0 0 12px;">Why advertise</p>
+<h2 style="font-size:40px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin:0 0 14px;">Everything you need to win locally.</h2>
+<p style="font-size:16px;color:#4b5563;line-height:1.55;">Stop competing with random Facebook posts. Reach customers actively searching for your service in your city.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:10px;padding:28px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#fff7d1;border:1px solid #FFD400;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;">🥇</div>
+<h3 style="font-size:17px;font-weight:800;margin:0 0 8px;">Top placement in search</h3>
+<p style="font-size:13px;color:#4b5563;line-height:1.6;">Featured listings appear above organic results for relevant searches in your category and city.</p>
+</div>
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:10px;padding:28px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#e8f5ed;border:1px solid #b5dec3;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;">✓</div>
+<h3 style="font-size:17px;font-weight:800;margin:0 0 8px;">Verified badge &amp; trust signal</h3>
+<p style="font-size:13px;color:#4b5563;line-height:1.6;">A green "Verified" badge tells customers your business is real, current and personally managed.</p>
+</div>
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:10px;padding:28px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#e8f4fd;border:1px solid #b6d9f5;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;">📊</div>
+<h3 style="font-size:17px;font-weight:800;margin:0 0 8px;">Real-time analytics</h3>
+<p style="font-size:13px;color:#4b5563;line-height:1.6;">See exactly how many people viewed your listing, called you, asked for directions or visited your website.</p>
+</div>
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:10px;padding:28px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#f3e8fd;border:1px solid #d4b3f5;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;">💬</div>
+<h3 style="font-size:17px;font-weight:800;margin:0 0 8px;">Review management</h3>
+<p style="font-size:13px;color:#4b5563;line-height:1.6;">Respond to reviews publicly, flag inaccurate ones, and get notified the moment a new review goes live.</p>
+</div>
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:10px;padding:28px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#fce8ec;border:1px solid #f5b7c1;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;">📸</div>
+<h3 style="font-size:17px;font-weight:800;margin:0 0 8px;">Unlimited photos &amp; video</h3>
+<p style="font-size:13px;color:#4b5563;line-height:1.6;">Show your space, your team, your menu and a video walkthrough. Premium plans support video hero images.</p>
+</div>
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:10px;padding:28px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#fff1e0;border:1px solid #ffd7a6;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;">📣</div>
+<h3 style="font-size:17px;font-weight:800;margin:0 0 8px;">Promotions &amp; offers</h3>
+<p style="font-size:13px;color:#4b5563;line-height:1.6;">Run limited-time offers ("20% off this week") right on your listing. Highlighted in yellow to drive clicks.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- PRICING -->
+<section id="pricing" style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:80px 24px;">
+<div style="text-align:center;max-width:680px;margin:0 auto 48px;">
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#1a6dcc;text-transform:uppercase;margin:0 0 12px;">Pricing</p>
+<h2 style="font-size:40px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin:0 0 14px;">Pick a plan that fits your business.</h2>
+<p style="font-size:16px;color:#4b5563;line-height:1.55;">Pay in NPR. No setup fees. Cancel anytime in your dashboard.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
+<!-- FREE -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:12px;padding:28px;display:flex;flex-direction:column;">
+<div style="font-size:13px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#6b7280;margin-bottom:10px;">Free</div>
+<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px;">
+<span style="font-size:48px;font-weight:800;letter-spacing:-1.5px;line-height:1;">Rs 0</span>
+<span style="font-size:13px;color:#6b7280;">/month</span>
+</div>
+<p style="font-size:13px;color:#4b5563;margin-bottom:20px;">Basic listing for solo and small businesses.</p>
+<a href="Claim Listing.dc.html" style="background:#fff;border:1px solid #1a1a1a;color:#1a1a1a;padding:13px;border-radius:4px;text-align:center;font-weight:700;font-size:14px;text-decoration:none;margin-bottom:24px;">Claim a free listing</a>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px;font-size:13px;">
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span>Standard listing in search results</li>
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span>Up to 5 photos</li>
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span>Business hours &amp; contact</li>
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span>Respond to reviews</li>
+<li style="display:flex;gap:8px;color:#9ca3af;"><span style="flex-shrink:0;">—</span>No featured placement</li>
+<li style="display:flex;gap:8px;color:#9ca3af;"><span style="flex-shrink:0;">—</span>No analytics dashboard</li>
+</ul>
+</div>
+<!-- FEATURED — recommended -->
+<div style="background:#1a1a1a;color:#fff;border:2px solid #FFD400;border-radius:12px;padding:28px;display:flex;flex-direction:column;position:relative;transform:translateY(-8px);box-shadow:0 24px 60px -16px rgba(0,0,0,0.3);">
+<span style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#FFD400;color:#1a1a1a;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:1.2px;">⭐ MOST POPULAR</span>
+<div style="font-size:13px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#FFD400;margin-bottom:10px;">Featured</div>
+<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px;">
+<span style="font-size:48px;font-weight:800;letter-spacing:-1.5px;line-height:1;">Rs 2,500</span>
+<span style="font-size:13px;color:#9ca3af;">/month</span>
+</div>
+<p style="font-size:13px;color:#d3d6db;margin-bottom:20px;">Stand out and rank higher in your category.</p>
+<a href="#lead" style="background:#FFD400;color:#1a1a1a;padding:13px;border-radius:4px;text-align:center;font-weight:800;font-size:14px;text-decoration:none;margin-bottom:24px;">Start 14-day free trial</a>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px;font-size:13px;">
+<li style="display:flex;gap:8px;"><span style="color:#FFD400;font-weight:800;flex-shrink:0;">✓</span><strong>Everything in Free, plus:</strong></li>
+<li style="display:flex;gap:8px;"><span style="color:#FFD400;font-weight:800;flex-shrink:0;">✓</span>Featured placement (top of category)</li>
+<li style="display:flex;gap:8px;"><span style="color:#FFD400;font-weight:800;flex-shrink:0;">✓</span>Verified green badge</li>
+<li style="display:flex;gap:8px;"><span style="color:#FFD400;font-weight:800;flex-shrink:0;">✓</span>Up to 30 photos + menu</li>
+<li style="display:flex;gap:8px;"><span style="color:#FFD400;font-weight:800;flex-shrink:0;">✓</span>Analytics dashboard</li>
+<li style="display:flex;gap:8px;"><span style="color:#FFD400;font-weight:800;flex-shrink:0;">✓</span>1 active promotion at a time</li>
+<li style="display:flex;gap:8px;"><span style="color:#FFD400;font-weight:800;flex-shrink:0;">✓</span>Priority email support</li>
+</ul>
+</div>
+<!-- PREMIUM -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:12px;padding:28px;display:flex;flex-direction:column;">
+<div style="font-size:13px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#6b7280;margin-bottom:10px;">Premium</div>
+<div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px;">
+<span style="font-size:48px;font-weight:800;letter-spacing:-1.5px;line-height:1;">Rs 6,500</span>
+<span style="font-size:13px;color:#6b7280;">/month</span>
+</div>
+<p style="font-size:13px;color:#4b5563;margin-bottom:20px;">For multi-location &amp; high-volume businesses.</p>
+<a href="#lead" style="background:#1a1a1a;color:#fff;padding:13px;border-radius:4px;text-align:center;font-weight:700;font-size:14px;text-decoration:none;margin-bottom:24px;">Talk to sales</a>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px;font-size:13px;">
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span><strong>Everything in Featured, plus:</strong></li>
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span>Up to 5 locations under one account</li>
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span>Video hero on listing</li>
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span>City-wide banner ads</li>
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span>Unlimited promotions</li>
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span>Dedicated account manager</li>
+<li style="display:flex;gap:8px;"><span style="color:#1a7d3a;font-weight:800;flex-shrink:0;">✓</span>Phone + WhatsApp support</li>
+</ul>
+</div>
+</div>
+<p style="text-align:center;font-size:13px;color:#6b7280;margin-top:32px;">Need something custom? <a href="#lead" style="font-weight:700;">Talk to our team</a> about Enterprise plans (10+ locations).</p>
+</div>
+</section>
+<!-- HOW IT WORKS -->
+<section id="how" style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:80px 24px;">
+<div style="text-align:center;max-width:680px;margin:0 auto 48px;">
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#1a6dcc;text-transform:uppercase;margin:0 0 12px;">How it works</p>
+<h2 style="font-size:40px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin:0;">Live on the directory in under 10 minutes.</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative;">
+<!-- connector line -->
+<div style="position:absolute;top:36px;left:16.67%;right:16.67%;height:2px;background:repeating-linear-gradient(90deg, #e3e5e8 0, #e3e5e8 6px, transparent 6px, transparent 12px);"></div>
+<div style="position:relative;background:#fff;text-align:center;padding:0 16px;">
+<div style="width:72px;height:72px;border-radius:50%;background:#FFD400;color:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;margin:0 auto 18px;border:6px solid #fff;box-shadow:0 0 0 1px #e3e5e8;">1</div>
+<h3 style="font-size:18px;font-weight:800;margin:0 0 8px;">Claim &amp; verify</h3>
+<p style="font-size:13px;color:#4b5563;line-height:1.55;">Find your business, verify ownership by phone (2 min) and create your owner account.</p>
+</div>
+<div style="position:relative;background:#fff;text-align:center;padding:0 16px;">
+<div style="width:72px;height:72px;border-radius:50%;background:#FFD400;color:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;margin:0 auto 18px;border:6px solid #fff;box-shadow:0 0 0 1px #e3e5e8;">2</div>
+<h3 style="font-size:18px;font-weight:800;margin:0 0 8px;">Pick a plan</h3>
+<p style="font-size:13px;color:#4b5563;line-height:1.55;">Choose Free, Featured or Premium. Pay with eSewa, Khalti, IME Pay, card or bank transfer.</p>
+</div>
+<div style="position:relative;background:#fff;text-align:center;padding:0 16px;">
+<div style="width:72px;height:72px;border-radius:50%;background:#FFD400;color:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;margin:0 auto 18px;border:6px solid #fff;box-shadow:0 0 0 1px #e3e5e8;">3</div>
+<h3 style="font-size:18px;font-weight:800;margin:0 0 8px;">Reach customers</h3>
+<p style="font-size:13px;color:#4b5563;line-height:1.55;">Your listing goes live within an hour. Track views, calls and reviews from your dashboard.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- TESTIMONIALS -->
+<section style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:80px 24px;">
+<div style="text-align:center;margin-bottom:48px;">
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#1a6dcc;text-transform:uppercase;margin:0 0 12px;">Loved by Nepali businesses</p>
+<h2 style="font-size:40px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin:0 0 8px;">24,800+ owners. <em style="font-style:italic;font-family:serif;color:#FFD400;background:#1a1a1a;padding:0 8px;">Real results.</em></h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:10px;padding:28px;">
+<div style="display:flex;gap:1px;margin-bottom:14px;">
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<p style="font-size:15px;color:#1a1a1a;line-height:1.6;margin:0 0 18px;">"Within a month of switching to Featured, our incoming calls tripled. The dashboard helps me understand which neighborhoods we're getting customers from."</p>
+<div style="display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid #f0f2f5;">
+<div style="width:40px;height:40px;border-radius:50%;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;">SM</div>
+<div>
+<div style="font-size:13px;font-weight:700;">Sumesh Maharjan</div>
+<div style="font-size:12px;color:#6b7280;">Owner, Newa Lahana · Bhaktapur</div>
+</div>
+</div>
+</div>
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:10px;padding:28px;">
+<div style="display:flex;gap:1px;margin-bottom:14px;">
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<p style="font-size:15px;color:#1a1a1a;line-height:1.6;margin:0 0 18px;">"As a plumbing business, customers find us when their pipe bursts at 11pm. NepaliDirectory's 'open now' filter literally puts our number in front of them."</p>
+<div style="display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid #f0f2f5;">
+<div style="width:40px;height:40px;border-radius:50%;background:#1a6dcc;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;">BT</div>
+<div>
+<div style="font-size:13px;font-weight:700;">Bishnu Tamang</div>
+<div style="font-size:12px;color:#6b7280;">Founder, KTM Quick Plumbing · Kathmandu</div>
+</div>
+</div>
+</div>
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:10px;padding:28px;">
+<div style="display:flex;gap:1px;margin-bottom:14px;">
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<p style="font-size:15px;color:#1a1a1a;line-height:1.6;margin:0 0 18px;">"We run 4 boutiques across the Valley. Premium lets us manage all locations under one account and run different promotions per neighborhood."</p>
+<div style="display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid #f0f2f5;">
+<div style="width:40px;height:40px;border-radius:50%;background:#1a7d3a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;">PR</div>
+<div>
+<div style="font-size:13px;font-weight:700;">Priya Rai</div>
+<div style="font-size:12px;color:#6b7280;">CEO, Rangmanch Boutiques · Pokhara</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Logo row -->
+<div style="margin-top:48px;padding-top:32px;border-top:1px solid #e3e5e8;text-align:center;">
+<p style="font-size:11px;color:#6b7280;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;">Trusted by 24,800+ Nepali businesses</p>
+<div style="display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;opacity:0.6;font-weight:700;font-size:14px;color:#6b7280;letter-spacing:-0.3px;">
+<span>Hotel Shanker</span>
+<span style="font-family:serif;font-style:italic;">Chez Caroline</span>
+<span>Roadhouse</span>
+<span>Himalayan Java</span>
+<span style="font-family:serif;">Newa Lahana</span>
+<span>CIWEC Hospital</span>
+<span>Karma Roasters</span>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ -->
+<section id="faq" style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:860px;margin:0 auto;padding:80px 24px;">
+<div style="text-align:center;margin-bottom:40px;">
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#1a6dcc;text-transform:uppercase;margin:0 0 12px;">FAQ</p>
+<h2 style="font-size:36px;font-weight:800;letter-spacing:-1px;line-height:1.1;margin:0;">Common questions.</h2>
+</div>
+<div style="border-top:1px solid #e3e5e8;">
+<details open="" style="border-bottom:1px solid #e3e5e8;padding:18px 0;">
+<summary style="cursor:pointer;font-size:16px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+          What payment methods do you accept?
+          <span style="font-size:20px;color:#1a6dcc;">−</span>
+</summary>
+<p style="font-size:14px;color:#4b5563;line-height:1.6;margin-top:12px;">We accept eSewa, Khalti, IME Pay, ConnectIPS, Visa &amp; Mastercard, and direct bank transfer. For Enterprise accounts we also accept cheque and quarterly invoicing.</p>
+</details>
+<details style="border-bottom:1px solid #e3e5e8;padding:18px 0;">
+<summary style="cursor:pointer;font-size:16px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;">Can I cancel my plan?<span style="font-size:20px;color:#1a6dcc;">+</span></summary>
+</details>
+<details style="border-bottom:1px solid #e3e5e8;padding:18px 0;">
+<summary style="cursor:pointer;font-size:16px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;">How does Featured placement actually work?<span style="font-size:20px;color:#1a6dcc;">+</span></summary>
+</details>
+<details style="border-bottom:1px solid #e3e5e8;padding:18px 0;">
+<summary style="cursor:pointer;font-size:16px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;">Do you offer discounts for annual payment?<span style="font-size:20px;color:#1a6dcc;">+</span></summary>
+</details>
+<details style="border-bottom:1px solid #e3e5e8;padding:18px 0;">
+<summary style="cursor:pointer;font-size:16px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;">Can I run promotions for festivals (Dashain, Tihar)?<span style="font-size:20px;color:#1a6dcc;">+</span></summary>
+</details>
+<details style="padding:18px 0;">
+<summary style="cursor:pointer;font-size:16px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;">What if I have multiple business locations?<span style="font-size:20px;color:#1a6dcc;">+</span></summary>
+</details>
+</div>
+</div>
+</section>
+<!-- LEAD FORM -->
+<section id="lead" style="background:#1a1a1a;color:#fff;">
+<div style="max-width:1180px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;">
+<div>
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#FFD400;text-transform:uppercase;margin:0 0 14px;">Talk to sales</p>
+<h2 style="font-size:42px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin:0 0 18px;">Have questions? We'll call you back within 2 hours.</h2>
+<p style="font-size:16px;color:#d3d6db;line-height:1.55;margin:0 0 28px;">Our Nepali sales team helps you pick the right plan, build your listing and answer payment questions.</p>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;">
+<li style="display:flex;align-items:center;gap:14px;font-size:14px;color:#d3d6db;">
+<span style="width:34px;height:34px;border-radius:50%;background:rgba(255,212,0,0.15);border:1px solid rgba(255,212,0,0.4);display:flex;align-items:center;justify-content:center;color:#FFD400;font-weight:700;flex-shrink:0;">📞</span>
+          Or call us directly: <strong style="color:#fff;">01-4256789</strong> (Sun–Fri, 9 am – 7 pm)
+        </li>
+<li style="display:flex;align-items:center;gap:14px;font-size:14px;color:#d3d6db;">
+<span style="width:34px;height:34px;border-radius:50%;background:rgba(255,212,0,0.15);border:1px solid rgba(255,212,0,0.4);display:flex;align-items:center;justify-content:center;color:#FFD400;font-weight:700;flex-shrink:0;">💬</span>
+          WhatsApp us: <strong style="color:#fff;">+977-9851-456789</strong>
+</li>
+<li style="display:flex;align-items:center;gap:14px;font-size:14px;color:#d3d6db;">
+<span style="width:34px;height:34px;border-radius:50%;background:rgba(255,212,0,0.15);border:1px solid rgba(255,212,0,0.4);display:flex;align-items:center;justify-content:center;color:#FFD400;font-weight:700;flex-shrink:0;">✉️</span>
+          Email: <strong style="color:#fff;">sales@nepalidirectory.com</strong>
+</li>
+</ul>
+</div>
+<div style="background:#fff;color:#1a1a1a;border-radius:12px;padding:32px;">
+<h3 style="font-size:20px;font-weight:800;margin:0 0 6px;">Request a callback</h3>
+<p style="font-size:13px;color:#6b7280;margin:0 0 22px;">Free, no obligation. Average response time: 1h 40m.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+<div>
+<label style="display:block;font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px;">Your name</label>
+<input placeholder="Rajan Maharjan" style="width:100%;padding:11px 12px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;"/>
+</div>
+<div>
+<label style="display:block;font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px;">Business name</label>
+<input placeholder="Newa Lahana" style="width:100%;padding:11px 12px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;"/>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+<div>
+<label style="display:block;font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px;">Phone (+977)</label>
+<input placeholder="98XX-XXXXXX" style="width:100%;padding:11px 12px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;"/>
+</div>
+<div>
+<label style="display:block;font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px;">City</label>
+<select style="width:100%;padding:11px 12px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;background:#fff;"><option>Kathmandu</option><option>Lalitpur</option><option>Pokhara</option><option>Bhaktapur</option><option>Other</option></select>
+</div>
+</div>
+<div style="margin-bottom:14px;">
+<label style="display:block;font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px;">Category</label>
+<select style="width:100%;padding:11px 12px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;background:#fff;"><option>Restaurants &amp; Food</option><option>Hotels &amp; Travel</option><option>Home Services</option><option>Medical</option><option>Beauty &amp; Wellness</option><option>Wedding &amp; Events</option><option>Other</option></select>
+</div>
+<div style="margin-bottom:18px;">
+<label style="display:block;font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px;">Anything else?</label>
+<textarea placeholder="Tell us about your business — locations, current marketing, what you're hoping to achieve…" rows="3" style="width:100%;padding:11px 12px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;resize:vertical;font-family:inherit;"></textarea>
+</div>
+<button onclick="window.location.href='Request Callback.dc.html';" style="width:100%;background:#FFD400;color:#1a1a1a;padding:14px;border-radius:4px;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;">
+        Request callback
+        <svg fill="none" height="16" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="16"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+</button>
+<p style="font-size:11px;color:#6b7280;text-align:center;margin-top:12px;">By submitting, you agree to our <a href="Terms of Service.dc.html">Terms</a> and <a href="Privacy Policy.dc.html">Privacy Policy</a>.</p>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer style="background:#0e1116;color:#d3d6db;">
+<div style="max-width:1180px;margin:0 auto;padding:32px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+<div style="display:flex;align-items:center;gap:24px;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:13px;padding:6px 8px;border-radius:3px;line-height:1;">ND</span>
+<span style="color:#fff;font-weight:700;font-size:14px;">NepaliDirectory</span>
+</a>
+<div style="font-size:12px;color:#6b7280;">© 2026 NepaliDirectory. All rights reserved.</div>
+</div>
+<div style="display:flex;gap:20px;font-size:12px;">
+<a href="Home.dc.html" style="color:#9ca3af;">Home</a>
+<a href="Categories.dc.html" style="color:#9ca3af;">Categories</a>
+<a href="Privacy Policy.dc.html" style="color:#9ca3af;">Privacy</a>
+<a href="Terms of Service.dc.html" style="color:#9ca3af;">Terms</a>
+</div>
+</div>
+</footer>
+</x-dc>
+</body>
+</html>

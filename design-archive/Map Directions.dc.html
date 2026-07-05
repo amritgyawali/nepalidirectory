@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Map &amp; Directions - Bhojan Griha | Nepali Directory</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#001d35",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-primary-fixed-variant": "#554500",
+                        "surface-container": "#f0eded",
+                        "surface-tint": "#715d00",
+                        "surface": "#fcf9f8",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-bright": "#fcf9f8",
+                        "primary-container": "#ffd400",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#705c00",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-container": "#004472",
+                        "secondary-fixed-dim": "#9ccaff",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#313030",
+                        "on-surface": "#1c1b1b",
+                        "background": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#00497a",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-fixed": "#ffe177",
+                        "on-primary-fixed": "#231b00",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary-container": "#64b3ff",
+                        "on-background": "#1c1b1b",
+                        "surface-dim": "#dcd9d9",
+                        "on-surface-variant": "#4d4632",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#d8d8d8",
+                        "outline": "#7f775f",
+                        "on-primary": "#ffffff",
+                        "secondary": "#0062a0",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#5d5f5f",
+                        "outline-variant": "#d0c6ab",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "secondary-fixed": "#d0e4ff",
+                        "inverse-primary": "#ebc300",
+                        "on-tertiary-container": "#5c5e5e",
+                        "error-container": "#ffdad6",
+                        "primary": "#715d00",
+                        "surface-container-high": "#eae7e7",
+                        "primary-fixed-dim": "#ebc300"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "stack-md": "16px",
+                        "margin-desktop": "32px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-bold": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-bold": ["13px", { "lineHeight": "18px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface sticky top-0 w-full z-50 border-b border-outline-variant shadow-sm transition-transform duration-150">
+<div class="max-w-[1180px] mx-auto px-6 h-16 flex items-center justify-between gap-4">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2 text-xl font-extrabold text-on-surface" href="../Home.dc.html">
+                Nepali Directory
+            </a>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="../Advertise.dc.html">Advertise</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="../Write Review.dc.html">Write a Review</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="font-label-bold text-label-bold text-on-surface hover:text-primary transition-colors" onclick="window.location.href='../Login.dc.html';">Log In</button>
+<button class="font-label-bold text-label-bold bg-surface border border-outline text-on-surface px-4 py-2 rounded hover:bg-surface-container-high transition-colors" onclick="window.location.href='../Register.dc.html';">Sign Up</button>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 w-full max-w-[1280px] mx-auto px-4 md:px-gutter py-gutter flex flex-col md:flex-row gap-gutter">
+<!-- Left Panel: Context & Controls -->
+<aside class="w-full md:w-[380px] flex flex-col gap-stack-md flex-shrink-0">
+<!-- Contextual Breadcrumb -->
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<a class="hover:text-primary hover:underline" href="../restaurants_category_nepali_directory/code.html">Restaurants</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary hover:underline" href="../City Landing.dc.html">Kathmandu</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface">Bhojan Griha</span>
+</div>
+<!-- Business Information Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm flex flex-col gap-4">
+<div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-1">
+                        Bhojan Griha
+                    </h1>
+<div class="flex items-center gap-1 text-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-outline">star</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1">(128 Reviews)</span>
+</div>
+</div>
+<hr class="border-outline-variant/50"/>
+<div class="flex flex-col gap-3">
+<div class="flex items-start gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-on-surface">location_on</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface">Dillibazar, Kathmandu, Bagmati Province</p>
+<p class="font-body-sm text-body-sm mt-1">Open today until 10:00 PM</p>
+</div>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-on-surface">call</span>
+<p class="font-body-md text-body-md text-on-surface">+977 1-4416423</p>
+</div>
+</div>
+</div>
+<!-- Routing / Directions Interface -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm flex flex-col gap-6">
+<h2 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">directions</span>
+                    Get Directions
+                </h2>
+<!-- Transit Mode Selector -->
+<div class="flex items-center gap-2 bg-surface-container p-1 rounded-lg">
+<button aria-label="Drive" class="flex-1 flex justify-center items-center py-2 bg-surface-container-lowest rounded shadow-sm text-on-surface" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+</button>
+<button aria-label="Walk" class="flex-1 flex justify-center items-center py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest/50 rounded transition-all" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined">directions_walk</span>
+</button>
+<button aria-label="Transit" class="flex-1 flex justify-center items-center py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest/50 rounded transition-all" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined">directions_bus</span>
+</button>
+</div>
+<!-- Input Fields -->
+<div class="relative flex flex-col gap-2">
+<!-- Decorative Timeline Line -->
+<div class="absolute left-[11px] top-6 bottom-6 w-[2px] bg-outline-variant/50 border-l border-dashed border-outline/30 z-0"></div>
+<!-- Starting Point -->
+<div class="relative z-10 flex items-center gap-3 bg-surface border border-outline-variant rounded-lg px-3 py-2 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="material-symbols-outlined text-primary text-[18px]">radio_button_checked</span>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant" placeholder="Choose starting point..." type="text"/>
+<button class="text-on-surface-variant hover:text-primary transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" title="Use current location">
+<span class="material-symbols-outlined text-[18px]">my_location</span>
+</button>
+</div>
+<!-- Destination -->
+<div class="relative z-10 flex items-center gap-3 bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 bg-opacity-50">
+<span class="material-symbols-outlined text-error text-[18px]">location_on</span>
+<input class="w-full bg-transparent border-none p-0 focus:ring-0 font-body-md text-body-md text-on-surface font-semibold" readonly="" type="text" value="Bhojan Griha"/>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary-container text-on-primary-container font-label-bold text-label-bold py-3 rounded hover:bg-primary hover:text-on-primary transition-colors flex justify-center items-center gap-2 shadow-sm" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+                    Show Route
+                </button>
+</div>
+</aside>
+<!-- Right Panel: Interactive Map Canvas -->
+<section class="flex-1 w-full min-h-[500px] md:h-[calc(100vh-140px)] md:sticky md:top-[88px] bg-surface-container rounded-xl border border-outline-variant overflow-hidden relative shadow-sm flex items-center justify-center group">
+<!-- Map Placeholder -->
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A highly detailed, interactive digital map interface centered on a dense urban district. The map styling is clean and corporate, utilizing a light color palette with subtle tonal differences to distinguish roads, parks, and buildings. A prominent, high-contrast red location pin drops exactly on a specific building. The lighting implies a bright, daytime digital display." data-location="Kathmandu, Nepal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARwKpVg9cmBqeV62vgIdY1EWn5tUWumtmcqioc9l3OOqni8pK44uKGm6SP1N9-wl74MwQ5Za0CI8gFt035a1yhr3of6kBK-a7KPCw0i3NTBLhC7bSIzEsytOUBqHCJKHyxOMnzgfrz33ytWtrLVsQXuDWVCuMhKFav7SxkAtxvslQoYEUHe3vFlCLJoQKZXHrWSrP4T7NCsLsjU1fKSB6RG04ELrZwSfQLWbENtqUFldU6WtTlKTNSb7ucGeqo6Qvfw3DZgQMFlf59"/>
+<!-- Map UI Overlays (Zoom/Pan Controls) -->
+<div class="absolute right-4 bottom-8 flex flex-col gap-2">
+<div class="bg-surface-container-lowest border border-outline-variant rounded shadow-sm flex flex-col overflow-hidden">
+<button aria-label="Zoom In" class="p-2 text-on-surface hover:bg-surface-container-high transition-colors border-b border-outline-variant" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button aria-label="Zoom Out" class="p-2 text-on-surface hover:bg-surface-container-high transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+</div>
+<!-- Map UI Overlays (Layers) -->
+<div class="absolute right-4 top-4">
+<button class="bg-surface-container-lowest border border-outline-variant p-2 rounded shadow-sm text-on-surface hover:bg-surface-container-high transition-colors flex items-center gap-2 font-label-bold text-label-bold" onclick="window.location.href='code.html';">
+<span class="material-symbols-outlined">layers</span>
+<span class="hidden md:inline">Map View</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-inverse-surface w-full mt-auto">
+<div class="max-w-[1180px] mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Brand & Copyright -->
+<div class="md:col-span-1">
+<div class="text-2xl font-black text-primary-container">
+                    Nepali Directory
+                </div>
+<p class="font-body-md text-body-md text-inverse-on-surface mt-4 opacity-80">
+                    © 2026 Nepali Directory. Nepal's trusted local business directory.
+                </p>
+</div>
+<!-- Links Column 1 -->
+<div class="flex flex-col gap-3">
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-container hover:underline transition-all" href="About Us.dc.html">About Us</a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-container hover:underline transition-all" href="Contact Us.dc.html">Contact Us</a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-container hover:underline transition-all" href="Privacy Policy.dc.html">Privacy Policy</a>
+</div>
+<!-- Links Column 2 -->
+<div class="flex flex-col gap-3">
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-container hover:underline transition-all" href="Terms of Service.dc.html">Terms of Service</a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-container hover:underline transition-all" href="../Home.dc.html">Add Business</a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-container hover:underline transition-all" href="../Help.dc.html">Business Support</a>
+</div>
+<!-- Links Column 3 -->
+<div class="flex flex-col gap-3">
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-container hover:underline transition-all" href="../Categories.dc.html">Browse Categories</a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-container hover:underline transition-all" href="../Home.dc.html">Popular Cities</a>
+</div>
+</div>
+</footer>
+</body></html>

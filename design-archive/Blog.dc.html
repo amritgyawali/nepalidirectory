@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nepal Insider — Guides, News &amp; Local Tips | Nepali Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#715d00",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-container-low": "#f6f3f2",
+                    "on-primary-fixed-variant": "#554500",
+                    "outline-variant": "#d0c6ab",
+                    "surface-container-high": "#eae7e7",
+                    "on-secondary-container": "#004472",
+                    "surface": "#fcf9f8",
+                    "surface-tint": "#715d00",
+                    "inverse-surface": "#313030",
+                    "tertiary-container": "#d8d8d8",
+                    "surface-container": "#f0eded",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "inverse-on-surface": "#f3f0ef",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#5d5f5f",
+                    "on-primary-container": "#705c00",
+                    "tertiary-fixed": "#e2e2e2",
+                    "inverse-primary": "#ebc300",
+                    "surface-dim": "#dcd9d9",
+                    "primary-fixed": "#ffe177",
+                    "primary-container": "#ffd400",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-primary-fixed": "#231b00",
+                    "surface-bright": "#fcf9f8",
+                    "secondary-container": "#64b3ff",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#0062a0",
+                    "secondary-fixed": "#d0e4ff",
+                    "on-background": "#1c1b1b",
+                    "on-tertiary-container": "#5c5e5e",
+                    "surface-variant": "#e5e2e1",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#4d4632",
+                    "on-secondary-fixed-variant": "#00497a",
+                    "on-surface": "#1c1b1b",
+                    "outline": "#7f775f",
+                    "on-secondary-fixed": "#001d35",
+                    "on-tertiary": "#ffffff",
+                    "background": "#fcf9f8",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#ebc300",
+                    "secondary-fixed-dim": "#9ccaff",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "container-max": "1280px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "32px",
+                    "stack-lg": "32px"
+            },
+            "fontFamily": {
+                    "label-bold": [
+                            "Inter"
+                    ],
+                    "headline-lg-mobile": [
+                            "Manrope"
+                    ],
+                    "headline-lg": [
+                            "Manrope"
+                    ],
+                    "headline-xl": [
+                            "Manrope"
+                    ],
+                    "headline-sm": [
+                            "Manrope"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Manrope"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "body-sm": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "label-bold": [
+                            "13px",
+                            {
+                                    "lineHeight": "18px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-xl": [
+                            "40px",
+                            {
+                                    "lineHeight": "48px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "headline-sm": [
+                            "18px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased font-body-md text-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-inverse-surface text-primary dark:text-inverse-primary docked full-width top-0 border-b border-outline-variant flat no shadows">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto py-4">
+<a class="text-headline-md font-headline-md font-black text-on-surface dark:text-inverse-on-surface" href="../Home.dc.html">
+                Nepali Directory
+            </a>
+<nav class="hidden md:flex items-center space-x-gutter">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors text-label-bold font-label-bold" href="../Advertise.dc.html">Advertise</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors text-label-bold font-label-bold" href="../Write Review.dc.html">Write a Review</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors text-label-bold font-label-bold" href="../Login.dc.html">Log In</a>
+</nav>
+<div class="hidden md:flex items-center space-x-4">
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded font-label-bold text-label-bold hover:opacity-90 transition-opacity" onclick="window.location.href='../Register.dc.html';">
+                    Sign Up
+                </button>
+</div>
+<button class="md:hidden text-on-surface p-2" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Blog Header -->
+<section class="bg-surface-container-low py-12 md:py-16">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<h1 class="text-headline-lg-mobile md:text-headline-xl font-headline-lg-mobile md:font-headline-xl text-on-surface mb-4">Nepal Insider</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mx-auto">Guides, News &amp; Local Tips to navigate and discover the best of Nepal.</p>
+</div>
+</section>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 flex flex-col lg:flex-row gap-8 lg:gap-12">
+<!-- Main Content Area -->
+<div class="lg:w-8/12 flex flex-col gap-12">
+<!-- Featured Article -->
+<article class="group relative overflow-hidden rounded-xl border border-outline-variant bg-surface hover:shadow-lg transition-shadow duration-300">
+<div class="aspect-video w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stunning wide-angle landscape photograph of the Annapurna mountain range in Nepal during a golden hour sunset, featuring warm light hitting the snow-capped peaks, and a traditional stone village in the foreground. Professional travel photography style, high contrast, golden yellow and deep blue tones reflecting a premium directory aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC67hxadb7-jXBTRqtgnwu94MnpgQg6Mwa-dvWHcV4jV9anvP9HTEKFqTjSADvqx-xFIno2kv_-5RzJ_hthV2qp_MR0mXvNk2KVw7E6Cgjc8plZaVLlo5gH0Ak8B_tyqQVw1ZzrNengW3RQA7EeX4_aaaatQeIpdzmgSmYl_YRPio36UqJSk0QoGG0jiAZMVKs0-1xGc8KychhPoTWZWhByYxOAyGy_Vc-d60_gknkUSRoi5qOHH8n4JbIiC-G1KFr7JqqV6jRy_XrW"/>
+</div>
+<div class="p-6 md:p-8">
+<div class="flex items-center gap-4 mb-4">
+<span class="text-label-bold font-label-bold text-secondary uppercase tracking-wider">Travel</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">October 12, 2024</span>
+</div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-surface mb-4 group-hover:text-primary transition-colors">
+<a class="after:absolute after:inset-0" href="../Search Results.dc.html">The Ultimate Guide to Trekking the Annapurna Circuit</a>
+</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-6 line-clamp-3">
+                            Everything you need to know before embarking on one of the world's most famous trekking routes. From essential gear and permits to acclimatization tips and finding the best teahouses along the way.
+                        </p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of an adventurous Nepalese travel writer, smiling warmly, wearing a lightweight trekking jacket against a blurred mountain background. Natural lighting, crisp focus, representing authoritative local expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfyGpm0dmzKYqhXLHt0cBoJ3p3C4cD4KDXC6iP9hufPvKLvxDVcKV2gdLaJid5DbXAPHN5VUsrtQEiPp9Pcs075HPQKM6wIibirQQqw78WUg7uKy0FxqvJl7JkUc76mTl3oNq1W4dqDG1--Q9lomjGHwER3RqzGl04VOg1PhyWtJOrqNi-3vmJUc31VKQmW19teaIMcfpX6xPaW_haAhXw_BLangB5bwEuYaC7B2Huw0N_23Pg9sOI7GL8rX__oYVQuZAyhTg0hv7P"/>
+</div>
+<span class="text-label-bold font-label-bold text-on-surface">By Prakash Gurung</span>
+</div>
+</div>
+</article>
+<!-- Grid of Blog Posts -->
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface border-b border-outline-variant pb-2 mb-6">Latest Articles</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Post 1 -->
+<article class="flex flex-col group border border-outline-variant rounded-lg overflow-hidden bg-surface hover:shadow-md transition-shadow">
+<div class="aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A vibrant overhead shot of traditional Nepalese Dal Bhat served on a brass plate with various colorful side dishes, pickles, and curries. Shot in a well-lit, modern restaurant setting. High-quality food photography style, warm inviting tones, emphasizing local culinary expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-ua32sVsWs3kIXbajcE94xh-27cVjdWgUlPTeAhm8w7PzvIJG7njopmVxnpgNu7BvQCREyW2CtHWIPqOUNTw--WJltpDO4X5jm6wUekBNjYPoXkKCBkVz9CUritFKjDJB1CcS_Jzm2epb-zf9dxm9EQCNtDM2D9uq2AGi4niZraVtIidZZbN35lmJN3k82Pb--yct_eT4-jD8kisPpcu-MfSB_S35qNmjxZ1iuK5RyidAx0yRaACRRYn-k2pqdNhc8Xab9CyNdy82"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center justify-between mb-2">
+<span class="text-label-bold font-label-bold text-secondary text-xs uppercase tracking-wider">Food &amp; Drink</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Oct 10, 2024</span>
+</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-3 group-hover:text-primary transition-colors">
+<a class="after:absolute after:inset-0" href="../City Landing.dc.html">Top 10 Authentic Dal Bhat Spots in Kathmandu</a>
+</h4>
+<div class="mt-auto pt-4 border-t border-outline-variant/50">
+<span class="text-label-bold font-label-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+                                        Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</span>
+</div>
+</div>
+</article>
+<!-- Post 2 -->
+<article class="flex flex-col group border border-outline-variant rounded-lg overflow-hidden bg-surface hover:shadow-md transition-shadow">
+<div class="aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A detailed, crisp photograph of intricate wood carvings on a traditional Newari window in Bhaktapur Durbar Square. Soft morning light highlights the craftsmanship. Professional architectural photography, rich brown tones, representing cultural heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHD1IvZzEvkZtQked1LbHc0NHVc1oyLhUTS7A7VzE3Uqi5I_5VVyGc22YpoCnx57qWo7EeQFB23lFkXAwFB8TohqHH2aht7nQXwOcRHgqpOhUUubCutM5mEAF2uxnmwEFJFPIk3ZsKH5Fm3LwodGQXkoPQBE7BrUCvYq7iMqqQX_3FyAm9f_NSdOBGhCcTTRZvcXeEnY1RCDaO5GiWC4bvrkFKs7q6gfPenbbiZGmNbCErJgFdrSM7qP0bDNqi_miob6zihdRIXc_n"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center justify-between mb-2">
+<span class="text-label-bold font-label-bold text-secondary text-xs uppercase tracking-wider">Culture</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Oct 08, 2024</span>
+</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-3 group-hover:text-primary transition-colors">
+<a class="after:absolute after:inset-0" href="../City Landing.dc.html">Understanding Newari Architecture in the Kathmandu Valley</a>
+</h4>
+<div class="mt-auto pt-4 border-t border-outline-variant/50">
+<span class="text-label-bold font-label-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+                                        Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</span>
+</div>
+</div>
+</article>
+<!-- Post 3 -->
+<article class="flex flex-col group border border-outline-variant rounded-lg overflow-hidden bg-surface hover:shadow-md transition-shadow">
+<div class="aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A bright, modern co-working space in Kathmandu filled with young professionals working on laptops. Large windows let in natural light, with indoor plants and ergonomic furniture. Corporate yet approachable photography style, highlighting modern business infrastructure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrl88ox2v6_tvEVCZkMQHstBK44cVhCyaDbZVt9UJeoD8VD47qktlyK4TbsHQKvDh6yfB7OFPw1fYUMSFNmE9jcgzukTPmWQ00L3Vm5tBBV2zgyJQU9lAXC643uQSecT8kuCpWbgnxifjTpt56wBoeqpfLPvxpsEmYM1YAA9m72FHx89eVguqFK4DdSeruUluzW73BCTE_do1X9oiHBmSECLJC5jN6HpJy1oOuxN3xaij0lXavH6_uM0BSdkSrIQV0wz1KiTnAy8mb"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center justify-between mb-2">
+<span class="text-label-bold font-label-bold text-secondary text-xs uppercase tracking-wider">Business</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Oct 05, 2024</span>
+</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-3 group-hover:text-primary transition-colors">
+<a class="after:absolute after:inset-0" href="../Home.dc.html">Navigating the Startup Ecosystem in Nepal</a>
+</h4>
+<div class="mt-auto pt-4 border-t border-outline-variant/50">
+<span class="text-label-bold font-label-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+                                        Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</span>
+</div>
+</div>
+</article>
+<!-- Post 4 -->
+<article class="flex flex-col group border border-outline-variant rounded-lg overflow-hidden bg-surface hover:shadow-md transition-shadow">
+<div class="aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A colorful, bustling local market scene in Patan, showing vendors selling fresh vegetables and spices. High depth of field, vibrant colors, capturing the dynamic energy of local commerce and daily life in a professional documentary style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVqqV2OJoibmuktsRgW98XfDGiUTTIGFYrFdb3zCRf7ub4_Og5UjeOO_FSqvIELw2Q658ro9FVLs71XlHrspGX6KaH94zwkKTRc67BItk4gvTZeocemx6My7Knrwhjo0Pml2jLIiUJjPjMixvUdaH7D2UifpORrC7zhztAXP_rnrD7kNr-YtUjA2mtlOz_kLWsKWaLR1TL9OIV493fxDwWAQLZ4fqg_auPJedBYME90RgIbSSzDkaFivGromUmK7Gg_CW3mVImC31i"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center justify-between mb-2">
+<span class="text-label-bold font-label-bold text-secondary text-xs uppercase tracking-wider">Local Life</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Oct 02, 2024</span>
+</div>
+<h4 class="text-headline-sm font-headline-sm text-on-surface mb-3 group-hover:text-primary transition-colors">
+<a class="after:absolute after:inset-0" href="../Search Results.dc.html">A Guide to Haggling at the Asan Bazaar</a>
+</h4>
+<div class="mt-auto pt-4 border-t border-outline-variant/50">
+<span class="text-label-bold font-label-bold text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
+                                        Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</span>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<aside class="lg:w-4/12 flex flex-col gap-8">
+<!-- Popular Guides -->
+<div class="bg-surface border border-outline-variant rounded-xl p-6">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">local_fire_department</span>
+                        Popular Guides
+                    </h3>
+<ul class="flex flex-col gap-4">
+<li class="border-b border-outline-variant/50 pb-4 last:border-0 last:pb-0">
+<a class="group flex gap-4 items-start" href="../Search Results.dc.html">
+<div class="w-16 h-16 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="A close-up shot of a steaming plate of momos (dumplings) with a spicy red dipping sauce on a wooden table. High-contrast, appetizing food photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQFkXaJQHkxEULyyvhl0E90zLwFMEIq1AxZiDeTWAOTL_khbUMGRozB_M3ZXHJquOTv11O3VCH3S3iU-MDzzTgV4wfb5VaKYoWXG4bdDj5Berua9DyKrRubtLmXHvq8V2G5ER_9SqdXc4Aw_R5Ok_9nWnnzYtcACkY4YduCpz7La_yj3QajJHc4tqzpPZ_eXZBr5Xc2P4Qz7pnZppJSj1b3AhwplzWph77D74JPZUCNtzsFUFIHPTR_vXyVhi_HDLIbhIw-qU6fYmy"/>
+</div>
+<div>
+<h4 class="text-label-bold font-label-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2 mb-1">The Best Momo Spots in Every District</h4>
+<span class="text-body-sm font-body-sm text-on-surface-variant">5 Min Read</span>
+</div>
+</a>
+</li>
+<li class="border-b border-outline-variant/50 pb-4 last:border-0 last:pb-0">
+<a class="group flex gap-4 items-start" href="../Home.dc.html">
+<div class="w-16 h-16 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="A professional shot of a modern, well-lit hospital facade in Kathmandu, emphasizing cleanliness, trust, and modern medical facilities." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBtKhcZeM0WLH8OyxTA5NSM_kk4nGtvLfJZdfQKQ2Qwk6PTzkPaTYdhuExvTd8tERagUU69k1JbDAFCdC0_DvPS6azh5hnn8_PrztBBLPBhhBtnIiAXjG-GXfGgUe8d-mJagWYEydIT7MR6gH66usvxR1BH_IODkpS7FaMEzqkG0v7K-7tnTFd3KTvS7lygirKhXFzChGlfWZVfC-RO8b3_yVACKvnT56Dk14CGekzw5fXLOr8D5crZCB4TJbNyoPFzmVYtb-_DDUJ"/>
+</div>
+<div>
+<h4 class="text-label-bold font-label-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2 mb-1">How to Navigate Healthcare Services for Expats</h4>
+<span class="text-body-sm font-body-sm text-on-surface-variant">8 Min Read</span>
+</div>
+</a>
+</li>
+<li class="border-b border-outline-variant/50 pb-4 last:border-0 last:pb-0">
+<a class="group flex gap-4 items-start" href="Local Events.dc.html">
+<div class="w-16 h-16 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="A brightly colored traditional Nepalese festival scene featuring dancers in vibrant costumes, captured with dynamic motion blur and sharp focus on the main subject." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0sE3pa0ELrmJYzBco6kyDYXQopfs0HMU_9L9b1WJSsuWB7IP0h8SdHT54qVkxOKIJs2lSfxGC3ohU-lEwzc0jqYLKNU-GQ0RlKBc6RvsFyCIwrOBgDK-3U2v95tGWACwJvrZnZ4f41CfNOnm89a0IGLfUXz9RKJMOxs0hEyzwB1nGxDYvdOL13pj1Joj6nkNGUUKQXbdz0S2NVjRmdSPFS3DcCxfzVwHP2xVtKBBSbDjmaDGTSUMGY62qW76x9kDFfUHj_LM4F3UI"/>
+</div>
+<div>
+<h4 class="text-label-bold font-label-bold text-on-surface group-hover:text-primary transition-colors line-clamp-2 mb-1">A Yearly Calendar of Major Festivals</h4>
+<span class="text-body-sm font-body-sm text-on-surface-variant">6 Min Read</span>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Newsletter Signup -->
+<div class="bg-secondary-container text-on-secondary-container rounded-xl p-6 text-center">
+<span class="material-symbols-outlined text-4xl mb-2">mail</span>
+<h3 class="text-headline-sm font-headline-sm mb-2">Get the Insider Scoop</h3>
+<p class="text-body-sm font-body-sm mb-6 opacity-90">Subscribe to our weekly newsletter for the latest local tips, new business listings, and curated guides.</p>
+<form class="flex flex-col gap-3">
+<input class="w-full px-4 py-2 rounded border border-secondary-container/20 bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent font-body-sm" placeholder="Your email address" type="email"/>
+<button class="w-full bg-secondary text-on-secondary px-4 py-2 rounded font-label-bold text-label-bold hover:bg-secondary/90 transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" type="submit">
+                            Subscribe
+                        </button>
+</form>
+<p class="text-[10px] mt-4 opacity-70">No spam. Unsubscribe anytime.</p>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container-highest text-secondary dark:text-secondary-fixed full-width mt-stack-lg flat no shadows border-t bg-surface-container-low dark:bg-inverse-surface">
+<div class="w-full px-margin-desktop py-stack-lg max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface">
+                Nepali Directory
+            </div>
+<nav class="flex flex-wrap justify-center gap-4 md:gap-6">
+<a class="text-on-surface-variant dark:text-surface-variant text-label-bold font-label-bold hover:underline hover:text-primary transition-all duration-300" href="About Us.dc.html">About</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-bold font-label-bold hover:underline hover:text-primary transition-all duration-300" href="../Help.dc.html">Business Support</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-bold font-label-bold hover:underline hover:text-primary transition-all duration-300" href="Terms of Service.dc.html">Terms of Use</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-bold font-label-bold hover:underline hover:text-primary transition-all duration-300" href="Privacy Policy.dc.html">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-bold font-label-bold hover:underline hover:text-primary transition-all duration-300" href="Contact Us.dc.html">Contact Us</a>
+</nav>
+<div class="text-body-sm font-body-sm text-on-surface-variant">
+                © 2024 Nepali Directory. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

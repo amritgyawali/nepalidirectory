@@ -1,0 +1,612 @@
+Suspicious Links pointing to Home.dc.html:
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Bagmati Province | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Newari Fine Dining | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Newari Fine Dining | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Heritage Dining | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Cultural Show | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Visit Website | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Directions | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Save | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: View full menu → | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: View all → | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: 📷 Add your photos | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Anuja Shrestha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: 👍 Helpful (28) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Flag | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Rajan Gurung | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: 👍 Helpful (12) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Flag | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Sumitra KC | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: 👍 Helpful (8) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Flag | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: www.newalahana.com | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: reservations@newalahana.com | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Inacho | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Taumadhi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Fine Dining | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Heritage Dining | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Cultural Show | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Newari | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Heritage | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Slow Food | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Get Directions → | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Banepa (6 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Dhulikhel (10 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Nagarkot (8 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Changu Narayan (4 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Thimi (3 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Panauti (16 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Sankhu (12 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Sanga (4 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Business Detail.dc.html | Text: Legal | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Dentists | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Top provinceBagmati | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: ProvinceGandaki | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: ProvinceLumbini | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: ProvinceKoshi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: ProvinceMadhesh | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: ProvinceKarnali | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: ProvinceSudurpashchim | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Painters | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Movers & Packers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Carpenters | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Masons | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: AC Repair | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Water Tank Cleaning | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: House Cleaning | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Interior Designers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: RO / Water Purifier | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: CCTV Installation | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Solar Installers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Hardware Stores | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Pest Control | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Generator Service | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Inverter / UPS | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Septic Tank Cleaning | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Roofing & Waterproofing | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Dentists | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Dermatologists | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Gynecologists | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Pediatricians | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Orthopedics | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Cardiologists | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: ENT Specialists | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Hospitals | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Pharmacies | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Eye Care / Opticians | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Physiotherapy | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Diagnostic Labs | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Mental Health | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Veterinary | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Maternity Hospitals | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Dental Implants | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Ambulance Services | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Notaries | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Audit Firms | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Tax Consultants | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Insurance Agents | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Life Insurance | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Vehicle Insurance | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Banks | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Cooperatives | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Money Exchange | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Remittance | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Investment Advisors | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Loan Consultants | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Newari | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Thakali | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Tibetan / Sherpa | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Indian | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Chinese | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Continental | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Italian | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Korean | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Japanese | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Thai | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Cafés | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Bakeries | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Sweet Shops / Mithai | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Catering | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Momo | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Fast Food | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Fine Dining | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Vegetarian | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Buffet | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Bars & Lounges | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Steakhouses | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Open 24 Hours | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Late-Night Dining | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Wedding Photographers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Cinematographers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Decorators / Florists | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Party Palaces | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Caterers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Tent House | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: DJ / Sound Systems | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Mehendi Artists | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Bridal Makeup | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Wedding Cards | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Bridal Jewellery | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Wedding Cars | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Honeymoon Packages | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Pundits / Priests | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Wedding Lehengas | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Bartar Houses | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Mata Tirtha Venues | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Event Planners | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Bike Service | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Car Wash | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Tyre Shops | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Spare Parts | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Towing Service | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Vehicle Rental | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Bike Rental | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Mechanic (Two-wheeler) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Auto Electrical | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Bullbar / Accessories | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Polish & Detailing | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: EV Charging | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Barbers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Spa | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Massage Therapy | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Gyms | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Yoga Studios | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Nail Art | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Bridal Makeup | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Hair Color & Treatment | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Eyebrow Threading | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Tattoo Studios | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Pilates | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Aerobics / Dance Fitness | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Personal Trainers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: +2 Colleges | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Universities | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Tuition Centers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Consultancies / Abroad Study | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Language Institutes | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: IELTS / TOEFL | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Computer Training | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Music Classes | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Dance Classes | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Art Classes | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Engineering Colleges | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Medical Colleges | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Trekking Agencies | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Adventure Tours | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Travel Agents | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Hostels / Backpackers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Resorts | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Guides & Porters | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Mountain Flight Operators | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Paragliding | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Rafting | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Visa & Permits | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Travel Insurance | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Clothing Stores | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Shoe Stores | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Electronics | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Mobile Phone Stores | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Furniture Stores | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Bookstores | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Sports Equipment | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Toys & Games | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Grocery / Supermarkets | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Departmental Stores | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Boutiques | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Tailoring | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Jewellery | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Pashmina / Handicrafts | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Software Companies | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Web Design Agencies | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Digital Marketing | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Computer Repair | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: IT Training | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Cyber Cafés | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Printing & Photocopy | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Real Estate Agents | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Property Developers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Apartments for Rent | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Land for Sale | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Commercial Space | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Surveyors | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Architects | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Ward Offices | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Police Stations | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Hospitals (Govt) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Land Revenue Office | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Passport Office | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Transport Management | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: CDO Office | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Embassies | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Customs Office | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Election Commission | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Categories.dc.html | Text: Legal | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Bagmati Province | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Bagmati Province | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: 📸Wedding Photographers164 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Hospital · MaharajgunjCIWEC Hospital★★★★★4.8(560) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Trekking · ThamelHimalayan Glacier Trek★★★★★4.9(2.1k) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Thamel2,140 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Patan1,820 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Boudha680 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Durbar Marg420 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Baluwatar340 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Lazimpat520 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Jhamsikhel280 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Sanepa220 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Kupondole196 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Pulchowk312 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Jawalakhel280 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Maharajgunj410 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Naxal220 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Bansbari194 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Tinkune182 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Koteshwor274 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Sinamangal158 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Kalanki240 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Kirtipur196 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Basantapur160 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Sundhara128 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Chabahil214 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Gongabu186 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Hadigaun142 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Kirtipur4 mi · 612 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Banepa16 mi · 480 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Dhulikhel18 mi · 320 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Nagarkot20 mi · 188 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Sankhu10 mi · 124 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Budhanilkantha5 mi · 246 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Tokha4 mi · 168 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Godawari8 mi · 134 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Carpenters (186) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Painters (142) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: AC Repair (94) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: House Cleaning (118) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Movers & Packers (82) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: CCTV Installation (76) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Dentists (218) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Hospitals (78) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Pharmacies (412) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Eye Care (108) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Physiotherapy (96) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Diagnostic Labs (124) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Insurance (96) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Banks (118) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Money Exchange (84) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Remittance (78) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Tax Consultants (62) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: +2 Colleges (138) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Universities (24) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Consultancies / Abroad Study (218) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Language Institutes (96) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Computer Training (74) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Tuition Centers (186) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Wedding Photographers (164) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Decorators (124) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Party Palaces (88) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Caterers (96) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Tent House (72) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Bridal Makeup (118) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Mehendi Artists (62) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Spas (148) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Barbers (218) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Gyms (108) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Yoga Studios (74) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Bike Service (218) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Car Wash (74) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Tyre Shops (96) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Vehicle Rental (68) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Trekking Agencies (286) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Travel Agents (218) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Tour Operators (164) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Guides (118) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\City Landing.dc.html | Text: Legal | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Claim Listing.dc.html | Text: Change | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Claim Listing.dc.html | Text: Help | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Dashboard.dc.html | Text: 🔔3 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Dashboard.dc.html | Text: 📊 Overview | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Dashboard.dc.html | Text: 🏪 My Listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Dashboard.dc.html | Text: 📷 Photos | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Dashboard.dc.html | Text: ⏱️ Hours & Info | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Dashboard.dc.html | Text: 📈 Insights | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Dashboard.dc.html | Text: 💳 Billing | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Dashboard.dc.html | Text: ⚙️ Settings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: 📍 Use my location | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: View all cities → | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Chitwan1,820 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Biratnagar | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Birgunj | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Butwal | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Bharatpur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Dharan | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Nepalgunj | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Hetauda | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Itahari | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Dhangadhi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Janakpur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Ghorahi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Tulsipur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Damak | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Birtamod | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Tansen | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Bandipur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Nagarkot | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Sauraha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Jomsom | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Ilam | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Dentists | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Family Law | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Insurance | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Plumbing | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: GET IT ONGoogle Play | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: f | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: IG | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: in | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: X | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Careers | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Articles | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: (More Cities) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Biratnagar | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Birgunj | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Butwal | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Bharatpur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Dharan | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Nepalgunj | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Hetauda | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Janakpur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Home.dc.html | Text: Legal | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Login.dc.html | Text: Forgot? | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Login.dc.html | Text: Help | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Kirtipur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Budhanilkantha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Tokha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Tarakeshwar | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Chandragiri | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Nagarjun | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Gokarneshwar | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Godawari | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Mahalaxmi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Konjyosom | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Bagmati (Rural) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Madhyapur Thimi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Changunarayan | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Suryabinayak | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Bharatpur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Ratnanagar (Sauraha) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Khairahani | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Hetauda | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Thaha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Banepa | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Dhulikhel | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Panauti | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Chautara | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Nuwakot — Bidur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Dhading — Nilkantha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Rasuwa — Dhunche | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Ramechhap — Manthali | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Dolakha — Charikot | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Sindhuli — Kamalamai | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: 🏔️Trekking860 | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Koshi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Madhesh | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Gandaki | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Lumbini | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Karnali | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Province.dc.html | Text: Sudurpashchim | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Bagmati Province | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Continental | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Multicuisine | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Fine Dining | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Website | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: View Menu | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Directions | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Order Online | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Website | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Directions | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Order Online | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Bhojan Griha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Honacha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: 🥟Momo | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: 🍛Thali | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: 🍕Pizza | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: 🍜Thukpa | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: 🥘Thakali | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: 🍢Sekuwa | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: AC Repair | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: House Cleaning | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Dentists | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Hospitals | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Pharmacies | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Spas | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Gyms | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Kirtipur (4 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Banepa (16 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Dhulikhel (18 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Nagarkot (20 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Sankhu (10 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Budhanilkantha (5 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Tokha (4 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Godawari (8 mi) | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Fast Food | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Cafes & Bistros | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Bakeries | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Sweet Shops | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Mediterranean | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Steakhouses | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Bars & Lounges | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Fine Dining | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Buffet | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Open 24 Hours | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Articles | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Biratnagar | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Birgunj | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Butwal | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Bharatpur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Search Results.dc.html | Text: Legal | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Koshi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Madhesh | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Gandaki | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Lumbini | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Karnali | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Sudurpashchim | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: G | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: H | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: I | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: J | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: K | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: L | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: N | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: P | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: T | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Koshi14 districts · 18,200 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Madhesh8 districts · 12,600 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Gandaki11 districts · 14,800 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Lumbini12 districts · 16,400 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Karnali10 districts · 4,200 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Sudurpashchim9 districts · 6,800 listings | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Amargadhi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Arughat | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Attariya | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Banepa | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Bandipur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Besisahar | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Bharatpur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Bhimdatta | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Biratnagar | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Birgunj | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Birtamod | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Budhanilkantha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Butwal | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Chandragiri | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Changunarayan | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Charikot | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Chautara | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Damak | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Dhangadhi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Dharan | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Dhulikhel | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Dhunche | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Dipayal | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Ghorahi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Godawari | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Gorkha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Hetauda | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Ilam | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Itahari | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Janakpur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Jomsom | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Kirtipur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Lumbini | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Madhyapur Thimi | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Nagarkot | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Nepalgunj | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Nuwakot | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Panauti | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Sauraha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Tansen | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Tokha | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Sitemap.dc.html | Text: Tulsipur | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Write Review.dc.html | Text: Change business | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\Write Review.dc.html | Text: Read the full policy → | Href: Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\about_us_nepali_directory\code.html | Text: Add Business | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\about_us_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\about_us_nepali_directory\code.html | Text: Popular Cities | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\ask_a_question_nepali_directory_1\code.html | Text: Community Guidelines | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\ask_a_question_nepali_directory_1\code.html | Text: Shopping | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\ask_a_question_nepali_directory_1\code.html | Text: Services | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\ask_a_question_nepali_directory_1\code.html | Text: Nightlife | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\ask_a_question_nepali_directory_1\code.html | Text: Add a Business | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\ask_a_question_nepali_directory_1\code.html | Text: Success Stories | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\ask_a_question_nepali_directory_1\code.html | Text: Careers | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\ask_a_question_nepali_directory_1\code.html | Text: Press | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\ask_a_question_nepali_directory_2\code.html | Text: Cancel | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\blog_index_nepali_directory\code.html | Text: The Ultimate Guide to Trekking the Annapurna Circuit | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\blog_index_nepali_directory\code.html | Text: Navigating the Startup Ecosystem in Nepal | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\blog_index_nepali_directory\code.html | Text: A Guide to Haggling at the Asan Bazaar | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\blog_index_nepali_directory\code.html | Text: The Best Momo Spots in Every District5 Min Read | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\blog_index_nepali_directory\code.html | Text: How to Navigate Healthcare Services for Expats8 Min Read | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\blog_index_nepali_directory\code.html | Text: A Yearly Calendar of Major Festivals6 Min Read | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\blog_index_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: buildLocal Services | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: shopping_bagShopping | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: exploreTravel | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: groupsCommunity | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: trending_upTrending | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: quizUnanswered | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: View allarrow_forward | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: View allarrow_forward | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: View allarrow_forward | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: View allarrow_forward | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: View allarrow_forward | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\browse_categories_nepali_directory\code.html | Text: View allarrow_forward | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\contact_us_nepali_directory\code.html | Text: share | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\contact_us_nepali_directory\code.html | Text: language | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\contact_us_nepali_directory\code.html | Text: Add Business | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\contact_us_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\contact_us_nepali_directory\code.html | Text: Popular Cities | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\find_people_nepali_directory\code.html | Text: Add Business | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\find_people_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\find_people_nepali_directory\code.html | Text: Popular Cities | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\get_the_app_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\map_directions_nepali_directory\code.html | Text: Add Business | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\map_directions_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\map_directions_nepali_directory\code.html | Text: Popular Cities | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\photo_gallery_nepali_directory\code.html | Text: Newa Lahana | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\photo_gallery_nepali_directory\code.html | Text: Add Business | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\photo_gallery_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\photo_gallery_nepali_directory\code.html | Text: Popular Cities | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: storefrontShopping920 | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: directions_carAutomotive450 | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: health_and_safetyHealth & Medical610 | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: Newari Food | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: Weekend Plans | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: Family Friendly | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: Get Directions | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: What is the best dish to try at Newa Lahana for a first timer? | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: Do they serve vegetarian or vegan Newari food options? | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: Add Business | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_1\code.html | Text: Popular Cities | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_2\code.html | Text: What are the must-try Newari dishes at Newa Lahana? | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_2\code.html | Text: Is there parking available nearby? | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_2\code.html | Text: Do they serve vegetarian samay baji? | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\question_detail_nepali_directory_2\code.html | Text: Advertising options | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_community_index\code.html | Text: local_hospitalHealth & Medical980 | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_community_index\code.html | Text: Answer this → | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_community_index\code.html | Text: What are the visiting hours for Grande International Hospital on Saturdays? | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_community_index\code.html | Text: Answer this → | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_community_index\code.html | Text: Read answer → | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_nepali_directory\code.html | Text: shopping_bagShopping | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_nepali_directory\code.html | Text: flight_takeoffTravel & Tourism | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_nepali_directory\code.html | Text: more_horizView All | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_nepali_directory\code.html | Text: #VisaProcess | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_nepali_directory\code.html | Text: #TrekkingPermits | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_nepali_directory\code.html | Text: #BestISPs | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_nepali_directory\code.html | Text: Answer thisarrow_forward | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_nepali_directory\code.html | Text: Answer thisarrow_forward | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_nepali_directory\code.html | Text: Answer thisedit | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\q_a_hub_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurants_category_nepali_directory\code.html | Text: Add Business | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurants_category_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurants_category_nepali_directory\code.html | Text: Popular Cities | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurants_category_nepali_directory\code.html | Text: Careers | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurant_q_a_nepali_directory\code.html | Text: buildLocal Services | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurant_q_a_nepali_directory\code.html | Text: shopping_bagShopping | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurant_q_a_nepali_directory\code.html | Text: exploreTravel | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurant_q_a_nepali_directory\code.html | Text: groupsCommunity | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurant_q_a_nepali_directory\code.html | Text: trending_upTrending | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurant_q_a_nepali_directory\code.html | Text: quizUnanswered | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\restaurant_q_a_nepali_directory\code.html | Text: share | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\terms_of_service_nepali_directory\code.html | Text: cookieCookie Policy | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\terms_of_service_nepali_directory\code.html | Text: groupsCommunity Guidelines | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\terms_of_service_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\the_ultimate_guide_to_trekking_the_annapurna_circuit_nepali_directory\code.html | Text: View allarrow_forward | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\the_ultimate_guide_to_trekking_the_annapurna_circuit_nepali_directory\code.html | Text: GuidesEverest Base Camp vs. Annapurna CircuitChoosing between Nepal's two most famous treks can be difficult. Here is a breakdown to help you decide. | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\the_ultimate_guide_to_trekking_the_annapurna_circuit_nepali_directory\code.html | Text: CultureTeahouse Trekking: What to ExpectFrom dal bhat power to wifi availability, here is what life is really like on the trail. | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\the_ultimate_guide_to_trekking_the_annapurna_circuit_nepali_directory\code.html | Text: GearThe Ultimate Himalaya Packing ListDon't overpack. These are the absolute essentials you need for a comfortable high-altitude trek. | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\the_ultimate_guide_to_trekking_the_annapurna_circuit_nepali_directory\code.html | Text: Add Business | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\the_ultimate_guide_to_trekking_the_annapurna_circuit_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\the_ultimate_guide_to_trekking_the_annapurna_circuit_nepali_directory\code.html | Text: Popular Cities | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\user_profile_nepali_directory\code.html | Text: Bhojan Griha | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\user_profile_nepali_directory\code.html | Text: Sparkle Auto Spa | Href: ../Home.dc.html
+File: c:\Users\amrit\Downloads\NepaliDirectory page claude\user_profile_nepali_directory\code.html | Text: Business Support | Href: ../Home.dc.html

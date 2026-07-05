@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Q&amp;A Hub - Nepali Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#715d00",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container-low": "#f6f3f2",
+                        "on-primary-fixed-variant": "#554500",
+                        "outline-variant": "#d0c6ab",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-container": "#004472",
+                        "surface": "#fcf9f8",
+                        "surface-tint": "#715d00",
+                        "inverse-surface": "#313030",
+                        "tertiary-container": "#d8d8d8",
+                        "surface-container": "#f0eded",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#5d5f5f",
+                        "on-primary-container": "#705c00",
+                        "tertiary-fixed": "#e2e2e2",
+                        "inverse-primary": "#ebc300",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed": "#ffe177",
+                        "primary-container": "#ffd400",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-fixed": "#231b00",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#64b3ff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#0062a0",
+                        "secondary-fixed": "#d0e4ff",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-container": "#5c5e5e",
+                        "surface-variant": "#e5e2e1",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#4d4632",
+                        "on-secondary-fixed-variant": "#00497a",
+                        "on-surface": "#1c1b1b",
+                        "outline": "#7f775f",
+                        "on-secondary-fixed": "#001d35",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ebc300",
+                        "secondary-fixed-dim": "#9ccaff",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "32px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "headline-sm": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["13px", { "lineHeight": "18px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Anchor -->
+<header class="bg-surface dark:bg-inverse-surface text-primary dark:text-inverse-primary docked full-width top-0 border-b border-outline-variant flat no shadows z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto py-4">
+<a class="text-headline-md font-headline-md font-black text-on-surface dark:text-inverse-on-surface hover:opacity-80 transition-opacity" href="../Home.dc.html">
+                Nepali Directory
+            </a>
+<nav class="hidden md:flex items-center space-x-gutter">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors text-label-bold font-label-bold" href="../Advertise.dc.html">Advertise</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors text-label-bold font-label-bold" href="../Write Review.dc.html">Write a Review</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors text-label-bold font-label-bold" href="../Login.dc.html">Log In</a>
+<a class="bg-primary text-on-primary px-4 py-2 rounded-lg text-label-bold font-label-bold hover:bg-on-primary-fixed-variant transition-colors" href="../Register.dc.html">Sign Up</a>
+</nav>
+<button class="md:hidden text-on-surface p-2" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative bg-surface-container py-16 md:py-24 px-margin-mobile md:px-margin-desktop text-center border-b border-outline-variant">
+<div class="max-w-3xl mx-auto space-y-stack-md">
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile md:text-headline-xl md:font-headline-xl text-on-surface">Community Q&amp;A Hub</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-xl mx-auto">Ask questions and find answers about local businesses, services, and daily life in Nepal from the community.</p>
+<div class="mt-stack-lg relative max-w-2xl mx-auto flex items-center bg-surface rounded-full shadow-sm border border-outline-variant focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="material-symbols-outlined text-outline pl-4">search</span>
+<input class="w-full bg-transparent border-none py-3 px-4 text-body-md font-body-md text-on-surface focus:ring-0 placeholder:text-outline" placeholder="Search questions about businesses in Nepal..." type="text"/>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-r-full text-label-bold font-label-bold hover:bg-primary hover:text-on-primary transition-colors whitespace-nowrap" onclick="window.location.href='../Search Results.dc.html';">
+                    Search
+                </button>
+</div>
+</div>
+</section>
+<!-- Main Layout Grid -->
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Sidebar -->
+<aside class="lg:col-span-3 space-y-stack-lg hidden md:block">
+<!-- CTA Card -->
+<div class="bg-primary-container p-6 rounded-xl shadow-sm text-center">
+<h3 class="text-headline-sm font-headline-sm text-on-primary-container mb-2">Have a question?</h3>
+<p class="text-body-sm font-body-sm text-on-primary-container/80 mb-4">Tap into local knowledge to get the answers you need.</p>
+<button class="w-full bg-on-primary-container text-primary-container py-2.5 rounded-lg text-label-bold font-label-bold hover:bg-primary transition-colors" onclick="window.location.href='code.html';">Post a Question</button>
+</div>
+<!-- Categories -->
+<div class="bg-surface rounded-xl border border-outline-variant p-6">
+<h4 class="text-label-bold font-label-bold text-on-surface uppercase tracking-wider mb-4 border-b border-outline-variant pb-2">Categories</h4>
+<ul class="space-y-2">
+<li><a class="flex items-center text-body-md font-body-md text-on-surface-variant hover:text-primary transition-colors" href="../restaurants_category_nepali_directory/code.html"><span class="material-symbols-outlined text-[20px] mr-2">restaurant</span> Restaurants</a></li>
+<li><a class="flex items-center text-body-md font-body-md text-on-surface-variant hover:text-primary transition-colors" href="../Home.dc.html"><span class="material-symbols-outlined text-[20px] mr-2">shopping_bag</span> Shopping</a></li>
+<li><a class="flex items-center text-body-md font-body-md text-on-surface-variant hover:text-primary transition-colors" href="../Home.dc.html"><span class="material-symbols-outlined text-[20px] mr-2">flight_takeoff</span> Travel &amp; Tourism</a></li>
+<li><a class="flex items-center text-body-md font-body-md text-on-surface-variant hover:text-primary transition-colors" href="../Home.dc.html"><span class="material-symbols-outlined text-[20px] mr-2">home_repair_service</span> Home Services</a></li>
+<li><a class="flex items-center text-body-md font-body-md text-on-surface-variant hover:text-primary transition-colors" href="../Search Results.dc.html"><span class="material-symbols-outlined text-[20px] mr-2">directions_car</span> Auto Repair</a></li>
+<li><a class="flex items-center text-body-md font-body-md text-on-surface-variant hover:text-primary transition-colors text-primary font-medium" href="../Business Detail.dc.html"><span class="material-symbols-outlined text-[20px] mr-2">more_horiz</span> View All</a></li>
+</ul>
+</div>
+<!-- Trending Topics -->
+<div class="bg-surface rounded-xl border border-outline-variant p-6">
+<h4 class="text-label-bold font-label-bold text-on-surface uppercase tracking-wider mb-4 border-b border-outline-variant pb-2">Trending Topics</h4>
+<div class="flex flex-wrap gap-2">
+<a class="bg-surface-container-high px-3 py-1 rounded-full text-body-sm font-body-sm text-on-surface-variant hover:bg-surface-variant transition-colors" href="../City Landing.dc.html">#KathmanduEats</a>
+<a class="bg-surface-container-high px-3 py-1 rounded-full text-body-sm font-body-sm text-on-surface-variant hover:bg-surface-variant transition-colors" href="../Home.dc.html">#VisaProcess</a>
+<a class="bg-surface-container-high px-3 py-1 rounded-full text-body-sm font-body-sm text-on-surface-variant hover:bg-surface-variant transition-colors" href="../Search Results.dc.html">#TrekkingPermits</a>
+<a class="bg-surface-container-high px-3 py-1 rounded-full text-body-sm font-body-sm text-on-surface-variant hover:bg-surface-variant transition-colors" href="../Home.dc.html">#BestISPs</a>
+</div>
+</div>
+</aside>
+<!-- Main Feed Area -->
+<section class="lg:col-span-9 space-y-stack-md">
+<!-- Mobile Post CTA -->
+<div class="md:hidden mb-stack-md">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-lg text-label-bold font-label-bold flex items-center justify-center" onclick="window.location.href='code.html';">
+<span class="material-symbols-outlined mr-2">edit_note</span> Post a Question
+                </button>
+</div>
+<!-- Tabs -->
+<div class="flex space-x-6 border-b border-outline-variant mb-6 overflow-x-auto no-scrollbar">
+<button class="pb-3 text-label-bold font-label-bold text-primary border-b-2 border-primary whitespace-nowrap" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">Latest</button>
+<button class="pb-3 text-label-bold font-label-bold text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">Unanswered</button>
+<button class="pb-3 text-label-bold font-label-bold text-on-surface-variant hover:text-on-surface whitespace-nowrap transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">Trending</button>
+</div>
+<!-- Feed List -->
+<div class="space-y-4">
+<!-- Question Card 1 -->
+<article class="bg-surface rounded-xl border border-outline-variant p-6 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<span class="text-body-sm font-body-sm text-secondary font-medium uppercase tracking-wide">Travel &amp; Tourism</span>
+<span class="text-body-sm font-body-sm text-outline">2 hours ago</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface mb-3 hover:text-primary cursor-pointer transition-colors">What is the most reliable domestic airline for flying from Kathmandu to Pokhara during monsoon season?</h2>
+<div class="bg-surface-container-low p-4 rounded-lg border-l-4 border-secondary mb-4">
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">"Based on personal experience, Buddha Air tends to have the best track record for minimizing cancellations during poor weather, though delays are inevitable for all carriers..."</p>
+</div>
+<div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant">
+<div class="flex items-center space-x-4 text-body-sm font-body-sm text-on-surface-variant">
+<span class="flex items-center"><span class="material-symbols-outlined text-[18px] mr-1">chat_bubble</span> 14 Answers</span>
+<span class="flex items-center"><span class="material-symbols-outlined text-[18px] mr-1">visibility</span> 120 Views</span>
+</div>
+<a class="text-label-bold font-label-bold text-secondary hover:underline flex items-center" href="../Home.dc.html">
+                            Answer this <span class="material-symbols-outlined text-[18px] ml-1">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Question Card 2 -->
+<article class="bg-surface rounded-xl border border-outline-variant p-6 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<span class="text-body-sm font-body-sm text-secondary font-medium uppercase tracking-wide">Restaurants</span>
+<span class="text-body-sm font-body-sm text-outline">5 hours ago</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface mb-3 hover:text-primary cursor-pointer transition-colors">Looking for recommendations: Best authentic Newari food in Patan?</h2>
+<div class="bg-surface-container-low p-4 rounded-lg border-l-4 border-secondary mb-4">
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">"Honacha is a classic, but if you want something slightly less crowded with incredible Bara, try checking out the small eatery near the Mangal Bazaar..."</p>
+</div>
+<div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant">
+<div class="flex items-center space-x-4 text-body-sm font-body-sm text-on-surface-variant">
+<span class="flex items-center"><span class="material-symbols-outlined text-[18px] mr-1">chat_bubble</span> 8 Answers</span>
+<span class="flex items-center"><span class="material-symbols-outlined text-[18px] mr-1">visibility</span> 85 Views</span>
+</div>
+<a class="text-label-bold font-label-bold text-secondary hover:underline flex items-center" href="../Home.dc.html">
+                            Answer this <span class="material-symbols-outlined text-[18px] ml-1">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Question Card 3 -->
+<article class="bg-surface rounded-xl border border-outline-variant p-6 hover:shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-shadow">
+<div class="flex justify-between items-start mb-2">
+<span class="text-body-sm font-body-sm text-secondary font-medium uppercase tracking-wide">Auto Repair</span>
+<span class="text-body-sm font-body-sm text-outline">1 day ago</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface mb-3 hover:text-primary cursor-pointer transition-colors">Can anyone recommend an honest mechanic for a Mahindra Scorpio in the Ring Road area?</h2>
+<div class="bg-surface-container-low p-4 rounded-lg border-l-4 border-outline-variant border-dashed mb-4">
+<p class="text-body-md font-body-md text-on-surface-variant italic">Be the first to answer this question.</p>
+</div>
+<div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant">
+<div class="flex items-center space-x-4 text-body-sm font-body-sm text-on-surface-variant">
+<span class="flex items-center"><span class="material-symbols-outlined text-[18px] mr-1">chat_bubble</span> 0 Answers</span>
+<span class="flex items-center"><span class="material-symbols-outlined text-[18px] mr-1">visibility</span> 45 Views</span>
+</div>
+<a class="text-label-bold font-label-bold text-primary hover:underline flex items-center" href="../Home.dc.html">
+                            Answer this <span class="material-symbols-outlined text-[18px] ml-1">edit</span>
+</a>
+</div>
+</article>
+<div class="text-center pt-4">
+<button class="bg-surface border border-outline-variant text-on-surface px-6 py-2 rounded-lg text-label-bold font-label-bold hover:bg-surface-container transition-colors" onclick="window.location.href='code.html';">Load More Questions</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Anchor -->
+<footer class="bg-surface-container dark:bg-surface-container-highest text-secondary dark:text-secondary-fixed full-width mt-stack-lg flat no shadows">
+<div class="w-full px-margin-mobile md:px-margin-desktop py-stack-lg max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 bg-surface-container-low dark:bg-inverse-surface rounded-xl">
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface">
+                Nepali Directory
+            </div>
+<nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+<a class="text-on-surface-variant dark:text-surface-variant hover:underline hover:text-primary transition-all duration-300 text-label-bold font-label-bold" href="About Us.dc.html">About</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:underline hover:text-primary transition-all duration-300 text-label-bold font-label-bold" href="../Help.dc.html">Business Support</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:underline hover:text-primary transition-all duration-300 text-label-bold font-label-bold" href="Terms of Service.dc.html">Terms of Use</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:underline hover:text-primary transition-all duration-300 text-label-bold font-label-bold" href="Privacy Policy.dc.html">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:underline hover:text-primary transition-all duration-300 text-label-bold font-label-bold" href="Contact Us.dc.html">Contact Us</a>
+</nav>
+<div class="text-body-sm font-body-sm text-on-surface-variant">
+                © 2024 Nepali Directory. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

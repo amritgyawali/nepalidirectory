@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; line-height: 1.45; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    input { font-family: inherit; }
+    h1, h2, h3, h4, p { margin: 0; }
+  </style>
+</helmet>
+<!-- HEADER -->
+<header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<nav style="display:flex;gap:20px;font-size:14px;font-weight:600;">
+<a href="Home.dc.html" style="color:#1a1a1a;">Back to Directory</a>
+</nav>
+</div>
+</header>
+<!-- HERO -->
+<section style="background:#1a1a1a;color:#fff;padding:80px 24px;text-align:center;">
+<h1 style="font-size:40px;font-weight:800;letter-spacing:-1px;margin-bottom:12px;">How can we help?</h1>
+<div style="max-width:600px;margin:0 auto;position:relative;">
+<svg height="20" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);fill:none;stroke:#9ca3af;stroke-width:2" viewbox="0 0 24 24" width="20"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+<input placeholder="Search for help topics (e.g., claiming a listing)" style="width:100%;padding:16px 16px 16px 48px;border-radius:8px;border:0;font-size:16px;outline:none;" type="text"/>
+</div>
+</section>
+<!-- CONTENT -->
+<main style="max-width:980px;margin:60px auto;padding:0 24px;">
+<h2 style="font-size:24px;font-weight:800;margin-bottom:24px;border-bottom:1px solid #e3e5e8;padding-bottom:12px;">Frequently Asked Questions</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+<div>
+<h3 style="font-size:18px;font-weight:700;margin-bottom:8px;">How do I claim my business listing?</h3>
+<p style="font-size:14px;color:#4b5563;margin-bottom:16px;">Search for your business in the directory. If it exists, click the "Claim this listing" button on the business detail page. If it doesn't exist, you can add it through your Dashboard.</p>
+<h3 style="font-size:18px;font-weight:700;margin-bottom:8px;">Is it free to list my business?</h3>
+<p style="font-size:14px;color:#4b5563;margin-bottom:16px;">Yes! A basic business listing is 100% free forever. You can also upgrade to premium features to get more visibility.</p>
+</div>
+<div>
+<h3 style="font-size:18px;font-weight:700;margin-bottom:8px;">How do I edit my business information?</h3>
+<p style="font-size:14px;color:#4b5563;margin-bottom:16px;">Log in to your account, go to the Dashboard, and select "My Listings". From there you can update your hours, phone number, and address.</p>
+<h3 style="font-size:18px;font-weight:700;margin-bottom:8px;">I forgot my password. What do I do?</h3>
+<p style="font-size:14px;color:#4b5563;margin-bottom:16px;">Go to the Login page and click on "Forgot Password" to receive a password reset link in your email.</p>
+</div>
+</div>
+<div style="margin-top:60px;background:#f7f8fa;border:1px solid #e3e5e8;border-radius:12px;padding:40px;text-align:center;">
+<h2 style="font-size:22px;font-weight:800;margin-bottom:12px;">Still need help?</h2>
+<p style="font-size:14px;color:#4b5563;margin-bottom:24px;">Our support team is available Monday-Friday, 9am - 5pm NPT.</p>
+<button onclick="alert('Contact form opened!')" style="background:#FFD400;color:#1a1a1a;padding:12px 24px;border-radius:4px;font-weight:700;font-size:14px;">Contact Support</button>
+</div>
+</main>
+<footer style="text-align:center;padding:40px 24px;font-size:12px;color:#6b7280;border-top:1px solid #e3e5e8;margin-top:80px;">
+<a href="Home.dc.html" style="color:#6b7280;">Home</a> · <a href="Privacy Policy.dc.html" style="color:#6b7280;">Privacy</a> · <a href="Terms of Service.dc.html" style="color:#6b7280;">Terms</a> · <a href="Help.dc.html" style="color:#6b7280;">Help</a> · © 2026 NepaliDirectory
+</footer>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; line-height: 1.45; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    img { display: block; max-width: 100%; }
+    input { font-family: inherit; }
+    h1, h2, h3, h4, p { margin: 0; }
+  </style>
+</helmet>
+<!-- HEADER -->
+<header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<div style="flex:1;display:flex;align-items:stretch;border:1px solid #d3d6db;border-radius:4px;overflow:hidden;max-width:620px;background:#fff;">
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;"><svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><input placeholder="Find a business" style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;"/></div>
+<div style="width:1px;background:#e3e5e8;"></div>
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;"><svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><input placeholder="Where? (City, district)" style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;"/></div>
+<button onclick="window.location.href='Search Results.dc.html';" style="background:#FFD400;color:#1a1a1a;padding:11px 24px;font-weight:700;font-size:14px;">FIND</button>
+</div>
+<nav style="display:flex;align-items:center;gap:22px;font-size:14px;">
+<a href="Advertise.dc.html" style="color:#1a1a1a;font-weight:500;">Advertise</a>
+<a href="Write Review.dc.html" style="color:#1a1a1a;font-weight:500;">Write a Review</a>
+<a href="Login.dc.html" style="color:#1a1a1a;font-weight:500;">Log In</a>
+<a href="Register.dc.html" style="background:#1a1a1a;color:#fff;padding:9px 16px;border-radius:4px;font-weight:600;">Sign Up</a>
+</nav>
+</div>
+</header>
+<!-- BREADCRUMB -->
+<div style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:10px 24px;font-size:12px;color:#6b7280;">
+<a href="Home.dc.html">Home</a> <span style="margin:0 6px;">›</span>
+<a href="Map Directions.dc.html">Site Map</a> <span style="margin:0 6px;">›</span>
+<span style="color:#1a1a1a;font-weight:600;">Categories</span>
+</div>
+</div>
+<!-- HEADER + TOP CHIPS -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:40px 24px 32px;">
+<h1 style="font-size:38px;font-weight:800;letter-spacing:-1px;margin:0 0 8px;">Browse business categories</h1>
+<p style="color:#4b5563;font-size:15px;max-width:680px;margin:0 0 24px;">Find verified local businesses across 140+ categories in every district of Nepal — from plumbers in Pokhara to wedding photographers in Kathmandu.</p>
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
+<span style="font-size:13px;font-weight:700;color:#1a1a1a;">Most searched:</span>
+<a href="Search Results.dc.html" style="background:#fff7d1;border:1px solid #FFD400;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#1a1a1a;">Restaurants</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#1a1a1a;">Dentists</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#1a1a1a;">Plumbers</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#1a1a1a;">Electricians</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#1a1a1a;">Contractors</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#1a1a1a;">Auto Repair</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#1a1a1a;">Hotels</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#1a1a1a;">Lawyers</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#1a1a1a;">Beauty Salons</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:10px;">
+<a href="City Landing.dc.html" style="text-align:center;padding:14px 8px;background:#fff;border:1px solid #e3e5e8;border-radius:6px;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:11px;font-weight:700;color:#FFD400;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Top province</div>
+<div style="font-size:14px;font-weight:700;">Bagmati</div>
+</a>
+<a href="City Landing.dc.html" style="text-align:center;padding:14px 8px;background:#fff;border:1px solid #e3e5e8;border-radius:6px;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Province</div>
+<div style="font-size:14px;font-weight:700;">Gandaki</div>
+</a>
+<a href="City Landing.dc.html" style="text-align:center;padding:14px 8px;background:#fff;border:1px solid #e3e5e8;border-radius:6px;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Province</div>
+<div style="font-size:14px;font-weight:700;">Lumbini</div>
+</a>
+<a href="City Landing.dc.html" style="text-align:center;padding:14px 8px;background:#fff;border:1px solid #e3e5e8;border-radius:6px;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Province</div>
+<div style="font-size:14px;font-weight:700;">Koshi</div>
+</a>
+<a href="City Landing.dc.html" style="text-align:center;padding:14px 8px;background:#fff;border:1px solid #e3e5e8;border-radius:6px;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Province</div>
+<div style="font-size:14px;font-weight:700;">Madhesh</div>
+</a>
+<a href="City Landing.dc.html" style="text-align:center;padding:14px 8px;background:#fff;border:1px solid #e3e5e8;border-radius:6px;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Province</div>
+<div style="font-size:14px;font-weight:700;">Karnali</div>
+</a>
+<a href="City Landing.dc.html" style="text-align:center;padding:14px 8px;background:#fff;border:1px solid #e3e5e8;border-radius:6px;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:11px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Province</div>
+<div style="font-size:14px;font-weight:700;">Sudurpashchim</div>
+</a>
+</div>
+</div>
+</section>
+<!-- GROUPED CATEGORY SECTIONS -->
+<section style="background:#fff;">
+<div style="max-width:1180px;margin:0 auto;padding:48px 24px;">
+<!-- Home Services -->
+<div style="margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid #e3e5e8;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#fff7d1;border:1px solid #FFD400;display:flex;align-items:center;justify-content:center;font-size:24px;">🏠</div>
+<div>
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Home Services</h2>
+<p style="font-size:13px;color:#6b7280;margin-top:2px;">Plumbing, electrical, repair and household contractors</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Search Results.dc.html" style="padding:6px 0;">Plumbers</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Electricians</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Painters</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Movers &amp; Packers</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Carpenters</a>
+<a href="Home.dc.html" style="padding:6px 0;">Masons</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">AC Repair</a>
+<a href="Home.dc.html" style="padding:6px 0;">Water Tank Cleaning</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">House Cleaning</a>
+<a href="Home.dc.html" style="padding:6px 0;">Interior Designers</a>
+<a href="Home.dc.html" style="padding:6px 0;">RO / Water Purifier</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">CCTV Installation</a>
+<a href="Home.dc.html" style="padding:6px 0;">Solar Installers</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Contractors</a>
+<a href="Home.dc.html" style="padding:6px 0;">Hardware Stores</a>
+<a href="Home.dc.html" style="padding:6px 0;">Pest Control</a>
+<a href="Home.dc.html" style="padding:6px 0;">Generator Service</a>
+<a href="Home.dc.html" style="padding:6px 0;">Inverter / UPS</a>
+<a href="Home.dc.html" style="padding:6px 0;">Septic Tank Cleaning</a>
+<a href="Home.dc.html" style="padding:6px 0;">Roofing &amp; Waterproofing</a>
+</div>
+<a href="Home.dc.html" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#1a6dcc;">View all 28 Home Services categories →</a>
+</div>
+<!-- Medical -->
+<div style="margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid #e3e5e8;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#e8f4fd;border:1px solid #b6d9f5;display:flex;align-items:center;justify-content:center;font-size:24px;">🩺</div>
+<div>
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Medical &amp; Healthcare</h2>
+<p style="font-size:13px;color:#6b7280;margin-top:2px;">Doctors, hospitals, specialists and pharmacies</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Search Results.dc.html" style="padding:6px 0;">Doctors (General)</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Dentists</a>
+<a href="Home.dc.html" style="padding:6px 0;">Dermatologists</a>
+<a href="Home.dc.html" style="padding:6px 0;">Gynecologists</a>
+<a href="Home.dc.html" style="padding:6px 0;">Pediatricians</a>
+<a href="Home.dc.html" style="padding:6px 0;">Orthopedics</a>
+<a href="Home.dc.html" style="padding:6px 0;">Cardiologists</a>
+<a href="Home.dc.html" style="padding:6px 0;">ENT Specialists</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Hospitals</a>
+<a href="Home.dc.html" style="padding:6px 0;">Pharmacies</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Eye Care / Opticians</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Physiotherapy</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Diagnostic Labs</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Ayurvedic Doctors</a>
+<a href="Home.dc.html" style="padding:6px 0;">Mental Health</a>
+<a href="Home.dc.html" style="padding:6px 0;">Veterinary</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Maternity Hospitals</a>
+<a href="Home.dc.html" style="padding:6px 0;">Dental Implants</a>
+<a href="Home.dc.html" style="padding:6px 0;">Ambulance Services</a>
+</div>
+<a href="Categories.dc.html" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#1a6dcc;">View all 24 Medical categories →</a>
+</div>
+<!-- Legal & Financial -->
+<div style="margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid #e3e5e8;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#ecf0fb;border:1px solid #b8c5e8;display:flex;align-items:center;justify-content:center;font-size:24px;">⚖️</div>
+<div>
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Legal &amp; Financial</h2>
+<p style="font-size:13px;color:#6b7280;margin-top:2px;">Lawyers, accountants, banks and insurance</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Search Results.dc.html" style="padding:6px 0;">Lawyers (General)</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Property Lawyers</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Family Lawyers</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Criminal Lawyers</a>
+<a href="Home.dc.html" style="padding:6px 0;">Notaries</a>
+<a href="Account Settings.dc.html" style="padding:6px 0;">Chartered Accountants</a>
+<a href="Home.dc.html" style="padding:6px 0;">Audit Firms</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Tax Consultants</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Insurance Agents</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Life Insurance</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Vehicle Insurance</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Banks</a>
+<a href="Home.dc.html" style="padding:6px 0;">Cooperatives</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Money Exchange</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Remittance</a>
+<a href="Home.dc.html" style="padding:6px 0;">Investment Advisors</a>
+<a href="Home.dc.html" style="padding:6px 0;">Loan Consultants</a>
+</div>
+<a href="Categories.dc.html" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#1a6dcc;">View all 22 Legal &amp; Financial categories →</a>
+</div>
+<!-- Restaurants & Food -->
+<div style="margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid #e3e5e8;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#fff7d1;border:1px solid #FFD400;display:flex;align-items:center;justify-content:center;font-size:24px;">🍽️</div>
+<div>
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Restaurants &amp; Food</h2>
+<p style="font-size:13px;color:#6b7280;margin-top:2px;">Restaurants by cuisine, cafés, bakeries and catering</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Search Results.dc.html" style="padding:6px 0;font-weight:600;">All Restaurants</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Newari</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Thakali</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Tibetan / Sherpa</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Indian</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Chinese</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Continental</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Italian</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Korean</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Japanese</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Thai</a>
+<a href="Home.dc.html" style="padding:6px 0;">Cafés</a>
+<a href="Home.dc.html" style="padding:6px 0;">Bakeries</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Sweet Shops / Mithai</a>
+<a href="Home.dc.html" style="padding:6px 0;">Catering</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Momo</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Fast Food</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Fine Dining</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Vegetarian</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Buffet</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Bars &amp; Lounges</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Steakhouses</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Open 24 Hours</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Late-Night Dining</a>
+</div>
+<a href="Categories.dc.html" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#1a6dcc;">View all 32 Food categories →</a>
+</div>
+<!-- Wedding & Events -->
+<div style="margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid #e3e5e8;background:linear-gradient(to right, #fff7d1 0%, transparent 60%);border-radius:8px;padding:24px;border:1px solid #ffe9a8;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#fff;border:1px solid #FFD400;display:flex;align-items:center;justify-content:center;font-size:24px;">💒</div>
+<div>
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Wedding &amp; Events <span style="background:#1a1a1a;color:#FFD400;font-size:10px;padding:3px 8px;border-radius:3px;font-weight:800;letter-spacing:1px;vertical-align:middle;margin-left:6px;">FEATURED</span></h2>
+<p style="font-size:13px;color:#6b7280;margin-top:2px;">Photographers, decorators, party palaces and bridal services</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Search Results.dc.html" style="padding:6px 0;">Wedding Photographers</a>
+<a href="Home.dc.html" style="padding:6px 0;">Cinematographers</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Decorators / Florists</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Party Palaces</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Caterers</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Tent House</a>
+<a href="Home.dc.html" style="padding:6px 0;">DJ / Sound Systems</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Mehendi Artists</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Bridal Makeup</a>
+<a href="Home.dc.html" style="padding:6px 0;">Wedding Cards</a>
+<a href="Home.dc.html" style="padding:6px 0;">Bridal Jewellery</a>
+<a href="Home.dc.html" style="padding:6px 0;">Wedding Cars</a>
+<a href="Home.dc.html" style="padding:6px 0;">Honeymoon Packages</a>
+<a href="Home.dc.html" style="padding:6px 0;">Pundits / Priests</a>
+<a href="Home.dc.html" style="padding:6px 0;">Wedding Lehengas</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Bartar Houses</a>
+<a href="Home.dc.html" style="padding:6px 0;">Mata Tirtha Venues</a>
+<a href="Local Events.dc.html" style="padding:6px 0;">Event Planners</a>
+</div>
+<a href="Categories.dc.html" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#1a6dcc;">View all 26 Wedding &amp; Event categories →</a>
+</div>
+<!-- Auto -->
+<div style="margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid #e3e5e8;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#fff1e0;border:1px solid #ffd7a6;display:flex;align-items:center;justify-content:center;font-size:24px;">🚗</div>
+<div>
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Auto &amp; Bike</h2>
+<p style="font-size:13px;color:#6b7280;margin-top:2px;">Repair, service, spare parts and vehicle rental</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Search Results.dc.html" style="padding:6px 0;">Auto Repair (Car)</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Bike Service</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Car Wash</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Tyre Shops</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Spare Parts</a>
+<a href="Home.dc.html" style="padding:6px 0;">Towing Service</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Vehicle Rental</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Bike Rental</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Driving Schools</a>
+<a href="Home.dc.html" style="padding:6px 0;">Mechanic (Two-wheeler)</a>
+<a href="Home.dc.html" style="padding:6px 0;">Auto Electrical</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Bullbar / Accessories</a>
+<a href="Home.dc.html" style="padding:6px 0;">Polish &amp; Detailing</a>
+<a href="Home.dc.html" style="padding:6px 0;">EV Charging</a>
+</div>
+<a href="Categories.dc.html" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#1a6dcc;">View all 18 Auto categories →</a>
+</div>
+<!-- Beauty & Wellness -->
+<div style="margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid #e3e5e8;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#f3e8fd;border:1px solid #d4b3f5;display:flex;align-items:center;justify-content:center;font-size:24px;">💆</div>
+<div>
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Beauty &amp; Wellness</h2>
+<p style="font-size:13px;color:#6b7280;margin-top:2px;">Salons, spas, barbers, gyms and yoga</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Search Results.dc.html" style="padding:6px 0;">Beauty Salons / Parlours</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Barbers</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Spa</a>
+<a href="Home.dc.html" style="padding:6px 0;">Massage Therapy</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Gyms</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Yoga Studios</a>
+<a href="Home.dc.html" style="padding:6px 0;">Nail Art</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Bridal Makeup</a>
+<a href="Home.dc.html" style="padding:6px 0;">Hair Color &amp; Treatment</a>
+<a href="Home.dc.html" style="padding:6px 0;">Eyebrow Threading</a>
+<a href="Home.dc.html" style="padding:6px 0;">Tattoo Studios</a>
+<a href="Home.dc.html" style="padding:6px 0;">Pilates</a>
+<a href="Home.dc.html" style="padding:6px 0;">Aerobics / Dance Fitness</a>
+<a href="Home.dc.html" style="padding:6px 0;">Personal Trainers</a>
+</div>
+<a href="Categories.dc.html" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#1a6dcc;">View all 16 Beauty &amp; Wellness categories →</a>
+</div>
+<!-- Education -->
+<div style="margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid #e3e5e8;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#e0f4f4;border:1px solid #99d6d6;display:flex;align-items:center;justify-content:center;font-size:24px;">🎓</div>
+<div>
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Education</h2>
+<p style="font-size:13px;color:#6b7280;margin-top:2px;">Schools, colleges, consultancies and training centers</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Search Results.dc.html" style="padding:6px 0;">Schools (Primary)</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Schools (Secondary)</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">+2 Colleges</a>
+<a href="Home.dc.html" style="padding:6px 0;">Universities</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Tuition Centers</a>
+<a href="Home.dc.html" style="padding:6px 0;">Consultancies / Abroad Study</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Language Institutes</a>
+<a href="Home.dc.html" style="padding:6px 0;">IELTS / TOEFL</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Computer Training</a>
+<a href="Home.dc.html" style="padding:6px 0;">Music Classes</a>
+<a href="Home.dc.html" style="padding:6px 0;">Dance Classes</a>
+<a href="Home.dc.html" style="padding:6px 0;">Art Classes</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Driving School</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Engineering Colleges</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Medical Colleges</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Daycare / Preschool</a>
+</div>
+<a href="Categories.dc.html" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#1a6dcc;">View all 22 Education categories →</a>
+</div>
+<!-- Travel & Tourism -->
+<div style="margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid #e3e5e8;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#fce8ec;border:1px solid #f5b7c1;display:flex;align-items:center;justify-content:center;font-size:24px;">🏔️</div>
+<div>
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Travel &amp; Tourism</h2>
+<p style="font-size:13px;color:#6b7280;margin-top:2px;">Trekking agencies, hotels, travel agents</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Search Results.dc.html" style="padding:6px 0;">Trekking Agencies</a>
+<a href="Home.dc.html" style="padding:6px 0;">Adventure Tours</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Travel Agents</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Hotels (3-Star)</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Hotels (4–5 Star)</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Boutique Hotels</a>
+<a href="Home.dc.html" style="padding:6px 0;">Hostels / Backpackers</a>
+<a href="Home.dc.html" style="padding:6px 0;">Homestays</a>
+<a href="Home.dc.html" style="padding:6px 0;">Resorts</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Guides &amp; Porters</a>
+<a href="Home.dc.html" style="padding:6px 0;">Mountain Flight Operators</a>
+<a href="Home.dc.html" style="padding:6px 0;">Paragliding</a>
+<a href="Home.dc.html" style="padding:6px 0;">Rafting</a>
+<a href="Home.dc.html" style="padding:6px 0;">Visa &amp; Permits</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Travel Insurance</a>
+</div>
+<a href="Categories.dc.html" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#1a6dcc;">View all 20 Travel categories →</a>
+</div>
+<!-- Shopping & Retail -->
+<div style="margin-bottom:48px;padding-bottom:36px;border-bottom:1px solid #e3e5e8;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#e8f5ed;border:1px solid #b5dec3;display:flex;align-items:center;justify-content:center;font-size:24px;">🛍️</div>
+<div>
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Shopping &amp; Retail</h2>
+<p style="font-size:13px;color:#6b7280;margin-top:2px;">Stores, malls, and specialty retail</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Home.dc.html" style="padding:6px 0;">Clothing Stores</a>
+<a href="Home.dc.html" style="padding:6px 0;">Shoe Stores</a>
+<a href="Home.dc.html" style="padding:6px 0;">Electronics</a>
+<a href="Home.dc.html" style="padding:6px 0;">Mobile Phone Stores</a>
+<a href="Home.dc.html" style="padding:6px 0;">Furniture Stores</a>
+<a href="Home.dc.html" style="padding:6px 0;">Home Décor</a>
+<a href="Home.dc.html" style="padding:6px 0;">Bookstores</a>
+<a href="Home.dc.html" style="padding:6px 0;">Sports Equipment</a>
+<a href="Home.dc.html" style="padding:6px 0;">Toys &amp; Games</a>
+<a href="Home.dc.html" style="padding:6px 0;">Grocery / Supermarkets</a>
+<a href="Home.dc.html" style="padding:6px 0;">Departmental Stores</a>
+<a href="Home.dc.html" style="padding:6px 0;">Boutiques</a>
+<a href="Home.dc.html" style="padding:6px 0;">Tailoring</a>
+<a href="Home.dc.html" style="padding:6px 0;">Jewellery</a>
+<a href="Home.dc.html" style="padding:6px 0;">Pashmina / Handicrafts</a>
+</div>
+<a href="Categories.dc.html" style="display:inline-block;margin-top:14px;font-size:12px;font-weight:700;color:#1a6dcc;">View all 24 Shopping categories →</a>
+</div>
+<!-- IT & Real Estate side-by-side -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-bottom:48px;">
+<div>
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#ecf0fb;border:1px solid #b8c5e8;display:flex;align-items:center;justify-content:center;font-size:24px;">💻</div>
+<div>
+<h2 style="font-size:22px;font-weight:800;letter-spacing:-0.5px;">IT &amp; Software</h2>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:13px;">
+<a href="Home.dc.html" style="padding:6px 0;">Software Companies</a>
+<a href="Home.dc.html" style="padding:6px 0;">Web Design Agencies</a>
+<a href="Home.dc.html" style="padding:6px 0;">Digital Marketing</a>
+<a href="Get App.dc.html" style="padding:6px 0;">App Development</a>
+<a href="Home.dc.html" style="padding:6px 0;">Computer Repair</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">IT Training</a>
+<a href="Home.dc.html" style="padding:6px 0;">Cyber Cafés</a>
+<a href="Home.dc.html" style="padding:6px 0;">Printing &amp; Photocopy</a>
+</div>
+</div>
+<div>
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#f7f8fa;border:1px solid #d3d6db;display:flex;align-items:center;justify-content:center;font-size:24px;">🏘️</div>
+<div>
+<h2 style="font-size:22px;font-weight:800;letter-spacing:-0.5px;">Real Estate</h2>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-size:13px;">
+<a href="Home.dc.html" style="padding:6px 0;">Real Estate Agents</a>
+<a href="Home.dc.html" style="padding:6px 0;">Property Developers</a>
+<a href="Home.dc.html" style="padding:6px 0;">Apartments for Rent</a>
+<a href="Home.dc.html" style="padding:6px 0;">Land for Sale</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Commercial Space</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Property Lawyers</a>
+<a href="Home.dc.html" style="padding:6px 0;">Surveyors</a>
+<a href="Home.dc.html" style="padding:6px 0;">Architects</a>
+</div>
+</div>
+</div>
+<!-- Government -->
+<div>
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<div style="width:48px;height:48px;border-radius:10px;background:#f7f8fa;border:1px solid #d3d6db;display:flex;align-items:center;justify-content:center;font-size:24px;">🏛️</div>
+<div>
+<h2 style="font-size:22px;font-weight:800;letter-spacing:-0.5px;">Government &amp; Public Services</h2>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 24px;font-size:13px;">
+<a href="Home.dc.html" style="padding:6px 0;">Ward Offices</a>
+<a href="Home.dc.html" style="padding:6px 0;">Police Stations</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Hospitals (Govt)</a>
+<a href="Home.dc.html" style="padding:6px 0;">Land Revenue Office</a>
+<a href="Home.dc.html" style="padding:6px 0;">Passport Office</a>
+<a href="Home.dc.html" style="padding:6px 0;">Transport Management</a>
+<a href="Home.dc.html" style="padding:6px 0;">CDO Office</a>
+<a href="Home.dc.html" style="padding:6px 0;">Embassies</a>
+<a href="Home.dc.html" style="padding:6px 0;">Customs Office</a>
+<a href="Home.dc.html" style="padding:6px 0;">Election Commission</a>
+</div>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer style="background:#1a1a1a;color:#d3d6db;">
+<div style="max-width:1180px;margin:0 auto;padding:56px 24px 32px;">
+<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:48px;">
+<div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#fff;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#9ca3af;">Directory</span></span>
+</div>
+<p style="font-size:13px;line-height:1.6;color:#9ca3af;margin:0 0 20px;">Nepal's most trusted local business directory.</p>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">About</h4>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:13px;">
+<li><a href="About Us.dc.html" style="color:#d3d6db;">About Us</a></li>
+<li><a href="Contact Us.dc.html" style="color:#d3d6db;">Contact Us</a></li>
+<li><a href="Advertise.dc.html" style="color:#d3d6db;">Advertise with Us</a></li>
+</ul>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">Directory</h4>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:13px;">
+<li><a href="Search Results.dc.html" style="color:#d3d6db;">Find a Business</a></li>
+<li><a href="Categories.dc.html" style="color:#d3d6db;">Categories</a></li>
+</ul>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">City Guides</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;font-size:13px;">
+<a href="City Landing.dc.html" style="color:#d3d6db;">Kathmandu</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Pokhara</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Lalitpur</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Bhaktapur</a>
+</div>
+</div>
+</div>
+<div style="border-top:1px solid #2a2a2a;margin-top:48px;padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+<div style="display:flex;gap:24px;font-size:12px;"><a href="Privacy Policy.dc.html" style="color:#9ca3af;">Privacy</a><a href="Terms of Service.dc.html" style="color:#9ca3af;">Terms of Use</a><a href="Search Results.dc.html" style="color:#9ca3af;">Legal</a></div>
+<div style="font-size:12px;color:#6b7280;">© 2026 NepaliDirectory. All rights reserved.</div>
+</div>
+</div>
+</footer>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Public Profile - Nepali Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#715d00",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container-low": "#f6f3f2",
+                        "on-primary-fixed-variant": "#554500",
+                        "outline-variant": "#d0c6ab",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-container": "#004472",
+                        "surface": "#fcf9f8",
+                        "surface-tint": "#715d00",
+                        "inverse-surface": "#313030",
+                        "tertiary-container": "#d8d8d8",
+                        "surface-container": "#f0eded",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#5d5f5f",
+                        "on-primary-container": "#705c00",
+                        "tertiary-fixed": "#e2e2e2",
+                        "inverse-primary": "#ebc300",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed": "#ffe177",
+                        "primary-container": "#ffd400",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-fixed": "#231b00",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#64b3ff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#0062a0",
+                        "secondary-fixed": "#d0e4ff",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-container": "#5c5e5e",
+                        "surface-variant": "#e5e2e1",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#4d4632",
+                        "on-secondary-fixed-variant": "#00497a",
+                        "on-surface": "#1c1b1b",
+                        "outline": "#7f775f",
+                        "on-secondary-fixed": "#001d35",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ebc300",
+                        "secondary-fixed-dim": "#9ccaff",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "32px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "headline-sm": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["13px", { "lineHeight": "18px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-lg">
+<!-- Top Navigation (Shared Component) -->
+<nav class="bg-surface dark:bg-inverse-surface text-primary dark:text-inverse-primary font-headline-sm text-headline-sm docked full-width top-0 border-b border-outline-variant flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto py-4 z-50 sticky transition-all duration-300">
+<div class="flex items-center gap-4">
+<span class="text-headline-md font-headline-md font-black text-on-surface dark:text-inverse-on-surface tracking-tight">Nepali Directory</span>
+</div>
+<!-- Desktop Nav Links -->
+<div class="hidden md:flex items-center gap-6 text-label-bold font-label-bold">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="../Advertise.dc.html">Advertise</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="../Write Review.dc.html">Write a Review</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 opacity-80 transition-all duration-200" href="User Profile.dc.html">Profile</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="../Login.dc.html">Log In</a>
+<a class="bg-primary text-on-primary px-4 py-2 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-colors ml-2" href="../Register.dc.html">Sign Up</a>
+</div>
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-on-surface-variant p-2" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Profile Summary & Stats (Bento Style) -->
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<!-- User Profile Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col items-center text-center shadow-sm relative overflow-hidden">
+<!-- Decorative Top Banner -->
+<div class="absolute top-0 left-0 w-full h-24 bg-surface-container-highest"></div>
+<div class="relative mt-8 mb-4">
+<img class="w-32 h-32 rounded-full border-4 border-surface-container-lowest object-cover bg-surface-variant z-10 relative" data-alt="A professional portrait photograph of a confident individual, smiling slightly, set against a clean, softly lit outdoor background. The lighting is natural and bright, typical of a professional yet approachable headshot, fitting perfectly with a modern light-mode corporate directory aesthetic. The color palette emphasizes natural skin tones and a crisp, well-tailored navy blue shirt, contrasting subtly with a blurred green and white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlAJ3TN4FJC5kAzH6reLqbekH6bpdLEaGxH-XKhwVychIKC314W9Jb_ZegtuWxzOEGncGoTzDlEPhwJG4sa22n6GGWhES3vQWqAffbByKFT9SBPAyZv0GzvyoHDIsFMQfZpRugbQhkWH9zfYt5AJvLY2LILnbaT5mkQDqXmEI_uyaLYle9aFxj2DL9j41T3BA3BhhONJmrT_snCHZDLVmQfnFqDy1Ug1fWpPMn4yIt3VhJc6xITHzHiqoCjzmPEXKuocwvCqjK8Uk-"/>
+</div>
+<h1 class="text-headline-md font-headline-md text-on-surface mb-1">Aarav Sharma</h1>
+<p class="text-body-md font-body-md text-on-surface-variant flex items-center gap-1 mb-4">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                    Kathmandu, Bagmati
+                </p>
+<p class="text-body-sm font-body-sm text-on-surface-variant bg-surface-container py-1 px-3 rounded-full mb-6">
+                    Joined August 2021
+                </p>
+<!-- Badges -->
+<div class="w-full flex flex-wrap justify-center gap-2 border-t border-outline-variant pt-6">
+<span class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md text-label-bold font-label-bold bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[14px] fill">stars</span> Local Expert
+                    </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md text-label-bold font-label-bold bg-primary-container text-on-primary-container">
+<span class="material-symbols-outlined text-[14px] fill">trophy</span> Top Contributor
+                    </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md text-label-bold font-label-bold bg-tertiary-container text-on-tertiary-container">
+<span class="material-symbols-outlined text-[14px] fill">photo_camera</span> Avid Snapper
+                    </span>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col items-center justify-center shadow-sm">
+<span class="text-headline-lg font-headline-lg text-primary mb-1">142</span>
+<span class="text-label-bold font-label-bold text-on-surface-variant uppercase tracking-wider text-[10px]">Reviews</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col items-center justify-center shadow-sm">
+<span class="text-headline-lg font-headline-lg text-secondary mb-1">350+</span>
+<span class="text-label-bold font-label-bold text-on-surface-variant uppercase tracking-wider text-[10px]">Photos</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col items-center justify-center shadow-sm col-span-2">
+<span class="text-headline-lg font-headline-lg text-on-surface mb-1">87</span>
+<span class="text-label-bold font-label-bold text-on-surface-variant uppercase tracking-wider text-[10px]">Questions Answered</span>
+</div>
+</div>
+<!-- About Section -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-3 border-b border-outline-variant pb-2">About Aarav</h3>
+<p class="text-body-md font-body-md text-on-surface-variant text-pretty leading-relaxed">
+                    Passionate about discovering local hidden gems in Kathmandu valley. From traditional Newari eateries to the best tech repair shops, I try to leave honest, detailed reviews to help the community.
+                </p>
+</div>
+</aside>
+<!-- Right Column: Activity Tabs & Feed -->
+<section class="lg:col-span-8 flex flex-col gap-6">
+<!-- Tab Navigation -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl px-2 pt-2 shadow-sm overflow-x-auto">
+<div class="flex space-x-2 min-w-max border-b border-outline-variant">
+<button class="px-6 py-3 text-label-bold font-label-bold text-primary border-b-2 border-primary transition-colors flex items-center gap-2" onclick="window.location.href='../Write Review.dc.html';">
+<span class="material-symbols-outlined text-[18px]">rate_review</span>
+                        Reviews (142)
+                    </button>
+<button class="px-6 py-3 text-label-bold font-label-bold text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined text-[18px]">image</span>
+                        Photos
+                    </button>
+<button class="px-6 py-3 text-label-bold font-label-bold text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" onclick="window.location.href='../q_a_hub_nepali_directory/code.html';">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+                        Q&amp;A Activity
+                    </button>
+</div>
+</div>
+<!-- Reviews Feed (List of detailed cards) -->
+<div class="flex flex-col gap-stack-md">
+<!-- Review Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+<!-- Business Header -->
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-4 items-center">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex-shrink-0 flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-[24px] text-tertiary">restaurant</span>
+</div>
+<div>
+<a class="text-headline-sm font-headline-sm text-secondary hover:underline cursor-pointer" href="../Home.dc.html">Bhojan Griha</a>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Dillibazar, Kathmandu • Traditional Nepali Dining</p>
+</div>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface-variant whitespace-nowrap">2 days ago</span>
+</div>
+<!-- Rating & Content -->
+<div class="mb-4">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-[18px] text-primary-container fill">star</span>
+<span class="material-symbols-outlined text-[18px] text-primary-container fill">star</span>
+<span class="material-symbols-outlined text-[18px] text-primary-container fill">star</span>
+<span class="material-symbols-outlined text-[18px] text-primary-container fill">star</span>
+<span class="material-symbols-outlined text-[18px] text-outline-variant">star</span>
+<span class="text-label-bold font-label-bold text-on-surface ml-2">4.0</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface leading-relaxed">
+                            Excellent ambiance and authentic taste. The set meal is a bit pricey but definitely worth it for the experience, especially if you are hosting guests. The cultural dance performances during dinner add a great touch. Service was slightly slow on a busy Friday night, but overall a solid choice.
+                        </p>
+</div>
+<!-- Review Photos -->
+<div class="grid grid-cols-3 gap-2 mb-4">
+<img class="w-full h-24 object-cover rounded-md border border-outline-variant cursor-pointer hover:opacity-90 transition-opacity" data-alt="A well-lit, close-up photograph of a traditional Nepali Dal Bhat thali meal served on a brass plate. The meal features vibrant colors: yellow lentils, bright green spinach, rich red meat curry, and white rice. The setting is a warm, softly lit restaurant table, conveying an authentic, appetizing culinary experience fitting a premium directory listing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByr4o4vuPNsvFXBe4XJyM4Txii_eWVVilXOGVsTlVzBR9tkApAaWPwD3kF7Cf22X8ueFYED2r6_Gq3nMe8JiLfszyTNIuyCpGqfiuf3KKTy2TdYv4v29qdQS5BbouayXuGUbBbKYdiK2DETfT1tKt3IJNEnWfbv7RhtYA7C4cEZJIR5pG3hmFlG0L1JkjZqds9nDspqqy-0V2XfXzJULtIRz5ENTSo1x5PieafY9LBbA9gPrKHwsmJWc5ZScn5c-dqLnIDJlYzYNLi"/>
+<img class="w-full h-24 object-cover rounded-md border border-outline-variant cursor-pointer hover:opacity-90 transition-opacity" data-alt="A wide shot of a traditional dining hall interior featuring intricate wooden carved pillars, soft warm ambient lighting, and elegant table settings. The mood is sophisticated yet culturally rich, highlighting the high-end traditional aesthetic of a premium local dining establishment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz6C-Zdd9j9Iwk-lHIF1R1VuuM9u3fIAvEyO3rhIvq_x_DSk9pK2WI9d8lhZ2V9L1lr-qvfhthExPanEYvLl3FSGQh9lUdwTMW7vwiU1GYQ-Q6uLlSB4DUiQiEtZV0DM-HQGJRlkWF-X1dY23NTIrbq1nYtbW8GIuElAo70yHBrGPAoXQOvfEOhA2lJb9r3_un_GBbhpO3uKZaOkSjr94J5y0zuNTvDk8zqqCiy4_bhnXdiP97oIYW8dW5ssYdCbZ-mAavPYuEhvSB"/>
+</div>
+<!-- Interaction Actions -->
+<div class="flex items-center gap-4 text-on-surface-variant border-t border-surface-container-high pt-4 mt-2">
+<button class="flex items-center gap-1 text-label-bold font-label-bold hover:text-secondary transition-colors" onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span> Helpful (12)
+                        </button>
+<button class="flex items-center gap-1 text-label-bold font-label-bold hover:text-secondary transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined text-[18px]">share</span> Share
+                        </button>
+</div>
+</div>
+<!-- Review Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-4 items-center">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex-shrink-0 flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-[24px] text-tertiary">local_car_wash</span>
+</div>
+<div>
+<a class="text-headline-sm font-headline-sm text-secondary hover:underline cursor-pointer" href="../Search Results.dc.html">Sparkle Auto Spa</a>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Lalitpur • Auto Detailing</p>
+</div>
+</div>
+<span class="text-body-sm font-body-sm text-on-surface-variant whitespace-nowrap">1 week ago</span>
+</div>
+<div class="mb-4">
+<div class="flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-[18px] text-primary-container fill">star</span>
+<span class="material-symbols-outlined text-[18px] text-primary-container fill">star</span>
+<span class="material-symbols-outlined text-[18px] text-primary-container fill">star</span>
+<span class="material-symbols-outlined text-[18px] text-primary-container fill">star</span>
+<span class="material-symbols-outlined text-[18px] text-primary-container fill">star</span>
+<span class="text-label-bold font-label-bold text-on-surface ml-2">5.0</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface leading-relaxed">
+                            Best car wash I've been to in Patan. They are meticulous with the interior detailing and use high-quality products. The owner is very friendly and ensures every customer leaves satisfied. Highly recommended for a deep clean before the festival season!
+                        </p>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant border-t border-surface-container-high pt-4 mt-2">
+<button class="flex items-center gap-1 text-label-bold font-label-bold hover:text-secondary transition-colors" onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';">
+<span class="material-symbols-outlined text-[18px]">thumb_up</span> Helpful (5)
+                        </button>
+<button class="flex items-center gap-1 text-label-bold font-label-bold hover:text-secondary transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined text-[18px]">share</span> Share
+                        </button>
+</div>
+</div>
+<!-- Load More -->
+<button class="w-full py-4 text-secondary font-label-bold text-label-bold border border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors bg-surface-container-lowest text-center shadow-sm" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+                    Load More Activity
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container dark:bg-surface-container-highest text-secondary dark:text-secondary-fixed text-body-sm font-body-sm full-width mt-stack-lg border-t border-outline-variant mt-auto">
+<div class="w-full px-margin-desktop py-stack-lg max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface">Nepali Directory</span>
+<span class="text-on-surface-variant dark:text-surface-variant">© 2024 Nepali Directory. All rights reserved.</span>
+</div>
+<div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 text-label-bold font-label-bold">
+<a class="text-on-surface-variant dark:text-surface-variant hover:underline hover:text-primary transition-all duration-300" href="About Us.dc.html">About</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:underline hover:text-primary transition-all duration-300" href="../Help.dc.html">Business Support</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:underline hover:text-primary transition-all duration-300" href="Terms of Service.dc.html">Terms of Use</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:underline hover:text-primary transition-all duration-300" href="Privacy Policy.dc.html">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:underline hover:text-primary transition-all duration-300" href="Contact Us.dc.html">Contact Us</a>
+</div>
+</div>
+</footer>
+</body></html>

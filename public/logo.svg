@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Nepali Directory logo</title>
+  <desc id="desc">Yellow ND mark for Nepali Directory</desc>
+  <rect width="512" height="512" rx="64" fill="#1a1a1a"/>
+  <rect x="56" y="56" width="400" height="400" rx="42" fill="#ffd400"/>
+  <path d="M132 346V166h52l76 103V166h58v180h-52l-76-103v103h-58Z" fill="#1a1a1a"/>
+  <path d="M320 346V166h70c28 0 51 8 68 25 18 17 26 39 26 65s-8 48-26 65c-17 17-40 25-68 25h-70Zm58-51h12c22 0 36-15 36-39s-14-39-36-39h-12v78Z" fill="#1a1a1a"/>
+</svg>

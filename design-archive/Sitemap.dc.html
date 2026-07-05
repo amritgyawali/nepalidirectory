@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: 'Manrope', sans-serif; color: #1a1a1a; background: #fff; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    input { font-family: inherit; }
+    h1, h2, h3, h4, p { margin: 0; }
+  </style>
+</helmet>
+<!-- HEADER -->
+<header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<div style="flex:1;display:flex;align-items:stretch;border:1px solid #d3d6db;border-radius:4px;overflow:hidden;max-width:620px;background:#fff;">
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;"><svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><input placeholder="Find a business" style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;"/></div>
+<div style="width:1px;background:#e3e5e8;"></div>
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;"><svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><input placeholder="Where?" style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;"/></div>
+<button onclick="window.location.href='Search Results.dc.html';" style="background:#FFD400;color:#1a1a1a;padding:11px 24px;font-weight:700;font-size:14px;">FIND</button>
+</div>
+<nav style="display:flex;align-items:center;gap:22px;font-size:14px;">
+<a href="Advertise.dc.html" style="color:#1a1a1a;font-weight:500;">Advertise</a>
+<a href="Login.dc.html" style="color:#1a1a1a;font-weight:500;">Log In</a>
+<a href="Register.dc.html" style="background:#1a1a1a;color:#fff;padding:9px 16px;border-radius:4px;font-weight:600;">Sign Up</a>
+</nav>
+</div>
+</header>
+<!-- BREADCRUMB -->
+<div style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:10px 24px;font-size:12px;color:#6b7280;">
+<a href="Home.dc.html">Home</a> <span style="margin:0 6px;">›</span>
+<span style="color:#1a1a1a;font-weight:600;">Site Map</span>
+</div>
+</div>
+<!-- HEAD -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:40px 24px 24px;">
+<h1 style="font-size:38px;font-weight:800;letter-spacing:-1px;margin:0 0 8px;">Explore cities across Nepal</h1>
+<p style="color:#4b5563;font-size:15px;max-width:640px;margin:0 0 24px;">Browse business listings in every covered municipality. Jump to a letter or pick a province.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;color:#1a1a1a;">Koshi</a>
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;color:#1a1a1a;">Madhesh</a>
+<a href="Province.dc.html" style="background:#fff7d1;border:1px solid #FFD400;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;color:#1a1a1a;">Bagmati</a>
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;color:#1a1a1a;">Gandaki</a>
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;color:#1a1a1a;">Lumbini</a>
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;color:#1a1a1a;">Karnali</a>
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:700;color:#1a1a1a;">Sudurpashchim</a>
+</div>
+<!-- A-Z jump nav -->
+<div style="display:flex;gap:4px;flex-wrap:wrap;">
+<a href="#A" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#1a1a1a;color:#fff;border-radius:4px;font-size:13px;font-weight:700;">A</a>
+<a href="#B" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">B</a>
+<a href="#C" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">C</a>
+<a href="#D" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">D</a>
+<a href="Home.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">G</a>
+<a href="Home.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">H</a>
+<a href="Home.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">I</a>
+<a href="Home.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">J</a>
+<a href="Home.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">K</a>
+<a href="Home.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">L</a>
+<a href="Home.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">N</a>
+<a href="Home.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">P</a>
+<a href="Home.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;">T</a>
+</div>
+</div>
+</section>
+<!-- ALL PROVINCES detail -->
+<section style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:40px 24px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;margin:0 0 18px;">All 7 provinces</h2>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
+<a href="Home.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-decoration:none;color:#1a1a1a;"><div style="font-size:15px;font-weight:700;">Koshi</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">14 districts · 18,200 listings</div></a>
+<a href="Home.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-decoration:none;color:#1a1a1a;"><div style="font-size:15px;font-weight:700;">Madhesh</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">8 districts · 12,600 listings</div></a>
+<a href="Province.dc.html" style="background:#fff;border:2px solid #FFD400;border-radius:8px;padding:16px;text-decoration:none;color:#1a1a1a;"><div style="font-size:15px;font-weight:700;">Bagmati</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">13 districts · 38,400 listings</div></a>
+<a href="Home.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-decoration:none;color:#1a1a1a;"><div style="font-size:15px;font-weight:700;">Gandaki</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">11 districts · 14,800 listings</div></a>
+<a href="Home.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-decoration:none;color:#1a1a1a;"><div style="font-size:15px;font-weight:700;">Lumbini</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">12 districts · 16,400 listings</div></a>
+<a href="Home.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-decoration:none;color:#1a1a1a;"><div style="font-size:15px;font-weight:700;">Karnali</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">10 districts · 4,200 listings</div></a>
+<a href="Home.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-decoration:none;color:#1a1a1a;"><div style="font-size:15px;font-weight:700;">Sudurpashchim</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">9 districts · 6,800 listings</div></a>
+<a href="Categories.dc.html" style="background:#1a1a1a;border:1px solid #1a1a1a;border-radius:8px;padding:16px;text-decoration:none;color:#fff;display:flex;flex-direction:column;justify-content:center;"><div style="font-size:15px;font-weight:700;color:#FFD400;">Browse by category →</div><div style="font-size:12px;color:#9ca3af;margin-top:2px;">140+ business categories</div></a>
+</div>
+</div>
+</section>
+<!-- A-Z CITY GRID -->
+<section style="background:#fff;">
+<div style="max-width:1180px;margin:0 auto;padding:40px 24px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;margin:0 0 24px;">All cities A–Z</h2>
+<div id="A" style="margin-bottom:28px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><span style="width:34px;height:34px;border-radius:6px;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;">A</span><div style="flex:1;height:1px;background:#e3e5e8;"></div></div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px 18px;font-size:13px;">
+<a href="Home.dc.html">Amargadhi</a><a href="Home.dc.html">Arughat</a><a href="Home.dc.html">Attariya</a>
+</div>
+</div>
+<div id="B" style="margin-bottom:28px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><span style="width:34px;height:34px;border-radius:6px;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;">B</span><div style="flex:1;height:1px;background:#e3e5e8;"></div></div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px 18px;font-size:13px;">
+<a href="City Landing.dc.html">Banepa</a><a href="City Landing.dc.html">Bandipur</a><a href="Home.dc.html">Besisahar</a><a href="City Landing.dc.html">Bharatpur</a><a href="City Landing.dc.html">Bhaktapur</a><a href="Home.dc.html">Bhimdatta</a><a href="City Landing.dc.html">Biratnagar</a><a href="City Landing.dc.html">Birgunj</a><a href="City Landing.dc.html">Birtamod</a><a href="City Landing.dc.html">Budhanilkantha</a><a href="City Landing.dc.html">Butwal</a>
+</div>
+</div>
+<div id="C" style="margin-bottom:28px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><span style="width:34px;height:34px;border-radius:6px;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;">C</span><div style="flex:1;height:1px;background:#e3e5e8;"></div></div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px 18px;font-size:13px;">
+<a href="Home.dc.html">Chandragiri</a><a href="Home.dc.html">Changunarayan</a><a href="Home.dc.html">Charikot</a><a href="Home.dc.html">Chautara</a>
+</div>
+</div>
+<div id="D" style="margin-bottom:28px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><span style="width:34px;height:34px;border-radius:6px;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;">D</span><div style="flex:1;height:1px;background:#e3e5e8;"></div></div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px 18px;font-size:13px;">
+<a href="City Landing.dc.html">Damak</a><a href="City Landing.dc.html">Dhangadhi</a><a href="City Landing.dc.html">Dharan</a><a href="City Landing.dc.html">Dhulikhel</a><a href="Home.dc.html">Dhunche</a><a href="Home.dc.html">Dipayal</a>
+</div>
+</div>
+<div style="margin-bottom:28px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><span style="width:34px;height:34px;border-radius:6px;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;">G–H</span><div style="flex:1;height:1px;background:#e3e5e8;"></div></div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px 18px;font-size:13px;">
+<a href="City Landing.dc.html">Ghorahi</a><a href="City Landing.dc.html">Godawari</a><a href="Home.dc.html">Gorkha</a><a href="City Landing.dc.html">Hetauda</a>
+</div>
+</div>
+<div style="margin-bottom:28px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><span style="width:34px;height:34px;border-radius:6px;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;">I–K</span><div style="flex:1;height:1px;background:#e3e5e8;"></div></div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px 18px;font-size:13px;">
+<a href="City Landing.dc.html">Ilam</a><a href="City Landing.dc.html">Itahari</a><a href="City Landing.dc.html">Janakpur</a><a href="City Landing.dc.html">Jomsom</a><a href="City Landing.dc.html" style="font-weight:700;">Kathmandu</a><a href="City Landing.dc.html">Kirtipur</a>
+</div>
+</div>
+<div style="margin-bottom:28px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><span style="width:34px;height:34px;border-radius:6px;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;">L–N</span><div style="flex:1;height:1px;background:#e3e5e8;"></div></div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px 18px;font-size:13px;">
+<a href="City Landing.dc.html">Lalitpur</a><a href="Home.dc.html">Lumbini</a><a href="Home.dc.html">Madhyapur Thimi</a><a href="City Landing.dc.html">Nagarkot</a><a href="City Landing.dc.html">Nepalgunj</a><a href="Home.dc.html">Nuwakot</a>
+</div>
+</div>
+<div style="margin-bottom:28px;">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;"><span style="width:34px;height:34px;border-radius:6px;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;">P–T</span><div style="flex:1;height:1px;background:#e3e5e8;"></div></div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px 18px;font-size:13px;">
+<a href="Home.dc.html">Panauti</a><a href="City Landing.dc.html">Pokhara</a><a href="City Landing.dc.html">Sauraha</a><a href="City Landing.dc.html">Tansen</a><a href="City Landing.dc.html">Tokha</a><a href="City Landing.dc.html">Tulsipur</a>
+</div>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer style="background:#1a1a1a;color:#d3d6db;">
+<div style="max-width:1180px;margin:0 auto;padding:32px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+<div style="display:flex;align-items:center;gap:24px;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:13px;padding:6px 8px;border-radius:3px;line-height:1;">ND</span>
+<span style="color:#fff;font-weight:700;font-size:14px;">NepaliDirectory</span>
+</a>
+<div style="font-size:12px;color:#6b7280;">© 2026 NepaliDirectory. All rights reserved.</div>
+</div>
+<div style="display:flex;gap:20px;font-size:12px;"><a href="Categories.dc.html" style="color:#9ca3af;">Categories</a><a href="Province.dc.html" style="color:#9ca3af;">Provinces</a><a href="Privacy Policy.dc.html" style="color:#9ca3af;">Privacy</a><a href="Terms of Service.dc.html" style="color:#9ca3af;">Terms</a></div>
+</div>
+</footer>
+</x-dc>
+</body>
+</html>

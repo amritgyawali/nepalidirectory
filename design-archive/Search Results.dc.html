@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; line-height: 1.45; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    img { display: block; max-width: 100%; }
+    input, select { font-family: inherit; }
+    h1, h2, h3, h4, p { margin: 0; }
+  </style>
+</helmet>
+<!-- ============ HEADER ============ -->
+<header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<div style="flex:1;display:flex;align-items:stretch;border:1px solid #d3d6db;border-radius:4px;overflow:hidden;max-width:620px;background:#fff;">
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;">
+<svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+<input placeholder="Find a business" style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;" value="restaurants"/>
+</div>
+<div style="width:1px;background:#e3e5e8;"></div>
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;">
+<svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<input style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;" value="Kathmandu, Bagmati"/>
+</div>
+<button onclick="window.location.href='Search Results.dc.html';" style="background:#FFD400;color:#1a1a1a;padding:11px 24px;font-weight:700;font-size:14px;letter-spacing:0.3px;">FIND</button>
+</div>
+<nav style="display:flex;align-items:center;gap:22px;font-size:14px;">
+<a href="Advertise.dc.html" style="color:#1a1a1a;font-weight:500;">Advertise</a>
+<a href="Write Review.dc.html" style="color:#1a1a1a;font-weight:500;">Write a Review</a>
+<a href="Login.dc.html" style="color:#1a1a1a;font-weight:500;">Log In</a>
+<a href="Register.dc.html" style="background:#1a1a1a;color:#fff;padding:9px 16px;border-radius:4px;font-weight:600;">Sign Up</a>
+</nav>
+</div>
+</header>
+<!-- ============ BREADCRUMB ============ -->
+<div style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:10px 24px;font-size:12px;color:#6b7280;">
+<a href="Home.dc.html">Home</a> <span style="margin:0 6px;">›</span>
+<a href="City Landing.dc.html">Bagmati Province</a> <span style="margin:0 6px;">›</span>
+<a href="City Landing.dc.html">Kathmandu</a> <span style="margin:0 6px;">›</span>
+<span style="color:#1a1a1a;font-weight:600;">Restaurants</span>
+</div>
+</div>
+<!-- ============ PAGE HEAD ============ -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:28px 24px 20px;">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+<div>
+<h1 style="font-size:30px;font-weight:800;letter-spacing:-0.7px;margin:0 0 6px;">Restaurants in Kathmandu, Bagmati</h1>
+<p style="color:#6b7280;font-size:14px;">Showing <strong style="color:#1a1a1a;">1,240</strong> restaurants across 28 neighborhoods. Updated daily.</p>
+</div>
+<div style="display:flex;align-items:center;gap:10px;">
+<span style="font-size:13px;color:#6b7280;">Sort by:</span>
+<div style="position:relative;">
+<select style="appearance:none;background:#fff;border:1px solid #d3d6db;border-radius:4px;padding:8px 36px 8px 12px;font-size:13px;font-weight:600;cursor:pointer;color:#1a1a1a;">
+<option>Default (relevance)</option>
+<option>Distance</option>
+<option>Rating (high to low)</option>
+<option>Name (A–Z)</option>
+</select>
+<svg fill="none" height="12" stroke="#6b7280" stroke-width="2.5" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;" viewbox="0 0 24 24" width="12"><path d="m6 9 6 6 6-6"></path></svg>
+</div>
+</div>
+</div>
+<!-- filter chips -->
+<div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap;align-items:center;">
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#1a1a1a;color:#fff;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;">
+<svg fill="none" height="11" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="11"><line x1="4" x2="4" y1="21" y2="14"></line><line x1="4" x2="4" y1="10" y2="3"></line><line x1="12" x2="12" y1="21" y2="12"></line><line x1="12" x2="12" y1="8" y2="3"></line><line x1="20" x2="20" y1="21" y2="16"></line><line x1="20" x2="20" y1="12" y2="3"></line><line x1="1" x2="7" y1="14" y2="14"></line><line x1="9" x2="15" y1="8" y2="8"></line><line x1="17" x2="23" y1="16" y2="16"></line></svg>
+        All Filters
+      </button>
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;">Open Now</button>
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;">Open 24 Hours</button>
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;">Newari</button>
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;">Thakali</button>
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;">Tibetan</button>
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;">Continental</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;">Pizza</button>
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;">Vegetarian</button>
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;">Outdoor Seating</button>
+<button onclick="this.style.background = this.style.background === 'rgb(26, 26, 26)' ? '#fff' : '#1a1a1a'; this.style.color = this.style.color === 'rgb(255, 255, 255)' ? '#1a1a1a' : '#fff';" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;">Family-friendly</button>
+</div>
+</div>
+</section>
+<!-- ============ MAIN GRID ============ -->
+<div style="max-width:1180px;margin:0 auto;padding:24px;display:grid;grid-template-columns:1fr 320px;gap:32px;">
+<!-- ====== LEFT: RESULTS ====== -->
+<main>
+<!-- Sponsored Ad row -->
+<article style="display:flex;gap:18px;padding:20px;background:#fffbe6;border:1px solid #ffe9a8;border-radius:8px;margin-bottom:8px;position:relative;">
+<div style="flex-shrink:0;width:140px;height:140px;border-radius:6px;overflow:hidden;background:#f0f2f5;">
+<img alt="" src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=300&amp;h=300&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/>
+</div>
+<div style="flex:1;min-width:0;">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
+<div style="flex:1;">
+<a href="Business Detail.dc.html" style="font-size:20px;font-weight:800;color:#1a6dcc;letter-spacing:-0.3px;">Le Sherpa Garden Restaurant</a>
+<div style="font-size:13px;margin-top:2px;"><a href="Search Results.dc.html">Continental</a>, <a href="Home.dc.html">Multicuisine</a>, <a href="Search Results.dc.html">Fine Dining</a></div>
+<div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+<div style="display:flex;gap:1px;">
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<a href="Write Review.dc.html" style="font-size:12px;">(1,247 reviews)</a>
+<span style="font-size:12px;color:#1a1a1a;font-weight:700;">Rs Rs Rs Rs</span>
+<span style="display:inline-flex;align-items:center;gap:4px;font-size:11px;background:#FFD400;color:#1a1a1a;padding:3px 8px;border-radius:3px;font-weight:700;">⚡ Years in Business: 15</span>
+</div>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
+<span style="font-size:11px;background:#fff;border:1px solid #e3e5e8;padding:3px 8px;border-radius:3px;color:#4b5563;">Outdoor Garden</span>
+<span style="font-size:11px;background:#fff;border:1px solid #e3e5e8;padding:3px 8px;border-radius:3px;color:#4b5563;">Bar &amp; Cocktails</span>
+<span style="font-size:11px;background:#fff;border:1px solid #e3e5e8;padding:3px 8px;border-radius:3px;color:#4b5563;">Live Music Fri/Sat</span>
+<span style="font-size:11px;background:#fff;border:1px solid #e3e5e8;padding:3px 8px;border-radius:3px;color:#4b5563;">Wheelchair Accessible</span>
+</div>
+</div>
+<div style="text-align:right;font-size:13px;flex-shrink:0;">
+<div style="font-weight:700;color:#1a1a1a;">(01) 4002999</div>
+<div style="color:#4b5563;margin-top:2px;">Maharajgunj Marg,<br/>Maharajgunj, Kathmandu 44600</div>
+<div style="margin-top:8px;color:#1a7d3a;font-weight:700;font-size:12px;">● OPEN NOW</div>
+<div style="color:#6b7280;font-size:11px;">until 10:00 pm</div>
+</div>
+</div>
+<p style="font-size:13px;color:#4b5563;margin-top:10px;font-style:italic;">"Beautiful garden setting with elevated continental fare. Their slow-roasted lamb is a must-try when in Kathmandu..." <a href="Business Detail.dc.html" style="font-style:normal;font-weight:600;">Read more</a></p>
+<div style="display:flex;gap:8px;margin-top:12px;">
+<a href="Home.dc.html" style="background:#1a1a1a;color:#fff;padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;">Website</a>
+<a href="Business Detail.dc.html" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;">View Menu</a>
+<a href="Business Detail.dc.html" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;">Directions</a>
+<a href="Home.dc.html" style="background:#FFD400;color:#1a1a1a;padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;">Order Online</a>
+</div>
+</div>
+<span style="position:absolute;top:14px;right:14px;background:#1a1a1a;color:#FFD400;font-size:10px;font-weight:800;padding:3px 8px;border-radius:3px;letter-spacing:1px;">AD</span>
+</article>
+<!-- Listings will be rendered via sc-for -->
+<sc-for as="r" hint-placeholder-count="12" list="{{ restaurants }}">
+<article style="display:flex;gap:18px;padding:22px 4px;border-bottom:1px solid #e8eaee;">
+<div style="flex-shrink:0;width:130px;height:130px;border-radius:6px;overflow:hidden;background:#f0f2f5;">
+<img alt="{{ r.name }}" src="{{ r.thumb }}" style="width:100%;height:100%;object-fit:cover;"/>
+</div>
+<div style="flex:1;min-width:0;">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
+<div style="flex:1;">
+<div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;">
+<span style="font-size:13px;color:#6b7280;font-weight:700;">{{ r.rank }}.</span>
+<a href="Business Detail.dc.html" style="font-size:18px;font-weight:700;color:#1a6dcc;letter-spacing:-0.3px;">{{ r.name }}</a>
+</div>
+<div style="font-size:13px;margin-top:2px;color:#4b5563;">{{ r.categories }}</div>
+<div style="display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap;">
+<div style="display:flex;align-items:center;gap:6px;">
+<span style="font-size:13px;font-weight:700;color:#1a1a1a;">{{ r.rating }}</span>
+<span style="display:inline-block;font-size:12px;letter-spacing:1px;color:#f5b300;">{{ r.stars }}</span>
+</div>
+<a href="Write Review.dc.html" style="font-size:12px;">({{ r.reviews }})</a>
+<span style="font-size:12px;color:#1a1a1a;font-weight:700;">{{ r.priceText }}</span>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ r.hasYears }}">
+<span style="display:inline-flex;align-items:center;gap:4px;font-size:11px;background:#fff7d1;color:#1a1a1a;padding:3px 8px;border-radius:3px;font-weight:700;border:1px solid #FFD400;">⭐ {{ r.years }} Years in Business</span>
+</sc-if>
+</div>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ r.hasAmenities }}">
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
+<sc-for as="a" hint-placeholder-count="2" list="{{ r.amenities }}">
+<span style="font-size:11px;background:#f7f8fa;border:1px solid #e3e5e8;padding:3px 8px;border-radius:3px;color:#4b5563;">{{ a }}</span>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<div style="text-align:right;font-size:13px;flex-shrink:0;">
+<a href="tel:{{ r.phone }}" style="font-weight:700;color:#1a1a1a;">{{ r.phone }}</a>
+<div style="color:#4b5563;margin-top:2px;font-size:12px;line-height:1.5;">{{ r.address }}</div>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ r.isOpen }}">
+<div style="margin-top:8px;color:#1a7d3a;font-weight:700;font-size:12px;">● OPEN NOW</div>
+<div style="color:#6b7280;font-size:11px;">{{ r.hoursToday }}</div>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ r.is24h }}">
+<div style="margin-top:8px;color:#1a7d3a;font-weight:700;font-size:12px;">● OPEN 24 HOURS</div>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ r.isClosed }}">
+<div style="margin-top:8px;color:#b3261e;font-weight:700;font-size:12px;">● CLOSED NOW</div>
+<div style="color:#6b7280;font-size:11px;">{{ r.hoursToday }}</div>
+</sc-if>
+</div>
+</div>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ r.hasQuote }}">
+<p style="font-size:13px;color:#4b5563;margin-top:10px;font-style:italic;line-height:1.5;">"{{ r.quote }}" <a href="Business Detail.dc.html" style="font-style:normal;font-weight:600;">Read more</a></p>
+</sc-if>
+<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+<a href="Home.dc.html" style="background:#1a1a1a;color:#fff;padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;">Website</a>
+<a href="Business Detail.dc.html" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;">View Menu</a>
+<a href="Business Detail.dc.html" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;">Directions</a>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ r.hasDelivery }}">
+<a href="Home.dc.html" style="background:#FFD400;color:#1a1a1a;padding:7px 14px;border-radius:4px;font-size:12px;font-weight:700;">Order Online</a>
+</sc-if>
+</div>
+</div>
+</article>
+</sc-for>
+<!-- Pagination -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-top:32px;padding:0 4px;">
+<div style="font-size:13px;color:#6b7280;">Showing <strong style="color:#1a1a1a;">1–30</strong> of <strong style="color:#1a1a1a;">1,240</strong></div>
+<div style="display:flex;gap:4px;">
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#FFD400;color:#1a1a1a;width:36px;height:36px;border-radius:4px;font-size:13px;font-weight:700;">1</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;width:36px;height:36px;border-radius:4px;font-size:13px;font-weight:600;">2</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;width:36px;height:36px;border-radius:4px;font-size:13px;font-weight:600;">3</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;width:36px;height:36px;border-radius:4px;font-size:13px;font-weight:600;">4</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;width:36px;height:36px;border-radius:4px;font-size:13px;font-weight:600;">5</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:0 14px;height:36px;border-radius:4px;font-size:13px;font-weight:600;">Next →</button>
+</div>
+</div>
+<!-- About Search Results -->
+<details style="margin-top:32px;background:#f7f8fa;border:1px solid #e3e5e8;border-radius:8px;padding:14px 18px;">
+<summary style="cursor:pointer;font-size:13px;font-weight:700;color:#1a1a1a;list-style:none;display:flex;align-items:center;gap:8px;">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
+        About these search results
+      </summary>
+<p style="font-size:12px;color:#6b7280;line-height:1.6;margin-top:10px;">Results are ranked using a combination of relevance to your search, customer ratings, distance from the searched location, and whether the business has a verified profile. Sponsored "Ad" listings appear at the top and may receive higher placement than the default ranking. NepaliDirectory does not endorse any specific business — verify hours, prices, and service availability directly with the business.</p>
+</details>
+<!-- FAQ -->
+<section style="margin-top:40px;">
+<h2 style="font-size:22px;font-weight:800;letter-spacing:-0.4px;margin:0 0 16px;">Top Kathmandu Restaurant FAQs</h2>
+<div style="border-top:1px solid #e3e5e8;">
+<details open="" style="border-bottom:1px solid #e3e5e8;padding:16px 0;">
+<summary style="cursor:pointer;font-size:15px;font-weight:700;color:#1a1a1a;list-style:none;display:flex;align-items:center;justify-content:space-between;">
+            Where can I find authentic Newari food in Kathmandu?
+            <span style="font-size:18px;color:#1a6dcc;">−</span>
+</summary>
+<p style="font-size:14px;color:#4b5563;margin-top:12px;line-height:1.6;">Some of the most authentic Newari restaurants in Kathmandu are <a href="Business Detail.dc.html">Newa Lahana</a> in Bhaktapur, <a href="Home.dc.html">Bhojan Griha</a> in Dilli Bazar, <a href="restaurants_category_nepali_directory/code.html">Lhasa Newari Restaurant</a> in Patan, and <a href="Home.dc.html">Honacha</a> in Patan Durbar Square. For samay baji, chatamari and choila, locals recommend Newa Lahana's heritage tasting set.</p>
+</details>
+<details style="border-bottom:1px solid #e3e5e8;padding:16px 0;">
+<summary style="cursor:pointer;font-size:15px;font-weight:700;color:#1a1a1a;list-style:none;display:flex;align-items:center;justify-content:space-between;">
+            Which restaurants in Kathmandu are open 24 hours?
+            <span style="font-size:18px;color:#1a6dcc;">+</span>
+</summary>
+</details>
+<details style="border-bottom:1px solid #e3e5e8;padding:16px 0;">
+<summary style="cursor:pointer;font-size:15px;font-weight:700;color:#1a1a1a;list-style:none;display:flex;align-items:center;justify-content:space-between;">
+            What are the most romantic restaurants in Kathmandu?
+            <span style="font-size:18px;color:#1a6dcc;">+</span>
+</summary>
+</details>
+<details style="border-bottom:1px solid #e3e5e8;padding:16px 0;">
+<summary style="cursor:pointer;font-size:15px;font-weight:700;color:#1a1a1a;list-style:none;display:flex;align-items:center;justify-content:space-between;">
+            Are there pet-friendly restaurants in Kathmandu?
+            <span style="font-size:18px;color:#1a6dcc;">+</span>
+</summary>
+</details>
+<details style="border-bottom:1px solid #e3e5e8;padding:16px 0;">
+<summary style="cursor:pointer;font-size:15px;font-weight:700;color:#1a1a1a;list-style:none;display:flex;align-items:center;justify-content:space-between;">
+            Which restaurants in Thamel deliver to Lazimpat?
+            <span style="font-size:18px;color:#1a6dcc;">+</span>
+</summary>
+</details>
+<details style="padding:16px 0;">
+<summary style="cursor:pointer;font-size:15px;font-weight:700;color:#1a1a1a;list-style:none;display:flex;align-items:center;justify-content:space-between;">
+            Where can I find the best momo in Kathmandu?
+            <span style="font-size:18px;color:#1a6dcc;">+</span>
+</summary>
+</details>
+</div>
+</section>
+</main>
+<!-- ====== RIGHT: SIDEBAR ====== -->
+<aside style="display:flex;flex-direction:column;gap:24px;">
+<!-- Popular Cuisines -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:18px;">
+<h3 style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;color:#1a1a1a;">Popular Cuisines</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+<a href="Search Results.dc.html" style="display:flex;align-items:center;gap:8px;padding:8px;border-radius:4px;font-size:13px;color:#1a1a1a;border:1px solid #e3e5e8;">
+<span style="font-size:18px;">🥟</span>Momo
+        </a>
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:8px;padding:8px;border-radius:4px;font-size:13px;color:#1a1a1a;border:1px solid #e3e5e8;">
+<span style="font-size:18px;">🍛</span>Thali
+        </a>
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:8px;padding:8px;border-radius:4px;font-size:13px;color:#1a1a1a;border:1px solid #e3e5e8;">
+<span style="font-size:18px;">🍕</span>Pizza
+        </a>
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:8px;padding:8px;border-radius:4px;font-size:13px;color:#1a1a1a;border:1px solid #e3e5e8;">
+<span style="font-size:18px;">🍜</span>Thukpa
+        </a>
+<a href="Search Results.dc.html" style="display:flex;align-items:center;gap:8px;padding:8px;border-radius:4px;font-size:13px;color:#1a1a1a;border:1px solid #e3e5e8;">
+<span style="font-size:18px;">🥘</span>Thakali
+        </a>
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:8px;padding:8px;border-radius:4px;font-size:13px;color:#1a1a1a;border:1px solid #e3e5e8;">
+<span style="font-size:18px;">🍢</span>Sekuwa
+        </a>
+</div>
+</div>
+<!-- Claim CTA -->
+<div style="background:linear-gradient(135deg, #fff7d1 0%, #FFD400 100%);border-radius:8px;padding:20px;">
+<div style="font-size:14px;font-weight:700;margin-bottom:6px;">Manage your free listing</div>
+<p style="font-size:12px;color:#4b5563;line-height:1.5;margin:0 0 14px;">Update your business info in a few steps. It's free.</p>
+<a href="Claim Listing.dc.html" style="background:#1a1a1a;color:#FFD400;padding:9px 16px;border-radius:4px;font-size:12px;font-weight:700;display:inline-block;">Claim Your Listing</a>
+</div>
+<!-- Featured -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:18px;">
+<h3 style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;color:#1a1a1a;">Featured Restaurants</h3>
+<div style="display:flex;flex-direction:column;gap:14px;">
+<a href="Business Detail.dc.html" style="display:flex;gap:10px;text-decoration:none;color:#1a1a1a;">
+<div style="width:60px;height:60px;flex-shrink:0;border-radius:4px;overflow:hidden;background:#f0f2f5;">
+<img alt="" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=150&amp;h=150&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/>
+</div>
+<div style="min-width:0;">
+<div style="font-size:13px;font-weight:700;color:#1a6dcc;">Krishnarpan</div>
+<div style="font-size:11px;color:#6b7280;">Nepali Heritage · Battisputali</div>
+<div style="font-size:11px;margin-top:2px;color:#f5b300;letter-spacing:1px;">★★★★★ <span style="color:#6b7280;">(420)</span></div>
+</div>
+</a>
+<a href="Business Detail.dc.html" style="display:flex;gap:10px;text-decoration:none;color:#1a1a1a;">
+<div style="width:60px;height:60px;flex-shrink:0;border-radius:4px;overflow:hidden;background:#f0f2f5;">
+<img alt="" src="https://images.unsplash.com/photo-1525755662778-989d0524087e?w=150&amp;h=150&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/>
+</div>
+<div style="min-width:0;">
+<div style="font-size:13px;font-weight:700;color:#1a6dcc;">Chez Caroline</div>
+<div style="font-size:11px;color:#6b7280;">French Bistro · Babar Mahal</div>
+<div style="font-size:11px;margin-top:2px;color:#f5b300;letter-spacing:1px;">★★★★★ <span style="color:#6b7280;">(680)</span></div>
+</div>
+</a>
+<a href="Business Detail.dc.html" style="display:flex;gap:10px;text-decoration:none;color:#1a1a1a;">
+<div style="width:60px;height:60px;flex-shrink:0;border-radius:4px;overflow:hidden;background:#f0f2f5;">
+<img alt="" src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=150&amp;h=150&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/>
+</div>
+<div style="min-width:0;">
+<div style="font-size:13px;font-weight:700;color:#1a6dcc;">OR2K Tibetan</div>
+<div style="font-size:11px;color:#6b7280;">Vegetarian · Thamel</div>
+<div style="font-size:11px;margin-top:2px;color:#f5b300;letter-spacing:1px;">★★★★☆ <span style="color:#6b7280;">(1.1k)</span></div>
+</div>
+</a>
+</div>
+</div>
+<!-- Browse Categories rail -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:18px;">
+<h3 style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;color:#1a1a1a;">Browse Kathmandu</h3>
+<div style="display:flex;flex-direction:column;gap:0;">
+<div style="font-size:12px;font-weight:700;color:#4b5563;margin-top:6px;margin-bottom:4px;">Home Services</div>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">Plumbers</a>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">Electricians</a>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">Contractors</a>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">AC Repair</a>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">House Cleaning</a>
+<div style="font-size:12px;font-weight:700;color:#4b5563;margin-top:12px;margin-bottom:4px;">Medical</div>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">Doctors</a>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">Dentists</a>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">Hospitals</a>
+<a href="Home.dc.html" style="padding:4px 0;font-size:13px;">Pharmacies</a>
+<div style="font-size:12px;font-weight:700;color:#4b5563;margin-top:12px;margin-bottom:4px;">Beauty &amp; Wellness</div>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">Beauty Salons</a>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">Spas</a>
+<a href="Search Results.dc.html" style="padding:4px 0;font-size:13px;">Gyms</a>
+<a href="Categories.dc.html" style="display:inline-block;margin-top:12px;font-size:12px;font-weight:700;color:#1a6dcc;">View all categories →</a>
+</div>
+</div>
+</aside>
+</div>
+<!-- ============ PLACES NEAR ============ -->
+<section style="background:#f7f8fa;border-top:1px solid #e3e5e8;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:40px 24px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;margin:0 0 6px;">Places Near Kathmandu with Restaurants</h2>
+<p style="color:#6b7280;font-size:13px;margin:0 0 18px;">Browse restaurants in surrounding cities and tourist destinations within Bagmati Province.</p>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px 18px;font-size:14px;">
+<a href="City Landing.dc.html">Lalitpur (5 mi)</a>
+<a href="City Landing.dc.html">Bhaktapur (12 mi)</a>
+<a href="City Landing.dc.html">Kirtipur (4 mi)</a>
+<a href="City Landing.dc.html">Banepa (16 mi)</a>
+<a href="City Landing.dc.html">Dhulikhel (18 mi)</a>
+<a href="City Landing.dc.html">Nagarkot (20 mi)</a>
+<a href="City Landing.dc.html">Sankhu (10 mi)</a>
+<a href="City Landing.dc.html">Budhanilkantha (5 mi)</a>
+<a href="City Landing.dc.html">Tokha (4 mi)</a>
+<a href="City Landing.dc.html">Godawari (8 mi)</a>
+</div>
+</div>
+</section>
+<!-- ============ MORE TYPES ============ -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:40px 24px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;margin:0 0 18px;">More Types of Restaurants in Kathmandu</h2>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px 18px;font-size:14px;">
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Newari Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Thakali Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Tibetan Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Sherpa Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Indian Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Chinese Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Continental Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Italian Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Pizza Restaurants</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Fast Food</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Cafes &amp; Bistros</a>
+<a href="Home.dc.html" style="padding:6px 0;">Bakeries</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Sweet Shops</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Vegetarian Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Vegan Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Korean Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Japanese Restaurants</a>
+<a href="restaurants_category_nepali_directory/code.html" style="padding:6px 0;">Thai Restaurants</a>
+<a href="Home.dc.html" style="padding:6px 0;">Mediterranean</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Steakhouses</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Bars &amp; Lounges</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Fine Dining</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Buffet</a>
+<a href="Search Results.dc.html" style="padding:6px 0;">Open 24 Hours</a>
+</div>
+</div>
+</section>
+<!-- ============ FOOTER ============ -->
+<footer style="background:#1a1a1a;color:#d3d6db;">
+<div style="max-width:1180px;margin:0 auto;padding:56px 24px 32px;">
+<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:48px;">
+<div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#fff;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#9ca3af;">Directory</span></span>
+</div>
+<p style="font-size:13px;line-height:1.6;color:#9ca3af;margin:0 0 20px;">Nepal's most trusted local business directory. Find verified plumbers, doctors, restaurants and more across all 7 provinces.</p>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">About</h4>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:13px;">
+<li><a href="About Us.dc.html" style="color:#d3d6db;">About Us</a></li>
+<li><a href="Contact Us.dc.html" style="color:#d3d6db;">Contact Us</a></li>
+<li><a href="Advertise.dc.html" style="color:#d3d6db;">Advertise with Us</a></li>
+<li><a href="Blog.dc.html" style="color:#d3d6db;">Blog</a></li>
+<li><a href="Claim Listing.dc.html" style="color:#d3d6db;">Become a Partner</a></li>
+</ul>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">Directory</h4>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:13px;">
+<li><a href="Blog.dc.html" style="color:#d3d6db;">Articles</a></li>
+<li><a href="Search Results.dc.html" style="color:#d3d6db;">Find a Business</a></li>
+<li><a href="Get App.dc.html" style="color:#d3d6db;">Mobile App</a></li>
+<li><a href="Map Directions.dc.html" style="color:#d3d6db;">Site Map</a></li>
+<li><a href="Categories.dc.html" style="color:#d3d6db;">Categories</a></li>
+</ul>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">City Guides</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;font-size:13px;">
+<a href="City Landing.dc.html" style="color:#d3d6db;">Kathmandu</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Pokhara</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Lalitpur</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Bhaktapur</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Biratnagar</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Birgunj</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Butwal</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Bharatpur</a>
+</div>
+</div>
+</div>
+<div style="border-top:1px solid #2a2a2a;margin-top:48px;padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+<div style="display:flex;gap:24px;font-size:12px;">
+<a href="Privacy Policy.dc.html" style="color:#9ca3af;">Privacy</a>
+<a href="Terms of Service.dc.html" style="color:#9ca3af;">Terms of Use</a>
+<a href="Search Results.dc.html" style="color:#9ca3af;">Legal</a>
+</div>
+<div style="font-size:12px;color:#6b7280;">© 2026 NepaliDirectory. All rights reserved.</div>
+</div>
+</div>
+</footer>
+</x-dc>
+<script data-dc-script="" type="text/x-dc">
+class Component extends DCLogic {
+  renderVals() {
+    const stars = (r) => {
+      const full = Math.floor(r);
+      const half = (r - full) >= 0.3 && (r - full) < 0.75;
+      const out = [];
+      for (let i = 0; i < full; i++) out.push('★');
+      if (half) out.push('★');
+      while (out.length < 5) out.push('☆');
+      return out.join('');
+    };
+    const priceText = (n) => {
+      const arr = [];
+      for (let i = 0; i < n; i++) arr.push('Rs');
+      return arr.join(' ');
+    };
+    const U = (id) => `https://images.unsplash.com/${id}?w=300&h=300&fit=crop&auto=format`;
+    const raw = [
+      { name: 'Newa Lahana', categories: 'Newari Fine Dining, Restaurants, Heritage', area: 'Bhaktapur', address: 'Inacho, Bhaktapur Durbar Sq', phone: '01-6611945', rating: 4.7, reviews: 842, price: 3, status: 'closed', hoursToday: 'Today: 11:30 am – 9:00 pm', thumb: U('photo-1547592180-85f173990554'), quote: 'Authentic Newari samay baji served in a heritage courtyard. The choila and yomari were exceptional', amenities: ['Heritage building','Outdoor courtyard','Group friendly'], years: 18, delivery: false },
+      { name: 'Bhojan Griha Heritage Restaurant', categories: 'Multicuisine Nepali, Cultural Show, Restaurants', area: 'Dilli Bazar', address: 'Dilli Bazar, Kathmandu 44600', phone: '01-4416423', rating: 4.6, reviews: 1240, price: 4, status: 'open', hoursToday: 'Today: 6:00 pm – 11:00 pm', thumb: U('photo-1567188040759-fb8a883dc6d8'), quote: '15-course tasting menu in a restored 150-year-old palace. Cultural dance every evening — book ahead', amenities: ['Live cultural show','Set menu','Air conditioned'], years: 22, delivery: false },
+      { name: 'Yangling Tibetan Restaurant', categories: 'Tibetan, Sherpa, Momos', area: 'Boudha', address: 'Boudha Stupa Rd, Kathmandu', phone: '01-4910092', rating: 4.5, reviews: 520, price: 2, status: 'open', hoursToday: 'Today: 8:00 am – 10:00 pm', thumb: U('photo-1496116218417-1a781b1c416c'), quote: 'The buff momo here is legendary among monks and tourists alike. Try the thukpa on cold days', amenities: ['Cash only','Family friendly'], years: 0, delivery: true },
+      { name: 'Roadhouse Café Thamel', categories: 'Italian, Pizza, Continental, Bars', area: 'Thamel', address: 'Thamel Chowk, JP Marg', phone: '01-4262768', rating: 4.4, reviews: 1890, price: 3, status: 'open', hoursToday: 'Today: 11:00 am – 11:30 pm', thumb: U('photo-1565299624946-b28f40a0ae38'), quote: 'Wood-fired pizzas, great cocktails and a rooftop view of Thamel. Reliable for date night', amenities: ['Rooftop','Wood-fired oven','Bar','Live music Sat'], years: 12, delivery: true },
+      { name: 'Bota Momo Center', categories: 'Momo, Fast Food, Takeaway', area: 'Kalanki', address: 'Kalanki Chowk, Ring Rd', phone: '01-4670812', rating: 4.3, reviews: 610, price: 1, status: 'open', hoursToday: 'Today: 10:30 am – 9:30 pm', thumb: U('photo-1604908176997-125f25cc6f3d'), quote: 'Buff jhol momo at Rs 180 a plate — the broth is what brings everyone back', amenities: ['Takeaway','Counter service'], years: 0, delivery: true },
+      { name: 'Himalayan Java Lazimpat', categories: 'Café, Coffee, Breakfast, Bakery', area: 'Lazimpat', address: 'Lazimpat Rd, Kathmandu', phone: '01-4411604', rating: 4.5, reviews: 980, price: 2, status: 'open', hoursToday: 'Today: 7:00 am – 9:00 pm', thumb: U('photo-1495474472287-4d71bcdd2085'), quote: 'Best espresso in town. The cappuccino with a nice city view from upstairs is unbeatable', amenities: ['Wi-Fi','Specialty coffee','Outdoor seating'], years: 17, delivery: true },
+      { name: 'Annapurna Thakali Bhansa Ghar', categories: 'Thakali, Nepali Thali, Restaurants', area: 'Lazimpat', address: 'Lazimpat Marg, Kathmandu', phone: '01-4419807', rating: 4.7, reviews: 734, price: 3, status: 'closed', hoursToday: 'Today: 12:00 pm – 10:00 pm', thumb: U('photo-1565557623262-b51c2513a641'), quote: 'A proper Thakali set with dhindo, gundruk and aloo bodi tama. The mutton is slow-cooked perfection', amenities: ['Traditional seating','Halal','Group friendly'], years: 9, delivery: false },
+      { name: 'The Old House', categories: 'Multicuisine, Continental, Restaurants', area: 'Baluwatar', address: 'Baluwatar, Kathmandu', phone: '01-4422281', rating: 4.5, reviews: 412, price: 3, status: 'open', hoursToday: 'Today: 11:30 am – 10:30 pm', thumb: U('photo-1517248135467-4c7edcad34c4'), quote: 'Cozy converted bungalow with reliable Continental and Indian standards. Quiet for business lunches', amenities: ['Air conditioned','Reservations'], years: 0, delivery: true },
+      { name: 'Patan Dhoka Kitchen', categories: 'Newari, Local, Restaurants', area: 'Patan', address: 'Patan Dhoka, Lalitpur', phone: '01-5547821', rating: 4.6, reviews: 350, price: 3, status: 'open', hoursToday: 'Today: 11:00 am – 10:00 pm', thumb: U('photo-1591488050486-c98306bff859'), quote: 'Tiny courtyard place — the chwela and aila pairing is what locals come for after sunset', amenities: ['Heritage','Outdoor courtyard'], years: 0, delivery: false },
+      { name: 'Café Soma', categories: 'Continental, Café, Bistro, Restaurants', area: 'Jhamsikhel', address: 'Jhamsikhel, Lalitpur', phone: '01-5521234', rating: 4.4, reviews: 520, price: 2, status: 'open', hoursToday: 'Today: 8:00 am – 10:30 pm', thumb: U('photo-1554118811-1e0d58224f24'), quote: 'All-day brunch place — eggs benedict and avocado toast done well. Free Wi-Fi makes it work-from-café friendly', amenities: ['Wi-Fi','Brunch','Outdoor seating'], years: 0, delivery: true },
+      { name: 'Kakori House', categories: 'North Indian, Mughlai, Restaurants', area: 'Durbar Marg', address: 'Durbar Marg, Kathmandu', phone: '01-4221289', rating: 4.6, reviews: 820, price: 3, status: 'open', hoursToday: 'Today: 12:00 pm – 11:00 pm', thumb: U('photo-1599487488170-d11ec9c172f0'), quote: 'Tandoor done right — the seekh kakori melts in the mouth. Pair with the saffron pulao', amenities: ['Air conditioned','Tandoor','Bar'], years: 11, delivery: true },
+      { name: 'Bhojan Sansar', categories: 'Nepali Thali, Vegetarian, Restaurants', area: 'New Baneshwor', address: 'New Baneshwor Chowk', phone: '01-4467890', rating: 4.3, reviews: 488, price: 2, status: 'open', hoursToday: 'Today: 11:00 am – 9:30 pm', thumb: U('photo-1601050690597-df0568f70950'), quote: 'Unlimited Nepali thali for Rs 380. Refills come fast and the dal-bhat is honest, home-style', amenities: ['Unlimited refills','Vegetarian','Family friendly'], years: 0, delivery: true },
+      { name: 'Dolma Aama Kitchen', categories: 'Tibetan, Sherpa, Soup, Restaurants', area: 'Boudha', address: 'Phulbari, Boudha', phone: '01-4914872', rating: 4.5, reviews: 290, price: 2, status: 'closed', hoursToday: 'Today: 9:00 am – 9:00 pm', thumb: U('photo-1582878826629-29b7ad1cdc43'), quote: 'Hand-pulled thenthuk and butter tea — feels like eating in a Tibetan home', amenities: ['Cash only','Vegetarian options'], years: 7, delivery: false },
+      { name: 'Sherpa Heritage Kitchen', categories: 'Sherpa, Tibetan, Restaurants', area: 'Thamel', address: 'Mandala St, Thamel', phone: '01-4256123', rating: 4.6, reviews: 640, price: 3, status: 'open', hoursToday: 'Today: 11:00 am – 11:00 pm', thumb: U('photo-1525755662778-989d0524087e'), quote: 'Riki kur (potato pancake) and gyathuk are the standouts. Owners are from Khumbu — ask for stories', amenities: ['Live music Fri','Family owned'], years: 0, delivery: true },
+      { name: 'Tukche Thakali Bhansa', categories: 'Thakali, Nepali, Restaurants', area: 'Sanepa', address: 'Sanepa Heights, Lalitpur', phone: '01-5521098', rating: 4.7, reviews: 924, price: 2, status: '24h', hoursToday: 'Open 24 hours', thumb: U('photo-1574484284002-952d92456975'), quote: 'Open all night — perfect post-flight stop. The mustard-oil mutton and gundruk soup are top-tier', amenities: ['Open 24 hours','Late night','Parking'], years: 14, delivery: true },
+      { name: 'Karma Coffee Roasters', categories: 'Café, Coffee, Bakery', area: 'Pulchowk', address: 'Pulchowk Rd, Lalitpur', phone: '01-5532341', rating: 4.4, reviews: 315, price: 1, status: 'open', hoursToday: 'Today: 7:00 am – 8:00 pm', thumb: U('photo-1486427944299-d1955d23e34d'), quote: 'Locally roasted single-origin beans from Sindhuli. The cold brew is excellent in summer', amenities: ['Specialty coffee','Wi-Fi','Roastery'], years: 0, delivery: true },
+      { name: 'Embers Steakhouse & Wine', categories: 'Steakhouse, Continental, Bar, Fine Dining', area: 'Lazimpat', address: 'Lazimpat Plaza, Kathmandu', phone: '01-4434567', rating: 4.5, reviews: 267, price: 4, status: 'closed', hoursToday: 'Today: 6:00 pm – 11:30 pm', thumb: U('photo-1544025162-d76694265947'), quote: 'Imported Australian wagyu and a reasonable wine list. Pricey but the only proper steakhouse in town', amenities: ['Wine cellar','Reservations','Bar'], years: 6, delivery: false },
+      { name: 'Yala Wood Fired Pizza', categories: 'Italian, Pizza, Restaurants', area: 'Patan', address: 'Mangal Bazaar, Lalitpur', phone: '01-5526789', rating: 4.6, reviews: 502, price: 3, status: 'open', hoursToday: 'Today: 12:00 pm – 10:30 pm', thumb: U('photo-1571997478779-2adcbbe9ab2f'), quote: 'Margherita with imported San Marzano tomatoes. The 72-hour cold-fermented dough is the secret', amenities: ['Wood-fired oven','Outdoor seating'], years: 0, delivery: true },
+      { name: 'Manaslu Sekuwa Korner', categories: 'BBQ, Sekuwa, Nepali, Bar', area: 'Koteshwor', address: 'Koteshwor Chowk, Kathmandu', phone: '01-5102345', rating: 4.4, reviews: 388, price: 2, status: 'open', hoursToday: 'Today: 4:00 pm – 11:00 pm', thumb: U('photo-1583224964978-2257b960c3d3'), quote: 'Charcoal-grilled mutton sekuwa with chiura and aila. The way locals end a Friday', amenities: ['Bar','Late night','Charcoal grill'], years: 8, delivery: false },
+      { name: "Helena's Restaurant", categories: 'Multicuisine, Continental, Israeli, Restaurants', area: 'Thamel', address: 'Mandala St, Thamel', phone: '01-4259567', rating: 4.3, reviews: 1540, price: 3, status: 'open', hoursToday: 'Today: 8:00 am – 11:00 pm', thumb: U('photo-1546069901-ba9599a7e63c'), quote: 'Long-standing Thamel staple. Reliable shakshuka, falafel and a tourist-friendly menu', amenities: ['Outdoor seating','Wi-Fi','Bar'], years: 24, delivery: true },
+      { name: 'Kasthamandap Café', categories: 'Café, Bistro, Restaurants', area: 'Basantapur', address: 'Basantapur Sq, Kathmandu', phone: '01-4232109', rating: 4.5, reviews: 220, price: 2, status: 'open', hoursToday: 'Today: 9:00 am – 9:00 pm', thumb: U('photo-1533089860892-a7c6f0a88666'), quote: 'Window seat overlooks the Durbar Square. Skip the entrees, come for coffee and people-watching', amenities: ['Heritage view','Wi-Fi'], years: 0, delivery: false },
+      { name: 'Friends Café', categories: 'Brunch, Café, Continental', area: 'Baluwatar', address: 'Naxal Bhagwati Marg', phone: '01-4416723', rating: 4.6, reviews: 610, price: 3, status: 'open', hoursToday: 'Today: 8:00 am – 9:30 pm', thumb: U('photo-1533089860892-a7c6f0a88666'), quote: 'All-day brunch with the best pancakes in town. Friendly to laptops and slow coffee mornings', amenities: ['Brunch','Wi-Fi','Vegetarian options'], years: 0, delivery: true },
+      { name: 'The Yak Restaurant', categories: 'Tibetan, Restaurants', area: 'Thamel', address: 'JP Marg, Thamel', phone: '01-4419076', rating: 4.5, reviews: 440, price: 2, status: 'open', hoursToday: 'Today: 11:00 am – 10:30 pm', thumb: U('photo-1604908176997-125f25cc6f3d'), quote: 'Solid kothey momo and tingmo. The chili oil is house-made and very spicy', amenities: ['Vegetarian options','Family friendly'], years: 0, delivery: true },
+      { name: 'Falcha Bistro', categories: 'Café, Continental, Restaurants', area: 'Patan', address: 'Patan Durbar Sq, Lalitpur', phone: '01-5512378', rating: 4.7, reviews: 390, price: 3, status: 'closed', hoursToday: 'Today: 11:00 am – 10:00 pm', thumb: U('photo-1559925393-8be0ec4767c8'), quote: 'Modern Newari fusion — choila tacos and yomari cheesecake. Surprisingly works', amenities: ['Wi-Fi','Outdoor seating','Creative menu'], years: 0, delivery: true },
+      { name: 'Shree Thali Ghar', categories: 'Nepali Thali, Vegetarian, Restaurants', area: 'Sundhara', address: 'Sundhara, Kathmandu', phone: '01-4256019', rating: 4.2, reviews: 812, price: 1, status: 'open', hoursToday: 'Today: 10:00 am – 9:00 pm', thumb: U('photo-1567188040759-fb8a883dc6d8'), quote: 'Unlimited dal-bhat for Rs 280. Office workers swear by the lunch rush', amenities: ['Unlimited refills','Vegetarian','Counter service'], years: 0, delivery: true },
+    ];
+    const restaurants = raw.map((r, i) => ({
+      rank: i + 1,
+      name: r.name,
+      categories: r.categories,
+      area: r.area,
+      address: r.address,
+      phone: r.phone,
+      rating: r.rating.toFixed(1),
+      stars: stars(r.rating),
+      reviews: r.reviews,
+      priceText: priceText(r.price),
+      hasYears: r.years > 0,
+      years: r.years,
+      hasAmenities: r.amenities && r.amenities.length > 0,
+      amenities: r.amenities || [],
+      isOpen: r.status === 'open',
+      is24h: r.status === '24h',
+      isClosed: r.status === 'closed',
+      hoursToday: r.hoursToday,
+      thumb: r.thumb,
+      hasQuote: !!r.quote,
+      quote: r.quote,
+      hasDelivery: r.delivery,
+    }));
+    return { restaurants };
+  }
+}
+</script>
+</body>
+</html>

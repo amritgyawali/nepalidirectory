@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: 'Manrope', sans-serif; color: #1a1a1a; background: #fff; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    input { font-family: inherit; }
+    h1, h2, h3, h4, p { margin: 0; }
+    img { display:block; max-width:100%; }
+  </style>
+</helmet>
+<!-- HEADER -->
+<header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<div style="flex:1;display:flex;align-items:stretch;border:1px solid #d3d6db;border-radius:4px;overflow:hidden;max-width:620px;background:#fff;">
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;"><svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg><input placeholder="Find a business" style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;"/></div>
+<div style="width:1px;background:#e3e5e8;"></div>
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;"><svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><input style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;" value="Bagmati Province"/></div>
+<button onclick="window.location.href='Search Results.dc.html';" style="background:#FFD400;color:#1a1a1a;padding:11px 24px;font-weight:700;font-size:14px;">FIND</button>
+</div>
+<nav style="display:flex;align-items:center;gap:22px;font-size:14px;">
+<a href="Advertise.dc.html" style="color:#1a1a1a;font-weight:500;">Advertise</a>
+<a href="Login.dc.html" style="color:#1a1a1a;font-weight:500;">Log In</a>
+<a href="Register.dc.html" style="background:#1a1a1a;color:#fff;padding:9px 16px;border-radius:4px;font-weight:600;">Sign Up</a>
+</nav>
+</div>
+</header>
+<!-- BREADCRUMB -->
+<div style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:10px 24px;font-size:12px;color:#6b7280;">
+<a href="Home.dc.html">Home</a> <span style="margin:0 6px;">›</span>
+<a href="Sitemap.dc.html">Provinces</a> <span style="margin:0 6px;">›</span>
+<span style="color:#1a1a1a;font-weight:600;">Bagmati Province</span>
+</div>
+</div>
+<!-- HERO -->
+<section style="position:relative;background:#1a1a1a;color:#fff;overflow:hidden;">
+<div style="position:absolute;inset:0;background-image:linear-gradient(120deg, rgba(20,20,20,0.55) 0%, rgba(20,20,20,0.85) 100%), url('https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=1800&amp;h=500&amp;fit=crop&amp;auto=format');background-size:cover;background-position:center;"></div>
+<div style="position:relative;max-width:1180px;margin:0 auto;padding:56px 24px 48px;">
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#FFD400;text-transform:uppercase;margin:0 0 12px;">Province No. 3 · Capital region</p>
+<h1 style="font-size:52px;font-weight:800;letter-spacing:-1.4px;line-height:1.05;margin:0 0 14px;">Business Directory in Bagmati, Nepal</h1>
+<p style="font-size:16px;color:#d3d6db;line-height:1.55;margin:0 0 24px;max-width:620px;">Bagmati is home to the Kathmandu Valley and Nepal's densest concentration of businesses — over 38,000 verified listings across 13 districts.</p>
+<div style="display:flex;gap:32px;flex-wrap:wrap;">
+<div><div style="font-size:30px;font-weight:800;letter-spacing:-1px;">38,400</div><div style="font-size:12px;color:#9ca3af;font-weight:600;">listings</div></div>
+<div><div style="font-size:30px;font-weight:800;letter-spacing:-1px;">13</div><div style="font-size:12px;color:#9ca3af;font-weight:600;">districts</div></div>
+<div><div style="font-size:30px;font-weight:800;letter-spacing:-1px;">119</div><div style="font-size:12px;color:#9ca3af;font-weight:600;">municipalities</div></div>
+<div><div style="font-size:30px;font-weight:800;letter-spacing:-1px;">140+</div><div style="font-size:12px;color:#9ca3af;font-weight:600;">categories</div></div>
+</div>
+</div>
+</section>
+<!-- DISTRICTS & CITIES -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:48px 24px;">
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;margin:0 0 6px;">Cities &amp; districts in Bagmati</h2>
+<p style="color:#6b7280;font-size:14px;margin:0 0 28px;">Browse local businesses by municipality across all 13 districts.</p>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:28px;">
+<div>
+<h3 style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#1a1a1a;margin:0 0 12px;border-bottom:2px solid #FFD400;padding-bottom:6px;display:inline-block;">Kathmandu District</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;font-size:13px;">
+<li><a href="City Landing.dc.html">Kathmandu Metropolitan</a></li>
+<li><a href="City Landing.dc.html">Kirtipur</a></li>
+<li><a href="City Landing.dc.html">Budhanilkantha</a></li>
+<li><a href="City Landing.dc.html">Tokha</a></li>
+<li><a href="Home.dc.html">Tarakeshwar</a></li>
+<li><a href="Home.dc.html">Chandragiri</a></li>
+<li><a href="Home.dc.html">Nagarjun</a></li>
+<li><a href="Home.dc.html">Gokarneshwar</a></li>
+</ul>
+</div>
+<div>
+<h3 style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#1a1a1a;margin:0 0 12px;border-bottom:2px solid #FFD400;padding-bottom:6px;display:inline-block;">Lalitpur District</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;font-size:13px;">
+<li><a href="City Landing.dc.html">Lalitpur Metropolitan</a></li>
+<li><a href="City Landing.dc.html">Godawari</a></li>
+<li><a href="Home.dc.html">Mahalaxmi</a></li>
+<li><a href="Home.dc.html">Konjyosom</a></li>
+<li><a href="City Landing.dc.html">Bagmati (Rural)</a></li>
+</ul>
+<h3 style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#1a1a1a;margin:20px 0 12px;border-bottom:2px solid #FFD400;padding-bottom:6px;display:inline-block;">Bhaktapur District</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;font-size:13px;">
+<li><a href="City Landing.dc.html">Bhaktapur</a></li>
+<li><a href="Home.dc.html">Madhyapur Thimi</a></li>
+<li><a href="Home.dc.html">Changunarayan</a></li>
+<li><a href="Home.dc.html">Suryabinayak</a></li>
+</ul>
+</div>
+<div>
+<h3 style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#1a1a1a;margin:0 0 12px;border-bottom:2px solid #FFD400;padding-bottom:6px;display:inline-block;">Chitwan &amp; Makwanpur</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;font-size:13px;">
+<li><a href="City Landing.dc.html">Bharatpur</a></li>
+<li><a href="City Landing.dc.html">Ratnanagar (Sauraha)</a></li>
+<li><a href="Home.dc.html">Khairahani</a></li>
+<li><a href="City Landing.dc.html">Hetauda</a></li>
+<li><a href="Home.dc.html">Thaha</a></li>
+</ul>
+<h3 style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#1a1a1a;margin:20px 0 12px;border-bottom:2px solid #FFD400;padding-bottom:6px;display:inline-block;">Kavre &amp; Sindhupalchok</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;font-size:13px;">
+<li><a href="City Landing.dc.html">Banepa</a></li>
+<li><a href="City Landing.dc.html">Dhulikhel</a></li>
+<li><a href="Home.dc.html">Panauti</a></li>
+<li><a href="Home.dc.html">Chautara</a></li>
+</ul>
+</div>
+<div>
+<h3 style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#1a1a1a;margin:0 0 12px;border-bottom:2px solid #FFD400;padding-bottom:6px;display:inline-block;">Other Districts</h3>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;font-size:13px;">
+<li><a href="Home.dc.html">Nuwakot — Bidur</a></li>
+<li><a href="Home.dc.html">Dhading — Nilkantha</a></li>
+<li><a href="Home.dc.html">Rasuwa — Dhunche</a></li>
+<li><a href="Home.dc.html">Ramechhap — Manthali</a></li>
+<li><a href="Home.dc.html">Dolakha — Charikot</a></li>
+<li><a href="Home.dc.html">Sindhuli — Kamalamai</a></li>
+<li><a href="Map Directions.dc.html" style="font-weight:700;">View full sitemap →</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- POPULAR CATEGORIES -->
+<section style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:48px 24px;">
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;margin:0 0 24px;">Popular categories in Bagmati</h2>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;">
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-align:center;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:26px;margin-bottom:8px;">🍽️</div><div style="font-size:13px;font-weight:700;">Restaurants</div><div style="font-size:11px;color:#6b7280;">3,640</div>
+</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-align:center;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:26px;margin-bottom:8px;">🩺</div><div style="font-size:13px;font-weight:700;">Doctors</div><div style="font-size:11px;color:#6b7280;">2,180</div>
+</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-align:center;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:26px;margin-bottom:8px;">🏨</div><div style="font-size:13px;font-weight:700;">Hotels</div><div style="font-size:11px;color:#6b7280;">1,920</div>
+</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-align:center;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:26px;margin-bottom:8px;">🔧</div><div style="font-size:13px;font-weight:700;">Plumbers</div><div style="font-size:11px;color:#6b7280;">1,140</div>
+</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-align:center;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:26px;margin-bottom:8px;">💇</div><div style="font-size:13px;font-weight:700;">Beauty Salons</div><div style="font-size:11px;color:#6b7280;">1,480</div>
+</a>
+<a href="Search Results.dc.html" style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:16px;text-align:center;text-decoration:none;color:#1a1a1a;">
+<div style="font-size:26px;margin-bottom:8px;">🏔️</div><div style="font-size:13px;font-weight:700;">Trekking</div><div style="font-size:11px;color:#6b7280;">860</div>
+</a>
+</div>
+</div>
+</section>
+<!-- OTHER PROVINCES -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:40px 24px;">
+<h2 style="font-size:18px;font-weight:800;letter-spacing:-0.4px;margin:0 0 16px;">Explore other provinces</h2>
+<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:10px;">
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;border-radius:6px;padding:12px;text-align:center;font-size:13px;font-weight:700;color:#1a1a1a;">Koshi</a>
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;border-radius:6px;padding:12px;text-align:center;font-size:13px;font-weight:700;color:#1a1a1a;">Madhesh</a>
+<a href="Province.dc.html" style="background:#fff7d1;border:1px solid #FFD400;border-radius:6px;padding:12px;text-align:center;font-size:13px;font-weight:700;color:#1a1a1a;">Bagmati</a>
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;border-radius:6px;padding:12px;text-align:center;font-size:13px;font-weight:700;color:#1a1a1a;">Gandaki</a>
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;border-radius:6px;padding:12px;text-align:center;font-size:13px;font-weight:700;color:#1a1a1a;">Lumbini</a>
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;border-radius:6px;padding:12px;text-align:center;font-size:13px;font-weight:700;color:#1a1a1a;">Karnali</a>
+<a href="Home.dc.html" style="background:#f7f8fa;border:1px solid #e3e5e8;border-radius:6px;padding:12px;text-align:center;font-size:13px;font-weight:700;color:#1a1a1a;">Sudurpashchim</a>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer style="background:#1a1a1a;color:#d3d6db;">
+<div style="max-width:1180px;margin:0 auto;padding:32px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+<div style="display:flex;align-items:center;gap:24px;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:13px;padding:6px 8px;border-radius:3px;line-height:1;">ND</span>
+<span style="color:#fff;font-weight:700;font-size:14px;">NepaliDirectory</span>
+</a>
+<div style="font-size:12px;color:#6b7280;">© 2026 NepaliDirectory. All rights reserved.</div>
+</div>
+<div style="display:flex;gap:20px;font-size:12px;"><a href="Map Directions.dc.html" style="color:#9ca3af;">Site Map</a><a href="Categories.dc.html" style="color:#9ca3af;">Categories</a><a href="Privacy Policy.dc.html" style="color:#9ca3af;">Privacy</a><a href="Terms of Service.dc.html" style="color:#9ca3af;">Terms</a></div>
+</div>
+</footer>
+</x-dc>
+</body>
+</html>

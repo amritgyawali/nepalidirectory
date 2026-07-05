@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nayan - E-commerce Homepage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#91f4e8",
+                        "border-subtle": "#E2E8F0",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface": "#f8f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "background": "#f8f9fb",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-low": "#f2f4f6",
+                        "accent-gold": "#B3905F",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2d3133",
+                        "surface-tint": "#555996",
+                        "inverse-primary": "#bfc2ff",
+                        "on-primary-fixed-variant": "#3d417c",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f8f9fb",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#1b1b1b",
+                        "on-secondary-fixed-variant": "#00504a",
+                        "on-surface-variant": "#464650",
+                        "secondary-fixed": "#91f4e8",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#bfc2ff",
+                        "surface-dim": "#d8dadc",
+                        "secondary-fixed-dim": "#74d7cc",
+                        "outline": "#777681",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-container": "#007169",
+                        "tertiary-container": "#1b1b1b",
+                        "tertiary-fixed-dim": "#c6c6c6",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#006a62",
+                        "primary-container": "#0f134f",
+                        "primary-fixed": "#e0e0ff",
+                        "on-primary-fixed": "#0f134f",
+                        "tertiary": "#000000",
+                        "surface-muted": "#FBFBFC",
+                        "on-primary-container": "#7a7fbe",
+                        "on-secondary-fixed": "#00201d",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary-container": "#848484",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "primary": "#000000",
+                        "on-surface": "#191c1e",
+                        "outline-variant": "#c7c5d1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "4rem",
+                        "gutter": "1.5rem",
+                        "stack-md": "1.5rem",
+                        "margin-desktop": "2.5rem",
+                        "margin-mobile": "1rem",
+                        "stack-sm": "0.5rem",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- Mobile Top Navigation -->
+<header class="sticky top-0 z-50 bg-surface border-b border-outline-variant shadow-sm w-full">
+<div class="flex items-center justify-between px-margin-mobile py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-on-surface">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<a class="font-headline-lg-mobile text-headline-lg-mobile font-black text-primary" href="#">Nayan</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined text-[24px]">search</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined text-[24px]">shopping_cart</span>
+</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Banner -->
+<section class="w-full relative">
+<img class="w-full h-auto object-cover block" data-alt="A stylized hero banner for JJ Rhapsody eyewear collection featuring a high-fashion model wearing stylish glasses in a modern, light-mode e-commerce setting. Professional studio lighting highlights the product details." src="https://lh3.googleusercontent.com/aida/AP1WRLsor9Tb6gpAKrd2LJT8eEslx65gBRqa5_HNzMUAD9YtbJ18YYf2RH1QGQfPAx6oupIGf91myqaWP5-sdLAQinrGm9xCFRPEuP3Q9IEYDx54SvLUa3GaBj5kVJtguuh0yiVSa84MD1JRcMeIwMZMmD_CGDCqzkRi7hYYXrV0gyvhXy9xAYpzZm8YZszaQLvz9cAap-_B6DecX8WzN6fbacnPG01cvRUQO4nRgeg8x4FciEtVRIZYMveeBOY"/>
+</section>
+<!-- Categories Horizontal Scroll -->
+<section class="py-stack-md bg-surface-container-lowest">
+<div class="flex overflow-x-auto hide-scroll gap-4 px-margin-mobile pb-4">
+<div class="flex flex-col items-center flex-shrink-0 w-20 cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-2 border border-border-subtle group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[28px] text-primary">eyeglasses</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center whitespace-nowrap">Eyeglasses</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 w-20 cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-2 border border-border-subtle group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[28px] text-primary">eyeglasses</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center whitespace-nowrap">Sunglasses</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 w-20 cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-2 border border-border-subtle group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[28px] text-primary">computer</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center whitespace-nowrap">Computer</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 w-20 cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-2 border border-border-subtle group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[28px] text-primary">child_care</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center whitespace-nowrap">Kids</span>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 w-20 cursor-pointer group">
+<div class="w-16 h-16 rounded-full bg-surface-muted flex items-center justify-center mb-2 border border-border-subtle group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[28px] text-primary">visibility</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center whitespace-nowrap">Contact Lenses</span>
+</div>
+</div>
+</section>
+<!-- Value Proposition Bar -->
+<section class="bg-primary-container py-3">
+<div class="flex justify-center items-center gap-6 px-margin-mobile">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-on-primary-container" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-md text-label-md text-on-primary">10 Million+ Glasses Sold</span>
+</div>
+</div>
+</section>
+<!-- NY Fashion Week Section -->
+<section class="w-full py-stack-md bg-surface-container-lowest">
+<div class="px-margin-mobile mb-4">
+<h2 class="font-headline-md text-headline-md text-primary text-center">Nayan at NY Fashion Week</h2>
+</div>
+<img class="w-full h-auto object-cover" data-alt="Animated banner showcasing Nayan eyewear models walking the runway at New York Fashion Week. Bright, high-contrast fashion photography style." src="https://lh3.googleusercontent.com/aida/AP1WRLsv15WTVjeSIPfzOFOO7qF5fhGWwV6-QCpwWatthhJCmqhdYkEoL06tC3gwGV2UF25Vz7cZ_6PV1ns6iEc2LkKi6yPkEyxoHMSu2XkBhh82ZQjogFYFv56qsuGQE4EVFWJla9K52QThyeaqemdVvhWVMHOar6sB6DEnk2I7jdB59WpUfIE9aWfSXpfF8Z3J0ELgpSyCooS7Lx4KDdKR4E0bFEU_Swdh_EWApLArSl-IoKXupFILNkR6Chkp"/>
+</section>
+<!-- Choose Your Shape Section -->
+<section class="py-stack-lg px-margin-mobile bg-surface">
+<h2 class="font-headline-md text-headline-md text-primary text-center mb-8">Choose Your Favorite Shape</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-container-max mx-auto">
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-xl flex flex-col items-center">
+<img class="w-full h-auto object-contain mb-3" data-alt="A close-up shot of a classic rectangular eyeglass frame displayed on a minimalist white background. Professional product photography." src="https://lh3.googleusercontent.com/aida/AP1WRLsOeP1tYbkZ0mNLWW3qSjz11XBJXf2EsYRYV8lvWMJ9kXGSk3KiBCKa3JWzU-dtYUgn6E7mygPWdNjy842qZPGjsGiwxBD0nVbwZHPHnV3P7UBo4P3m3sSYS8_2sOEGWcfO8PIsrL1DEFnaRqT1tl592AlwoX8blBPnTTUM5U5ayLM6TV12UN23rcWcCN-b1sfLaUCRa5IZWRQORLy8oXlIXx5APsW_z81u9bbkyzta7RgaPaJlekcXXzgz"/>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Rectangle</span>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-xl flex flex-col items-center">
+<img class="w-full h-auto object-contain mb-3" data-alt="A close-up shot of a stylish round eyeglass frame displayed on a minimalist white background. Professional product photography." src="https://lh3.googleusercontent.com/aida/AP1WRLtW8ucVcKmhcHh1Ig-4KXL_1o7uNA9ylUXqPtDnzTVFrlqnhCED1iKrU8GK5nUk3VrdrdjvIr0wW2PvhNSjH7nraU--mjsaJ863xRaot4sRCVw3SDYG3fULVY583qxYnJfPgMJacWQDWCT2QNkCMnoHukHe99NCMyaZuj5VwVqTBtI16qBcYBhXqSjdE_FkGWydBZ3-OVnatbC1rT6cJ26Ok21e9KDETkRxohjHNjTI7qLplyu8cTZ8xS38"/>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Round</span>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-xl flex flex-col items-center">
+<img class="w-full h-auto object-contain mb-3" data-alt="A close-up shot of a classic wayfarer eyeglass frame displayed on a minimalist white background. Professional product photography." src="https://lh3.googleusercontent.com/aida/AP1WRLupLeW5fvq9ztUA8hOlzgYrPs1HDo-BerbAdWK46hbsGGV3jC7KlTT22MljgWyimJTlS6A2z8mXPhZddEPyyxuKYqZsOte6dPrMWI4fyVHOx1V7Et1o572CRdl1qXxxGSvRg0sNQikTutv-iWVgDYu5VsOjFJtOHK61SrN8ZAJm09l7zY3tJsxCozz3D01HJl1whDEYUu0FYW6oZrPOqE9GpYOAh8w3pvtZ2sYM0UHlF_o0tOmeTz2vHPPz"/>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Wayfarer</span>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-xl flex flex-col items-center">
+<img class="w-full h-auto object-contain mb-3" data-alt="A close-up shot of an elegant cat-eye eyeglass frame displayed on a minimalist white background. Professional product photography." src="https://lh3.googleusercontent.com/aida/AP1WRLt9UwurAYYIxj_XTDE88F2qjx6VuD6ruGrfGIbuaViCN0_58-6LZeAO5px_8GRmUPjnW0rviXF7rWS2m0rxB2SjpjlFGQKixEBcROSCYPo_DoFfxWU6WKOhiMj-LCjIJGBk9vjL2Om2bvMo9uaYTCyW8AVwOb3L0MvwfI9DDsnn3qI2446PGszzzqPnehZ_8D6N76XOvwerJrU04V7phL-N-R_vpDcMeRL3Zl7WzDy3XuAfONj_EUAAY_Sy"/>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Cat-Eye</span>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-xl flex flex-col items-center">
+<img class="w-full h-auto object-contain mb-3" data-alt="A close-up shot of a modern geometric hexagonal eyeglass frame displayed on a minimalist white background. Professional product photography." src="https://lh3.googleusercontent.com/aida/AP1WRLu-l9AU1ouwlvh1rPm47mGGJrUCn0n6HgmhY0jt1QzF0mO08aQFvT14F8tutqOL00yqCivMj7yfbLQ-QCCZdnb9lcusGPIA1rbTJwSo7xXFb1FgDdrCcXgK-ovQiZ_SZbRopt75tZqypnuxmftKSagmhBT1VP_ijda9R1cjxJeSn7yKY9odjtd0xX5c92R6r3edACXY5Qv-1nAGtqZnfrjBPJ0H2NRzGsIk886FqRWDCXu-tHa2aWwgiEI"/>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Hexagon</span>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle p-4 rounded-xl flex flex-col items-center">
+<img class="w-full h-auto object-contain mb-3" data-alt="A close-up shot of a classic aviator eyeglass frame displayed on a minimalist white background. Professional product photography." src="https://lh3.googleusercontent.com/aida/AP1WRLvG88dz1HxXqNU-ZzzckdpFzn-mvxqWP0BOfPscln8VE7yR5ysDUN2g-ZOBYGPoxdj2Ode5x0nthKQBEjkJ7tF7CtBF5CGaHfP5TuCmfnWgnh6wwCv36g7LMAxwQmXCYlPxZ-289uikVbyLOCouJU4wLO4UUgKVhyQMxcGrNFavb6m8TLdukiNWA6lFmucrhrp3SE2CKB2WA1EdmEoIoZckPwOoLBxsg-TpR1uxxhxOTlx2oEJhM4PsH2sY"/>
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Aviator</span>
+</div>
+</div>
+</section>
+<!-- Innovative Collections -->
+<section class="py-stack-lg bg-surface-container-lowest">
+<h2 class="font-headline-md text-headline-md text-primary text-center mb-8 px-margin-mobile">Innovative Collections</h2>
+<div class="flex flex-col gap-6 px-margin-mobile max-w-container-max mx-auto">
+<a class="block group relative overflow-hidden rounded-xl border border-border-subtle" href="#">
+<img class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Lifestyle banner for the 'Roman Holiday' eyewear collection featuring a couple in elegant vintage-inspired clothing wearing stylish glasses outdoors." src="https://lh3.googleusercontent.com/aida/AP1WRLvHf3s1InXhPoG8bnuemN4Ap64O1MK01DdU8HOqqROiIj6tIta-H8BZkqFwwqKmQybjg5ukBDaDEW_74qgay6IfOO6uLFKnD60he-MFy0BhDDjX1iCtRnMrl8pNEe273me7AhLk9yoVubkTzydjxJnzkiz9NTH5IRFkfr_Uo_q4h-WICNVC_7Z5oETGRJJA-JAMYfyi_uVEhI-_RIw-ZOBv0Zcqn77fiNvHOTyVrPmPIKYXnL2a8_D0I06M"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+<h3 class="font-headline-md text-headline-md text-on-primary">Roman Holiday</h3>
+</div>
+</a>
+<a class="block group relative overflow-hidden rounded-xl border border-border-subtle" href="#">
+<img class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Avant-garde banner for the 'Surrealist' eyewear collection featuring artistic framing and bold, creative optical frame designs in a modern studio." src="https://lh3.googleusercontent.com/aida/AP1WRLv9zovjoc7kgtAEiQnP3eiHrecFTBKrHBeUUVbL1ev7vwgkYN-SqZWAevBvwdwCRCvlz6V7lpQASpoAK01uPHj7r1BPkooaPbD0AGZB17wudMpRgt013OqCSLdEtLulF01aZEql4EmsRhGJPR2NvZxUvx_UM2ppTPWJTrJdZydKWRyKQu_U9mJ7n-WKlznUWAaxjB2eLGDQ7yBvh12A944SbOx4oRGdGrZ0vwPRVfVvtPGMVRmqE_rdfcpc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+<h3 class="font-headline-md text-headline-md text-on-primary">Surrealist</h3>
+</div>
+</a>
+<a class="block group relative overflow-hidden rounded-xl border border-border-subtle" href="#">
+<img class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Futuristic banner for the 'Prism' eyewear collection showing colorful, transparent acetate frames with geometric light reflections." src="https://lh3.googleusercontent.com/aida/AP1WRLuqtlNzhjTmCkIrKzOfApSrgn1K6ZRD83aF6RCMFVj-ZoFelFG72A1deOHerKxNk8exF5crfW6PSdvjbIzDpvSmLwH7sKG-w7uj-kHYRq7A4Evr3VsyKcSbwgXzBNqRJkHASPaCjNre_N-goe9paX7ptSQsNTKMzZOlRACg_qSZzDPC3Msz8J0zDDPV8g47KtcVKHm7enw44onlSQEwV_Qz1-v1mqu6GU-A3SxWF1WzbATTrUQu0mYRctSg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+<h3 class="font-headline-md text-headline-md text-on-primary">Prism</h3>
+</div>
+</a>
+<a class="block group relative overflow-hidden rounded-xl border border-border-subtle" href="#">
+<img class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Sporty banner for the 'Wrap' eyewear collection highlighting aerodynamic sunglass frames suitable for outdoor activities." src="https://lh3.googleusercontent.com/aida/AP1WRLu0bCON2EVrZTnR32Zgeb-spfCrcG69HaJlxv8DSergLJoEkaNgC6tlEyp1ImECT60FCx09FkeW_e4PhYHuo8vki5fqk4W60n4xZ-bfdvVUInaKi69NiUmRgqMqWgcs0QrqH4lZsMjKr2gViUqIF-QImx4S3IbbYQA-4mUYxmWtRkZ9QWrWuG5ehy8ztWYJg1NpvaI3kp1jVDkNiduL4jsHwkyQEUIJK0oBgFPhhz3ajqMmktg_gUCWtXDM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+<h3 class="font-headline-md text-headline-md text-on-primary">Wrap</h3>
+</div>
+</a>
+</div>
+</section>
+<!-- Shark Tank Feature -->
+<section class="w-full py-stack-md bg-surface">
+<div class="px-margin-mobile mb-4">
+<h2 class="font-headline-md text-headline-md text-primary text-center">As Seen On Shark Tank</h2>
+</div>
+<img class="w-full h-auto object-cover" data-alt="Promotional banner highlighting Nayan's appearance on Shark Tank, featuring modern typography and confident business presentation styling." src="https://lh3.googleusercontent.com/aida/AP1WRLuKeo3JvayrwaZGyb64a6kIAJRSBIV8ghNRIYwsbfdMV4yqzY6zSb_09OSXzm2MAkdoN7mqeGvfIf-QtjjlRUzRwZCZ4n2M3PMojftbBxZKicYtUGBKKdBY8YcKh_OuM1dglWvFW2Pzccm-vamec0SEXG7EtUyn98uWjos70trbPLZLA5mGwoJcgfUyNzxUo6xC6ecXb9tuTJ3wTH50c9ZnVCwfI7RzXtbcQ66jQZv-o2NRnZp4z-n1_kfu"/>
+</section>
+<!-- Social Grid -->
+<section class="py-stack-lg px-margin-mobile bg-surface-container-lowest">
+<h2 class="font-headline-md text-headline-md text-primary text-center mb-2">#NayanFam</h2>
+<p class="text-center font-body-sm text-body-sm text-on-surface-variant mb-8">Tag us to be featured.</p>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-2 max-w-container-max mx-auto">
+<img class="w-full aspect-square object-cover rounded-lg" data-alt="User-generated style photo of a happy customer wearing Nayan glasses in a casual outdoor setting, bright and natural." src="https://lh3.googleusercontent.com/aida/AP1WRLtwNASV6HaOLGUV6lUuiP59YfHTQq_hUVhiBDKHc-jRVkGDvlDBqhit72afZ4AGMn1lkhjzGwNSAwgXG-NTDwIOUPtjUrx8DLnSxfiTnyiBhhhD21TwlgsHn2QOrZJWB0bjT5OQkm24cRwz3CLO7DMB5RfRpWV5msy9PtjTr2ghHsRGYb0fB1jWqMfx1a4A1M6Dcf2r3xRxsAYZLuf71AI1_8L74n2ZY31TVTqBzgpXL__a-lrBt_bpPdQu"/>
+<img class="w-full aspect-square object-cover rounded-lg" data-alt="User-generated style photo of a fashion-forward individual posing with Nayan sunglasses in a city street environment." src="https://lh3.googleusercontent.com/aida/AP1WRLuFWr_GXhIevlRRFroP2I3DOAGE-3MUEul8f5onz55Xrrz66GQEcyzgOSBo2TpG-NES7SwegU8eZ1Van11hJP-39JqbZs8azDbb7MwfbOaHMLxrxKe9gPQJ9Z2rPjCz4Va6t-U_5zt2KcOPkUGbVP9v7OClYt0hs1uJlp9pS_866BlPpGKH2JNhT6uXWv6cdTjNC7reAG3zDHaNqh88vCuAL-tN45YzLpBeLPQdG0LpEMcdZcPS-n_ywCO2"/>
+<img class="w-full aspect-square object-cover rounded-lg" data-alt="User-generated style photo focusing on a close-up of a person styling clear Nayan optical frames." src="https://lh3.googleusercontent.com/aida/AP1WRLsRIn9aqxv2tgobBagqIkf8mz9JGVljHQ7iXBb1d2a5saVFRXFcFW5w7vrDrW1KtRsJbqySTCUKexeXixFeDghkADqwSl_USyFbK42T5evuC59sbD4GMN2RUe7RcZ1iP52JVgME1aojKruvre1ZnW_66rPFCIRjZwGI2DQMBDQ0bxQRsjLwG6QPZkNFb5tiZw_jCg9n21h4JadCMfnUEmGpIDiwjRugweqGzVUvsGshi5npK2f_qiSC2quT"/>
+<img class="w-full aspect-square object-cover rounded-lg" data-alt="User-generated style photo of a group of friends wearing different Nayan eyewear styles together." src="https://lh3.googleusercontent.com/aida/AP1WRLtDh-_9Ez1-TB1pmLzqxm5gKObzEYnQJ5LQrq8Vzhi959KPBwSs9ENn9SlnlrFekVVp7Z_lUlg8zG39uYcj1l_2a2j6XDf-wrxVb5TcnGZjt_W_X5A9ifArdrGmhF1UYqHFsonlK0RkTQWhtkN79N8ujkYEpFGyoBkFNiRcr9zmE-O8gGXzSZ3ZqMFZiqfXCiLu1oYrAbd56SBhZEO6s6L44VwxqtTGznCwui6q9c8zvjBAM5zcz9PWhfcv"/>
+<img class="w-full aspect-square object-cover rounded-lg col-span-2 md:col-span-1" data-alt="User-generated style photo of a creative professional wearing smart Nayan frames at a stylish cafe workspace." src="https://lh3.googleusercontent.com/aida/AP1WRLvHS2o_We7PVIQv9_N87-HMP0NAJvU1n7bFLiacpdqKL77sDZQPCkaQkoW1PdNkx8j9kcdmelOzAP0sWZp1rpQ_ERZXzXMRx8SDckdne5KuadrIgABrMrHkqrCRSyv4VRwK96lBMqSu1rpFoihl5NuDjUufXCKGdaLgeAWO_II62RNClvOpR11v8G0hAxh24Z5fbz4TuauKH2WAYYSu0J8hEQhkLCQLXjNvOYiJeZsW026SBkuJlN4Ga71K"/>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary-container text-on-primary w-full py-stack-lg px-margin-desktop max-w-container-max mx-auto flex flex-col gap-stack-md border-t border-outline-variant">
+<div class="flex flex-col items-center gap-6">
+<div class="text-headline-md font-headline-md text-on-primary font-black">Nayan</div>
+<nav class="flex flex-wrap justify-center gap-x-6 gap-y-4">
+<a class="font-label-md text-label-md text-on-primary-container hover:text-on-primary transition-opacity duration-200" href="#">Refund &amp; Exchange</a>
+<a class="font-label-md text-label-md text-on-primary-container hover:text-on-primary transition-opacity duration-200" href="#">Download App</a>
+<a class="font-label-md text-label-md text-on-primary-container hover:text-on-primary transition-opacity duration-200" href="#">Email Support</a>
+<a class="font-label-md text-label-md text-on-primary-container hover:text-on-primary transition-opacity duration-200" href="#">About Us</a>
+<a class="font-label-md text-label-md text-on-primary-container hover:text-on-primary transition-opacity duration-200" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-primary-container hover:text-on-primary transition-opacity duration-200" href="#">T &amp; C</a>
+<a class="font-label-md text-label-md text-on-primary-container hover:text-on-primary transition-opacity duration-200" href="#">Accessibility</a>
+</nav>
+<div class="flex gap-4 mt-4">
+<a class="w-10 h-10 rounded-full bg-on-primary/10 flex items-center justify-center hover:bg-on-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-on-primary text-[20px]">photo_camera</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-on-primary/10 flex items-center justify-center hover:bg-on-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-on-primary text-[20px]">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-on-primary/10 flex items-center justify-center hover:bg-on-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-on-primary text-[20px]">smart_display</span>
+</a>
+</div>
+<div class="font-body-sm text-body-sm text-on-primary-container text-center mt-4">
+                Version 1.0.0 | © 2024 Nayan. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>

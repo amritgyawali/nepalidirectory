@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif; color: #1a1a1a; background: #f7f8fa; -webkit-font-smoothing: antialiased; line-height: 1.45; min-height:100vh; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    h1, h2, h3, p, ul, li { margin: 0; padding: 0; }
+  </style>
+</helmet>
+<!-- HEADER -->
+<header style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<nav style="display:flex;gap:20px;font-size:14px;font-weight:600;">
+<a href="Dashboard.dc.html" style="color:#1a1a1a;">Go to Dashboard</a>
+</nav>
+</div>
+</header>
+<!-- HERO -->
+<section style="padding:80px 24px;text-align:center;">
+<h1 style="font-size:40px;font-weight:800;letter-spacing:-1px;margin-bottom:16px;">Grow your business with us</h1>
+<p style="font-size:16px;color:#6b7280;max-width:600px;margin:0 auto 40px;">Choose a plan that fits your business needs. Upgrade at any time to unlock powerful features and reach more local customers.</p>
+<div style="display:inline-flex;background:#fff;border:1px solid #d3d6db;border-radius:30px;padding:4px;">
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#1a1a1a;color:#fff;padding:8px 20px;border-radius:24px;font-weight:700;font-size:14px;">Billed Monthly</button>
+<button onclick="alert('Annual billing selected (Save 20%)')" style="background:transparent;color:#4b5563;padding:8px 20px;border-radius:24px;font-weight:700;font-size:14px;">Billed Annually</button>
+</div>
+</section>
+<!-- PRICING CARDS -->
+<main style="max-width:1180px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:24px;">
+<!-- Basic -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:12px;padding:40px;display:flex;flex-direction:column;">
+<h3 style="font-size:20px;font-weight:800;margin-bottom:8px;">Basic</h3>
+<p style="font-size:14px;color:#6b7280;margin-bottom:24px;">Everything you need to get listed.</p>
+<div style="font-size:36px;font-weight:800;margin-bottom:24px;">Free</div>
+<button onclick="window.location.href='Claim Listing.dc.html';" style="width:100%;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:14px;border-radius:4px;font-weight:800;font-size:14px;margin-bottom:32px;">Get Started</button>
+<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;font-size:14px;color:#4b5563;">
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#1a7d3a;font-weight:800;">✓</span> Standard Listing</li>
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#1a7d3a;font-weight:800;">✓</span> 5 Photos</li>
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#1a7d3a;font-weight:800;">✓</span> Receive Reviews</li>
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#1a7d3a;font-weight:800;">✓</span> Basic Support</li>
+</ul>
+</div>
+<!-- Pro -->
+<div style="background:#1a1a1a;color:#fff;border-radius:12px;padding:40px;display:flex;flex-direction:column;position:relative;transform:scale(1.02);box-shadow:0 20px 40px -10px rgba(0,0,0,0.2);">
+<span style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#FFD400;color:#1a1a1a;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;">Most Popular</span>
+<h3 style="font-size:20px;font-weight:800;margin-bottom:8px;">Professional</h3>
+<p style="font-size:14px;color:#d3d6db;margin-bottom:24px;">Stand out in search results and engage customers.</p>
+<div style="font-size:36px;font-weight:800;margin-bottom:24px;">Rs 1,500<span style="font-size:14px;color:#9ca3af;font-weight:500;">/mo</span></div>
+<button onclick="window.location.href='Claim Listing.dc.html';" style="width:100%;background:#FFD400;color:#1a1a1a;padding:14px;border-radius:4px;font-weight:800;font-size:14px;margin-bottom:32px;border:none;">Upgrade to Pro</button>
+<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;font-size:14px;color:#d3d6db;">
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#FFD400;font-weight:800;">✓</span> Priority Search Ranking</li>
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#FFD400;font-weight:800;">✓</span> Unlimited Photos &amp; Videos</li>
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#FFD400;font-weight:800;">✓</span> Reply to Reviews</li>
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#FFD400;font-weight:800;">✓</span> Add Custom Deals</li>
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#FFD400;font-weight:800;">✓</span> Analytics Dashboard</li>
+</ul>
+</div>
+<!-- Enterprise -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:12px;padding:40px;display:flex;flex-direction:column;">
+<h3 style="font-size:20px;font-weight:800;margin-bottom:8px;">Enterprise</h3>
+<p style="font-size:14px;color:#6b7280;margin-bottom:24px;">Maximum visibility for multiple locations.</p>
+<div style="font-size:36px;font-weight:800;margin-bottom:24px;">Rs 4,500<span style="font-size:14px;color:#9ca3af;font-weight:500;">/mo</span></div>
+<button onclick="window.location.href='Request Callback.dc.html';" style="width:100%;background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:14px;border-radius:4px;font-weight:800;font-size:14px;margin-bottom:32px;">Contact Sales</button>
+<ul style="list-style:none;display:flex;flex-direction:column;gap:16px;font-size:14px;color:#4b5563;">
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#1a7d3a;font-weight:800;">✓</span> Top of Search (Sponsored)</li>
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#1a7d3a;font-weight:800;">✓</span> Up to 5 Locations</li>
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#1a7d3a;font-weight:800;">✓</span> Dedicated Account Manager</li>
+<li style="display:flex;align-items:center;gap:12px;"><span style="color:#1a7d3a;font-weight:800;">✓</span> Advanced Competitor Analytics</li>
+</ul>
+</div>
+</main>
+<footer style="text-align:center;padding:40px 24px;font-size:12px;color:#6b7280;border-top:1px solid #e3e5e8;">
+<a href="Home.dc.html" style="color:#6b7280;">Home</a> · <a href="Content Page.dc.html" style="color:#6b7280;">Privacy</a> · <a href="Content Page.dc.html" style="color:#6b7280;">Terms</a> · <a href="Help.dc.html" style="color:#6b7280;">Help</a> · © 2026 NepaliDirectory
+</footer>
+</x-dc>
+</body>
+</html>

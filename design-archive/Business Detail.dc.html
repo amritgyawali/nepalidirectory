@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; line-height: 1.45; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    img { display: block; max-width: 100%; }
+    input, textarea { font-family: inherit; }
+    h1, h2, h3, h4, p { margin: 0; }
+  </style>
+</helmet>
+<!-- ============ HEADER ============ -->
+<header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<div style="flex:1;display:flex;align-items:stretch;border:1px solid #d3d6db;border-radius:4px;overflow:hidden;max-width:620px;background:#fff;">
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;">
+<svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+<input placeholder="Find a business" style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;"/>
+</div>
+<div style="width:1px;background:#e3e5e8;"></div>
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;">
+<svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<input style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;" value="Kathmandu, Bagmati"/>
+</div>
+<button onclick="window.location.href='Search Results.dc.html';" style="background:#FFD400;color:#1a1a1a;padding:11px 24px;font-weight:700;font-size:14px;letter-spacing:0.3px;">FIND</button>
+</div>
+<nav style="display:flex;align-items:center;gap:22px;font-size:14px;">
+<a href="Advertise.dc.html" style="color:#1a1a1a;font-weight:500;">Advertise</a>
+<a href="Write Review.dc.html" style="color:#1a1a1a;font-weight:500;">Write a Review</a>
+<a href="Login.dc.html" style="color:#1a1a1a;font-weight:500;">Log In</a>
+<a href="Register.dc.html" style="background:#1a1a1a;color:#fff;padding:9px 16px;border-radius:4px;font-weight:600;">Sign Up</a>
+</nav>
+</div>
+</header>
+<!-- ============ BREADCRUMB ============ -->
+<div style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:10px 24px;font-size:12px;color:#6b7280;">
+<a href="Home.dc.html">Home</a> <span style="margin:0 6px;">›</span>
+<a href="City Landing.dc.html">Bagmati Province</a> <span style="margin:0 6px;">›</span>
+<a href="City Landing.dc.html">Kathmandu Valley</a> <span style="margin:0 6px;">›</span>
+<a href="City Landing.dc.html">Bhaktapur</a> <span style="margin:0 6px;">›</span>
+<a href="Search Results.dc.html">Restaurants</a> <span style="margin:0 6px;">›</span>
+<a href="Search Results.dc.html">Newari Fine Dining</a> <span style="margin:0 6px;">›</span>
+<span style="color:#1a1a1a;font-weight:600;">Newa Lahana</span>
+</div>
+</div>
+<!-- ============ HEADER CARD ============ -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:32px 24px 28px;">
+<div style="display:grid;grid-template-columns:300px 1fr auto;gap:32px;align-items:start;">
+<!-- photo -->
+<a href="Photo Gallery.dc.html" style="position:relative;display:block;border-radius:8px;overflow:hidden;aspect-ratio:1;background:#f0f2f5;">
+<img alt="Newa Lahana" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600&amp;h=600&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/>
+<div style="position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.7);color:#fff;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;">📷 24 photos</div>
+</a>
+<!-- info -->
+<div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+<span style="display:inline-flex;align-items:center;gap:5px;background:#1a7d3a;color:#fff;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:0.5px;">
+<svg fill="currentColor" height="11" viewbox="0 0 24 24" width="11"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"></path></svg>
+            VERIFIED LISTING
+          </span>
+<span style="display:inline-flex;align-items:center;gap:5px;background:#fff7d1;color:#1a1a1a;border:1px solid #FFD400;padding:4px 10px;border-radius:3px;font-size:11px;font-weight:700;">⭐ 18 YEARS IN BUSINESS</span>
+</div>
+<h1 style="font-size:38px;font-weight:800;letter-spacing:-1px;line-height:1.1;margin:0 0 6px;">Newa Lahana</h1>
+<div style="font-size:14px;color:#4b5563;margin-bottom:10px;">
+<a href="Search Results.dc.html">Newari Fine Dining</a> · <a href="restaurants_category_nepali_directory/code.html">Restaurants</a> · <a href="Home.dc.html">Heritage Dining</a> · <a href="Home.dc.html">Cultural Show</a>
+</div>
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+<div style="display:flex;align-items:center;gap:8px;">
+<span style="font-size:18px;font-weight:800;color:#1a1a1a;">4.7</span>
+<div style="display:flex;gap:1px;">
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><defs><lineargradient id="halfgrad"><stop offset="70%" stop-color="#f5b300"></stop><stop offset="70%" stop-color="#e3e5e8"></stop></lineargradient></defs><polygon fill="url(#halfgrad)" points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<a href="#reviews" style="font-size:14px;font-weight:600;">(842 reviews)</a>
+</div>
+<span style="font-size:14px;font-weight:700;color:#1a1a1a;">Rs Rs Rs</span>
+<span style="font-size:13px;color:#b3261e;font-weight:700;">● CLOSED NOW</span>
+</div>
+<div style="margin-top:14px;font-size:13px;display:flex;flex-wrap:wrap;gap:18px;">
+<div><span style="color:#6b7280;">Today (Tue):</span> <strong>Closed</strong></div>
+<div><span style="color:#6b7280;">Tomorrow (Wed):</span> <strong>11:30 am – 9:00 pm</strong></div>
+</div>
+<div style="display:flex;gap:6px;margin-top:14px;flex-wrap:wrap;">
+<span style="font-size:11px;background:#f7f8fa;border:1px solid #e3e5e8;padding:4px 10px;border-radius:3px;color:#4b5563;font-weight:500;">🏛️ Heritage building</span>
+<span style="font-size:11px;background:#f7f8fa;border:1px solid #e3e5e8;padding:4px 10px;border-radius:3px;color:#4b5563;font-weight:500;">☕ Outdoor courtyard</span>
+<span style="font-size:11px;background:#f7f8fa;border:1px solid #e3e5e8;padding:4px 10px;border-radius:3px;color:#4b5563;font-weight:500;">👨‍👩‍👧 Group friendly</span>
+<span style="font-size:11px;background:#f7f8fa;border:1px solid #e3e5e8;padding:4px 10px;border-radius:3px;color:#4b5563;font-weight:500;">🌱 Vegetarian options</span>
+<span style="font-size:11px;background:#f7f8fa;border:1px solid #e3e5e8;padding:4px 10px;border-radius:3px;color:#4b5563;font-weight:500;">♿ Wheelchair accessible</span>
+<span style="font-size:11px;background:#f7f8fa;border:1px solid #e3e5e8;padding:4px 10px;border-radius:3px;color:#4b5563;font-weight:500;">💳 Cards accepted</span>
+</div>
+</div>
+<!-- actions -->
+<div style="display:flex;flex-direction:column;gap:8px;width:200px;">
+<a href="tel:01-6611945" style="background:#FFD400;color:#1a1a1a;padding:13px 18px;border-radius:4px;font-weight:800;font-size:14px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;">
+<svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.3 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.3 1l-2.2 2.2z"></path></svg>
+          (01) 6611945
+        </a>
+<a href="Home.dc.html" style="background:#fff;border:1px solid #1a1a1a;color:#1a1a1a;padding:11px 18px;border-radius:4px;font-weight:700;font-size:14px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="10"></circle><line x1="2" x2="22" y1="12" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          Visit Website
+        </a>
+<a href="Business Detail.dc.html" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:11px 18px;border-radius:4px;font-weight:700;font-size:14px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          Directions
+        </a>
+<a href="Write Review.dc.html" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:11px 18px;border-radius:4px;font-weight:700;font-size:14px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;">
+<svg fill="#f5b300" height="16" stroke="#1a1a1a" stroke-width="1.5" viewbox="0 0 24 24" width="16"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+          Write a Review
+        </a>
+<a href="javascript:void(0)" onclick="alert('Save action successful!');" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:11px 18px;border-radius:4px;font-weight:700;font-size:14px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><rect height="18" rx="2" width="18" x="3" y="3"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"></path></svg>
+          Save
+        </a>
+</div>
+</div>
+</div>
+</section>
+<!-- ============ MAIN GRID ============ -->
+<div style="max-width:1180px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:1fr 320px;gap:40px;">
+<main>
+<!-- General Info -->
+<section style="margin-bottom:36px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;margin:0 0 12px;">About Newa Lahana</h2>
+<p style="font-size:15px;color:#4b5563;line-height:1.7;">Newa Lahana is a heritage Newari restaurant set inside an 18th-century Malla-era courtyard in Bhaktapur Durbar Square. Founded in 2008 by chef Sumesh Maharjan, the restaurant serves traditional Newari fine dining with an emphasis on samay baji, choila and seasonal Newari festivals (Mha Puja, Yomari Punhi, Bhintuna). The 12-course tasting menu (Rs 2,400/person) features dishes rarely seen outside Newari homes — sapu mhicha, kachila and the seasonal pukala. Aila and chyaang are house-fermented and served in traditional anti-clay pots.</p>
+</section>
+<!-- Hours -->
+<section style="margin-bottom:36px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;margin:0 0 12px;display:flex;align-items:center;gap:10px;">Regular Hours <span style="font-size:11px;background:#fff7d1;color:#1a1a1a;padding:3px 8px;border-radius:3px;font-weight:700;border:1px solid #FFD400;">Updated 3 days ago</span></h2>
+<table style="width:100%;max-width:480px;border-collapse:collapse;font-size:14px;">
+<tbody>
+<tr><td style="padding:9px 0;color:#4b5563;font-weight:500;width:120px;">Monday</td><td style="padding:9px 0;font-weight:600;">11:30 am – 9:00 pm</td></tr>
+<tr style="background:#fff7d1;"><td style="padding:9px 12px;color:#4b5563;font-weight:500;border-radius:4px 0 0 4px;">Tuesday (Today)</td><td style="padding:9px 12px;font-weight:700;color:#b3261e;border-radius:0 4px 4px 0;">Closed</td></tr>
+<tr><td style="padding:9px 0;color:#4b5563;font-weight:500;">Wednesday</td><td style="padding:9px 0;font-weight:600;">11:30 am – 9:00 pm</td></tr>
+<tr><td style="padding:9px 0;color:#4b5563;font-weight:500;">Thursday</td><td style="padding:9px 0;font-weight:600;">11:30 am – 9:00 pm</td></tr>
+<tr><td style="padding:9px 0;color:#4b5563;font-weight:500;">Friday</td><td style="padding:9px 0;font-weight:600;">11:30 am – 10:30 pm</td></tr>
+<tr><td style="padding:9px 0;color:#4b5563;font-weight:500;">Saturday</td><td style="padding:9px 0;font-weight:600;">11:30 am – 10:30 pm</td></tr>
+<tr><td style="padding:9px 0;color:#4b5563;font-weight:500;">Sunday</td><td style="padding:9px 0;font-weight:600;">11:30 am – 9:00 pm</td></tr>
+</tbody>
+</table>
+</section>
+<!-- Menu -->
+<section id="open-menu" style="margin-bottom:36px;">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;">Menu</h2>
+<a href="Business Detail.dc.html" style="font-size:13px;font-weight:700;">View full menu →</a>
+</div>
+<p style="font-size:12px;color:#6b7280;margin-bottom:18px;">Menu items and prices may not be current. Confirm with the restaurant.</p>
+<details open="" style="border:1px solid #e3e5e8;border-radius:6px;margin-bottom:10px;">
+<summary style="cursor:pointer;list-style:none;padding:14px 18px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;background:#f7f8fa;border-radius:6px 6px 0 0;">
+          Newari Snacks (Khaja) <span style="color:#6b7280;font-weight:500;font-size:12px;">8 items</span>
+</summary>
+<div style="padding:6px 18px 18px;">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid #f0f2f5;gap:24px;">
+<div><div style="font-size:14px;font-weight:700;">Samay Baji Set</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">Beaten rice, soybean, smoked buff, egg, achar, black peas</div></div>
+<div style="font-size:14px;font-weight:700;white-space:nowrap;">Rs 320</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid #f0f2f5;gap:24px;">
+<div><div style="font-size:14px;font-weight:700;">Chatamari (Newari Pizza)</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">Rice flour crêpe with minced meat, egg, ginger</div></div>
+<div style="font-size:14px;font-weight:700;white-space:nowrap;">Rs 280</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid #f0f2f5;gap:24px;">
+<div><div style="font-size:14px;font-weight:700;">Bara (Lentil Pancake)</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">Black-eyed pea pancake, choice of egg or meat topping</div></div>
+<div style="font-size:14px;font-weight:700;white-space:nowrap;">Rs 180</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;gap:24px;">
+<div><div style="font-size:14px;font-weight:700;">Wo (Black Bean Fritters)</div><div style="font-size:12px;color:#6b7280;margin-top:2px;">Crispy black bean fritter, served with timur achar</div></div>
+<div style="font-size:14px;font-weight:700;white-space:nowrap;">Rs 160</div>
+</div>
+</div>
+</details>
+<details style="border:1px solid #e3e5e8;border-radius:6px;margin-bottom:10px;">
+<summary style="cursor:pointer;list-style:none;padding:14px 18px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;background:#f7f8fa;border-radius:6px 6px 6px 6px;">
+          Main Plates (Choila &amp; Bhutuwa) <span style="color:#6b7280;font-weight:500;font-size:12px;">12 items</span>
+</summary>
+</details>
+<details style="border:1px solid #e3e5e8;border-radius:6px;margin-bottom:10px;">
+<summary style="cursor:pointer;list-style:none;padding:14px 18px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;background:#f7f8fa;border-radius:6px;">
+          Heritage Tasting Sets <span style="color:#6b7280;font-weight:500;font-size:12px;">4 items</span>
+</summary>
+</details>
+<details style="border:1px solid #e3e5e8;border-radius:6px;margin-bottom:10px;">
+<summary style="cursor:pointer;list-style:none;padding:14px 18px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;background:#f7f8fa;border-radius:6px;">
+          Beverages (Aila &amp; Chyang) <span style="color:#6b7280;font-weight:500;font-size:12px;">9 items</span>
+</summary>
+</details>
+<details style="border:1px solid #e3e5e8;border-radius:6px;">
+<summary style="cursor:pointer;list-style:none;padding:14px 18px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;background:#f7f8fa;border-radius:6px;">
+          Desserts (Yomari, Sikarni, Juju Dhau) <span style="color:#6b7280;font-weight:500;font-size:12px;">6 items</span>
+</summary>
+</details>
+<p style="font-size:11px;color:#9ca3af;margin-top:14px;">Provided by Newa Lahana · Last updated: 12 Jun 2026</p>
+</section>
+<!-- Gallery -->
+<section id="gallery" style="margin-bottom:36px;">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;">Gallery <span style="font-weight:500;font-size:14px;color:#6b7280;">(24 photos)</span></h2>
+<a href="Business Detail.dc.html" style="font-size:13px;font-weight:700;">View all →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+<div style="aspect-ratio:1;border-radius:6px;overflow:hidden;background:#f0f2f5;"><img alt="" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300&amp;h=300&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div style="aspect-ratio:1;border-radius:6px;overflow:hidden;background:#f0f2f5;"><img alt="" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=300&amp;h=300&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div style="aspect-ratio:1;border-radius:6px;overflow:hidden;background:#f0f2f5;"><img alt="" src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=300&amp;h=300&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div style="aspect-ratio:1;border-radius:6px;overflow:hidden;background:#f0f2f5;position:relative;">
+<img alt="" src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=300&amp;h=300&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;opacity:0.4;"/>
+<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);color:#fff;font-weight:700;font-size:18px;">+20 more</div>
+</div>
+</div>
+<a href="Photo Gallery.dc.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:13px;font-weight:700;color:#1a6dcc;">📷 Add your photos</a>
+</section>
+<!-- Reviews -->
+<section id="reviews" style="margin-bottom:36px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;margin:0 0 18px;">Reviews <span style="font-weight:500;font-size:14px;color:#6b7280;">(842)</span></h2>
+<!-- Rate widget -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:20px;margin-bottom:24px;">
+<div style="font-size:15px;font-weight:700;margin-bottom:4px;">Rate this business!</div>
+<p style="font-size:12px;color:#6b7280;margin:0 0 14px;">Tap a star to rate (1 = Disappointing, 5 = First-class)</p>
+<div style="display:flex;gap:6px;">
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#f7f8fa;border:1px solid #e3e5e8;width:44px;height:44px;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+<svg fill="none" height="20" stroke="#9ca3af" stroke-width="1.5" viewbox="0 0 24 24" width="20"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#f7f8fa;border:1px solid #e3e5e8;width:44px;height:44px;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+<svg fill="none" height="20" stroke="#9ca3af" stroke-width="1.5" viewbox="0 0 24 24" width="20"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#f7f8fa;border:1px solid #e3e5e8;width:44px;height:44px;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+<svg fill="none" height="20" stroke="#9ca3af" stroke-width="1.5" viewbox="0 0 24 24" width="20"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#f7f8fa;border:1px solid #e3e5e8;width:44px;height:44px;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+<svg fill="none" height="20" stroke="#9ca3af" stroke-width="1.5" viewbox="0 0 24 24" width="20"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#f7f8fa;border:1px solid #e3e5e8;width:44px;height:44px;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+<svg fill="none" height="20" stroke="#9ca3af" stroke-width="1.5" viewbox="0 0 24 24" width="20"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</button>
+<a href="Write Review.dc.html" style="margin-left:16px;padding:0 16px;background:#FFD400;color:#1a1a1a;border-radius:4px;font-size:13px;font-weight:700;display:flex;align-items:center;text-decoration:none;">Write a full review →</a>
+</div>
+</div>
+<!-- Rating summary -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:20px;margin-bottom:24px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;">
+<div style="text-align:center;">
+<div style="font-size:48px;font-weight:800;letter-spacing:-1.5px;line-height:1;">4.7</div>
+<div style="display:flex;gap:1px;justify-content:center;margin-top:4px;">
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<div style="font-size:12px;color:#6b7280;margin-top:4px;">842 reviews</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px;font-size:12px;">
+<div style="display:grid;grid-template-columns:60px 1fr 40px;gap:10px;align-items:center;"><span>5 stars</span><div style="height:6px;background:#e3e5e8;border-radius:3px;overflow:hidden;"><div style="background:#1a7d3a;width:72%;height:100%;"></div></div><span style="text-align:right;color:#6b7280;">607</span></div>
+<div style="display:grid;grid-template-columns:60px 1fr 40px;gap:10px;align-items:center;"><span>4 stars</span><div style="height:6px;background:#e3e5e8;border-radius:3px;overflow:hidden;"><div style="background:#1a7d3a;width:18%;height:100%;"></div></div><span style="text-align:right;color:#6b7280;">151</span></div>
+<div style="display:grid;grid-template-columns:60px 1fr 40px;gap:10px;align-items:center;"><span>3 stars</span><div style="height:6px;background:#e3e5e8;border-radius:3px;overflow:hidden;"><div style="background:#f5b300;width:6%;height:100%;"></div></div><span style="text-align:right;color:#6b7280;">52</span></div>
+<div style="display:grid;grid-template-columns:60px 1fr 40px;gap:10px;align-items:center;"><span>2 stars</span><div style="height:6px;background:#e3e5e8;border-radius:3px;overflow:hidden;"><div style="background:#b85d00;width:2%;height:100%;"></div></div><span style="text-align:right;color:#6b7280;">18</span></div>
+<div style="display:grid;grid-template-columns:60px 1fr 40px;gap:10px;align-items:center;"><span>1 star</span><div style="height:6px;background:#e3e5e8;border-radius:3px;overflow:hidden;"><div style="background:#b3261e;width:2%;height:100%;"></div></div><span style="text-align:right;color:#6b7280;">14</span></div>
+</div>
+</div>
+<!-- Individual reviews -->
+<div style="display:flex;flex-direction:column;gap:24px;">
+<article style="padding:20px;background:#fff;border:1px solid #e3e5e8;border-radius:8px;">
+<div style="display:flex;gap:14px;">
+<div style="width:44px;height:44px;border-radius:50%;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#1a1a1a;flex-shrink:0;">AS</div>
+<div style="flex:1;">
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+<a href="Home.dc.html" style="font-weight:700;color:#1a1a1a;">Anuja Shrestha</a>
+<span style="display:inline-flex;align-items:center;gap:3px;background:#fff7d1;color:#1a1a1a;padding:2px 6px;border-radius:3px;font-size:10px;font-weight:700;">⭐ Top Reviewer</span>
+<span style="font-size:12px;color:#6b7280;">·  18 Jun 2026</span>
+</div>
+<div style="display:flex;gap:1px;margin-top:4px;">
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<h3 style="font-size:15px;font-weight:700;margin:10px 0 6px;">A proper Newari experience in a heritage courtyard</h3>
+<p style="font-size:14px;color:#4b5563;line-height:1.6;">We booked the 12-course tasting menu for our anniversary. Every dish was thoughtfully presented — the chefs explained the significance of each plate in Newari culture. Sapu mhicha was a revelation. The aila pairing was generous. Yes it's pricey for Bhaktapur but it's a real cultural experience, not just a meal. We will be back for Yomari Punhi.</p>
+<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+<div style="display:flex;align-items:center;gap:4px;font-size:11px;background:#f7f8fa;padding:4px 8px;border-radius:3px;color:#4b5563;">Atmosphere <strong style="color:#1a1a1a;">5/5</strong></div>
+<div style="display:flex;align-items:center;gap:4px;font-size:11px;background:#f7f8fa;padding:4px 8px;border-radius:3px;color:#4b5563;">Food <strong style="color:#1a1a1a;">5/5</strong></div>
+<div style="display:flex;align-items:center;gap:4px;font-size:11px;background:#f7f8fa;padding:4px 8px;border-radius:3px;color:#4b5563;">Service <strong style="color:#1a1a1a;">5/5</strong></div>
+<div style="display:flex;align-items:center;gap:4px;font-size:11px;background:#f7f8fa;padding:4px 8px;border-radius:3px;color:#4b5563;">Value <strong style="color:#1a1a1a;">4/5</strong></div>
+</div>
+<div style="margin-top:12px;display:flex;gap:14px;font-size:12px;color:#6b7280;">
+<a href="Help.dc.html">👍 Helpful (28)</a><a href="javascript:void(0)" onclick="alert('Flag action successful!');">Flag</a>
+</div>
+</div>
+</div>
+</article>
+<article style="padding:20px;background:#fff;border:1px solid #e3e5e8;border-radius:8px;">
+<div style="display:flex;gap:14px;">
+<div style="width:44px;height:44px;border-radius:50%;background:#1a6dcc;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;flex-shrink:0;">RG</div>
+<div style="flex:1;">
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+<a href="Home.dc.html" style="font-weight:700;color:#1a1a1a;">Rajan Gurung</a>
+<span style="font-size:12px;color:#6b7280;">·  04 Jun 2026</span>
+</div>
+<div style="display:flex;gap:1px;margin-top:4px;">
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#e3e5e8" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<h3 style="font-size:15px;font-weight:700;margin:10px 0 6px;">Best choila in Bhaktapur, but be patient</h3>
+<p style="font-size:14px;color:#4b5563;line-height:1.6;">Took family from Pokhara here. The smoked buff choila is honestly the best I've had — properly smoky, properly spiced. Service was slow on a Saturday evening because they were full. Ordering the set menu is the move; à la carte will feel underwhelming for the price.</p>
+<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+<div style="display:flex;align-items:center;gap:4px;font-size:11px;background:#f7f8fa;padding:4px 8px;border-radius:3px;color:#4b5563;">Atmosphere <strong>5/5</strong></div>
+<div style="display:flex;align-items:center;gap:4px;font-size:11px;background:#f7f8fa;padding:4px 8px;border-radius:3px;color:#4b5563;">Food <strong>5/5</strong></div>
+<div style="display:flex;align-items:center;gap:4px;font-size:11px;background:#f7f8fa;padding:4px 8px;border-radius:3px;color:#4b5563;">Service <strong>3/5</strong></div>
+<div style="display:flex;align-items:center;gap:4px;font-size:11px;background:#f7f8fa;padding:4px 8px;border-radius:3px;color:#4b5563;">Value <strong>4/5</strong></div>
+</div>
+<div style="margin-top:12px;display:flex;gap:14px;font-size:12px;color:#6b7280;">
+<a href="Help.dc.html">👍 Helpful (12)</a><a href="javascript:void(0)" onclick="alert('Flag action successful!');">Flag</a>
+</div>
+</div>
+</div>
+</article>
+<article style="padding:20px;background:#fff;border:1px solid #e3e5e8;border-radius:8px;">
+<div style="display:flex;gap:14px;">
+<div style="width:44px;height:44px;border-radius:50%;background:#1a7d3a;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;flex-shrink:0;">SK</div>
+<div style="flex:1;">
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+<a href="Home.dc.html" style="font-weight:700;color:#1a1a1a;">Sumitra KC</a>
+<span style="font-size:12px;color:#6b7280;">·  22 May 2026</span>
+</div>
+<div style="display:flex;gap:1px;margin-top:4px;">
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<h3 style="font-size:15px;font-weight:700;margin:10px 0 6px;">Bringing visiting friends here from now on</h3>
+<p style="font-size:14px;color:#4b5563;line-height:1.6;">I've taken three different sets of foreign visitors here in the past year. Every time they leave talking about the courtyard, the chyaang and the chef's stories. It's a proper representation of Newari heritage cuisine, presented with care. Book ahead for weekends.</p>
+<div style="margin-top:12px;display:flex;gap:14px;font-size:12px;color:#6b7280;">
+<a href="Help.dc.html">👍 Helpful (8)</a><a href="javascript:void(0)" onclick="alert('Flag action successful!');">Flag</a>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div style="display:flex;align-items:center;justify-content:space-between;margin-top:24px;">
+<div style="font-size:13px;color:#6b7280;">Showing 1–3 of 842 reviews</div>
+<a href="Write Review.dc.html" style="font-size:13px;font-weight:700;">Load more reviews →</a>
+</div>
+</section>
+<!-- More Info -->
+<section style="margin-bottom:36px;background:#f7f8fa;border-radius:8px;padding:24px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;margin:0 0 18px;">More info</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px 32px;font-size:14px;">
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Phone</div><div style="font-weight:600;">01-6611945, 9851-456789</div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Address</div><div style="font-weight:600;">Inacho-3, Bhaktapur Durbar Square, Bhaktapur 44800</div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Website</div><div><a href="Home.dc.html">www.newalahana.com</a></div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Email</div><div><a href="Home.dc.html">reservations@newalahana.com</a></div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Payment Methods</div><div style="font-weight:600;">Cash · Visa · Mastercard · eSewa · Khalti · IME Pay</div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Price Range</div><div style="font-weight:600;">Rs Rs Rs · Rs 1,200 – Rs 2,800 per person</div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Neighborhoods</div><div><a href="City Landing.dc.html">Bhaktapur Durbar Square</a>, <a href="Home.dc.html">Inacho</a>, <a href="Home.dc.html">Taumadhi</a></div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Categories</div><div><a href="restaurants_category_nepali_directory/code.html">Newari Restaurants</a>, <a href="Search Results.dc.html">Fine Dining</a>, <a href="Home.dc.html">Heritage Dining</a>, <a href="Home.dc.html">Cultural Show</a></div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Parking</div><div style="font-weight:600;">Street parking · Free for diners (Durbar Sq area)</div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Cuisines</div><div><a href="Search Results.dc.html">Newari</a>, <a href="Home.dc.html">Heritage</a>, <a href="Home.dc.html">Slow Food</a></div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Alcohol</div><div style="font-weight:600;">House-made Aila &amp; Chyang · Wine list</div></div>
+<div><div style="font-size:11px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Good for</div><div style="font-weight:600;">Anniversaries · Cultural visits · Heritage tours · Slow dining</div></div>
+</div>
+<p style="font-size:11px;color:#9ca3af;margin-top:18px;">Provided by Newa Lahana · <a href="Claim Listing.dc.html">Suggest an edit</a></p>
+</section>
+</main>
+<!-- ====== SIDEBAR ====== -->
+<aside style="display:flex;flex-direction:column;gap:24px;">
+<!-- Map preview -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;overflow:hidden;">
+<div style="height:200px;background:linear-gradient(135deg, #e8f4fd 0%, #c2e0f7 100%);position:relative;">
+<div style="position:absolute;inset:0;background-image:radial-gradient(circle at 60% 40%, transparent 12px, rgba(255,255,255,0.6) 12px, rgba(255,255,255,0.6) 13px, transparent 13px), linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);background-size:auto, 40px 40px, 40px 40px;"></div>
+<svg fill="#b3261e" height="36" stroke="#fff" stroke-width="1.5" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-90%);" viewbox="0 0 24 24" width="28"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.8 7.4 11.4 7.7 11.7.2.2.4.3.7.3s.5-.1.7-.3C13.4 21.4 20 15.8 20 10c0-4.4-3.6-8-8-8zm0 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"></path></svg>
+</div>
+<div style="padding:14px;">
+<div style="font-size:13px;font-weight:700;line-height:1.45;">Inacho-3, Bhaktapur Durbar Square</div>
+<div style="font-size:12px;color:#6b7280;margin-top:2px;">Bhaktapur 44800</div>
+<a href="Business Detail.dc.html" style="display:inline-block;margin-top:10px;background:#1a1a1a;color:#fff;padding:8px 14px;border-radius:4px;font-size:12px;font-weight:700;">Get Directions →</a>
+</div>
+</div>
+<!-- Places Near -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:18px;">
+<h3 style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;">Other Newari Spots</h3>
+<div style="display:flex;flex-direction:column;gap:10px;">
+<a href="Business Detail.dc.html" style="display:flex;gap:10px;text-decoration:none;color:#1a1a1a;">
+<div style="width:48px;height:48px;flex-shrink:0;border-radius:4px;overflow:hidden;background:#f0f2f5;"><img alt="" src="https://images.unsplash.com/photo-1591488050486-c98306bff859?w=150&amp;h=150&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div style="min-width:0;font-size:12px;">
+<div style="font-weight:700;color:#1a6dcc;">Honacha</div>
+<div style="color:#6b7280;">Patan · 4.6★ (520)</div>
+</div>
+</a>
+<a href="Business Detail.dc.html" style="display:flex;gap:10px;text-decoration:none;color:#1a1a1a;">
+<div style="width:48px;height:48px;flex-shrink:0;border-radius:4px;overflow:hidden;background:#f0f2f5;"><img alt="" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=150&amp;h=150&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div style="min-width:0;font-size:12px;">
+<div style="font-weight:700;color:#1a6dcc;">Lhasa Newari Restaurant</div>
+<div style="color:#6b7280;">Patan · 4.5★ (388)</div>
+</div>
+</a>
+<a href="Business Detail.dc.html" style="display:flex;gap:10px;text-decoration:none;color:#1a1a1a;">
+<div style="width:48px;height:48px;flex-shrink:0;border-radius:4px;overflow:hidden;background:#f0f2f5;"><img alt="" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=150&amp;h=150&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div style="min-width:0;font-size:12px;">
+<div style="font-weight:700;color:#1a6dcc;">Bhojan Griha Heritage</div>
+<div style="color:#6b7280;">Dilli Bazar · 4.6★ (1.2k)</div>
+</div>
+</a>
+</div>
+</div>
+<!-- Is this your business? -->
+<div style="background:#fff;border:2px dashed #FFD400;border-radius:8px;padding:18px;">
+<div style="font-size:13px;font-weight:800;margin-bottom:6px;">Is this your business?</div>
+<p style="font-size:12px;color:#4b5563;margin:0 0 12px;line-height:1.5;">Claim your free listing to respond to reviews, update info and add photos.</p>
+<a href="Claim Listing.dc.html" style="background:#1a1a1a;color:#FFD400;padding:9px 14px;border-radius:4px;font-size:12px;font-weight:700;display:inline-block;">Claim This Listing</a>
+</div>
+</aside>
+</div>
+<!-- ============ PLACES NEAR ============ -->
+<section style="background:#f7f8fa;border-top:1px solid #e3e5e8;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:40px 24px;">
+<h2 style="font-size:20px;font-weight:800;letter-spacing:-0.4px;margin:0 0 18px;">Places Near Bhaktapur with Restaurants</h2>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px 18px;font-size:14px;">
+<a href="City Landing.dc.html">Kathmandu (12 mi)</a>
+<a href="City Landing.dc.html">Lalitpur (10 mi)</a>
+<a href="City Landing.dc.html">Banepa (6 mi)</a>
+<a href="City Landing.dc.html">Dhulikhel (10 mi)</a>
+<a href="City Landing.dc.html">Nagarkot (8 mi)</a>
+<a href="Home.dc.html">Changu Narayan (4 mi)</a>
+<a href="Home.dc.html">Thimi (3 mi)</a>
+<a href="Home.dc.html">Panauti (16 mi)</a>
+<a href="City Landing.dc.html">Sankhu (12 mi)</a>
+<a href="Home.dc.html">Sanga (4 mi)</a>
+</div>
+</div>
+</section>
+<!-- ============ FOOTER ============ -->
+<footer style="background:#1a1a1a;color:#d3d6db;">
+<div style="max-width:1180px;margin:0 auto;padding:56px 24px 32px;">
+<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:48px;">
+<div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#fff;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#9ca3af;">Directory</span></span>
+</div>
+<p style="font-size:13px;line-height:1.6;color:#9ca3af;margin:0 0 20px;">Nepal's most trusted local business directory.</p>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">About</h4>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:13px;">
+<li><a href="About Us.dc.html" style="color:#d3d6db;">About Us</a></li>
+<li><a href="Contact Us.dc.html" style="color:#d3d6db;">Contact Us</a></li>
+<li><a href="Advertise.dc.html" style="color:#d3d6db;">Advertise with Us</a></li>
+<li><a href="Blog.dc.html" style="color:#d3d6db;">Blog</a></li>
+</ul>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">Directory</h4>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:13px;">
+<li><a href="Search Results.dc.html" style="color:#d3d6db;">Find a Business</a></li>
+<li><a href="Categories.dc.html" style="color:#d3d6db;">Categories</a></li>
+<li><a href="Map Directions.dc.html" style="color:#d3d6db;">Site Map</a></li>
+</ul>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">City Guides</h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;font-size:13px;">
+<a href="City Landing.dc.html" style="color:#d3d6db;">Kathmandu</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Pokhara</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Lalitpur</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Bhaktapur</a>
+</div>
+</div>
+</div>
+<div style="border-top:1px solid #2a2a2a;margin-top:48px;padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+<div style="display:flex;gap:24px;font-size:12px;">
+<a href="Privacy Policy.dc.html" style="color:#9ca3af;">Privacy</a>
+<a href="Terms of Service.dc.html" style="color:#9ca3af;">Terms of Use</a>
+<a href="Search Results.dc.html" style="color:#9ca3af;">Legal</a>
+</div>
+<div style="font-size:12px;color:#6b7280;">© 2026 NepaliDirectory. All rights reserved.</div>
+</div>
+</div>
+</footer>
+</x-dc>
+</body>
+</html>

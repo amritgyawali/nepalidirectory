@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ask a Question - Nepali Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#5f5e5e",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-background": "#191c1e",
+                    "tertiary-fixed-dim": "#a9c7ff",
+                    "surface-variant": "#e1e3e6",
+                    "on-tertiary-container": "#005cb4",
+                    "on-secondary": "#ffffff",
+                    "outline": "#7f775f",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-surface": "#191c1e",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f8f9fc",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "primary-fixed-dim": "#ebc300",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#4d4632",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface": "#f8f9fc",
+                    "on-secondary-container": "#636262",
+                    "surface-container-high": "#e6e8eb",
+                    "surface-tint": "#715d00",
+                    "inverse-surface": "#2d3133",
+                    "tertiary-container": "#c5d8ff",
+                    "surface-container-low": "#f2f4f7",
+                    "surface-container-highest": "#e1e3e6",
+                    "primary": "#715d00",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#d0c6ab",
+                    "on-primary-fixed-variant": "#554500",
+                    "primary-fixed": "#ffe177",
+                    "primary-container": "#ffd400",
+                    "surface-dim": "#d8dadd",
+                    "on-primary-fixed": "#231b00",
+                    "on-tertiary-fixed": "#001b3d",
+                    "surface-bright": "#f8f9fc",
+                    "secondary-container": "#e2dfde",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#00468b",
+                    "inverse-on-surface": "#eff1f4",
+                    "surface-container": "#eceef1",
+                    "tertiary": "#005db6",
+                    "on-primary-container": "#705c00",
+                    "tertiary-fixed": "#d6e3ff",
+                    "inverse-primary": "#ebc300"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "display": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #f7f8fa; color: #1a1a1a; }
+        .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        /* Custom scrollbar for textareas */
+        textarea::-webkit-scrollbar { width: 8px; }
+        textarea::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        textarea::-webkit-scrollbar-thumb { background: #d3d6db; border-radius: 4px; }
+        textarea::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+    </style>
+</head>
+<body class="bg-background flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim sticky top-0 w-full z-50 border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex justify-between items-center max-w-[1180px] mx-auto px-6 h-16">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2" href="../Home.dc.html">
+<img alt="Nepali Directory Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida/AP1WRLuTwlWP4eMZCN5Yb_rqKKR9hjeoUmWxub8zRgJqCAwonDZE4q0DnpwavMxaimb--N9zKrRDH7_JylUv7Z1vlyek55WoMm4urabgB8sM2Dj_Ww4QraqDuP4aFDaBxZBDP1qPXiGrYQDNUBxxVHvUUsTFhOK4ynNDh95VMkxVajirAa8kuRXks24Uj05YxUZctNIMmlMRBMdIYKKs9ffJjgvCGOr6e2xRM9N3L6Xtr9G0LSt3u_5tnKT15VA"/>
+</a>
+<!-- Search Bar (hidden on small screens, adjust as needed) -->
+<div class="hidden md:flex flex-1 max-w-lg mx-6">
+<div class="flex w-full rounded-md border border-outline-variant focus-within:border-primary overflow-hidden shadow-sm">
+<input class="w-1/2 px-4 py-2 border-r border-outline-variant focus:outline-none text-body-medium" placeholder="Find a business" type="text"/>
+<div class="w-1/2 relative flex items-center bg-surface-container-lowest">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant" style="font-size: 18px;">location_on</span>
+<input class="w-full pl-9 pr-4 py-2 focus:outline-none text-body-medium" placeholder="Location" type="text"/>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center" onclick="window.location.href='../Search Results.dc.html';">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-6 font-body text-label-lg font-bold">
+<a class="text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-150" href="../Advertise.dc.html">Advertise</a>
+<a class="text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-150" href="../Write Review.dc.html">Write a Review</a>
+<a class="text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 duration-150" href="../Login.dc.html">Log In</a>
+<a class="bg-on-background text-on-secondary px-4 py-2 rounded-full hover:bg-inverse-surface transition-colors active:scale-95 duration-150" href="../Register.dc.html">Sign Up</a>
+</nav>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface p-2" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Breadcrumb -->
+<div class="bg-[#f7f8fa] border-b border-[#e3e5e8] py-2">
+<div class="max-w-[1180px] mx-auto px-6">
+<nav aria-label="Breadcrumb" class="flex text-[12px] text-[#6b7280] font-normal">
+<ol class="inline-flex items-center space-x-1 md:space-x-2">
+<li class="inline-flex items-center">
+<a class="hover:text-primary transition-colors" href="../Home.dc.html">Home</a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="../q_a_hub_nepali_directory/code.html">Q&amp;A Hub</a>
+</div>
+</li>
+<li aria-current="page">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<span class="text-on-surface">Ask a Question</span>
+</div>
+</li>
+</ol>
+</nav>
+</div>
+</div>
+<!-- Page Header -->
+<div class="bg-surface-container-lowest border-b border-[#e3e5e8] py-8 md:py-12">
+<div class="max-w-[1180px] mx-auto px-6 text-center md:text-left">
+<h1 class="text-[32px] font-[800] tracking-[-0.5px] text-on-surface mb-2">Ask the Community</h1>
+<p class="text-on-surface-variant text-[16px] md:text-[18px]">Get answers from locals who know. Your question will be seen by thousands.</p>
+</div>
+</div>
+<!-- Main Content -->
+<main class="flex-grow py-8 md:py-12">
+<div class="max-w-[1180px] mx-auto px-6 flex flex-col lg:flex-row gap-8 lg:gap-12">
+<!-- Form Column -->
+<div class="w-full lg:w-[720px] flex-shrink-0">
+<div class="bg-surface-container-lowest border border-[#e3e5e8] rounded-xl p-6 md:p-8 shadow-sm">
+<!-- Step Indicator -->
+<div class="flex items-center gap-4 mb-8 text-[13px] font-bold uppercase tracking-wide">
+<div class="flex items-center text-on-surface">
+<span class="flex items-center justify-center w-6 h-6 rounded-full bg-primary-container text-on-primary-container mr-2">1</span>
+                            Your Question
+                        </div>
+<div class="h-[1px] w-8 bg-surface-variant"></div>
+<div class="flex items-center text-on-surface-variant opacity-60">
+<span class="flex items-center justify-center w-6 h-6 rounded-full border border-outline-variant mr-2">2</span>
+                            Business
+                        </div>
+<div class="h-[1px] w-8 bg-surface-variant"></div>
+<div class="flex items-center text-on-surface-variant opacity-60">
+<span class="flex items-center justify-center w-6 h-6 rounded-full border border-outline-variant mr-2">3</span>
+                            Details
+                        </div>
+</div>
+<form class="space-y-6">
+<!-- What's your question? -->
+<div>
+<label class="block text-[18px] font-bold text-on-surface mb-2" for="question">What's your question?</label>
+<textarea class="w-full rounded-md border border-[#d3d6db] focus:border-primary focus:ring-1 focus:ring-primary p-3 text-[16px] bg-surface-container-lowest text-on-surface placeholder:text-[#9ca3af] transition-colors resize-y" id="question" placeholder="e.g. Does this restaurant offer vegetarian options? What are the parking options near here?" rows="5"></textarea>
+<div class="flex justify-between mt-2">
+<span class="text-[13px] text-[#6b7280]">Minimum 20 characters</span>
+<span class="text-[13px] text-[#6b7280]">0 / 500</span>
+</div>
+</div>
+<!-- Tip Box -->
+<div class="bg-[#fff7d1] border border-primary-container rounded-md p-4 flex gap-3 items-start">
+<span class="text-[20px]">💡</span>
+<p class="text-[14px] text-on-surface font-medium leading-relaxed">
+<strong>Tip:</strong> Be specific. Questions that mention a specific business get answered 3× faster.
+                            </p>
+</div>
+<!-- Specific Business -->
+<div>
+<label class="block text-[16px] font-bold text-on-surface mb-2" for="business-search">Is this about a specific business? <span class="text-[#6b7280] font-normal">(optional)</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]">search</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-md border border-[#d3d6db] focus:border-primary focus:ring-1 focus:ring-primary bg-surface-container-lowest text-[16px]" id="business-search" placeholder="Search for a business..." type="text"/>
+</div>
+<!-- Suggestion Pills -->
+<div class="flex flex-wrap gap-2 mt-3">
+<button class="px-3 py-1.5 border border-[#d3d6db] rounded-[20px] text-[12px] font-semibold text-on-surface bg-surface-container-lowest hover:bg-[#f7f8fa] transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" type="button">Bhojan Griha</button>
+<button class="px-3 py-1.5 border border-[#d3d6db] rounded-[20px] text-[12px] font-semibold text-on-surface bg-surface-container-lowest hover:bg-[#f7f8fa] transition-colors" onclick="window.location.href='../City Landing.dc.html';" type="button">Kathmandu Guest House</button>
+<button class="px-3 py-1.5 border border-[#d3d6db] rounded-[20px] text-[12px] font-semibold text-on-surface bg-surface-container-lowest hover:bg-[#f7f8fa] transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" type="button">Fire And Ice Pizzeria</button>
+</div>
+</div>
+<!-- Category -->
+<div>
+<label class="block text-[16px] font-bold text-on-surface mb-2" for="category">Category</label>
+<select class="w-full rounded-md border border-[#d3d6db] focus:border-primary focus:ring-1 focus:ring-primary p-3 text-[16px] bg-surface-container-lowest text-on-surface appearance-none" id="category">
+<option disabled="" selected="" value="">Select a category</option>
+<option value="restaurants">Restaurants</option>
+<option value="hotels">Hotels</option>
+<option value="health">Health &amp; Medical</option>
+<option value="beauty">Beauty &amp; Spas</option>
+<option value="auto">Automotive</option>
+<option value="other">Other</option>
+</select>
+</div>
+<!-- Location -->
+<div>
+<label class="block text-[16px] font-bold text-on-surface mb-2">Your location</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<select aria-label="Province" class="w-full rounded-md border border-[#d3d6db] focus:border-primary focus:ring-1 focus:ring-primary p-3 text-[16px] bg-surface-container-lowest text-on-surface appearance-none">
+<option disabled="" selected="" value="">Province</option>
+<option value="p1">Koshi</option>
+<option value="p2">Madhesh</option>
+<option value="p3">Bagmati</option>
+<option value="p4">Gandaki</option>
+<option value="p5">Lumbini</option>
+<option value="p6">Karnali</option>
+<option value="p7">Sudurpashchim</option>
+</select>
+<select aria-label="District" class="w-full rounded-md border border-[#d3d6db] focus:border-primary focus:ring-1 focus:ring-primary p-3 text-[16px] bg-surface-container-lowest text-on-surface appearance-none">
+<option disabled="" selected="" value="">District</option>
+<option value="ktm">Kathmandu</option>
+<option value="pkr">Pokhara</option>
+<option value="ltp">Lalitpur</option>
+<option value="bkt">Bhaktapur</option>
+</select>
+</div>
+</div>
+<!-- Notify Me -->
+<div class="bg-[#f7f8fa] p-4 rounded-lg border border-[#e3e5e8]">
+<label class="block text-[16px] font-bold text-on-surface mb-2" for="email">Notify me</label>
+<p class="text-[14px] text-[#6b7280] mb-3">We'll email you when someone answers your question.</p>
+<input class="w-full rounded-md border border-[#d3d6db] focus:border-primary focus:ring-1 focus:ring-primary p-3 text-[16px] bg-surface-container-lowest mb-3" id="email" placeholder="your@email.com" type="email"/>
+<label class="flex items-start gap-2 cursor-pointer group">
+<div class="relative flex items-center pt-0.5">
+<input class="peer h-4 w-4 rounded-sm border-[#d3d6db] text-primary focus:ring-primary transition-all" type="checkbox"/>
+</div>
+<span class="text-[14px] text-on-surface group-hover:text-on-background transition-colors">Send me similar questions asked in my area</span>
+</label>
+</div>
+<!-- Submit Button -->
+<div class="pt-4">
+<button class="w-full h-[48px] bg-primary-container text-on-background font-bold text-[16px] rounded-md hover:bg-primary-fixed-dim transition-colors shadow-sm flex items-center justify-center gap-2" onclick="window.location.href='../q_a_hub_nepali_directory/code.html';" type="submit">
+                                Submit Question
+                                <span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+<p class="text-center text-[12px] text-[#6b7280] mt-3">
+                                By asking, you agree to our <a class="text-[#1a6dcc] hover:underline" href="../Search Results.dc.html">Community Guidelines</a> · Questions are reviewed before publishing.
+                            </p>
+</div>
+</form>
+</div>
+</div>
+<!-- Sidebar -->
+<div class="w-full lg:w-[320px] flex-shrink-0">
+<div class="sticky top-[88px] space-y-6">
+<!-- Similar Questions Card -->
+<div class="bg-surface-container-lowest border border-[#e3e5e8] rounded-xl p-5 shadow-sm">
+<h3 class="text-[18px] font-bold text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">forum</span>
+                            Similar Questions
+                        </h3>
+<ul class="space-y-4">
+<li>
+<a class="block group" href="../City Landing.dc.html">
+<h4 class="text-[14px] font-bold text-[#1a6dcc] group-hover:underline mb-1">What's the best time to visit Swayambhunath to avoid crowds?</h4>
+<p class="text-[12px] text-[#6b7280]">Asked in Kathmandu · 12 answers</p>
+</a>
+</li>
+<li class="border-t border-[#e3e5e8] pt-4">
+<a class="block group" href="../City Landing.dc.html">
+<h4 class="text-[14px] font-bold text-[#1a6dcc] group-hover:underline mb-1">Are there any good late-night delivery options in Patan?</h4>
+<p class="text-[12px] text-[#6b7280]">Asked in Lalitpur · 5 answers</p>
+</a>
+</li>
+<li class="border-t border-[#e3e5e8] pt-4">
+<a class="block group" href="../City Landing.dc.html">
+<h4 class="text-[14px] font-bold text-[#1a6dcc] group-hover:underline mb-1">Recommendation for a reliable mechanic for a Royal Enfield?</h4>
+<p class="text-[12px] text-[#6b7280]">Asked in Kathmandu · 8 answers</p>
+</a>
+</li>
+</ul>
+</div>
+<!-- Stats Card -->
+<div class="bg-on-background text-surface-container-lowest rounded-xl p-5 shadow-sm overflow-hidden relative">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[100px]">trending_up</span>
+</div>
+<div class="relative z-10">
+<h3 class="text-[14px] font-bold uppercase tracking-wider text-[#9ca3af] mb-1">Community Activity</h3>
+<p class="text-[32px] font-extrabold text-primary-fixed mb-1">847</p>
+<p class="text-[14px] text-surface-container-lowest">questions answered this week</p>
+</div>
+</div>
+<!-- Community Tips Card -->
+<div class="bg-surface-container-lowest border border-[#e3e5e8] rounded-xl p-5 shadow-sm">
+<h3 class="text-[16px] font-bold text-on-surface mb-3">Community Guidelines</h3>
+<ul class="text-[13px] text-on-surface-variant space-y-2">
+<li class="flex gap-2 items-start"><span class="text-primary-container font-bold">✓</span> Be respectful and helpful</li>
+<li class="flex gap-2 items-start"><span class="text-primary-container font-bold">✓</span> Keep it relevant to local businesses</li>
+<li class="flex gap-2 items-start"><span class="text-primary-container font-bold">✓</span> Search before you ask</li>
+<li class="flex gap-2 items-start text-error"><span class="font-bold">✗</span> No spam or self-promotion</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-on-background dark:bg-surface-container-lowest w-full mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1180px] mx-auto px-6 py-12">
+<div>
+<h2 class="text-primary-container font-black text-2xl mb-4">Nepali Directory</h2>
+<p class="text-surface-variant font-body text-body-medium">© 2026 Nepali Directory. Nepal's trusted local business directory.</p>
+</div>
+<div>
+<h3 class="text-surface-container-lowest font-bold mb-4 uppercase text-sm tracking-wider">Explore</h3>
+<ul class="space-y-2">
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../restaurants_category_nepali_directory/code.html">Restaurants</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../Home.dc.html">Shopping</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../Home.dc.html">Services</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../Home.dc.html">Nightlife</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-surface-container-lowest font-bold mb-4 uppercase text-sm tracking-wider">Business</h3>
+<ul class="space-y-2">
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../Home.dc.html">Add a Business</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../Advertise.dc.html">Advertise</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../Home.dc.html">Success Stories</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-surface-container-lowest font-bold mb-4 uppercase text-sm tracking-wider">About</h3>
+<ul class="space-y-2">
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../about_us_nepali_directory/code.html">About Us</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../Content Page.dc.html">Careers</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../Home.dc.html">Press</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../contact_us_nepali_directory/code.html">Contact</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed hover:underline transition-colors font-body text-body-medium" href="../get_the_app_nepali_directory/code.html">Mobile App</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

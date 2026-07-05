@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; }
+    a { color: #1a6dcc; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    input, textarea { font-family: inherit; }
+  </style>
+</helmet>
+<header style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+</div>
+</header>
+<main style="max-width:600px;margin:60px auto;padding:0 24px;">
+<h1 style="font-size:32px;font-weight:800;letter-spacing:-1px;margin:0 0 8px;">Request a Callback</h1>
+<p style="color:#4b5563;font-size:15px;margin:0 0 32px;">Leave your details below and our advertising team will get in touch with you shortly to discuss promoting your business.</p>
+
+<div style="display:flex;flex-direction:column;gap:16px;">
+    <label>
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Full Name</div>
+        <input type="text" placeholder="John Doe" style="width:100%;padding:14px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;" />
+    </label>
+    <label>
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Phone Number</div>
+        <input type="tel" placeholder="98XXXXXXXX" style="width:100%;padding:14px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;" />
+    </label>
+    <label>
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Business Name</div>
+        <input type="text" placeholder="Your Business Pvt. Ltd." style="width:100%;padding:14px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;" />
+    </label>
+    <label>
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Message (Optional)</div>
+        <textarea rows="4" placeholder="Tell us what you're looking for..." style="width:100%;padding:14px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;resize:vertical;"></textarea>
+    </label>
+    <button onclick="alert('Request sent successfully! We will contact you soon.'); window.location.href='Advertise.dc.html';" style="background:#FFD400;color:#1a1a1a;padding:16px;border-radius:4px;font-weight:800;font-size:15px;margin-top:16px;">
+        Submit Request
+    </button>
+</div>
+</main>
+</x-dc>
+</body>
+</html>

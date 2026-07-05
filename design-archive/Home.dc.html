@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1a1a1a; background: #fff; -webkit-font-smoothing: antialiased; line-height: 1.45; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    img { display: block; max-width: 100%; }
+    input { font-family: inherit; }
+    h1, h2, h3, h4, p { margin: 0; }
+  </style>
+</helmet>
+<!-- ============ HEADER ============ -->
+<header style="position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<div style="flex:1;display:flex;align-items:stretch;border:1px solid #d3d6db;border-radius:4px;overflow:hidden;max-width:620px;background:#fff;">
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;">
+<svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+<input placeholder="Find a business" style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;"/>
+</div>
+<div style="width:1px;background:#e3e5e8;"></div>
+<div style="flex:1;display:flex;align-items:center;padding:0 12px;gap:8px;">
+<svg fill="none" height="16" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<input placeholder="Kathmandu, Bagmati" style="flex:1;padding:9px 0;border:0;outline:0;font-size:14px;background:transparent;" value="Kathmandu, Bagmati"/>
+</div>
+<a href="Search Results.dc.html" style="background:#FFD400;color:#1a1a1a;padding:11px 24px;font-weight:700;font-size:14px;display:flex;align-items:center;text-decoration:none;letter-spacing:0.3px;">FIND</a>
+</div>
+<nav style="display:flex;align-items:center;gap:22px;font-size:14px;">
+<a href="Advertise.dc.html" style="color:#1a1a1a;font-weight:500;display:flex;align-items:center;gap:6px;">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16"><path d="M3 11l18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg>
+        Advertise
+      </a>
+<a href="Write Review.dc.html" style="color:#1a1a1a;font-weight:500;display:flex;align-items:center;gap:6px;">
+<svg fill="#FFD400" height="16" stroke="#1a1a1a" stroke-width="1.5" viewbox="0 0 24 24" width="16"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+        Write a Review
+      </a>
+<a href="Login.dc.html" style="color:#1a1a1a;font-weight:500;">Log In</a>
+<a href="Register.dc.html" style="background:#1a1a1a;color:#fff;padding:9px 16px;border-radius:4px;font-weight:600;">Sign Up</a>
+</nav>
+</div>
+</header>
+<!-- ============ HERO ============ -->
+<section style="position:relative;background:#1a1a1a;color:#fff;overflow:hidden;">
+<div style="position:absolute;inset:0;background-image:linear-gradient(180deg, rgba(20,20,20,0.45) 0%, rgba(20,20,20,0.75) 100%), url('https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=1800&amp;h=800&amp;fit=crop&amp;auto=format');background-size:cover;background-position:center;"></div>
+<div style="position:relative;max-width:1100px;margin:0 auto;padding:96px 24px 88px;text-align:center;">
+<p style="font-size:13px;font-weight:600;letter-spacing:3px;color:#FFD400;text-transform:uppercase;margin:0 0 20px;">Discover Local<sup style="font-size:9px;margin-left:2px;">SM</sup></p>
+<h1 style="font-size:60px;font-weight:800;letter-spacing:-1.8px;line-height:1.05;margin:0 0 18px;max-width:880px;margin-left:auto;margin-right:auto;">
+      Nepal's <span style="position:relative;display:inline-block;"><span style="position:relative;z-index:2;">trusted</span><span style="position:absolute;left:0;right:0;bottom:6px;height:14px;background:#FFD400;z-index:1;opacity:0.9;"></span></span> local business directory.
+    </h1>
+<p style="font-size:18px;opacity:0.85;margin:0 0 40px;max-width:580px;margin-left:auto;margin-right:auto;">Restaurants, plumbers, doctors, hotels and 50,000+ listings across all 7 provinces.</p>
+<div style="background:#fff;border-radius:6px;display:flex;align-items:stretch;max-width:760px;margin:0 auto;box-shadow:0 18px 50px -10px rgba(0,0,0,0.4);overflow:hidden;">
+<div style="flex:1;display:flex;align-items:center;padding:0 18px;gap:10px;">
+<svg fill="none" height="20" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="20"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+<input placeholder="Find a business (e.g. restaurants, plumbers)" style="flex:1;padding:18px 0;border:0;outline:0;font-size:16px;color:#1a1a1a;background:transparent;"/>
+</div>
+<div style="width:1px;background:#e3e5e8;"></div>
+<div style="flex:1;display:flex;align-items:center;padding:0 18px;gap:10px;">
+<svg fill="none" height="20" stroke="#6b7280" stroke-width="2" viewbox="0 0 24 24" width="20"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+<input placeholder="Where?" style="flex:1;padding:18px 0;border:0;outline:0;font-size:16px;color:#1a1a1a;background:transparent;" value="Kathmandu, Bagmati"/>
+</div>
+<a href="Search Results.dc.html" style="background:#FFD400;color:#1a1a1a;padding:0 42px;font-weight:800;font-size:16px;letter-spacing:0.5px;display:flex;align-items:center;text-decoration:none;">FIND</a>
+</div>
+<p style="font-size:13px;opacity:0.8;margin:14px 0 0;"><a href="Home.dc.html" style="color:#FFD400;font-weight:600;">📍 Use my location</a>  ·  Popular: <a href="Search Results.dc.html" style="color:#fff;text-decoration:underline;">Restaurants</a>  ·  <a href="Search Results.dc.html" style="color:#fff;text-decoration:underline;">Plumbers</a>  ·  <a href="Search Results.dc.html" style="color:#fff;text-decoration:underline;">Hotels</a>  ·  <a href="Search Results.dc.html" style="color:#fff;text-decoration:underline;">Doctors</a></p>
+</div>
+</section>
+<!-- ============ DISCOVER LOCAL — category strip ============ -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1100px;margin:0 auto;padding:48px 24px;">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;">
+<h2 style="font-size:24px;font-weight:800;letter-spacing:-0.5px;">Browse by category</h2>
+<a href="Categories.dc.html" style="font-size:14px;font-weight:600;">View all categories →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(10,1fr);gap:8px;">
+<a href="Search Results.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid #e3e5e8;border-radius:8px;text-decoration:none;color:#1a1a1a;background:#fff;transition:all 0.15s;">
+<div style="width:48px;height:48px;border-radius:50%;background:#fff7d1;display:flex;align-items:center;justify-content:center;border:1px solid #FFD400;">
+<svg fill="none" height="24" stroke="#1a1a1a" stroke-width="2" viewbox="0 0 24 24" width="24"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M5 11l-1 9h16l-1-9M9 7V5M15 7V5"></path></svg>
+</div>
+<span style="font-size:12px;font-weight:600;text-align:center;">Restaurants</span>
+</a>
+<a href="Search Results.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid #e3e5e8;border-radius:8px;text-decoration:none;color:#1a1a1a;background:#fff;">
+<div style="width:48px;height:48px;border-radius:50%;background:#e8f4fd;display:flex;align-items:center;justify-content:center;border:1px solid #b6d9f5;">
+<svg fill="none" height="24" stroke="#1a6dcc" stroke-width="2" viewbox="0 0 24 24" width="24"><path d="M19 14c1.5 0 3 .5 3 2v4H2v-4c0-1.5 1.5-2 3-2M12 11c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4z"></path><path d="M12 11v3"></path></svg>
+</div>
+<span style="font-size:12px;font-weight:600;text-align:center;">Doctors</span>
+</a>
+<a href="Search Results.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid #e3e5e8;border-radius:8px;text-decoration:none;color:#1a1a1a;background:#fff;">
+<div style="width:48px;height:48px;border-radius:50%;background:#e8f5ed;display:flex;align-items:center;justify-content:center;border:1px solid #b5dec3;">
+<svg fill="none" height="22" stroke="#1a7d3a" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M14 4l-4 4-4-4M10 8v8m-4 0h8M9 16l-2 4 2 4M11 16l2 4-2 4"></path></svg>
+</div>
+<span style="font-size:12px;font-weight:600;text-align:center;">Plumbers</span>
+</a>
+<a href="Search Results.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid #e3e5e8;border-radius:8px;text-decoration:none;color:#1a1a1a;background:#fff;">
+<div style="width:48px;height:48px;border-radius:50%;background:#fff1e0;display:flex;align-items:center;justify-content:center;border:1px solid #ffd7a6;">
+<svg fill="none" height="22" stroke="#b85d00" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M3 21L12 3l9 18H3z"></path><path d="M12 17v0"></path></svg>
+</div>
+<span style="font-size:12px;font-weight:600;text-align:center;">Contractors</span>
+</a>
+<a href="Search Results.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid #e3e5e8;border-radius:8px;text-decoration:none;color:#1a1a1a;background:#fff;">
+<div style="width:48px;height:48px;border-radius:50%;background:#fff7d1;display:flex;align-items:center;justify-content:center;border:1px solid #FFD400;">
+<svg fill="#FFD400" height="22" stroke="#1a1a1a" stroke-width="1.5" viewbox="0 0 24 24" width="22"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+</div>
+<span style="font-size:12px;font-weight:600;text-align:center;">Electricians</span>
+</a>
+<a href="Search Results.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid #e3e5e8;border-radius:8px;text-decoration:none;color:#1a1a1a;background:#fff;">
+<div style="width:48px;height:48px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;border:1px solid #d4d4d4;">
+<svg fill="none" height="24" stroke="#1a1a1a" stroke-width="2" viewbox="0 0 24 24" width="24"><path d="M5 17h14M5 17l1.5-7h11L19 17M7 13h10M7 17v3M17 17v3"></path><circle cx="8" cy="20" r="1.5"></circle><circle cx="16" cy="20" r="1.5"></circle></svg>
+</div>
+<span style="font-size:12px;font-weight:600;text-align:center;">Auto Repair</span>
+</a>
+<a href="Search Results.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid #e3e5e8;border-radius:8px;text-decoration:none;color:#1a1a1a;background:#fff;">
+<div style="width:48px;height:48px;border-radius:50%;background:#fce8ec;display:flex;align-items:center;justify-content:center;border:1px solid #f5b7c1;">
+<svg fill="none" height="22" stroke="#b3146a" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M3 21v-7l9-9 9 9v7H3z"></path><path d="M9 21v-6h6v6"></path></svg>
+</div>
+<span style="font-size:12px;font-weight:600;text-align:center;">Hotels</span>
+</a>
+<a href="Search Results.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid #e3e5e8;border-radius:8px;text-decoration:none;color:#1a1a1a;background:#fff;">
+<div style="width:48px;height:48px;border-radius:50%;background:#ecf0fb;display:flex;align-items:center;justify-content:center;border:1px solid #b8c5e8;">
+<svg fill="none" height="22" stroke="#1d3a8a" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M3 5h18M5 5v16M19 5v16M5 21h14M9 9h2M9 13h2M13 9h2M13 13h2M9 17h6"></path></svg>
+</div>
+<span style="font-size:12px;font-weight:600;text-align:center;">Lawyers</span>
+</a>
+<a href="Search Results.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid #e3e5e8;border-radius:8px;text-decoration:none;color:#1a1a1a;background:#fff;">
+<div style="width:48px;height:48px;border-radius:50%;background:#f3e8fd;display:flex;align-items:center;justify-content:center;border:1px solid #d4b3f5;">
+<svg fill="none" height="22" stroke="#7c2fb8" stroke-width="2" viewbox="0 0 24 24" width="22"><circle cx="12" cy="8" r="4"></circle><path d="M6 22v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path></svg>
+</div>
+<span style="font-size:12px;font-weight:600;text-align:center;">Beauty Salons</span>
+</a>
+<a href="Search Results.dc.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px;border:1px solid #e3e5e8;border-radius:8px;text-decoration:none;color:#1a1a1a;background:#fff;">
+<div style="width:48px;height:48px;border-radius:50%;background:#e0f4f4;display:flex;align-items:center;justify-content:center;border:1px solid #99d6d6;">
+<svg fill="none" height="22" stroke="#0e6b6b" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M3 9l9-6 9 6v12H3V9z"></path><path d="M9 21v-7h6v7"></path><path d="M3 9l9 6 9-6"></path></svg>
+</div>
+<span style="font-size:12px;font-weight:600;text-align:center;">Schools</span>
+</a>
+</div>
+</div>
+</section>
+<!-- ============ POPULAR CITIES ============ -->
+<section style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1100px;margin:0 auto;padding:56px 24px;">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:8px;">
+<div>
+<h2 style="font-size:28px;font-weight:800;letter-spacing:-0.6px;">Popular cities</h2>
+<p style="color:#6b7280;font-size:15px;margin-top:6px;">Browse listings in Nepal's largest cities and tourist destinations.</p>
+</div>
+<a href="Business Detail.dc.html" style="font-size:14px;font-weight:600;white-space:nowrap;">View all cities →</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:28px;">
+<a href="City Landing.dc.html" style="position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;text-decoration:none;color:#fff;display:block;background:#1a1a1a;">
+<img alt="Kathmandu" src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=400&amp;h=300&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;opacity:0.7;"/>
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.85) 100%);"></div>
+<div style="position:absolute;left:14px;right:14px;bottom:12px;">
+<div style="font-weight:800;font-size:18px;letter-spacing:-0.4px;">Kathmandu</div>
+<div style="font-size:11px;opacity:0.85;font-weight:500;">12,840 listings</div>
+</div>
+</a>
+<a href="City Landing.dc.html" style="position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;text-decoration:none;color:#fff;display:block;background:#1a1a1a;">
+<img alt="Pokhara" src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=400&amp;h=300&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;opacity:0.75;"/>
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.85) 100%);"></div>
+<div style="position:absolute;left:14px;right:14px;bottom:12px;">
+<div style="font-weight:800;font-size:18px;letter-spacing:-0.4px;">Pokhara</div>
+<div style="font-size:11px;opacity:0.85;font-weight:500;">4,210 listings</div>
+</div>
+</a>
+<a href="City Landing.dc.html" style="position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;text-decoration:none;color:#fff;display:block;background:#1a1a1a;">
+<img alt="Lalitpur" src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=400&amp;h=300&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;opacity:0.75;"/>
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.85) 100%);"></div>
+<div style="position:absolute;left:14px;right:14px;bottom:12px;">
+<div style="font-weight:800;font-size:18px;letter-spacing:-0.4px;">Lalitpur</div>
+<div style="font-size:11px;opacity:0.85;font-weight:500;">6,580 listings</div>
+</div>
+</a>
+<a href="City Landing.dc.html" style="position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;text-decoration:none;color:#fff;display:block;background:#1a1a1a;">
+<img alt="Bhaktapur" src="https://images.unsplash.com/photo-1614107707379-283a65774553?w=400&amp;h=300&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;opacity:0.75;"/>
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.85) 100%);"></div>
+<div style="position:absolute;left:14px;right:14px;bottom:12px;">
+<div style="font-weight:800;font-size:18px;letter-spacing:-0.4px;">Bhaktapur</div>
+<div style="font-size:11px;opacity:0.85;font-weight:500;">2,940 listings</div>
+</div>
+</a>
+<a href="City Landing.dc.html" style="position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;text-decoration:none;color:#fff;display:block;background:#1a1a1a;">
+<img alt="Chitwan" src="https://images.unsplash.com/photo-1571401835393-8c5f35328320?w=400&amp;h=300&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;opacity:0.75;"/>
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.85) 100%);"></div>
+<div style="position:absolute;left:14px;right:14px;bottom:12px;">
+<div style="font-weight:800;font-size:18px;letter-spacing:-0.4px;">Chitwan</div>
+<div style="font-size:11px;opacity:0.85;font-weight:500;">1,820 listings</div>
+</div>
+</a>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px 32px;margin-top:36px;font-size:14px;">
+<a href="City Landing.dc.html" style="padding:6px 0;">Biratnagar</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Birgunj</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Butwal</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Bharatpur</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Dharan</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Nepalgunj</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Hetauda</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Itahari</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Dhangadhi</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Janakpur</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Ghorahi</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Tulsipur</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Damak</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Birtamod</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Tansen</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Bandipur</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Nagarkot</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Sauraha</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Jomsom</a>
+<a href="City Landing.dc.html" style="padding:6px 0;">Ilam</a>
+</div>
+</div>
+</section>
+<!-- ============ CLAIM CTA ============ -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1100px;margin:0 auto;padding:72px 24px;display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:center;">
+<div style="position:relative;">
+<img alt="" src="https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=560&amp;h=560&amp;fit=crop&amp;auto=format" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;"/>
+<div style="position:absolute;top:-12px;left:-12px;background:#FFD400;padding:10px 16px;border-radius:4px;font-weight:800;font-size:13px;letter-spacing:0.5px;">FREE LISTING</div>
+<div style="position:absolute;bottom:-16px;right:-16px;background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:14px 18px;box-shadow:0 8px 24px rgba(0,0,0,0.08);">
+<div style="display:flex;align-items:center;gap:10px;">
+<div style="display:flex;gap:1px;">
+<svg fill="#f5b300" height="16" viewbox="0 0 24 24" width="16"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="16" viewbox="0 0 24 24" width="16"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="16" viewbox="0 0 24 24" width="16"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="16" viewbox="0 0 24 24" width="16"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="16" viewbox="0 0 24 24" width="16"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<div>
+<div style="font-weight:700;font-size:13px;">+18% reviews/month</div>
+<div style="font-size:11px;color:#6b7280;">for verified listings</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#1a6dcc;text-transform:uppercase;margin:0 0 12px;">For business owners</p>
+<h2 style="font-size:42px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin:0 0 16px;">
+        Manage your <span style="background:linear-gradient(180deg,transparent 60%,#FFD400 60%);padding:0 4px;">free</span> listing.
+      </h2>
+<p style="font-size:16px;color:#4b5563;margin:0 0 24px;line-height:1.55;">
+        Update your business hours, photos, menu and contact info in a few steps. Make it easy for customers to find you on NepaliDirectory.
+      </p>
+<ul style="list-style:none;padding:0;margin:0 0 28px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+<li style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;"><span style="width:18px;height:18px;border-radius:50%;background:#1a7d3a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;">✓</span>Respond to reviews</li>
+<li style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;"><span style="width:18px;height:18px;border-radius:50%;background:#1a7d3a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;">✓</span>Post photos &amp; menu</li>
+<li style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;"><span style="width:18px;height:18px;border-radius:50%;background:#1a7d3a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;">✓</span>Update hours instantly</li>
+<li style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;"><span style="width:18px;height:18px;border-radius:50%;background:#1a7d3a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;">✓</span>Track profile views</li>
+</ul>
+<div style="display:flex;align-items:center;gap:20px;">
+<a href="Claim Listing.dc.html" style="background:#FFD400;color:#1a1a1a;padding:14px 28px;border-radius:4px;font-weight:800;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+          Claim Your Listing
+          <svg fill="none" height="16" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="16"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+</a>
+<div style="font-size:13px;color:#6b7280;">or call <a href="tel:01-4256789" style="font-weight:700;">01-4256789</a></div>
+</div>
+</div>
+</div>
+</section>
+<!-- ============ Q&A TEASER ============ -->
+<section style="background:#0e4a7a;color:#fff;border-bottom:1px solid #e3e5e8;position:relative;overflow:hidden;">
+<div style="position:absolute;inset:0;opacity:0.08;background-image:radial-gradient(circle at 20% 30%, #FFD400 0%, transparent 40%), radial-gradient(circle at 80% 70%, #fff 0%, transparent 40%);"></div>
+<div style="position:relative;max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;">
+<div>
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#FFD400;text-transform:uppercase;margin:0 0 12px;">Community</p>
+<h2 style="font-size:40px;font-weight:800;letter-spacing:-1px;line-height:1.1;margin:0 0 20px;">
+        Questions &amp; <em style="font-style:italic;color:#FFD400;font-family:serif;font-weight:700;">Answers</em>
+</h2>
+<div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px;">
+<div style="background:rgba(255,255,255,0.08);border-left:3px solid #FFD400;padding:14px 18px;border-radius:0 4px 4px 0;font-size:15px;font-weight:500;">"How much does a tankless water heater cost in Kathmandu?"</div>
+<div style="background:rgba(255,255,255,0.08);border-left:3px solid #FFD400;padding:14px 18px;border-radius:0 4px 4px 0;font-size:15px;font-weight:500;">"Who should I contact for property registration in Lalitpur?"</div>
+<div style="background:rgba(255,255,255,0.08);border-left:3px solid #FFD400;padding:14px 18px;border-radius:0 4px 4px 0;font-size:15px;font-weight:500;">"Best wedding photographers in Pokhara under Rs 80,000?"</div>
+</div>
+<ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:10px;">
+<li style="display:flex;align-items:center;gap:10px;font-size:14px;"><span style="color:#FFD400;font-size:18px;">✓</span>Ask the local community</li>
+<li style="display:flex;align-items:center;gap:10px;font-size:14px;"><span style="color:#FFD400;font-size:18px;">✓</span>Share your knowledge to help others</li>
+<li style="display:flex;align-items:center;gap:10px;font-size:14px;"><span style="color:#FFD400;font-size:18px;">✓</span>Find answers from real Nepali experts</li>
+</ul>
+<a href="QA Hub.dc.html" style="background:#FFD400;color:#1a1a1a;padding:13px 26px;border-radius:4px;font-weight:800;font-size:14px;text-decoration:none;display:inline-block;">Ask a Question</a>
+<div style="margin-top:32px;font-size:13px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;">
+<span style="font-weight:700;">Browse popular Q&amp;A:</span>
+<a href="Search Results.dc.html" style="color:#FFD400;text-decoration:underline;">Dentists</a>
+<span style="opacity:0.4;">·</span>
+<a href="Home.dc.html" style="color:#FFD400;text-decoration:underline;">Family Law</a>
+<span style="opacity:0.4;">·</span>
+<a href="Search Results.dc.html" style="color:#FFD400;text-decoration:underline;">Insurance</a>
+<span style="opacity:0.4;">·</span>
+<a href="Search Results.dc.html" style="color:#FFD400;text-decoration:underline;">Auto Repair</a>
+<span style="opacity:0.4;">·</span>
+<a href="Home.dc.html" style="color:#FFD400;text-decoration:underline;">Home Improvement</a>
+<span style="opacity:0.4;">·</span>
+<a href="Home.dc.html" style="color:#FFD400;text-decoration:underline;">Plumbing</a>
+</div>
+</div>
+<div style="position:relative;">
+<img alt="" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&amp;h=600&amp;fit=crop&amp;auto=format" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:50%;border:6px solid rgba(255,255,255,0.15);"/>
+<div style="position:absolute;top:8%;left:-8%;background:#fff;color:#1a1a1a;border-radius:8px;padding:10px 14px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,0.25);">
+        💬 2,840 answers this week
+      </div>
+<div style="position:absolute;bottom:12%;right:-6%;background:#fff;color:#1a1a1a;border-radius:8px;padding:10px 14px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,0.25);">
+        ⭐ Asked by 12,400 locals
+      </div>
+</div>
+</div>
+</section>
+<!-- ============ ADVERTISE CTA ============ -->
+<section style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1100px;margin:0 auto;padding:72px 24px;display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;">
+<div>
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#1a6dcc;text-transform:uppercase;margin:0 0 12px;">Grow your business</p>
+<h2 style="font-size:42px;font-weight:800;letter-spacing:-1.2px;line-height:1.1;margin:0 0 16px;">
+        Get your business in front of <span style="background:linear-gradient(180deg,transparent 60%,#FFD400 60%);padding:0 4px;">local customers</span>.
+      </h2>
+<p style="font-size:16px;color:#4b5563;margin:0 0 28px;line-height:1.55;">
+        Maximize your opportunities for Nepali shoppers to find you. From featured placement to verified badges and review management.
+      </p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-bottom:32px;">
+<div>
+<div style="font-size:30px;font-weight:800;letter-spacing:-0.8px;color:#1a1a1a;">4.2x</div>
+<div style="font-size:13px;color:#6b7280;font-weight:500;">more profile views with Premium</div>
+</div>
+<div>
+<div style="font-size:30px;font-weight:800;letter-spacing:-0.8px;color:#1a1a1a;">68%</div>
+<div style="font-size:13px;color:#6b7280;font-weight:500;">of users call directly from listing</div>
+</div>
+<div>
+<div style="font-size:30px;font-weight:800;letter-spacing:-0.8px;color:#1a1a1a;">Rs 2,500</div>
+<div style="font-size:13px;color:#6b7280;font-weight:500;">/month — Featured plan starts at</div>
+</div>
+<div>
+<div style="font-size:30px;font-weight:800;letter-spacing:-0.8px;color:#1a1a1a;">14 days</div>
+<div style="font-size:13px;color:#6b7280;font-weight:500;">free trial — no card required</div>
+</div>
+</div>
+<a href="Advertise.dc.html" style="background:#1a1a1a;color:#fff;padding:14px 28px;border-radius:4px;font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">
+        Learn More
+        <svg fill="none" height="16" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="16"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+</a>
+</div>
+<div style="position:relative;">
+<img alt="" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&amp;h=600&amp;fit=crop&amp;auto=format" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;"/>
+<div style="position:absolute;top:18%;right:-20px;background:#fff;border:1px solid #e3e5e8;border-radius:8px;padding:12px 16px;box-shadow:0 10px 30px rgba(0,0,0,0.12);min-width:180px;">
+<div style="font-size:11px;color:#6b7280;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px;">This week</div>
+<div style="font-size:22px;font-weight:800;letter-spacing:-0.5px;">1,240 <span style="font-size:12px;color:#1a7d3a;font-weight:700;">↑ 32%</span></div>
+<div style="font-size:11px;color:#6b7280;">profile views</div>
+</div>
+<div style="position:absolute;bottom:14%;left:-20px;background:#FFD400;border-radius:8px;padding:12px 16px;font-size:12px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,0.18);">
+        ⚡ Featured #1<br/><span style="font-weight:600;opacity:0.7;">"Plumbers in Kathmandu"</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ============ APP BANNER ============ -->
+<section style="background:#f7f8fa;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center;">
+<div style="display:flex;justify-content:center;gap:14px;position:relative;">
+<div style="width:140px;height:280px;background:#1a1a1a;border-radius:24px;padding:8px;box-shadow:0 24px 48px -12px rgba(0,0,0,0.3);transform:rotate(-6deg);">
+<div style="background:#fff;border-radius:18px;height:100%;padding:14px 10px;display:flex;flex-direction:column;gap:6px;">
+<div style="background:#FFD400;height:6px;width:38px;border-radius:3px;margin:0 auto;"></div>
+<div style="background:#f0f2f5;height:24px;border-radius:4px;margin-top:6px;display:flex;align-items:center;padding:0 8px;"><div style="background:#d3d6db;height:8px;width:60%;border-radius:2px;"></div></div>
+<div style="display:flex;gap:6px;margin-top:4px;">
+<div style="background:#fff7d1;border:1px solid #FFD400;border-radius:4px;height:32px;flex:1;"></div>
+<div style="background:#e8f4fd;border:1px solid #b6d9f5;border-radius:4px;height:32px;flex:1;"></div>
+<div style="background:#e8f5ed;border:1px solid #b5dec3;border-radius:4px;height:32px;flex:1;"></div>
+</div>
+<div style="background:#f7f8fa;border-radius:6px;height:60px;margin-top:6px;padding:6px;display:flex;flex-direction:column;gap:3px;">
+<div style="background:#d3d6db;height:5px;width:80%;border-radius:1px;"></div>
+<div style="background:#d3d6db;height:5px;width:50%;border-radius:1px;"></div>
+<div style="display:flex;gap:2px;margin-top:3px;">
+<div style="background:#FFD400;height:5px;width:5px;border-radius:1px;"></div>
+<div style="background:#FFD400;height:5px;width:5px;border-radius:1px;"></div>
+<div style="background:#FFD400;height:5px;width:5px;border-radius:1px;"></div>
+<div style="background:#FFD400;height:5px;width:5px;border-radius:1px;"></div>
+<div style="background:#e3e5e8;height:5px;width:5px;border-radius:1px;"></div>
+</div>
+</div>
+<div style="background:#f7f8fa;border-radius:6px;height:60px;margin-top:4px;"></div>
+</div>
+</div>
+<div style="width:140px;height:280px;background:#1a1a1a;border-radius:24px;padding:8px;box-shadow:0 24px 48px -12px rgba(0,0,0,0.3);transform:rotate(6deg);margin-top:24px;">
+<div style="background:#fff;border-radius:18px;height:100%;padding:14px 10px;display:flex;flex-direction:column;gap:6px;">
+<div style="background:linear-gradient(135deg,#fff7d1 0%,#FFD400 100%);height:80px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:24px;">🍱</div>
+<div style="background:#f0f2f5;height:8px;width:70%;border-radius:2px;"></div>
+<div style="background:#f0f2f5;height:6px;width:50%;border-radius:2px;"></div>
+<div style="background:#1a6dcc;height:24px;border-radius:4px;margin-top:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700;">CALL</div>
+<div style="background:#f7f8fa;border-radius:4px;height:40px;margin-top:4px;"></div>
+</div>
+</div>
+</div>
+<div>
+<p style="font-size:12px;font-weight:700;letter-spacing:2px;color:#1a6dcc;text-transform:uppercase;margin:0 0 12px;">Available on mobile</p>
+<h2 style="font-size:36px;font-weight:800;letter-spacing:-1px;line-height:1.1;margin:0 0 14px;">
+        Take NepaliDirectory with you — it's <span style="background:linear-gradient(180deg,transparent 60%,#FFD400 60%);padding:0 4px;">free</span>.
+      </h2>
+<p style="font-size:15px;color:#4b5563;margin:0 0 24px;line-height:1.55;">
+        Search 50,000+ local businesses on the go. Save favourites, read reviews and get directions — everything you need in one app.
+      </p>
+<div style="display:flex;gap:12px;margin-bottom:24px;">
+<a href="Get App.dc.html" style="background:#1a1a1a;color:#fff;border-radius:8px;padding:10px 18px;display:flex;align-items:center;gap:10px;text-decoration:none;">
+<svg fill="#fff" height="22" viewbox="0 0 24 24" width="22"><path d="M3 20.5V3.5c0-.41.34-.5.5-.5.06 0 .11.01.16.03l13.5 7.5c.42.23.42.83 0 1.06l-13.5 7.5c-.05.02-.1.03-.16.03-.16 0-.5-.09-.5-.5z"></path></svg>
+<div>
+<div style="font-size:9px;opacity:0.85;">GET IT ON</div>
+<div style="font-size:14px;font-weight:700;">Google Play</div>
+</div>
+</a>
+<a href="Get App.dc.html" style="background:#1a1a1a;color:#fff;border-radius:8px;padding:10px 18px;display:flex;align-items:center;gap:10px;text-decoration:none;">
+<svg fill="#fff" height="22" viewbox="0 0 24 24" width="22"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"></path></svg>
+<div>
+<div style="font-size:9px;opacity:0.85;">Download on the</div>
+<div style="font-size:14px;font-weight:700;">App Store</div>
+</div>
+</a>
+</div>
+<div style="display:flex;align-items:center;gap:14px;font-size:13px;">
+<div style="display:flex;gap:1px;">
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="14" viewbox="0 0 24 24" width="14"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+<span style="color:#6b7280;"><strong style="color:#1a1a1a;">4.6</strong> · <strong>48K+</strong> downloads · नेपालीमा उपलब्ध</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ============ FOOTER ============ -->
+<footer style="background:#1a1a1a;color:#d3d6db;">
+<div style="max-width:1100px;margin:0 auto;padding:56px 24px 32px;">
+<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:48px;">
+<div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#fff;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#9ca3af;">Directory</span></span>
+</div>
+<p style="font-size:13px;line-height:1.6;color:#9ca3af;margin:0 0 20px;">Nepal's most trusted local business directory. Find verified plumbers, doctors, restaurants and more across all 7 provinces.</p>
+<div style="display:flex;gap:10px;">
+<a href="Home.dc.html" style="width:32px;height:32px;border-radius:50%;background:#2a2a2a;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:14px;">f</a>
+<a href="Home.dc.html" style="width:32px;height:32px;border-radius:50%;background:#2a2a2a;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:11px;font-weight:700;">IG</a>
+<a href="Home.dc.html" style="width:32px;height:32px;border-radius:50%;background:#2a2a2a;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:11px;font-weight:700;">in</a>
+<a href="Home.dc.html" style="width:32px;height:32px;border-radius:50%;background:#2a2a2a;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:14px;font-weight:700;">X</a>
+</div>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">About</h4>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:13px;">
+<li><a href="About Us.dc.html" style="color:#d3d6db;">About Us</a></li>
+<li><a href="Contact Us.dc.html" style="color:#d3d6db;">Contact Us</a></li>
+<li><a href="Advertise.dc.html" style="color:#d3d6db;">Advertise with Us</a></li>
+<li><a href="Blog.dc.html" style="color:#d3d6db;">Blog</a></li>
+<li><a href="Claim Listing.dc.html" style="color:#d3d6db;">Become a Partner</a></li>
+<li><a href="Content Page.dc.html" style="color:#d3d6db;">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">Directory</h4>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:13px;">
+<li><a href="Blog.dc.html" style="color:#d3d6db;">Articles</a></li>
+<li><a href="Search Results.dc.html" style="color:#d3d6db;">Find a Business</a></li>
+<li><a href="Get App.dc.html" style="color:#d3d6db;">Mobile App</a></li>
+<li><a href="Map Directions.dc.html" style="color:#d3d6db;">Site Map</a></li>
+<li><a href="Categories.dc.html" style="color:#d3d6db;">Categories</a></li>
+<li><a href="Search Results.dc.html" style="color:#d3d6db;">Browse Restaurants</a></li>
+</ul>
+</div>
+<div>
+<h4 style="color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin:0 0 14px;border-bottom:2px solid #FFD400;padding-bottom:8px;display:inline-block;">City Guides <a href="Home.dc.html" style="font-size:11px;color:#FFD400;text-transform:none;letter-spacing:0;font-weight:500;margin-left:6px;">(More Cities)</a></h4>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;font-size:13px;">
+<a href="City Landing.dc.html" style="color:#d3d6db;">Kathmandu</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Pokhara</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Lalitpur</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Bhaktapur</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Biratnagar</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Birgunj</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Butwal</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Bharatpur</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Dharan</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Nepalgunj</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Hetauda</a>
+<a href="City Landing.dc.html" style="color:#d3d6db;">Janakpur</a>
+</div>
+</div>
+</div>
+<div style="border-top:1px solid #2a2a2a;margin-top:48px;padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+<div style="display:flex;gap:24px;font-size:12px;">
+<a href="Privacy Policy.dc.html" style="color:#9ca3af;">Privacy</a>
+<a href="Privacy Policy.dc.html" style="color:#9ca3af;">Global Privacy Control / Do Not Track</a>
+<a href="Terms of Service.dc.html" style="color:#9ca3af;">Terms of Use</a>
+<a href="Search Results.dc.html" style="color:#9ca3af;">Legal</a>
+</div>
+<div style="font-size:12px;color:#6b7280;">© 2026 NepaliDirectory. All rights reserved.</div>
+</div>
+</div>
+</footer>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nepali Directory - Q&amp;A Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e6e8eb",
+                    "tertiary-fixed": "#d6e3ff",
+                    "primary-fixed-dim": "#ebc300",
+                    "on-secondary-fixed-variant": "#474746",
+                    "tertiary-fixed-dim": "#a9c7ff",
+                    "on-tertiary-fixed-variant": "#00468b",
+                    "on-secondary-container": "#636262",
+                    "primary-container": "#ffd400",
+                    "on-background": "#191c1e",
+                    "on-tertiary-container": "#005cb4",
+                    "secondary": "#5f5e5e",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f8f9fc",
+                    "outline": "#7f775f",
+                    "secondary-container": "#e2dfde",
+                    "inverse-primary": "#ebc300",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#715d00",
+                    "surface-container-highest": "#e1e3e6",
+                    "primary": "#715d00",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-surface": "#191c1e",
+                    "surface-container": "#eceef1",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "surface-variant": "#e1e3e6",
+                    "primary-fixed": "#ffe177",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#001b3d",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "tertiary": "#005db6",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "background": "#f8f9fc",
+                    "on-primary-container": "#705c00",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#eff1f4",
+                    "tertiary-container": "#c5d8ff",
+                    "surface-dim": "#d8dadd",
+                    "surface-container-low": "#f2f4f7",
+                    "on-primary-fixed": "#231b00",
+                    "on-error-container": "#93000a",
+                    "surface": "#f8f9fc",
+                    "on-primary-fixed-variant": "#554500",
+                    "on-surface-variant": "#4d4632",
+                    "outline-variant": "#d0c6ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Manrope"
+                    ],
+                    "display": [
+                            "Manrope"
+                    ],
+                    "body": [
+                            "Manrope"
+                    ],
+                    "label": [
+                            "Manrope"
+                    ]
+            },
+            "fontSize": {}
+    },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#f8f9fc] text-[#1a1a1a] min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-inverse-surface fixed top-0 w-full z-50 border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="max-w-[1180px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<img alt="Nepali Directory" class="h-8" src="data:image/png;base64,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"/>
+<div class="hidden md:flex border border-[#e3e5e8] rounded-[3px] overflow-hidden">
+<input class="border-none focus:ring-0 text-sm px-4 py-2 w-64 border-r border-[#e3e5e8]" placeholder="Find a business" type="text"/>
+<input class="border-none focus:ring-0 text-sm px-4 py-2 w-48" placeholder="Kathmandu, Bagmati" type="text"/>
+<button class="bg-[#FFD400] text-[#1a1a1a] font-bold px-6 py-2 text-sm uppercase tracking-wide" onclick="window.location.href='../Search Results.dc.html';">FIND</button>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-6 font-body font-medium text-on-surface dark:text-on-surface-variant">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 transition-transform" href="../Advertise.dc.html">Advertise</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 transition-transform" href="../Write Review.dc.html">Write a Review</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-95 transition-transform" href="../Login.dc.html">Log In</a>
+<a class="bg-[#1a1a1a] text-white px-5 py-2 rounded-full text-sm font-bold active:scale-95 transition-transform" href="../Register.dc.html">Sign Up</a>
+</nav>
+</div>
+</header>
+<div class="pt-16 flex-grow">
+<!-- Breadcrumb -->
+<div class="bg-[#f7f8fa] border-b border-[#e3e5e8] py-2">
+<div class="max-w-[1180px] mx-auto px-6">
+<span class="text-[12px] text-[#6b7280]">Home › Q&amp;A Hub</span>
+</div>
+</div>
+<!-- Page Header -->
+<div class="bg-white border-b border-[#e3e5e8] py-12">
+<div class="max-w-[1180px] mx-auto px-6 flex justify-between items-start">
+<div>
+<h1 class="text-[38px] font-extrabold tracking-[-1.5px] leading-tight mb-2">Q&amp;A Hub</h1>
+<p class="text-[#4b5563] text-lg mb-4">Get answers from real locals — ask about businesses, services, and life in Nepal.</p>
+<div class="text-[13px] font-bold text-[#6b7280] tracking-wide uppercase">
+                        12,400 Questions Answered · 3,200 Active Contributors · 98 Categories
+                    </div>
+</div>
+<button class="bg-[#FFD400] text-[#1a1a1a] font-bold px-6 py-3 rounded text-sm uppercase tracking-wide shadow-sm hover:bg-[#e6c000] transition-colors" onclick="window.location.href='../q_a_hub_nepali_directory/code.html';">
+                    Ask a Question
+                </button>
+</div>
+</div>
+<main class="max-w-[1180px] mx-auto px-6 py-8 flex gap-8">
+<!-- SideNavBar (Shared Component style adapted for layout) -->
+<aside class="w-64 flex-shrink-0 sticky top-24 h-[calc(100vh-6rem)] overflow-y-auto hidden lg:block">
+<h3 class="font-bold text-sm tracking-wide uppercase text-[#1a1a1a] mb-4">Categories</h3>
+<nav class="flex flex-col gap-1 mb-8">
+<a class="flex justify-between items-center text-on-primary-fixed-variant bg-tertiary-fixed rounded-lg px-3 py-2 font-bold text-sm" href="../q_a_hub_nepali_directory/code.html">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">forum</span> All Questions</span>
+<span class="bg-white/50 px-2 py-0.5 rounded-full text-[11px]">12.4k</span>
+</a>
+<a class="flex justify-between items-center text-on-secondary-container hover:bg-secondary-container rounded-lg px-3 py-2 text-sm transition-all" href="../restaurants_category_nepali_directory/code.html">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">restaurant</span> Restaurants</span>
+<span class="bg-[#e3e5e8] px-2 py-0.5 rounded-full text-[11px]">2,840</span>
+</a>
+<a class="flex justify-between items-center text-on-secondary-container hover:bg-secondary-container rounded-lg px-3 py-2 text-sm transition-all" href="../Search Results.dc.html">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">bed</span> Hotels</span>
+<span class="bg-[#e3e5e8] px-2 py-0.5 rounded-full text-[11px]">1,560</span>
+</a>
+<a class="flex justify-between items-center text-on-secondary-container hover:bg-secondary-container rounded-lg px-3 py-2 text-sm transition-all" href="../Search Results.dc.html">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">local_hospital</span> Health &amp; Medical</span>
+<span class="bg-[#e3e5e8] px-2 py-0.5 rounded-full text-[11px]">980</span>
+</a>
+<a class="flex justify-between items-center text-on-secondary-container hover:bg-secondary-container rounded-lg px-3 py-2 text-sm transition-all" href="../Search Results.dc.html">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">spa</span> Beauty &amp; Salons</span>
+<span class="bg-[#e3e5e8] px-2 py-0.5 rounded-full text-[11px]">720</span>
+</a>
+<a class="text-[#1a6dcc] text-sm font-semibold pl-3 mt-2 hover:underline" href="../Categories.dc.html">+ 89 more categories</a>
+</nav>
+<h3 class="font-bold text-sm tracking-wide uppercase text-[#1a1a1a] mb-4">Trending Topics</h3>
+<div class="flex flex-wrap gap-2 mb-8">
+<span class="border border-[#d3d6db] rounded-[20px] px-3 py-1 text-[12px] text-[#4b5563] cursor-pointer hover:border-[#1a1a1a]">#delivery</span>
+<span class="border border-[#d3d6db] rounded-[20px] px-3 py-1 text-[12px] text-[#4b5563] cursor-pointer hover:border-[#1a1a1a]">#hours</span>
+<span class="border border-[#d3d6db] rounded-[20px] px-3 py-1 text-[12px] text-[#4b5563] cursor-pointer hover:border-[#1a1a1a]">#parking</span>
+<span class="border border-[#d3d6db] rounded-[20px] px-3 py-1 text-[12px] text-[#4b5563] cursor-pointer hover:border-[#1a1a1a]">#vegetarian</span>
+</div>
+</aside>
+<!-- Main Feed -->
+<div class="flex-grow max-w-[600px]">
+<!-- Search -->
+<div class="relative mb-6">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[#9ca3af]">search</span>
+<input class="w-full h-12 pl-12 pr-4 border border-[#d3d6db] rounded-[4px] focus:ring-1 focus:ring-[#FFD400] focus:border-[#FFD400] text-[15px]" placeholder="Search questions about businesses in Nepal..." type="text"/>
+</div>
+<!-- Tabs & Sort -->
+<div class="flex justify-between items-center mb-6 border-b border-[#e3e5e8]">
+<div class="flex gap-6">
+<button class="pb-3 border-b-2 border-[#FFD400] text-[#1a1a1a] font-bold text-[13px] tracking-wide uppercase" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">LATEST</button>
+<button class="pb-3 border-b-2 border-transparent text-[#6b7280] font-bold text-[13px] tracking-wide uppercase hover:text-[#1a1a1a] flex items-center gap-2" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">UNANSWERED <span class="bg-[#e3e5e8] text-[#4b5563] px-1.5 py-0.5 rounded-sm text-[10px]">847</span></button>
+<button class="pb-3 border-b-2 border-transparent text-[#6b7280] font-bold text-[13px] tracking-wide uppercase hover:text-[#1a1a1a]" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">TRENDING</button>
+</div>
+<div class="flex items-center gap-2 text-sm text-[#4b5563] pb-3">
+                        Sort by: <select class="border-none bg-transparent py-0 pl-1 pr-6 font-semibold focus:ring-0 cursor-pointer text-[#1a1a1a]">
+<option>Newest</option>
+<option>Most Answered</option>
+</select>
+</div>
+</div>
+<!-- Question Cards -->
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="bg-white border border-[#e3e5e8] rounded-lg p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-[#fff7d1] text-[#715d00] border border-[#FFD400] px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wide">Restaurants</span>
+<span class="bg-[#e6f4ea] text-[#1a7d3a] px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wide">3 Answers</span>
+</div>
+<h3 class="text-[18px] font-bold leading-snug mb-1"><a class="hover:text-[#1a6dcc]" href="../City Landing.dc.html">Does Newa Lahana in Bhaktapur accept reservations on weekends?</a></h3>
+<div class="flex items-center gap-1 text-[#6b7280] text-[13px] mb-3">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Newa Lahana, Bhaktapur · Asked by Priya M. 2h ago
+                        </div>
+<p class="text-[#4b5563] text-[14px] leading-relaxed mb-4">"Yes, they do, but it's best to call at least a day in advance as they get very busy..."</p>
+<div class="flex justify-between items-center border-t border-[#f3f4f6] pt-3">
+<a class="text-[#1a6dcc] font-semibold text-[14px] hover:underline" href="../Home.dc.html">Answer this →</a>
+<div class="flex gap-4 text-[#6b7280]">
+<button class="flex items-center gap-1 hover:text-[#1a1a1a]" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined text-[18px]">thumb_up</span> <span class="text-xs font-semibold">12</span></button>
+<button class="flex items-center gap-1 hover:text-[#1a1a1a]" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined text-[18px]">bookmark_border</span></button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white border border-[#e3e5e8] rounded-lg p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-[#f3f4f6] text-[#4b5563] border border-[#d3d6db] px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wide">Health &amp; Medical</span>
+<span class="bg-[#f3f4f6] text-[#6b7280] px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wide">Unanswered</span>
+</div>
+<h3 class="text-[18px] font-bold leading-snug mb-1"><a class="hover:text-[#1a6dcc]" href="../Search Results.dc.html">What are the visiting hours for Grande International Hospital on Saturdays?</a></h3>
+<div class="flex items-center gap-1 text-[#6b7280] text-[13px] mb-4">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Grande Hospital, Dhapasi
+                        </div>
+<div class="flex justify-between items-center border-t border-[#f3f4f6] pt-3">
+<a class="text-[#1a6dcc] font-semibold text-[14px] hover:underline" href="../Home.dc.html">Answer this →</a>
+<div class="flex gap-4 text-[#6b7280]">
+<button class="flex items-center gap-1 hover:text-[#1a1a1a]" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined text-[18px]">thumb_up</span> <span class="text-xs font-semibold">2</span></button>
+<button class="flex items-center gap-1 hover:text-[#1a1a1a]" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined text-[18px]">bookmark_border</span></button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white border border-[#e3e5e8] rounded-lg p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-[#f3f4f6] text-[#4b5563] border border-[#d3d6db] px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wide">Auto Repair</span>
+<span class="bg-[#e6f4ea] text-[#1a7d3a] px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wide">1 Answer</span>
+</div>
+<h3 class="text-[18px] font-bold leading-snug mb-1"><a class="hover:text-[#1a6dcc]" href="../City Landing.dc.html">Best place for Suzuki bike servicing near Lalitpur?</a></h3>
+<div class="flex items-center gap-1 text-[#6b7280] text-[13px] mb-4">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Lalitpur
+                        </div>
+<div class="flex justify-between items-center border-t border-[#f3f4f6] pt-3">
+<a class="text-[#1a6dcc] font-semibold text-[14px] hover:underline" href="../Home.dc.html">Read answer →</a>
+<div class="flex gap-4 text-[#6b7280]">
+<button class="flex items-center gap-1 hover:text-[#1a1a1a]" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined text-[18px]">thumb_up</span> <span class="text-xs font-semibold">5</span></button>
+<button class="flex items-center gap-1 hover:text-[#1a1a1a]" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);"><span class="material-symbols-outlined text-[18px]">bookmark_border</span></button>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border border-[#d3d6db] rounded text-[14px] font-bold text-[#4b5563] hover:bg-[#f7f8fa] hover:text-[#1a1a1a] transition-colors" onclick="window.location.href='../q_a_hub_nepali_directory/code.html';">
+                    Load More Questions
+                </button>
+</div>
+<!-- Right Column -->
+<aside class="w-[280px] hidden xl:block">
+<div class="bg-[#fff7d1] p-5 rounded-lg border border-[#FFD400] mb-6">
+<h4 class="font-bold text-[16px] mb-2">Ask a Local Expert</h4>
+<p class="text-[14px] text-[#4d4632] mb-4 leading-snug">Can't find what you're looking for? Post your question and get notified when locals answer.</p>
+<button class="w-full bg-[#1a1a1a] text-white font-bold py-2 rounded text-[13px] uppercase tracking-wide" onclick="window.location.href='../q_a_hub_nepali_directory/code.html';">Post a Question</button>
+</div>
+</aside>
+</main>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest w-full mt-auto py-12">
+<div class="max-w-[1180px] mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<img alt="Nepali Directory" class="h-8 mb-4 filter invert brightness-0" src="data:image/png;base64,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"/>
+<p class="text-surface-variant font-body text-sm">© 2026 Nepali Directory.<br/>All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-surface-variant hover:text-white transition-colors font-body text-sm" href="../about_us_nepali_directory/code.html">About Us</a>
+<a class="text-surface-variant hover:text-white transition-colors font-body text-sm" href="../contact_us_nepali_directory/code.html">Contact Support</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-surface-variant hover:text-white transition-colors font-body text-sm" href="../privacy_policy_nepali_directory/code.html">Privacy Policy</a>
+<a class="text-surface-variant hover:text-white transition-colors font-body text-sm" href="../terms_of_service_nepali_directory/code.html">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-surface-variant hover:text-white transition-colors font-body text-sm" href="../Login.dc.html">Business Login</a>
+</div>
+</div>
+</footer>
+</body></html>

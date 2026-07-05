@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Account Settings - Nepali Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#715d00",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container-low": "#f6f3f2",
+                        "on-primary-fixed-variant": "#554500",
+                        "outline-variant": "#d0c6ab",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-container": "#004472",
+                        "surface": "#fcf9f8",
+                        "surface-tint": "#715d00",
+                        "inverse-surface": "#313030",
+                        "tertiary-container": "#d8d8d8",
+                        "surface-container": "#f0eded",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#5d5f5f",
+                        "on-primary-container": "#705c00",
+                        "tertiary-fixed": "#e2e2e2",
+                        "inverse-primary": "#ebc300",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed": "#ffe177",
+                        "primary-container": "#ffd400",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-fixed": "#231b00",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#64b3ff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#0062a0",
+                        "secondary-fixed": "#d0e4ff",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-container": "#5c5e5e",
+                        "surface-variant": "#e5e2e1",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#4d4632",
+                        "on-secondary-fixed-variant": "#00497a",
+                        "on-surface": "#1c1b1b",
+                        "outline": "#7f775f",
+                        "on-secondary-fixed": "#001d35",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ebc300",
+                        "secondary-fixed-dim": "#9ccaff",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "container-max": "1280px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "32px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "headline-sm": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["13px", { "lineHeight": "18px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased">
+<!-- Top Navigation (Suppressed - Task-Focused Page, though user asked for Settings layout, standard global nav can persist for context if 'Settings' is accessible globally, but typically suppressed if focused. Assuming we keep a generic header based on components) -->
+<!-- Not rendering TopNavBar as this is a focused settings page, adhering to "Automatic Suppression" rule for task-focused pages if they are considered departures. However, user might expect it. Let's provide a simpler, focused header. -->
+<header class="bg-surface w-full border-b border-outline-variant flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto h-[72px]">
+<div class="flex items-center gap-gutter">
+<a class="text-headline-md font-headline-md font-black text-on-surface flex items-center gap-2" href="../Home.dc.html">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+                Nepali Directory
+            </a>
+<span class="text-outline mx-2 hidden md:inline">/</span>
+<span class="font-headline-sm text-headline-sm text-on-surface-variant hidden md:inline">Account Settings</span>
+</div>
+<div>
+<button class="text-label-bold font-label-bold text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined">close</span>
+<span class="hidden md:inline">Close</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Sidebar Navigation -->
+<aside class="md:col-span-3 lg:col-span-3 flex flex-col gap-1">
+<nav class="flex flex-col gap-2 sticky top-stack-lg">
+<a class="flex items-center gap-3 p-3 rounded bg-primary-container text-on-primary-container font-label-bold text-label-bold border-l-4 border-primary" href="User Profile.dc.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+                    Profile Info
+                </a>
+<a class="flex items-center gap-3 p-3 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-bold text-label-bold border-l-4 border-transparent" href="#security">
+<span class="material-symbols-outlined">lock</span>
+                    Login &amp; Security
+                </a>
+<a class="flex items-center gap-3 p-3 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-bold text-label-bold border-l-4 border-transparent" href="Account Settings.dc.html">
+<span class="material-symbols-outlined">notifications</span>
+                    Notification Settings
+                </a>
+<a class="flex items-center gap-3 p-3 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-bold text-label-bold border-l-4 border-transparent" href="Privacy Policy.dc.html">
+<span class="material-symbols-outlined">visibility</span>
+                    Privacy
+                </a>
+<div class="h-px bg-outline-variant my-2"></div>
+<a class="flex items-center gap-3 p-3 rounded text-error hover:bg-error-container hover:text-on-error-container transition-colors font-label-bold text-label-bold border-l-4 border-transparent" href="Account Settings.dc.html">
+<span class="material-symbols-outlined">delete_forever</span>
+                    Delete Account
+                </a>
+</nav>
+</aside>
+<!-- Settings Content -->
+<div class="md:col-span-9 lg:col-span-8 flex flex-col gap-stack-lg pb-stack-lg">
+<!-- Profile Info Section -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-margin-desktop shadow-sm" id="profile">
+<div class="border-b border-outline-variant pb-stack-md mb-stack-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Profile Info</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Update your photo and personal details here.</p>
+</div>
+<div class="flex flex-col gap-stack-md">
+<!-- Avatar Upload -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-stack-md">
+<div class="w-24 h-24 rounded-full bg-surface-container overflow-hidden border border-outline-variant flex-shrink-0 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a business person against a clean, bright background. The lighting is soft and flattering, suitable for a corporate directory profile. The overall tone is approachable and trustworthy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcZISPuHtsTbGsV2laVTrElf3kNDTIIMTlvWs7xLNFCSLOtJM9Tt24iej7wGodhLh5kDkGNXijVqNrhmrzsN-2v03CP8z2TxcB58Mltyv5jExbCeHbjvwpBT9DxzMPqtcClwkaDh5IRzIFbxm00S-nqctcVfXHvXvQr3NsCl2QykkxeR0kRk8w5I70C2HLKa3zzMghL2mlzgErklOOiwC6URGoX70lYj7GAJCGZU5BAEguWZwvYHxXy0S9gXjrvsG5Q4S9K8ItCYR6"/>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex gap-2">
+<button class="bg-secondary text-on-secondary font-label-bold text-label-bold px-4 py-2 rounded flex items-center gap-2 hover:bg-on-secondary-fixed transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+                                    Upload New
+                                </button>
+<button class="bg-surface text-secondary border border-outline font-label-bold text-label-bold px-4 py-2 rounded hover:bg-surface-container transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+                                    Remove
+                                </button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">JPG, GIF or PNG. Max size of 800K</p>
+</div>
+</div>
+<!-- Form Fields -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface">Full Name</label>
+<input class="border border-outline-variant rounded p-3 bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md text-on-surface transition-all" type="text" value="Anil Shrestha"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface">Email Address</label>
+<input class="border border-outline-variant rounded p-3 bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md text-on-surface transition-all" type="email" value="anil.s@example.com"/>
+</div>
+<div class="flex flex-col gap-1 md:col-span-2">
+<label class="font-label-bold text-label-bold text-on-surface">Phone Number</label>
+<div class="flex">
+<span class="border border-r-0 border-outline-variant rounded-l p-3 bg-surface-container text-on-surface-variant font-body-md text-body-md">+977</span>
+<input class="border border-outline-variant rounded-r p-3 bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md text-on-surface w-full transition-all" type="tel" value="9841234567"/>
+</div>
+</div>
+<div class="flex flex-col gap-1 md:col-span-2">
+<label class="font-label-bold text-label-bold text-on-surface">Bio</label>
+<textarea class="border border-outline-variant rounded p-3 bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md text-on-surface resize-none transition-all" rows="4">Local business owner specializing in traditional handicrafts.</textarea>
+</div>
+</div>
+<div class="flex justify-end mt-2">
+<button class="bg-primary-container text-on-primary-container font-label-bold text-label-bold px-6 py-3 rounded hover:bg-primary-fixed transition-colors" onclick="alert('Action successful!');">
+                            Save Changes
+                        </button>
+</div>
+</div>
+</section>
+<!-- Login & Security Section -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-margin-desktop shadow-sm" id="security">
+<div class="border-b border-outline-variant pb-stack-md mb-stack-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Login &amp; Security</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage your password and secure your account.</p>
+</div>
+<div class="flex flex-col gap-stack-lg">
+<!-- Change Password -->
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-stack-sm">Change Password</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="flex flex-col gap-1 md:col-span-2 max-w-md">
+<label class="font-label-bold text-label-bold text-on-surface">Current Password</label>
+<input class="border border-outline-variant rounded p-3 bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md text-on-surface transition-all" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex flex-col gap-1 max-w-md">
+<label class="font-label-bold text-label-bold text-on-surface">New Password</label>
+<input class="border border-outline-variant rounded p-3 bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md text-on-surface transition-all" type="password"/>
+</div>
+<div class="flex flex-col gap-1 max-w-md">
+<label class="font-label-bold text-label-bold text-on-surface">Confirm New Password</label>
+<input class="border border-outline-variant rounded p-3 bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md text-on-surface transition-all" type="password"/>
+</div>
+</div>
+<button class="mt-stack-md bg-surface text-secondary border border-outline font-label-bold text-label-bold px-6 py-2 rounded hover:bg-surface-container transition-colors" onclick="alert('Action successful!');">
+                            Update Password
+                        </button>
+</div>
+<hr class="border-outline-variant"/>
+<!-- Two-Factor Authentication -->
+<div>
+<div class="flex justify-between items-start mb-stack-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Two-Factor Authentication (2FA)</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Add an extra layer of security to your account.</p>
+</div>
+<!-- Toggle switch mockup -->
+<div class="w-12 h-6 bg-outline-variant rounded-full relative cursor-pointer flex items-center shrink-0">
+<div class="w-4 h-4 bg-surface rounded-full absolute left-1 shadow-sm transition-transform"></div>
+</div>
+</div>
+<div class="bg-surface-container p-4 rounded border border-outline-variant mt-4">
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-tertiary">info</span>
+                                2FA is currently disabled. We recommend enabling it to protect your local business listings.
+                            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Delete Account Section -->
+<section class="bg-surface-container-lowest border border-error-container rounded-xl p-margin-desktop shadow-sm" id="delete">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-error">Delete Account</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-xl">
+                             Once you delete your account, there is no going back. Please be certain. This will remove all your directory listings, reviews, and saved items.
+                         </p>
+</div>
+<button class="bg-error text-on-error font-label-bold text-label-bold px-6 py-3 rounded hover:bg-[#93000a] transition-colors whitespace-nowrap flex-shrink-0" onclick="document.getElementById('delete-modal').classList.remove('hidden'); document.getElementById('delete-modal').classList.add('flex');">
+                         Delete Account
+                     </button>
+</div>
+</section>
+</div>
+</main>
+<!-- Delete Confirmation Modal -->
+<div class="fixed inset-0 bg-on-background/50 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity" id="delete-modal">
+<div class="bg-surface-container-lowest rounded-xl max-w-md w-full p-margin-desktop shadow-lg border border-outline-variant">
+<div class="flex items-center gap-3 mb-4 text-error">
+<span class="material-symbols-outlined text-[32px]">warning</span>
+<h3 class="font-headline-sm text-headline-sm">Delete Account?</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                Are you absolutely sure you want to delete your account? This action cannot be undone and you will lose access to all your local directory data.
+            </p>
+<div class="flex justify-end gap-3">
+<button class="px-4 py-2 font-label-bold text-label-bold text-on-surface-variant hover:bg-surface-container rounded transition-colors" onclick="document.getElementById('delete-modal').classList.add('hidden'); document.getElementById('delete-modal').classList.remove('flex');">
+                    Cancel
+                </button>
+<button class="px-4 py-2 bg-error text-on-error font-label-bold text-label-bold rounded hover:bg-[#93000a] transition-colors" onclick="window.location.href='../Dashboard.dc.html';">
+                    Yes, Delete My Account
+                </button>
+</div>
+</div>
+</div>
+</body></html>

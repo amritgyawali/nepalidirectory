@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Photo Gallery - Newa Lahana</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#001d35",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-primary-fixed-variant": "#554500",
+                        "surface-container": "#f0eded",
+                        "surface-tint": "#715d00",
+                        "surface": "#fcf9f8",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-bright": "#fcf9f8",
+                        "primary-container": "#ffd400",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#705c00",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-secondary-container": "#004472",
+                        "secondary-fixed-dim": "#9ccaff",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#313030",
+                        "on-surface": "#1c1b1b",
+                        "background": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#00497a",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-fixed": "#ffe177",
+                        "on-primary-fixed": "#231b00",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f6f3f2",
+                        "secondary-container": "#64b3ff",
+                        "on-background": "#1c1b1b",
+                        "surface-dim": "#dcd9d9",
+                        "on-surface-variant": "#4d4632",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#d8d8d8",
+                        "outline": "#7f775f",
+                        "on-primary": "#ffffff",
+                        "secondary": "#0062a0",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#5d5f5f",
+                        "outline-variant": "#d0c6ab",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "secondary-fixed": "#d0e4ff",
+                        "inverse-primary": "#ebc300",
+                        "on-tertiary-container": "#5c5e5e",
+                        "error-container": "#ffdad6",
+                        "primary": "#715d00",
+                        "surface-container-high": "#eae7e7",
+                        "primary-fixed-dim": "#ebc300"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "stack-md": "16px",
+                        "margin-desktop": "32px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-bold": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-bold": ["13px", { "lineHeight": "18px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopNavBar -->
+<header class="bg-surface sticky top-0 w-full z-50 border-b border-outline-variant shadow-sm transition-transform duration-150">
+<div class="max-w-[1180px] mx-auto px-6 h-16 flex items-center justify-between gap-4">
+<a class="flex items-center gap-2 text-xl font-extrabold text-on-surface" href="../Home.dc.html">
+<span class="material-symbols-outlined text-primary" data-icon="book" data-weight="fill">book</span>
+                Nepali Directory
+            </a>
+<!-- Search Area placeholder -->
+<div class="hidden md:flex flex-1 max-w-xl mx-4">
+<div class="flex w-full bg-surface-container-lowest border border-outline-variant rounded-full overflow-hidden shadow-sm">
+<input class="flex-1 border-none bg-transparent px-4 py-2 text-body-md focus:ring-0 outline-none placeholder:text-on-surface-variant" placeholder="Service or Business" type="text"/>
+<div class="w-px bg-outline-variant my-2"></div>
+<input class="flex-1 border-none bg-transparent px-4 py-2 text-body-md focus:ring-0 outline-none placeholder:text-on-surface-variant" placeholder="Location" type="text"/>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 font-label-bold flex items-center justify-center hover:bg-primary hover:text-on-primary transition-colors" onclick="window.location.href='../Search Results.dc.html';">
+<span class="material-symbols-outlined text-[20px]" data-icon="search">search</span>
+</button>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-body-md font-medium text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-high px-3 py-2 rounded-md" href="../Advertise.dc.html">Advertise</a>
+<a class="font-body-md font-medium text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-high px-3 py-2 rounded-md" href="../Write Review.dc.html">Write a Review</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="font-label-bold text-on-surface hover:text-primary transition-colors" onclick="window.location.href='../Login.dc.html';">Log In</button>
+<button class="font-label-bold bg-primary text-on-primary px-4 py-2 rounded-md hover:bg-surface-tint transition-colors" onclick="window.location.href='../Register.dc.html';">Sign Up</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col w-full max-w-container-max mx-auto px-6 py-8 gap-8">
+<!-- Breadcrumb & Header -->
+<div class="flex flex-col gap-2">
+<nav class="flex text-body-sm text-on-surface-variant gap-2 items-center">
+<a class="hover:text-primary" href="../Home.dc.html">Home</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary" href="../City Landing.dc.html">Kathmandu</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary" href="../restaurants_category_nepali_directory/code.html">Restaurants</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary font-medium" href="../Home.dc.html">Newa Lahana</a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface">Photos</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mt-2">
+<div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Photos for Newa Lahana</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Authentic Newari Cuisine in Kirtipur</p>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label-bold text-label-bold px-6 py-3 rounded-md flex items-center gap-2 hover:bg-primary hover:text-on-primary transition-colors shadow-sm" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined" data-icon="add_a_photo">add_a_photo</span>
+                    Add Photo
+                </button>
+</div>
+</div>
+<!-- Hero Photo Gallery Pattern (Bento Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-sm border border-outline-variant">
+<div class="col-span-1 md:col-span-2 row-span-2 relative group overflow-hidden cursor-pointer">
+<img alt="Main Restaurant Interior" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A high quality, professional interior photograph of a traditional Newari restaurant in Nepal. The space features intricately carved wooden windows, traditional brass dining utensils arranged on low tables, and warm, inviting amber lighting. Patrons are enjoying their meals in the background. The atmosphere is culturally rich and authentic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGR_vv6NxVR4EujS_-c-hIhCIybUZ8wSI2EwDlEmUUfiWFMyyan9RAddkA6AB7plNUbgOOJiQ9qnDCF8e0x0IQYOBIbHTxQnMODs5GQTAl52Szri43SOXqXh3TL9B7Mts69P5KtNU5MoWt29chUp_yE86MqvaqKQH7eH1zKvWV5XhTyH1ANb4fylFe0ks9f6pzZYaAqaLGgcGpUv9bwgPolckQCYr2VdbVqO4BpfpX1t5LUthIwLoF2xrP3zsx0n9ZY4x_SS99SlyB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<span class="text-white font-headline-sm text-headline-sm">Interior View</span>
+</div>
+</div>
+<div class="col-span-1 row-span-1 relative group overflow-hidden cursor-pointer hidden md:block">
+<img alt="Samay Baji Dish" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A close up, mouth-watering food photography shot of traditional Newari Samay Baji served on a brass plate. The dish includes beaten rice, black soybeans, smoked meat, and spicy potato salad. The lighting is bright and highlights the vibrant textures and colors of the local cuisine, set against a rustic wooden table." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk_qRQywyIPCrVt59FHJtDU86a77ASar3td3ytKG7MMZeWJLYsSDbFI9s1_nChXZYuNCoykhvAw2mYAT0qkhZoEKqUGN6u3eqDHOaajJ05qxukWTDPsvWgXSI430VcserthVvNB6g6MWOVQQKKaQWwvxjxQziMx0aYPe5Kl5JhNL1rxME0bR42UfdcOlCYuXF_Wi-OSoDvWW99fVbSVOf4uJVytgtkc8IbrcQAoYPm_E79GOBSSrLCXkdUutNVx6YYBeemApr1RMZJ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+<span class="text-white font-label-bold text-label-bold">Food &amp; Drink</span>
+</div>
+</div>
+<div class="col-span-1 row-span-1 relative group overflow-hidden cursor-pointer hidden md:block">
+<img alt="Restaurant Exterior" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An exterior shot of a traditional brick building in Kirtipur, Nepal, housing a local restaurant. The architecture features exposed red bricks, carved wooden balconies, and traditional slanted roofs. The sky is clear blue, providing a bright, inviting daylight atmosphere for outdoor dining." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn_evJMYy6JmEIwOIxvDwkl48l9OxLOnGIx1WhyP9DzWOx6juwXQa5A8LKZPFKcDhnX7IojaF7PY75t8bj90vCgW0olyn6uzhfVG4Y89fv4xl0V_bS-MuFrlObjjMPru8iO0plDE7fBXBUqZx7fFIQYOy29JO6ddUenXLQfCnMXfRXHDSqzmYpomp0fOCf5E0sqEVze5f9laRQ35M_jUHnNkkS65UNd9I2KdAqMXerrP9WVLPHLy6shsVaz4bgGjvwL-BAIpOJzJfA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+<span class="text-white font-label-bold text-label-bold">Outside</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2 row-span-1 relative group overflow-hidden cursor-pointer hidden md:flex items-center justify-center bg-surface-container-high">
+<img alt="More Photos" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-500 group-hover:scale-105" data-alt="A beautifully laid out spread of various Newari alcoholic beverages and snacks on a low traditional table. Features Aila (rice liquor) being poured from a traditional brass vessel (anti) into small clay cups. Warm, cinematic lighting emphasizing the cultural authenticity and social dining aspect." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCLddYR4FvdvxHkWkRoQM1WNAa0GcRiob2-andO2p4oRvUXd5ZfFYQprbgRqCdhvTUNqbG-vlevECR7nnNUereZmNe0-BmDy3_NO8EEUl5PbXQ8y62WmhzG41uf6jmwnYdHzT6vk1oZn0vxFmny6PSgBv2YLRTPZnPyOelFu3LryeWBYfbCGdb4uo3r7iNmH7OxW5-ggiYmSVtN-VZFKKieHjvWczSlSoWW7WIqEzvrMi1rCHeJmoXiA8w33TxunSf6HmwDKxZEQNG"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<button class="font-headline-sm text-headline-sm text-white border-2 border-white px-6 py-3 rounded-full hover:bg-white/20 transition-colors backdrop-blur-sm" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+                        View All 124 Photos
+                    </button>
+</div>
+</div>
+</div>
+<!-- Filter Tabs -->
+<div class="flex overflow-x-auto gap-4 border-b border-outline-variant pb-2 mt-4 scrollbar-hide">
+<button class="whitespace-nowrap px-4 py-2 font-label-bold text-label-bold text-primary border-b-2 border-primary" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">All Photos (124)</button>
+<button class="whitespace-nowrap px-4 py-2 font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">Food &amp; Drink (86)</button>
+<button class="whitespace-nowrap px-4 py-2 font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">Inside (20)</button>
+<button class="whitespace-nowrap px-4 py-2 font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">Outside (12)</button>
+<button class="whitespace-nowrap px-4 py-2 font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">Menu (6)</button>
+</div>
+<!-- Photo Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+<!-- Photo Card 1 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative aspect-square rounded-lg overflow-hidden border border-outline-variant bg-surface-container shadow-sm group-hover:shadow-md transition-shadow">
+<img alt="Momo" class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition-transform duration-300" data-alt="A top-down view of a steaming plate of Momo (dumplings) served with a rich, red tomato-based dipping sauce. The momos are perfectly pleated and arranged in a circle on a traditional metal plate. The lighting is bright, emphasizing the juicy texture of the food." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzKPsaILkG23nkv_UVw_MHZfu0Xgj217nBZOYKX3eDgEbtdSApytSxeS8lzQb2YLSACOFlvKl7KnW3Q0I-l1tIENDfqlguBjhpmCEU8reaW7PrLPUscvxgv0jP8hiPZ4yVkIk__d7FwJxrmqigvB_N17hsaV-xJLych_9FjLC1sqh_XWOb2rFi6LiHaGAqCSJA38vUisY1WCG5U66LahiNAagdu6otDc0lK-3COIPf623CHtbvhqoaN5uM6lZDMhjc2G8ZMQQuTZ7G"/>
+</div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-label-bold">A</div>
+<div class="flex flex-col">
+<span class="font-label-bold text-label-bold text-on-surface">Aarav S.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2 days ago</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary flex flex-col items-center gap-1 transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined text-[20px]" data-icon="thumb_up">thumb_up</span>
+<span class="font-body-sm text-[10px]">12</span>
+</button>
+</div>
+</div>
+<!-- Photo Card 2 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative aspect-square rounded-lg overflow-hidden border border-outline-variant bg-surface-container shadow-sm group-hover:shadow-md transition-shadow">
+<img alt="Friends dining" class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition-transform duration-300" data-alt="A lively group of friends enjoying a traditional Newari feast at a restaurant in Kathmandu. They are seated on cushions on the floor around low wooden tables. The atmosphere is festive and warm, with vibrant traditional clothing and plates full of local delicacies. Warm interior lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfRVjBt3v-U00lNtmVbb001i-wDTsK8wvEg46YOqBdFcSu3lJXe-A0tK07ztZfJk8EIj5DPh-BcjIIh6SPY9_KCUa2E_OdiyYB_vlMuMA1JWK0FCAycFF0UnYho3k27tryH3uCzvzCoA_MpXMBPE6K_2pCzT8Ozf-16uQ7mooGiIdy6cxwVM5Gw9PhnI4IyPg6mIqSSbIqHiJVeEYG2VCmJjUwPPKvYlBdJl6xOzUf-dTZWByCI-MIVwNLA9oTq28Us8W5bn_3yscJ"/>
+</div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-label-bold">P</div>
+<div class="flex flex-col">
+<span class="font-label-bold text-label-bold text-on-surface">Priya M.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 week ago</span>
+</div>
+</div>
+<button class="text-primary flex flex-col items-center gap-1 transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined text-[20px] fill" data-icon="thumb_up">thumb_up</span>
+<span class="font-body-sm text-[10px]">45</span>
+</button>
+</div>
+</div>
+<!-- Photo Card 3 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative aspect-square rounded-lg overflow-hidden border border-outline-variant bg-surface-container shadow-sm group-hover:shadow-md transition-shadow">
+<img alt="Menu page" class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition-transform duration-300" data-alt="A detailed shot of the restaurant's printed menu, showing the list of traditional Newari items like Bara, Chatamari, and Chhoila with their prices. The menu is printed on textured, rustic paper with traditional Nepali motifs adorning the edges. Clear, legible lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWRX6ERZD8xOJug3JTldgmnhhVaBQ-BWB6XbMn_oSCTBJEQKkIjuHv1GDxQqTpBAvIaStdT8mjEoYeOtAsbBQWxRZ1l_TAgHBt5UosXq85R6uihJ2drDA-xM0u8vzyMnthtLVqYm_50HETgM4I8R-mNAIj48fjXHyWz7ApuMHVA9pUo8X9NXMkAHZwHRMz2UrhYjPX7Ew2RTW9tBPCXxHV67gz-owXYz9fCTqd73SB-xh3hBAOk0Nw6RA13_QYkVw_3AdZ5XHPW_SU"/>
+</div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-label-bold">R</div>
+<div class="flex flex-col">
+<span class="font-label-bold text-label-bold text-on-surface">Rohan K.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">3 weeks ago</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary flex flex-col items-center gap-1 transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined text-[20px]" data-icon="thumb_up">thumb_up</span>
+<span class="font-body-sm text-[10px]">3</span>
+</button>
+</div>
+</div>
+<!-- Photo Card 4 -->
+<div class="flex flex-col gap-3 group">
+<div class="relative aspect-square rounded-lg overflow-hidden border border-outline-variant bg-surface-container shadow-sm group-hover:shadow-md transition-shadow">
+<img alt="Outdoor seating" class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition-transform duration-300" data-alt="An outdoor seating area of a traditional Nepali restaurant at dusk. Small warm string lights are strung across the courtyard, illuminating the brick-paved ground and wooden tables. The sky is a deep twilight blue, creating a cozy and romantic dining atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA28WuyWBzil2gbZb8hu2PIvqoaCmYgng4ZeIJQTz7IjJHzMiKG7GGwE0Z_cy2xc4HTmKDtbdDTcP7TwqHKucsxOXU4E1EPo3MfiSnrzgqYZYNhKbPJ4-BLP3TkUHFInFLbGUw0EPXZsJr2oFbkIrhu59RYcXw6QpB24crdx8mPng9qyiwKtYeHgwLkGWmW8KQuxNYHIA285TWHDIqKppV17xiySWuvDOCqoEA9w0wctmW70WHjKJ8nA9LpAvgZAK2nInFGG1MTx38I"/>
+</div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-label-bold">S</div>
+<div class="flex flex-col">
+<span class="font-label-bold text-label-bold text-on-surface">Sneha T.</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1 month ago</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary flex flex-col items-center gap-1 transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+<span class="material-symbols-outlined text-[20px]" data-icon="thumb_up">thumb_up</span>
+<span class="font-body-sm text-[10px]">8</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Load More -->
+<div class="flex justify-center mt-8">
+<button class="font-label-bold text-label-bold text-secondary border border-outline px-6 py-2 rounded-full hover:bg-surface-container-high transition-colors" onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);">
+                Load More Photos
+            </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-inverse-surface w-full mt-auto">
+<div class="max-w-[1180px] mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="flex flex-col gap-4 col-span-1 md:col-span-1">
+<span class="text-2xl font-black text-primary-container">Nepali Directory</span>
+<p class="font-body-md text-inverse-on-surface text-sm">© 2026 Nepali Directory. Nepal's trusted local business directory.</p>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-md text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container w-fit" href="../about_us_nepali_directory/code.html">About Us</a>
+<a class="font-body-md text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container w-fit" href="../contact_us_nepali_directory/code.html">Contact Us</a>
+<a class="font-body-md text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container w-fit" href="../privacy_policy_nepali_directory/code.html">Privacy Policy</a>
+<a class="font-body-md text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container w-fit" href="../terms_of_service_nepali_directory/code.html">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-md text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container w-fit" href="../Home.dc.html">Add Business</a>
+<a class="font-body-md text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container w-fit" href="../Help.dc.html">Business Support</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-md text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container w-fit" href="../Categories.dc.html">Browse Categories</a>
+<a class="font-body-md text-surface-variant hover:text-primary-container hover:underline transition-all focus:ring-2 focus:ring-primary-container w-fit" href="../Home.dc.html">Popular Cities</a>
+</div>
+</div>
+</footer>
+</body></html>

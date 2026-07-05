@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Browse Categories | Nepali Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e6e8eb",
+                    "surface": "#f8f9fc",
+                    "outline-variant": "#d0c6ab",
+                    "inverse-primary": "#ebc300",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#4d4632",
+                    "on-primary-container": "#705c00",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#e1e3e6",
+                    "outline": "#7f775f",
+                    "on-surface": "#191c1e",
+                    "tertiary-fixed-dim": "#a9c7ff",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#715d00",
+                    "tertiary-container": "#c5d8ff",
+                    "surface-bright": "#f8f9fc",
+                    "inverse-surface": "#2d3133",
+                    "on-secondary-container": "#636262",
+                    "tertiary": "#005db6",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-background": "#191c1e",
+                    "inverse-on-surface": "#eff1f4",
+                    "surface-dim": "#d8dadd",
+                    "surface-container-low": "#f2f4f7",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#eceef1",
+                    "surface-container-highest": "#e1e3e6",
+                    "on-primary-fixed-variant": "#554500",
+                    "secondary-container": "#e2dfde",
+                    "primary-fixed-dim": "#ebc300",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-container": "#005cb4",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#00468b",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#001b3d",
+                    "secondary": "#5f5e5e",
+                    "tertiary-fixed": "#d6e3ff",
+                    "background": "#f8f9fc",
+                    "primary": "#715d00",
+                    "on-primary-fixed": "#231b00",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "primary-fixed": "#ffe177",
+                    "primary-container": "#ffd400",
+                    "on-secondary-fixed-variant": "#474746"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "display": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface fixed top-0 w-full z-50 shadow-sm border-b border-outline-variant dark:border-outline">
+<div class="max-w-[1180px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="bg-primary-container text-on-primary-container font-headline font-black px-2 py-1 rounded-sm">ND</span>
+<span class="font-headline font-extrabold text-lg text-on-surface dark:text-on-surface-variant">Nepali Directory</span>
+</div>
+<!-- Search Area -->
+<div class="hidden md:flex flex-1 max-w-2xl mx-8 relative">
+<div class="flex w-full bg-surface-container-lowest border border-outline-variant rounded-full overflow-hidden shadow-sm">
+<div class="flex-1 flex items-center px-4 border-r border-outline-variant">
+<span class="material-symbols-outlined text-secondary mr-2">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder:text-secondary-fixed-dim" placeholder="Find a business..." type="text"/>
+</div>
+<div class="flex-1 flex items-center px-4">
+<span class="material-symbols-outlined text-secondary mr-2">location_on</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder:text-secondary-fixed-dim" placeholder="Location..." type="text"/>
+</div>
+<button class="bg-primary-container text-on-primary-container font-bold px-6 py-2 hover:bg-primary-fixed transition-colors" onclick="window.location.href='../Search Results.dc.html';">FIND</button>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<a class="font-body font-medium text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../Advertise.dc.html">Advertise</a>
+<a class="font-body font-medium text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../Write Review.dc.html">Write a Review</a>
+<a class="font-body font-medium text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors" href="../Login.dc.html">Log In</a>
+<button class="bg-on-surface text-on-primary px-6 py-2 rounded font-bold hover:bg-secondary-fixed-variant transition-colors active:scale-95 transition-transform" onclick="window.location.href='../Register.dc.html';">Sign Up</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 max-w-[1180px] w-full mx-auto px-6 pt-24 pb-16 flex gap-8">
+<!-- SideNavBar -->
+<aside class="w-64 h-screen sticky top-20 hidden md:block">
+<div class="bg-transparent flex flex-col gap-2 p-4">
+<div class="mb-4">
+<h2 class="font-headline font-extrabold text-on-surface text-lg">Categories</h2>
+<p class="font-body text-sm text-secondary">Browse by Topic</p>
+</div>
+<a class="flex items-center gap-3 p-3 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer" href="../q_a_hub_nepali_directory/code.html">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label font-bold text-sm tracking-wide uppercase">All Questions</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer" href="../Home.dc.html">
+<span class="material-symbols-outlined">build</span>
+<span class="font-label font-bold text-sm tracking-wide uppercase">Local Services</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer" href="../restaurants_category_nepali_directory/code.html">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-label font-bold text-sm tracking-wide uppercase">Restaurants</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer" href="../Home.dc.html">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-label font-bold text-sm tracking-wide uppercase">Shopping</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer" href="../Home.dc.html">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label font-bold text-sm tracking-wide uppercase">Travel</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer" href="../Home.dc.html">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label font-bold text-sm tracking-wide uppercase">Community</span>
+</a>
+<div class="mt-8 mb-4 border-t border-outline-variant pt-4">
+<button class="w-full bg-primary-container text-on-primary-container font-bold py-2 rounded hover:bg-primary-fixed transition-colors shadow-sm" onclick="window.location.href='../q_a_hub_nepali_directory/code.html';">Ask a Question</button>
+</div>
+<a class="flex items-center gap-3 p-3 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer" href="../Home.dc.html">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label font-bold text-sm tracking-wide uppercase">Trending</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-secondary-container hover:bg-secondary-container rounded-xl transition-all hover:translate-x-1 duration-200 cursor-pointer" href="../Home.dc.html">
+<span class="material-symbols-outlined">quiz</span>
+<span class="font-label font-bold text-sm tracking-wide uppercase">Unanswered</span>
+</a>
+</div>
+</aside>
+<!-- Categories Content -->
+<div class="flex-1">
+<div class="mb-8">
+<h1 class="font-headline font-extrabold text-[40px] tracking-tight mb-2">Browse All Categories</h1>
+<p class="font-body text-secondary text-lg">Find the best local businesses, services, and professionals in Nepal.</p>
+</div>
+<div class="mb-8 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm font-body text-on-surface focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all outline-none" placeholder="Filter categories (e.g., Plumbers, Italian Restaurants...)" type="text"/>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Category Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5 text-primary-container group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div class="w-12 h-12 bg-[#fff7d1] rounded-lg flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<h3 class="font-headline font-bold text-lg mb-2 group-hover:text-tertiary transition-colors">Food &amp; Drink</h3>
+<ul class="font-body text-sm text-secondary space-y-1 mb-4">
+<li>Restaurants</li>
+<li>Cafes &amp; Bakeries</li>
+<li>Bars &amp; Pubs</li>
+</ul>
+<a class="font-label font-bold text-tertiary text-sm flex items-center gap-1 group-hover:underline" href="../Business Detail.dc.html">View all <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5 text-primary-container group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">local_hospital</span>
+</div>
+<div class="w-12 h-12 bg-[#fff7d1] rounded-lg flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">local_hospital</span>
+</div>
+<h3 class="font-headline font-bold text-lg mb-2 group-hover:text-tertiary transition-colors">Health &amp; Medical</h3>
+<ul class="font-body text-sm text-secondary space-y-1 mb-4">
+<li>Hospitals &amp; Clinics</li>
+<li>Dentists</li>
+<li>Pharmacies</li>
+</ul>
+<a class="font-label font-bold text-tertiary text-sm flex items-center gap-1 group-hover:underline" href="../Business Detail.dc.html">View all <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5 text-primary-container group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">build</span>
+</div>
+<div class="w-12 h-12 bg-[#fff7d1] rounded-lg flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">build</span>
+</div>
+<h3 class="font-headline font-bold text-lg mb-2 group-hover:text-tertiary transition-colors">Local Services</h3>
+<ul class="font-body text-sm text-secondary space-y-1 mb-4">
+<li>Plumbers &amp; Electricians</li>
+<li>Home Cleaning</li>
+<li>Movers</li>
+</ul>
+<a class="font-label font-bold text-tertiary text-sm flex items-center gap-1 group-hover:underline" href="../Business Detail.dc.html">View all <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5 text-primary-container group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</div>
+<div class="w-12 h-12 bg-[#fff7d1] rounded-lg flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</div>
+<h3 class="font-headline font-bold text-lg mb-2 group-hover:text-tertiary transition-colors">Shopping</h3>
+<ul class="font-body text-sm text-secondary space-y-1 mb-4">
+<li>Supermarkets</li>
+<li>Clothing Boutiques</li>
+<li>Electronics Stores</li>
+</ul>
+<a class="font-label font-bold text-tertiary text-sm flex items-center gap-1 group-hover:underline" href="../Business Detail.dc.html">View all <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5 text-primary-container group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">explore</span>
+</div>
+<div class="w-12 h-12 bg-[#fff7d1] rounded-lg flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">explore</span>
+</div>
+<h3 class="font-headline font-bold text-lg mb-2 group-hover:text-tertiary transition-colors">Travel &amp; Tourism</h3>
+<ul class="font-body text-sm text-secondary space-y-1 mb-4">
+<li>Hotels &amp; Lodging</li>
+<li>Tour Operators</li>
+<li>Car Rentals</li>
+</ul>
+<a class="font-label font-bold text-tertiary text-sm flex items-center gap-1 group-hover:underline" href="../Business Detail.dc.html">View all <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:shadow-md transition-shadow group cursor-pointer relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-5 text-primary-container group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+</div>
+<div class="w-12 h-12 bg-[#fff7d1] rounded-lg flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+</div>
+<h3 class="font-headline font-bold text-lg mb-2 group-hover:text-tertiary transition-colors">Automotive</h3>
+<ul class="font-body text-sm text-secondary space-y-1 mb-4">
+<li>Auto Repair</li>
+<li>Car Dealerships</li>
+<li>Gas Stations</li>
+</ul>
+<a class="font-label font-bold text-tertiary text-sm flex items-center gap-1 group-hover:underline" href="../Business Detail.dc.html">View all <span class="material-symbols-outlined text-[16px]">arrow_forward</span></a>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest text-surface-variant w-full mt-auto">
+<div class="max-w-[1180px] mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="col-span-1 md:col-span-1">
+<div class="text-primary-container font-headline font-extrabold text-xl mb-4">ND</div>
+<p class="font-body text-sm text-surface-variant mb-4">Nepal's trusted local business directory. Trusted, informative, community-first.</p>
+<p class="font-body text-sm text-surface-variant">© 2026 Nepali Directory. All rights reserved.</p>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body text-sm text-surface-variant hover:text-white transition-colors" href="../about_us_nepali_directory/code.html">About Us</a>
+<a class="font-body text-sm text-surface-variant hover:text-white transition-colors" href="../contact_us_nepali_directory/code.html">Contact Support</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body text-sm text-surface-variant hover:text-white transition-colors" href="../privacy_policy_nepali_directory/code.html">Privacy Policy</a>
+<a class="font-body text-sm text-surface-variant hover:text-white transition-colors" href="../terms_of_service_nepali_directory/code.html">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body text-sm text-surface-variant hover:text-white transition-colors" href="../Login.dc.html">Business Login</a>
+</div>
+</div>
+</footer>
+</body></html>

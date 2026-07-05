@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; min-height:100%; }
+    body { font-family: 'Manrope', sans-serif; color: #1a1a1a; background: #f7f8fa; line-height: 1.45; min-height:100vh; }
+    a { color: #1a6dcc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font-family: inherit; cursor: pointer; border: 0; }
+    input, textarea { font-family: inherit; }
+    h1, h2, h3, h4, p { margin: 0; }
+  </style>
+</helmet>
+<!-- HEADER -->
+<header style="background:#fff;border-bottom:1px solid #e3e5e8;position:sticky;top:0;z-index:50;">
+<div style="max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+<a href="Home.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+<span style="background:#FFD400;color:#1a1a1a;font-weight:800;font-size:14px;padding:8px 10px;border-radius:3px;letter-spacing:-0.5px;line-height:1;">ND</span>
+<span style="color:#1a1a1a;font-weight:800;font-size:16px;letter-spacing:-0.3px;line-height:1.1;">Nepali<br/><span style="font-weight:600;color:#4b5563;">Directory</span></span>
+</a>
+<div style="display:flex;align-items:center;gap:14px;font-size:13px;color:#6b7280;">
+<span>Signed in as <strong style="color:#1a1a1a;">Rajan M.</strong></span>
+<div style="width:32px;height:32px;border-radius:50%;background:#FFD400;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;">RM</div>
+</div>
+</div>
+</header>
+<!-- BREADCRUMB -->
+<div style="background:#fff;border-bottom:1px solid #e3e5e8;">
+<div style="max-width:760px;margin:0 auto;padding:10px 24px;font-size:12px;color:#6b7280;">
+<a href="Home.dc.html">Home</a> <span style="margin:0 6px;">›</span>
+<a href="Business Detail.dc.html">Newa Lahana</a> <span style="margin:0 6px;">›</span>
+<span style="color:#1a1a1a;font-weight:600;">Write a Review</span>
+</div>
+</div>
+<main style="padding:36px 24px 48px;">
+<div style="max-width:760px;margin:0 auto;">
+<!-- Business header card -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:12px;padding:18px;display:flex;align-items:center;gap:18px;margin-bottom:24px;">
+<div style="width:72px;height:72px;border-radius:8px;background:#f0f2f5;overflow:hidden;flex-shrink:0;">
+<img alt="" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=200&amp;h=200&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/>
+</div>
+<div style="flex:1;min-width:0;">
+<div style="font-size:11px;color:#6b7280;font-weight:600;letter-spacing:1px;text-transform:uppercase;">You're reviewing</div>
+<a href="Business Detail.dc.html" style="font-size:20px;font-weight:800;color:#1a6dcc;letter-spacing:-0.3px;display:inline-block;margin-top:2px;">Newa Lahana</a>
+<div style="font-size:13px;color:#4b5563;margin-top:2px;">Newari Fine Dining · Inacho-3, Bhaktapur Durbar Square</div>
+</div>
+<a href="Home.dc.html" style="font-size:12px;font-weight:700;white-space:nowrap;">Change business</a>
+</div>
+<!-- Form -->
+<form style="background:#fff;border:1px solid #e3e5e8;border-radius:12px;padding:32px;">
+<h1 style="font-size:28px;font-weight:800;letter-spacing:-0.7px;margin:0 0 6px;">Share your experience.</h1>
+<p style="font-size:14px;color:#6b7280;margin:0 0 28px;">Honest reviews help thousands of Nepali customers make better choices.</p>
+<!-- Overall rating -->
+<div style="background:#fff7d1;border:1px solid #FFD400;border-radius:8px;padding:20px;margin-bottom:24px;">
+<div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1a1a;margin-bottom:6px;">Overall rating <span style="color:#b3261e;">*</span></div>
+<p style="font-size:12px;color:#4b5563;margin:0 0 14px;">How would you rate Newa Lahana overall?</p>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #FFD400;width:54px;height:54px;border-radius:8px;display:flex;align-items:center;justify-content:center;" type="button"><svg fill="#f5b300" height="26" viewbox="0 0 24 24" width="26"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg></button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #FFD400;width:54px;height:54px;border-radius:8px;display:flex;align-items:center;justify-content:center;" type="button"><svg fill="#f5b300" height="26" viewbox="0 0 24 24" width="26"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg></button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #FFD400;width:54px;height:54px;border-radius:8px;display:flex;align-items:center;justify-content:center;" type="button"><svg fill="#f5b300" height="26" viewbox="0 0 24 24" width="26"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg></button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #FFD400;width:54px;height:54px;border-radius:8px;display:flex;align-items:center;justify-content:center;" type="button"><svg fill="#f5b300" height="26" viewbox="0 0 24 24" width="26"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg></button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;width:54px;height:54px;border-radius:8px;display:flex;align-items:center;justify-content:center;" type="button"><svg fill="none" height="26" stroke="#9ca3af" stroke-width="1.5" viewbox="0 0 24 24" width="26"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg></button>
+<div style="margin-left:8px;background:#1a1a1a;color:#FFD400;padding:8px 14px;border-radius:6px;font-size:14px;font-weight:800;">4 / 5 — Very good</div>
+</div>
+</div>
+<!-- Sub-ratings -->
+<div style="margin-bottom:28px;">
+<div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1a1a;margin-bottom:14px;">Rate by category <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#9ca3af;">(optional)</span></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+<span style="font-size:13px;font-weight:600;">Food</span>
+<div style="display:flex;gap:3px;">
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+<span style="font-size:13px;font-weight:600;">Service</span>
+<div style="display:flex;gap:3px;">
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#e3e5e8" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#e3e5e8" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+<span style="font-size:13px;font-weight:600;">Atmosphere</span>
+<div style="display:flex;gap:3px;">
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+<span style="font-size:13px;font-weight:600;">Value for money</span>
+<div style="display:flex;gap:3px;">
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#f5b300" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+<svg fill="#e3e5e8" height="18" viewbox="0 0 24 24" width="18"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"></polygon></svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Title -->
+<div style="margin-bottom:18px;">
+<label style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1a1a;margin-bottom:8px;display:block;">Review title <span style="color:#b3261e;">*</span></label>
+<input style="width:100%;padding:13px 14px;border:1px solid #d3d6db;border-radius:4px;font-size:15px;font-weight:600;outline:0;" value="Beautiful courtyard, exceptional samay baji"/>
+</div>
+<!-- Body -->
+<div style="margin-bottom:18px;">
+<label style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1a1a;margin-bottom:8px;display:block;">Your review <span style="color:#b3261e;">*</span></label>
+<textarea placeholder="What did you love? What could be improved? Mention specific dishes, the staff, the ambiance — anything that helps other Nepali customers decide. Minimum 50 characters." rows="7" style="width:100%;padding:13px 14px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;resize:vertical;line-height:1.6;font-family:inherit;">We came for our wedding anniversary. The 12-course tasting was thoughtfully presented and the chef explained the Newari significance of each dish. Sapu mhicha was a highlight. Service was slightly slow but the courtyard setting and house-made aila made up for it. Will be back for Yomari Punhi.</textarea>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;font-size:12px;">
+<span style="color:#1a7d3a;font-weight:600;">✓ Looks good — 312 / 50 minimum characters</span>
+<span style="color:#6b7280;">312 / 2000</span>
+</div>
+</div>
+<!-- Photo upload -->
+<div style="margin-bottom:24px;">
+<label style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1a1a;margin-bottom:8px;display:block;">Add photos <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#9ca3af;">(optional, up to 6)</span></label>
+<div style="display:flex;gap:10px;flex-wrap:wrap;">
+<div style="width:90px;height:90px;border-radius:6px;overflow:hidden;position:relative;"><img alt="" src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200&amp;h=200&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/><button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;font-size:12px;line-height:1;" type="button">×</button></div>
+<div style="width:90px;height:90px;border-radius:6px;overflow:hidden;position:relative;"><img alt="" src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=200&amp;h=200&amp;fit=crop&amp;auto=format" style="width:100%;height:100%;object-fit:cover;"/><button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.7);color:#fff;font-size:12px;line-height:1;" type="button">×</button></div>
+<label style="width:90px;height:90px;border-radius:6px;border:2px dashed #d3d6db;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#6b7280;cursor:pointer;background:#fafbfc;">
+<svg fill="none" height="22" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24" width="22"><rect height="18" rx="2" width="18" x="3" y="3"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"></path></svg>
+<span style="font-size:11px;font-weight:700;margin-top:4px;">Add photo</span>
+</label>
+</div>
+<p style="font-size:11px;color:#6b7280;margin-top:8px;">JPG, PNG, HEIC up to 8 MB each. By uploading you confirm you own these photos.</p>
+</div>
+<!-- Visit details -->
+<div style="margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+<div>
+<label style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1a1a;margin-bottom:8px;display:block;">When did you visit?</label>
+<input style="width:100%;padding:11px 12px;border:1px solid #d3d6db;border-radius:4px;font-size:14px;outline:0;" type="month" value="2026-06"/>
+</div>
+<div>
+<label style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#1a1a1a;margin-bottom:8px;display:block;">Visit type</label>
+<div style="display:flex;gap:6px;flex-wrap:wrap;">
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff7d1;border:1px solid #FFD400;color:#1a1a1a;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:700;" type="button">Date / Anniversary</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#4b5563;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:600;" type="button">Family</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#4b5563;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:600;" type="button">Friends</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#4b5563;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:600;" type="button">Business</button>
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#4b5563;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:600;" type="button">Solo</button>
+</div>
+</div>
+</div>
+<!-- Anonymous toggle -->
+<label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#4b5563;cursor:pointer;line-height:1.5;padding:14px;background:#f7f8fa;border-radius:6px;margin-bottom:24px;">
+<input style="width:16px;height:16px;accent-color:#FFD400;cursor:pointer;margin-top:1px;flex-shrink:0;" type="checkbox"/>
+        Post anonymously. Your name will appear as "A NepaliDirectory member" — this can't be changed later.
+      </label>
+<!-- Submit -->
+<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;border-top:1px solid #e3e5e8;">
+<a href="Business Detail.dc.html" style="font-size:13px;color:#6b7280;font-weight:600;">← Cancel</a>
+<div style="display:flex;gap:10px;">
+<button onclick="this.style.opacity = '0.7'; setTimeout(() =&gt; this.style.opacity = '1', 200);" style="background:#fff;border:1px solid #d3d6db;color:#1a1a1a;padding:13px 22px;border-radius:4px;font-weight:700;font-size:14px;" type="button">Save draft</button>
+<button onclick="window.location.href='Write Review.dc.html';" style="background:#FFD400;color:#1a1a1a;padding:13px 28px;border-radius:4px;font-weight:800;font-size:14px;display:flex;align-items:center;gap:8px;" type="submit">
+            Post review
+            <svg fill="none" height="14" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+</button>
+</div>
+</div>
+</form>
+<!-- Guidelines -->
+<div style="background:#fff;border:1px solid #e3e5e8;border-radius:12px;padding:24px;margin-top:18px;">
+<div style="font-size:13px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px;">📋 Review guidelines</div>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;font-size:13px;color:#4b5563;line-height:1.55;">
+<li><strong style="color:#1a1a1a;">Be specific.</strong> Mention dishes, services or experiences — not just "good" or "bad".</li>
+<li><strong style="color:#1a1a1a;">Be honest.</strong> Only review places you've actually visited. Reviews are vetted before going live.</li>
+<li><strong style="color:#1a1a1a;">Be respectful.</strong> No personal attacks, hate speech, slurs or threats. Disagree civilly.</li>
+<li><strong style="color:#1a1a1a;">No private info.</strong> Don't share names of staff, phone numbers, or anything that identifies individuals.</li>
+<li><strong style="color:#1a1a1a;">No conflicts of interest.</strong> Don't review your own business, or businesses you're paid to promote.</li>
+</ul>
+<p style="font-size:12px;color:#6b7280;margin-top:14px;">Reviews violating our guidelines will be removed. <a href="Home.dc.html">Read the full policy →</a></p>
+</div>
+</div>
+</main>
+<footer style="text-align:center;padding:24px;font-size:12px;color:#6b7280;">
+<a href="Home.dc.html" style="color:#6b7280;">Home</a> · <a href="Privacy Policy.dc.html" style="color:#6b7280;">Privacy</a> · <a href="Terms of Service.dc.html" style="color:#6b7280;">Terms</a> · © 2026 NepaliDirectory
+</footer>
+</x-dc>
+</body>
+</html>
