@@ -45,8 +45,12 @@ export function Footer() {
             <Link href={routes.terms}>Terms of Use</Link>
             <Link href={routes.editorialPolicy}>Editorial Policy</Link>
             <Link href={routes.sitemap}>Sitemap</Link>
+            <Link href={routes.attribution}>Data Attribution</Link>
           </div>
-          <p>© 2026 Nepali Directory. All rights reserved.</p>
+          <p>
+            © 2026 Nepali Directory. All rights reserved. Map data ©{" "}
+            <Link href={routes.attribution}>OpenStreetMap contributors</Link>.
+          </p>
         </div>
       </div>
     </footer>

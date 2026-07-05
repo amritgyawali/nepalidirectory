@@ -50,7 +50,8 @@ export const routes = {
   requestCallback: "/request-callback",
   province: "/province",
   authors: "/authors",
-  editorialPolicy: "/editorial-policy"
+  editorialPolicy: "/editorial-policy",
+  attribution: "/attribution"
 } as const;
 
 export const primaryNav = [
