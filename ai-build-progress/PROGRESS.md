@@ -241,6 +241,13 @@ publishing the same thing twice.
 | 5 | Fix pre-existing bug: posts published with 0 internal links when the writer emitted no resolvable `{{category}}` placeholders (prompt §8.4.5 wants 3–8) | DONE — `link-injection.ts` now deterministically tops up to a floor of 3 |
 | 6 | Env: `BLOG_MAX_PER_DAY=4`, `CRON_SECRET` set, interval 300000; `.env.example` documented | DONE |
 | 7 | Verify: 64 tests + typecheck + lint + `next build` green; live smoke test published a real Groq post that renders on `/blog` with internal links; 2nd run correctly deduped (no duplicate) | DONE |
+| 8 | Super-admin "AI Activity" transparency page: live inventory of all 15 AI capabilities (what each does + effective on/off + live counts) + recent AI posts/jobs, backed by `GET /api/admin/ai-activity` (reads counts from Postgres) | DONE — `app/super-admin/ai-activity/page.tsx`, `app/api/admin/ai-activity/route.ts`, nav in `SuperAdminShell.tsx` |
+| 9 | Embedding-independent base-slug dedup guard so duplicates are suppressed even when no embedding provider works | DONE — `handlers/blog-generate.ts` + `generate/seo.ts` `baseSlug()` |
+
+**AI Activity status source:** the page reads effective on/off from the **env** runtime config
+(`loadAiConfig`), not the `feature_flags` table — the pipelines are gated by env, and the DB flags
+read all-off despite the engine running, so env is the truthful source. Live counts come from the
+tables the pipelines write to.
 
 **DATABASE_URL — DONE locally (2026-07-06).** Set to the Supabase **transaction pooler** in
 `.env.local`: `postgresql://postgres.frxszqimsvgraoldwrvn:<pwd %23-encoded>@aws-1-ap-south-1.pooler.supabase.com:6543/postgres`.

@@ -5797,6 +5797,33 @@ body.superadmin-mode > .footer {
   font-weight: 800;
 }
 
+/* AI Activity capability cards */
+.ai-cap__does {
+  margin: 0 0 0.6rem;
+  opacity: 0.85;
+  line-height: 1.5;
+}
+
+.ai-cap__status {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(140, 140, 160, 0.16);
+  white-space: nowrap;
+}
+
+.ai-cap__status--on {
+  background: rgba(80, 200, 120, 0.16);
+  color: #1a7f43;
+}
+
+.ai-cap__status--off {
+  background: rgba(220, 80, 80, 0.15);
+  color: #b23b3b;
+}
+
 .superadmin-switch-grid button {
   justify-content: space-between;
   min-height: 48px;

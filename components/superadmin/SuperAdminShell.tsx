@@ -11,6 +11,7 @@ import {
   Settings2,
   ShieldCheck,
   SlidersHorizontal,
+  Sparkles,
   UsersRound
 } from "lucide-react";
 import Link from "next/link";
@@ -29,6 +30,7 @@ const navItems = [
   { label: "Referrals", href: routes.superAdminReferrals, icon: BarChart3 },
   { label: "Controls", href: routes.superAdminControls, icon: SlidersHorizontal },
   { label: "AI Console", href: routes.adminAi, icon: BrainCircuit },
+  { label: "AI Activity", href: routes.superAdminAiActivity, icon: Sparkles },
   { label: "Audit Log", href: routes.superAdminAudit, icon: ClipboardList },
   { label: "Settings", href: routes.superAdminSettings, icon: Settings2 }
 ];
