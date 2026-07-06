@@ -23,6 +23,7 @@ export function makeTrendScanHandler(deps: TrendScanDeps): JobHandler {
     let fetched = 0;
     let created = 0;
     let deduped = 0;
+    let embedFailures = 0;
 
     for (const source of activeSources) {
       const fetchedItems = await fetchTrendSource(source, { fetchFn, youtubeApiKey: deps.youtubeApiKey });
@@ -31,7 +32,17 @@ export function makeTrendScanHandler(deps: TrendScanDeps): JobHandler {
 
       for (const item of fetchedItems) {
         const text = `${item.title}\n${item.summary ?? ""}`.trim();
-        const embedding = await providers.embedder().embed(text);
+        // Embedding is best-effort: it only sharpens clustering/dedup (the cluster handler treats an
+        // item with no vector as its own singleton group, and blog-generate's dedup already tolerates
+        // missing embeddings). A rate-limited or unavailable embedding provider must NOT fail the whole
+        // scan — otherwise a single 429 on the free tier poisons the trend pipeline for every source.
+        let embedding: number[] | undefined;
+        try {
+          embedding = await providers.embedder().embed(text);
+        } catch {
+          embedding = undefined;
+          embedFailures++;
+        }
         const inserted = await deps.items.create({
           sourceId: source.id,
           title: item.title,
@@ -45,6 +56,6 @@ export function makeTrendScanHandler(deps: TrendScanDeps): JobHandler {
       }
     }
 
-    return { sourcesScanned: activeSources.length, fetched, created, deduped };
+    return { sourcesScanned: activeSources.length, fetched, created, deduped, embedFailures };
   };
 }

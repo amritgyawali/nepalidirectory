@@ -53,6 +53,10 @@ type AutoBlogState = {
 
 const DEFAULT_INTERVAL_MS = 3 * 60 * 1000;
 const REVIEWED_BY = "auto-publisher";
+// BLOG_GENERATE must outrank TREND_SCAN/TREND_CLUSTER (default priority 5) so `runOnce` claims the
+// job we just enqueued rather than a lingering scan/cluster job — the cluster it references only
+// exists in this process's in-memory store and cannot survive to a later serverless invocation.
+const BLOG_GENERATE_PRIORITY = 10;
 const FALLBACK_URL = "https://www.nepalidirectory.com/editorial-policy#auto-blog-source";
 const FALLBACK_TOPICS = [
   {
@@ -196,7 +200,7 @@ async function seedFallbackCluster(runtime: BlogEngineRuntime): Promise<number |
 async function generateOneFallbackPost(runtime: BlogEngineRuntime): Promise<FallbackGenerateResult> {
   const clusterId = await seedFallbackCluster(runtime);
   if (!clusterId) return { generated: false, reason: "No fallback categories were available." };
-  await runtime.repo.enqueue({ type: "BLOG_GENERATE", payload: { clusterId }, priority: 4 });
+  await runtime.repo.enqueue({ type: "BLOG_GENERATE", payload: { clusterId }, priority: BLOG_GENERATE_PRIORITY });
   const job = await runtime.worker.runOnce();
   if (job?.status === "DONE") return { generated: true };
   return {
