@@ -41,6 +41,8 @@ export type AiConfig = {
   blogAutopublish: boolean;
   conciergeEnabled: boolean;
   crawlerEnabled: boolean;
+  /** Autonomous listing enrichment (descriptions/FAQs/tags) via the nightly cron sweep. */
+  enrichEnabled: boolean;
   /** Provider selection (Phase 1 wires real adapters; Phase 0 always resolves to mock). */
   primary: string;
   fallbacks: string[];
@@ -63,6 +65,7 @@ export function loadAiConfig(): AiConfig {
     blogAutopublish: bool("BLOG_AUTOPUBLISH"),
     conciergeEnabled: bool("CONCIERGE_ENABLED"),
     crawlerEnabled: bool("CRAWLER_ENABLED"),
+    enrichEnabled: bool("ENRICH_ENABLED"),
     primary: str("AI_PRIMARY", "gemini"),
     fallbacks: list("AI_FALLBACKS"),
     embeddingDim: num("EMBEDDING_DIM", 768),

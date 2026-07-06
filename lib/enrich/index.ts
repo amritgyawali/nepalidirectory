@@ -30,3 +30,6 @@ export { makeEnrichListingHandler } from "./enrich-listing";
 export { buildEmbeddingText, makeEmbedListingHandler } from "./embed-listing";
 export { enqueueEnrichmentSweep } from "./sweep";
 export { createEnrichmentRuntime } from "./runtime";
+export { getDefaultEnrichmentRuntime } from "./singleton";
+export { runAutoEnrichCycle } from "./auto-enrich";
+export type { AutoEnrichResult } from "./auto-enrich";

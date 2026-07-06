@@ -5099,6 +5099,14 @@ textarea:focus-visible {
   padding-block: 18px;
 }
 
+/* Community Q&A: instant AI answer card + community publish form stacked. */
+.qa-stack {
+  display: grid;
+  gap: 18px;
+  width: 100%;
+  max-width: 660px;
+}
+
 @keyframes ai-spin {
   to {
     transform: rotate(360deg);

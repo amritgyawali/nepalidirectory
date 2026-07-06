@@ -35,6 +35,14 @@ export type RegistryDeps = {
   fetchFn?: FetchFn;
 };
 
+/**
+ * Current free-tier Gemini defaults (verified July 2026): the older `gemini-2.0-flash` and
+ * `text-embedding-004` were retired in 2026. These let the owner upgrade to real Gemini by setting
+ * ONLY `GEMINI_API_KEY` (no `GEMINI_MODEL`/`GEMINI_EMBED_MODEL` needed) — override via env anytime.
+ */
+const DEFAULT_GEMINI_MODEL = "gemini-2.5-flash";
+const DEFAULT_GEMINI_EMBED_MODEL = "gemini-embedding-001";
+
 function envNum(name: string, fallback: number): number {
   const v = process.env[name];
   const n = v ? Number(v) : NaN;
@@ -54,11 +62,14 @@ function buildAdapter(id: string, cfg: AiConfig, fetchFn?: FetchFn): AiProvider 
   const env = process.env;
   switch (id) {
     case "gemini":
-      return env.GEMINI_API_KEY && env.GEMINI_MODEL
+      // Only the API key is required; model IDs default to the current free-tier models so the
+      // owner can "just add GEMINI_API_KEY" in Vercel and get real answers with no other config.
+      return env.GEMINI_API_KEY
         ? new GeminiAdapter({
             apiKey: env.GEMINI_API_KEY,
-            model: env.GEMINI_MODEL,
-            embedModel: env.GEMINI_EMBED_MODEL ?? "",
+            model: env.GEMINI_MODEL ?? DEFAULT_GEMINI_MODEL,
+            embedModel: env.GEMINI_EMBED_MODEL ?? DEFAULT_GEMINI_EMBED_MODEL,
+            embeddingDim: cfg.embeddingDim,
             fetchFn,
           })
         : null;
@@ -107,11 +118,12 @@ function buildEmbedAdapter(cfg: AiConfig, fetchFn?: FetchFn): AiProvider | null 
       fetchFn,
     });
   }
-  if (env.GEMINI_API_KEY && env.GEMINI_EMBED_MODEL) {
+  if (env.GEMINI_API_KEY) {
     return new GeminiAdapter({
       apiKey: env.GEMINI_API_KEY,
-      model: env.GEMINI_MODEL ?? "",
-      embedModel: env.GEMINI_EMBED_MODEL,
+      model: env.GEMINI_MODEL ?? DEFAULT_GEMINI_MODEL,
+      embedModel: env.GEMINI_EMBED_MODEL ?? DEFAULT_GEMINI_EMBED_MODEL,
+      embeddingDim: cfg.embeddingDim,
       fetchFn,
     });
   }

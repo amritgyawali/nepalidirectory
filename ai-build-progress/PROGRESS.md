@@ -5,7 +5,7 @@
 > Source of truth for the plan: [`NEPALIDIRECTORY_AI_BUILD_PROMPT.md`](../NEPALIDIRECTORY_AI_BUILD_PROMPT.md).
 
 **Last updated:** 2026-07-06
-**Current phase:** Phase 8 - automatic serverless auto-blog publishing
+**Current phase:** Phase 9 - Vercel auto-upgrade + autonomy (auto-enrich cron + AI Q&A answers)
 **Phase 0 status:** DONE  ·  **Phase 1 status:** DONE  ·  **Phase 2 status:** DONE  ·
 **Phase 3 status:** DONE  ·  **Phase 4 status:** DONE  ·
 **Phase 5 status:** DONE - verified (lint + typecheck + 63 tests green + `next build` succeeds,
@@ -16,6 +16,34 @@ green + `next build` succeeds)
 green + `next build` succeeds)
 **Next:** run V16 in Supabase (`owner_reply_drafts.review_ref` follow-up), then run the external
 SEO audit commands against a staging URL.
+
+---
+
+## Phase 9 (2026-07-06) — Vercel auto-upgrade + next autonomy layer
+
+Verified: lint + typecheck + **78 tests** green + `next build` succeeds (incl. new
+`/api/cron/enrich`, `/api/qa/answer`, `/ask-question`).
+
+- **"Just add GEMINI_API_KEY" now actually works.** `providers/registry.ts` no longer requires
+  `GEMINI_MODEL`/`GEMINI_EMBED_MODEL`; they default in-code to current free-tier IDs
+  (`gemini-2.5-flash`, `gemini-embedding-001` — the old `gemini-2.0-flash`/`text-embedding-004`
+  were retired in 2026). `GeminiAdapter.embed()` now sends `outputDimensionality=EMBEDDING_DIM`
+  (gemini-embedding-001 defaults to 3072) and L2-normalizes, so vectors match the `vector(768)`
+  column.
+- **Autonomy A — auto-enrich cron.** `lib/enrich/{singleton,auto-enrich}.ts` +
+  `GET/POST /api/cron/enrich` (nightly `15 18 * * *` in vercel.json = ~00:00 NPT). One
+  `runAutoEnrichCycle()` enqueues a capped sweep (`ENRICH_DAILY_CAP`) and drains ENRICH→EMBED;
+  idempotent (only `aiEnrichedAt==null`, owner descriptions untouched). Gated by
+  `AI_ENABLED` + new `ENRICH_ENABLED` flag. Persists only with `DATABASE_URL` set.
+- **Autonomy B — AI answer to every Q&A.** `QA_ANSWER_V1` prompt + `lib/qa/answer.ts` +
+  `POST /api/qa/answer`, wired into `/ask-question` via `components/qa/AskQuestion.tsx`. Same
+  grounding contract as the concierge; public-AI floor backs it so it never hard-fails without keys.
+- **Vercel finding (action needed):** project `nepalidirectory`
+  (`prj_vxl6JGJ8gNClAo89JIQSw9SzPanE`, team `team_sTXwJcv6hWk1g2lWHPw8esdr`) is connected to GitHub
+  main and auto-deploys, BUT production is stale at commit `81a7115` — the newer AI commits on
+  origin/main (`86d4d38`) never produced a deployment. Even pre-Phase-9 AI work isn't live. Owner
+  must trigger a fresh deploy (and confirm Git auto-deploy is on) + set env vars. Env vars cannot be
+  set from here (no MCP tool + they're secrets).
 
 ---
 

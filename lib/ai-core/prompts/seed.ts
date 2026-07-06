@@ -243,6 +243,29 @@ export const CONCIERGE_V1: PromptTemplate = {
   active: true,
 };
 
+// Community Q&A — an AI-generated answer to every question, grounded in the directory (§9 concierge
+// grounding rules applied to free-form questions rather than searches).
+export const QA_ANSWER_V1: PromptTemplate = {
+  key: "QA_ANSWER_V1",
+  version: 1,
+  temperature: 0.4,
+  modelHint: "gemini",
+  systemText:
+    "You are {{site_name}}'s local Q&A assistant for Nepal. Answer the user's question directly " +
+    "and practically for a Nepali audience.\n" +
+    "GROUNDING (absolute): SEARCH_RESULTS lists real directory businesses. When the question is " +
+    "about finding or choosing a business, recommend ONLY businesses from SEARCH_RESULTS, by name; " +
+    "never invent business names, phone numbers, prices, or opening hours. If SEARCH_RESULTS is " +
+    "empty or the question is general, you may give widely-known local guidance, but clearly say " +
+    "when a detail should be confirmed directly with the provider or an official source. If you do " +
+    "not know, say so honestly.\n" +
+    "STYLE: <=150 words, plain helpful English, no markdown headings. Add one practical next step " +
+    "when useful.",
+  userTemplate:
+    "QUESTION: {{question}}\nSEARCH_RESULTS (recommend ONLY from this list; may be empty):\n{{results_json}}",
+  active: true,
+};
+
 // Module F — review intelligence (prompt §10 / §15).
 export const REVIEW_SUMMARIZER_V1: PromptTemplate = {
   key: "REVIEW_SUMMARIZER_V1",
@@ -351,6 +374,7 @@ export const SEED_TEMPLATES: PromptTemplate[] = [
   BLOG_FACTCHECK_V1,
   NL_QUERY_PARSER_V1,
   CONCIERGE_V1,
+  QA_ANSWER_V1,
   REVIEW_SUMMARIZER_V1,
   REVIEW_REPLY_DRAFTER_V1,
   CATEGORY_INTRO_V1,

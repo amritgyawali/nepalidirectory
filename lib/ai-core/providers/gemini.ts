@@ -13,6 +13,13 @@ export type GeminiConfig = {
   apiKey: string;
   model: string;
   embedModel: string;
+  /**
+   * Requested embedding output dimension. `gemini-embedding-001` defaults to 3072; we ask for
+   * exactly `embeddingDim` (must equal the pgvector column's `vector(N)`) via
+   * `outputDimensionality`. Vectors below the native size are L2-normalized here because Google
+   * only returns pre-normalized vectors at the full 3072 dimension.
+   */
+  embeddingDim?: number;
   baseUrl?: string;
   fetchFn?: FetchFn;
 };
@@ -25,6 +32,14 @@ type GeminiGenerateResponse = {
 type GeminiEmbedResponse = { embedding?: { values?: number[] } };
 
 const DEFAULT_BASE = "https://generativelanguage.googleapis.com/v1beta";
+
+/** L2-normalize a vector so downstream cosine/dot-product similarity is well-defined. */
+function normalize(values: number[]): number[] {
+  let sumSq = 0;
+  for (const v of values) sumSq += v * v;
+  const mag = Math.sqrt(sumSq);
+  return mag > 0 ? values.map((v) => v / mag) : values;
+}
 
 export class GeminiAdapter implements AiProvider {
   private readonly cfg: GeminiConfig;
@@ -84,16 +99,23 @@ export class GeminiAdapter implements AiProvider {
 
   async embed(text: string): Promise<number[]> {
     const url = `${this.base}/models/${this.cfg.embedModel}:embedContent?key=${this.cfg.apiKey}`;
+    const dim = this.cfg.embeddingDim;
     const res = await this.fetchFn(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ content: { parts: [{ text }] } }),
+      body: JSON.stringify({
+        content: { parts: [{ text }] },
+        ...(dim && dim > 0 ? { outputDimensionality: dim } : {}),
+      }),
     });
     if (!res.ok) {
       throw new ProviderUnavailableError("gemini", res.status === 429 ? "rate_limit" : "error", `gemini embed HTTP ${res.status}`);
     }
     const data = (await res.json()) as GeminiEmbedResponse;
-    return data.embedding?.values ?? [];
+    const values = data.embedding?.values ?? [];
+    // gemini-embedding-001 only returns normalized vectors at its native 3072 dims; anything we
+    // truncate via outputDimensionality must be re-normalized so cosine/dot comparisons stay valid.
+    return dim && dim > 0 && values.length === dim ? normalize(values) : values;
   }
 
   async healthy(): Promise<boolean> {
