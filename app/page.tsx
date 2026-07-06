@@ -1,5 +1,6 @@
 import { BadgeCheck, Building2, Grid3X3, MapPin, Search, Star, Tag } from "lucide-react";
 import Link from "next/link";
+import { AiConcierge } from "@/components/ai/AiConcierge";
 import { GuideCard } from "@/components/content/GuideCard";
 import { AppPromo } from "@/components/directory/AppPromo";
 import { BusinessCard } from "@/components/directory/BusinessCard";
@@ -143,6 +144,20 @@ export default function HomePage() {
             <BadgeCheck size={17} aria-hidden />
             Verified profiles, real contact details, city pages, offers and owner tools in one directory.
           </div>
+        </div>
+      </section>
+
+      <section className="section ai-home-band">
+        <div className="container ai-home-band__grid">
+          <div>
+            <p className="eyebrow">AI Autopilot</p>
+            <h2>Let AI handle local discovery, matching and follow-up.</h2>
+            <p>
+              The assistant searches grounded directory data, ranks options, writes useful answers and hands visitors straight to calls,
+              websites and verified profiles.
+            </p>
+          </div>
+          <AiConcierge />
         </div>
       </section>
 

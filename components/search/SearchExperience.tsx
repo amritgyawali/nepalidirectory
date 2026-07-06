@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useMemo, useState } from "react";
+import { AiConcierge } from "@/components/ai/AiConcierge";
 import { BusinessCard } from "@/components/directory/BusinessCard";
 import { Stars } from "@/components/ui/Stars";
 import { businesses, categories, cityLinks, popularSearches } from "@/lib/data";
@@ -154,6 +155,12 @@ export function SearchExperience({ initialQuery, initialLocation }: SearchExperi
             </label>
             <button type="submit">Search</button>
           </form>
+        </div>
+      </section>
+
+      <section className="search-ai-band">
+        <div className="container">
+          <AiConcierge compact initialPrompt={query ? [query, location].filter(Boolean).join(" in ") : ""} />
         </div>
       </section>
 

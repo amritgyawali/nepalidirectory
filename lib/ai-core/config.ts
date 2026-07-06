@@ -35,6 +35,8 @@ function list(name: string): string[] {
 export type AiConfig = {
   /** Master switch (prompt AI_ENABLED). */
   enabled: boolean;
+  /** Free, no-provider public fallback for search/concierge when real AI is not configured. */
+  publicAiFallback: boolean;
   blogEngineEnabled: boolean;
   blogAutopublish: boolean;
   conciergeEnabled: boolean;
@@ -56,6 +58,7 @@ export type AiConfig = {
 export function loadAiConfig(): AiConfig {
   return {
     enabled: bool("AI_ENABLED"),
+    publicAiFallback: bool("PUBLIC_AI_FALLBACK", true),
     blogEngineEnabled: bool("BLOG_ENGINE_ENABLED"),
     blogAutopublish: bool("BLOG_AUTOPUBLISH"),
     conciergeEnabled: bool("CONCIERGE_ENABLED"),

@@ -25,6 +25,7 @@ export async function GET() {
   // pipelines — the feature_flags table is a separate console layer and can read differently.
   const config = {
     enabled: cfg.enabled,
+    publicAiFallback: cfg.publicAiFallback,
     blogEngineEnabled: cfg.blogEngineEnabled,
     blogAutopublish: cfg.blogAutopublish,
     conciergeEnabled: cfg.conciergeEnabled,

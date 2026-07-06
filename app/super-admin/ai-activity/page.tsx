@@ -21,6 +21,7 @@ import { useEffect, useState, type ComponentType } from "react";
 
 type RuntimeConfig = {
   enabled: boolean;
+  publicAiFallback: boolean;
   blogEngineEnabled: boolean;
   blogAutopublish: boolean;
   conciergeEnabled: boolean;
@@ -59,12 +60,21 @@ type Capability = {
   icon: ComponentType<{ size?: number; "aria-hidden"?: boolean }>;
   /** Runtime env switch that gates it, if any. Others run whenever the AI master switch is on. */
   envKey?: keyof RuntimeConfig;
+  masterRequired?: boolean;
   does: string;
   /** Live activity line, given the metrics snapshot. */
   metric: (m: Metrics) => string;
 };
 
 const CAPABILITIES: Capability[] = [
+  {
+    title: "Free public autopilot",
+    icon: Sparkles,
+    envKey: "publicAiFallback",
+    masterRequired: false,
+    does: "Answers visitors from local directory data when provider keys or AI env switches are not available.",
+    metric: (m) => `${m.listings.total} listings available without paid API calls`,
+  },
   {
     title: "Listing enrichment",
     icon: Store,
@@ -184,7 +194,12 @@ export default function SuperAdminAiActivityPage() {
   function statusFor(cap: Capability): { label: string; tone: "on" | "off" } {
     // Effective runtime state: the AI master switch gates everything; a few capabilities have their
     // own env switch; the rest run whenever the master is on.
-    if (!config || !config.enabled) return { label: "Off", tone: "off" };
+    if (!config) return { label: "Off", tone: "off" };
+    if (cap.masterRequired === false && cap.envKey) {
+      const on = Boolean(config[cap.envKey]);
+      return { label: on ? "On" : "Off", tone: on ? "on" : "off" };
+    }
+    if (!config.enabled) return { label: "Off", tone: "off" };
     if (cap.envKey) {
       const on = Boolean(config[cap.envKey]);
       return { label: on ? "On" : "Off", tone: on ? "on" : "off" };
