@@ -97,7 +97,12 @@ export function createBlogEngineRuntime(overrides: BlogEngineRuntimeOverrides = 
 
     let generated = 0;
     for (const s of selected) {
-      await acquisition.repo.enqueue({ type: "BLOG_GENERATE", payload: { clusterId: s.clusterId }, priority: 4 });
+      // BLOG_GENERATE outranks TREND_SCAN/TREND_CLUSTER (default priority 5) on purpose: the queue
+      // is Postgres-persistent but the cluster it consumes lives only in THIS process's in-memory
+      // store, so the just-enqueued job must be the very next one `runOnce` claims — otherwise a
+      // lingering scan/cluster job is picked first and the ephemeral cluster is gone by the time the
+      // generate job finally runs in a later invocation (BLOG_GENERATE_PRIORITY in auto-publisher.ts).
+      await acquisition.repo.enqueue({ type: "BLOG_GENERATE", payload: { clusterId: s.clusterId }, priority: 10 });
       const job = await acquisition.worker.runOnce();
       if (job?.status === "DONE") generated++;
     }

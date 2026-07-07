@@ -37,7 +37,11 @@ export function makeBlogGenerateHandler(deps: BlogGenerateDeps): JobHandler {
     if (!Number.isFinite(clusterId)) throw new Error("BLOG_GENERATE: payload.clusterId required");
 
     const cluster = await deps.clusters.get(clusterId);
-    if (!cluster) throw new Error(`BLOG_GENERATE: cluster ${clusterId} not found`);
+    // Clusters live only in this process's in-memory store, but the job queue is Postgres-persistent.
+    // A BLOG_GENERATE job left over from a previous process/cycle points at a cluster that no longer
+    // exists and can NEVER succeed — discard it (job DONE) instead of throwing, which would retry it
+    // four times as a high-priority PENDING job and starve the current cycle's real generate job.
+    if (!cluster) return { clusterId, discarded: "cluster-missing" };
 
     const selectorOutput = (cluster.selectorOutput ?? {}) as {
       angle?: string;

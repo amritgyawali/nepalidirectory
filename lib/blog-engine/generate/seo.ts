@@ -28,7 +28,12 @@ function trimAtWord(value: string, max: number): string {
  * when no embedding provider is configured (prompt §8.4.5 duplicate suppression).
  */
 export function baseSlug(draft: { slug?: string; title: string }): string {
-  return (draft.slug || slugify(draft.title)).slice(0, 80) || "post";
+  const raw = draft.slug || slugify(draft.title);
+  if (raw.length <= 80) return raw || "post";
+  // Cut at a word (hyphen) boundary so long titles don't produce slugs like `…-comprehensive-g`.
+  const cut = raw.slice(0, 80);
+  const lastHyphen = cut.lastIndexOf("-");
+  return (lastHyphen > 40 ? cut.slice(0, lastHyphen) : cut) || "post";
 }
 
 export function buildSeo(
