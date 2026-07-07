@@ -43,6 +43,22 @@ export type RegistryDeps = {
 const DEFAULT_GEMINI_MODEL = "gemini-2.5-flash";
 const DEFAULT_GEMINI_EMBED_MODEL = "gemini-embedding-001";
 
+/**
+ * Embedding models Google retired in 2026 — the endpoint now returns HTTP 404 for these, which
+ * exhausts the (Gemini-only, serverless) embed chain and silently drops search/enrichment to a
+ * non-vector path. A stale `GEMINI_EMBED_MODEL` carrying one of these (common in older env setups)
+ * would otherwise break embeddings in prod even though the API key is valid, so we transparently
+ * upgrade them to the current default instead of trusting the dead value.
+ */
+const RETIRED_GEMINI_EMBED_MODELS = new Set(["text-embedding-004", "text-embedding-preview-0409", "embedding-001"]);
+
+/** Resolve the Gemini embedding model from env, upgrading known-retired IDs to the current default. */
+function geminiEmbedModel(): string {
+  const v = process.env.GEMINI_EMBED_MODEL?.trim();
+  if (!v || RETIRED_GEMINI_EMBED_MODELS.has(v)) return DEFAULT_GEMINI_EMBED_MODEL;
+  return v;
+}
+
 function envNum(name: string, fallback: number): number {
   const v = process.env[name];
   const n = v ? Number(v) : NaN;
@@ -68,7 +84,7 @@ function buildAdapter(id: string, cfg: AiConfig, fetchFn?: FetchFn): AiProvider 
         ? new GeminiAdapter({
             apiKey: env.GEMINI_API_KEY,
             model: env.GEMINI_MODEL ?? DEFAULT_GEMINI_MODEL,
-            embedModel: env.GEMINI_EMBED_MODEL ?? DEFAULT_GEMINI_EMBED_MODEL,
+            embedModel: geminiEmbedModel(),
             embeddingDim: cfg.embeddingDim,
             fetchFn,
           })
@@ -122,7 +138,7 @@ function buildEmbedAdapter(cfg: AiConfig, fetchFn?: FetchFn): AiProvider | null 
     return new GeminiAdapter({
       apiKey: env.GEMINI_API_KEY,
       model: env.GEMINI_MODEL ?? DEFAULT_GEMINI_MODEL,
-      embedModel: env.GEMINI_EMBED_MODEL ?? DEFAULT_GEMINI_EMBED_MODEL,
+      embedModel: geminiEmbedModel(),
       embeddingDim: cfg.embeddingDim,
       fetchFn,
     });
