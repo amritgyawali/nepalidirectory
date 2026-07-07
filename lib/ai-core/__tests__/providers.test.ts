@@ -190,7 +190,7 @@ describe("FallbackChain", () => {
     });
     const chain = new FallbackChain([b1, b2]);
     await expect(chain.complete(req)).rejects.toSatisfy(
-      (e: unknown) => e instanceof AllProvidersExhaustedError && e.reasons.every((r) => r.endsWith(":budget")),
+      (e: unknown) => e instanceof AllProvidersExhaustedError && e.reasons.every((r) => r.includes(":budget")),
     );
   });
 });

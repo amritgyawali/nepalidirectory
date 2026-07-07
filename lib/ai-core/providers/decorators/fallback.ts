@@ -30,7 +30,7 @@ export class FallbackChain implements AiProvider {
       } catch (err) {
         const reason =
           err instanceof ProviderUnavailableError
-            ? `${err.provider}:${err.reason}`
+            ? `${err.provider}:${err.reason}:${err.message}`
             : `${p.id()}:${err instanceof Error ? err.message : "error"}`;
         reasons.push(reason);
       }

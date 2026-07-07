@@ -62,11 +62,22 @@ export async function hybridSearch(
     .sort((a, b) => b.score - a.score);
   const ftsRank = new Map(ftsRanked.map((x, i) => [x.l.id, i + 1]));
 
-  const queryEmbedding = await deps.embed(query);
+  // Embeddings are an enhancement over FTS, not a hard dependency. If the embed provider is
+  // unavailable (e.g. a misconfigured/rate-limited Gemini key in prod) we degrade to full-text
+  // ranking instead of throwing — otherwise the whole search/concierge/Q&A route would collapse
+  // to the non-AI local fallback even though real NL parsing + FTS retrieval succeeded.
+  let queryEmbedding: number[] | null = null;
+  try {
+    queryEmbedding = await deps.embed(query);
+  } catch (err) {
+    console.warn("[hybridSearch] query embedding unavailable, ranking by full-text only:", err instanceof Error ? err.message : err);
+  }
   const vecScored: { l: Listing; score: number }[] = [];
-  for (const l of filtered) {
-    const stored = await deps.embeddings.get(l.id);
-    if (stored) vecScored.push({ l, score: cosineSimilarity(stored.embedding, queryEmbedding) });
+  if (queryEmbedding) {
+    for (const l of filtered) {
+      const stored = await deps.embeddings.get(l.id);
+      if (stored) vecScored.push({ l, score: cosineSimilarity(stored.embedding, queryEmbedding) });
+    }
   }
   vecScored.sort((a, b) => b.score - a.score);
   const vecRank = new Map(vecScored.map((x, i) => [x.l.id, i + 1]));
