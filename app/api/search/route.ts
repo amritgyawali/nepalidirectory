@@ -50,6 +50,9 @@ export async function GET(req: NextRequest) {
   try {
     ({ parsed, results } = await runtime.search(q, 20, { category, city, openNow }));
   } catch (error) {
+    // Surface the real provider failure in server logs (was silently swallowed, making
+    // "why is live AI falling back to local?" undebuggable). Public response is unchanged.
+    console.error("[api/search] provider path failed, using local fallback:", error);
     if (!config.publicAiFallback) throw error;
     const location = searchParams.get("location")?.trim() || city;
     const reply = localAutopilotSearch(q, location, 20);
