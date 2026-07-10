@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { createReviewsAiRuntime } from "@/lib/reviews-ai";
 import {
+  allSitemapEntries,
   buildEvergreenItemListJsonLd,
   getCategorySitemapEntries,
   getEvergreenPage,
   getEvergreenPages,
   localBusinessSubtype,
+  sitemapIndexXml,
   sitemapXml,
   suggestInternalLinks,
 } from "../index";
@@ -38,6 +40,45 @@ describe("SEO/AEO automation (prompt Module G)", () => {
 
     expect(xml).toContain("<urlset");
     expect(xml).toContain("/best/restaurants/kathmandu");
+  });
+
+  it("publishes each canonical public URL once and excludes private routes", () => {
+    const entries = allSitemapEntries();
+    const urls = entries.map((entry) => entry.url);
+    const paths = urls.map((url) => new URL(url).pathname);
+    const excludedPrefixes = [
+      "/api",
+      "/admin",
+      "/super-admin",
+      "/dashboard",
+      "/account",
+      "/search",
+      "/profile",
+      "/login",
+      "/register",
+      "/forgot-password",
+    ];
+
+    expect(new Set(urls).size).toBe(urls.length);
+    expect(paths).toContain("/questions/trekking-annapurna");
+    expect(
+      paths.some((path) =>
+        excludedPrefixes.some((prefix) => path === prefix || path.startsWith(`${prefix}/`)),
+      ),
+    ).toBe(false);
+  });
+
+  it("generates a true sitemap index and omits invented crawl hints", () => {
+    const indexXml = sitemapIndexXml([
+      { url: "https://www.nepalidirectory.com/sitemap-pages.xml" },
+      { url: "https://www.nepalidirectory.com/sitemap-blog.xml" },
+    ]);
+    const urlXml = sitemapXml(allSitemapEntries());
+
+    expect(indexXml).toContain("<sitemapindex");
+    expect(indexXml).toContain("/sitemap-pages.xml");
+    expect(urlXml).not.toContain("<changefreq>");
+    expect(urlXml).not.toContain("<priority>");
   });
 
   it("suggests internal links for editor approval without mutating content", () => {

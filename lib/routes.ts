@@ -14,6 +14,7 @@ export const routes = {
   qa: "/qa",
   qaCommunity: "/qa/community",
   askQuestion: "/ask-question",
+  question: "/questions/trekking-annapurna",
   restaurantQa: "/restaurant-qa",
   blog: "/blog",
   blogPost: "/blog/annapurna-circuit-guide",

@@ -25,9 +25,6 @@ export const metadata: Metadata = {
   description:
     "Find verified local businesses, restaurants, doctors, hotels, services and city guides across Nepal.",
   metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: "/"
-  },
   keywords: [
     "Nepali Directory",
     "Nepal business directory",

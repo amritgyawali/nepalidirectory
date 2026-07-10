@@ -6,9 +6,18 @@ import { blogPosts, getBlogCategories } from "@/lib/blog";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
 import { routes } from "@/lib/routes";
+import { isIndexableRoute } from "@/lib/seo-config";
+import { getEvergreenPages } from "@/lib/seo-auto";
 
-const pages = Object.entries(routes).filter(([key]) => key !== "home" && key !== "blogPost" && key !== "city");
+const pages = Object.entries(routes).filter(
+  ([key, href]) =>
+    key !== "home" &&
+    key !== "blogPost" &&
+    key !== "city" &&
+    isIndexableRoute(href),
+);
 const blogCategories = getBlogCategories();
+const evergreenPages = getEvergreenPages();
 
 export default function SitemapPage() {
   return (
@@ -45,6 +54,11 @@ export default function SitemapPage() {
           {cityDirectoryPages.map((city) => (
             <Link key={city.slug} href={city.href}>
               City: {city.name}
+            </Link>
+          ))}
+          {evergreenPages.map((page) => (
+            <Link key={`${page.categorySlug}-${page.citySlug}`} href={page.href}>
+              Local answer: {page.title}
             </Link>
           ))}
         </div>

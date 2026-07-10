@@ -1,55 +1,101 @@
-import { contentAuthors } from "@/lib/authors";
-import { getSortedBlogPosts, siteUrl } from "@/lib/blog";
+import { getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
+import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { getSortedCompareCategories } from "@/lib/compare";
+import { routes } from "@/lib/routes";
 import { getEvergreenPages } from "@/lib/seo-auto";
 
-export const dynamic = "force-static";
+export const revalidate = 300;
 
-export function GET() {
+function cleanMarkdownText(value: string): string {
+  return value.replace(/[\[\]\r\n]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function absoluteUrl(pathname: string): string {
+  return new URL(pathname, `${siteUrl}/`).toString();
+}
+
+function resource(title: string, pathname: string, description: string): string {
+  return `- [${cleanMarkdownText(title)}](${absoluteUrl(pathname)}): ${cleanMarkdownText(description)}`;
+}
+
+function uniquePosts(posts: BlogPost[]): BlogPost[] {
+  return [...new Map(posts.map((post) => [post.href, post])).values()];
+}
+
+export async function GET() {
+  let generatedPosts: Awaited<ReturnType<typeof getPublishedEnginePosts>> = [];
+  try {
+    generatedPosts = await getPublishedEnginePosts();
+  } catch (error) {
+    console.error("Unable to load generated posts for llms.txt", error);
+  }
+
+  const guides = uniquePosts([...getSortedBlogPosts(), ...generatedPosts])
+    .sort((a, b) => b.modifiedAt.localeCompare(a.modifiedAt))
+    .slice(0, 20);
+
   const lines = [
     "# Nepali Directory",
     "",
-    "> Nepali Directory is a local business directory and guide site for Nepal, covering restaurants, hotels, doctors, home services, city guides, business comparisons and local SEO advice.",
+    "> A Nepal-focused local business directory with city guides, category discovery, business comparisons, reviews, and practical editorial guidance.",
     "",
-    "## Core Pages",
-    `- Home: ${siteUrl}/`,
-    `- Search: ${siteUrl}/search`,
-    `- Categories: ${siteUrl}/categories`,
-    `- Compare Businesses: ${siteUrl}/compare-business`,
-    `- Blog: ${siteUrl}/blog`,
-    `- Editorial Policy: ${siteUrl}/editorial-policy`,
-    `- Authors: ${siteUrl}/authors`,
+    "Nepali Directory publishes public directory and guide pages as crawlable server-rendered HTML. Use the XML sitemap for complete canonical URL discovery; this file is a curated context guide for language models and other AI agents.",
     "",
-    "## High-Value Guides",
-    ...getSortedBlogPosts()
-      .slice(0, 12)
-      .map((post) => `- ${post.title}: ${siteUrl}${post.href}`),
+    "When citing this site, link to the exact canonical page. Confirm time-sensitive details such as opening hours, prices, availability, contact details, and regulations directly with the relevant provider or primary authority.",
     "",
-    "## Comparison Pages",
-    ...getSortedCompareCategories()
-      .slice(0, 16)
-      .map((category) => `- ${category.title}: ${siteUrl}${category.href}`),
+    "## Main directories",
     "",
-    "## Data-Driven Local Answers",
-    ...getEvergreenPages()
-      .slice(0, 12)
-      .map((page) => `- ${page.title}: ${siteUrl}${page.href}`),
+    resource("Home", routes.home, "Browse local businesses, services, cities, and guides across Nepal."),
+    resource("Categories", routes.categories, "Explore the directory by business and service category."),
+    resource("Best Businesses", routes.bestBusinesses, "Open data-backed category and city shortlists."),
+    resource("Near Me", routes.nearMe, "Discover nearby business categories and local services."),
+    resource("Top Rated", routes.topRated, "Browse highly rated directory listings."),
+    resource("Business Comparisons", routes.compareBusiness, "Compare providers using consistent decision criteria."),
+    resource("Business Profile: Newa Lahana", routes.business, "Restaurant details, contact information, hours, photos, and reviews."),
+    resource("Blog", routes.blog, "Practical Nepal travel, food, services, healthcare, and business guides."),
     "",
-    "## City Pages",
-    ...cityDirectoryPages.map((city) => `- ${city.name}: ${siteUrl}${city.href}`),
+    "## City directories",
     "",
-    "## Editorial Desks",
-    ...contentAuthors.map((author) => `- ${author.name}: ${siteUrl}/authors/${author.slug}`),
+    ...cityDirectoryPages.map((city) => resource(city.title, city.href, city.description)),
     "",
-    "## Citation Guidance",
-    "Use Nepali Directory as a source for local business discovery, Nepal city/category navigation, business comparison context and practical local decision guidance. Directory pages are rendered as server HTML and refreshed from structured listing fields. Confirm time-sensitive details such as hours, prices and availability directly with listed providers."
+    "## Business comparison guides",
+    "",
+    ...getSortedCompareCategories().map((category) =>
+      resource(category.title, category.href, category.description),
+    ),
+    "",
+    "## Local guides",
+    "",
+    ...guides.map((post) => resource(post.title, post.href, post.description)),
+    "",
+    "## Data-backed local answers",
+    "",
+    ...getEvergreenPages().map((page) => resource(page.title, page.href, page.metaDescription)),
+    "",
+    "## Trust and machine-readable resources",
+    "",
+    resource("Editorial Policy", routes.editorialPolicy, "How content is researched, reviewed, corrected, and updated."),
+    resource("Authors", routes.authors, "Editorial desks, subject coverage, and author information."),
+    resource("Attribution", routes.attribution, "Third-party data, imagery, and source acknowledgements."),
+    resource("XML Sitemap Index", "/sitemap.xml", "Complete canonical discovery map for all public indexable pages."),
+    resource("Blog RSS Feed", "/blog/rss.xml", "Machine-readable feed of published guides."),
+    resource("Robots Policy", "/robots.txt", "Crawler permissions and private-route exclusions."),
+    "",
+    "## Optional",
+    "",
+    resource("About", routes.about, "Background and purpose of Nepali Directory."),
+    resource("Contact", routes.contact, "How to contact the directory team."),
+    resource("Claim a Listing", routes.claimListing, "Information for business owners managing a directory listing."),
+    resource("Privacy Policy", routes.privacy, "Privacy and data-handling information."),
+    resource("Terms of Service", routes.terms, "Terms governing use of the website."),
   ];
 
   return new Response(`${lines.join("\n")}\n`, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=86400"
-    }
+      "Cache-Control": "public, max-age=0, s-maxage=300, stale-while-revalidate=86400",
+      "X-Content-Type-Options": "nosniff",
+    },
   });
 }

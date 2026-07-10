@@ -1,6 +1,10 @@
+import type { Metadata } from "next";
 import { PageHero } from "@/components/directory/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { noIndexMetadata } from "@/lib/noindex";
 import { routes } from "@/lib/routes";
+
+export const metadata: Metadata = noIndexMetadata;
 
 export default function ProfilePage() {
   return (

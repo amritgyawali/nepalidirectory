@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { BadgeCheck, Building2, Grid3X3, MapPin, Search, Star, Tag } from "lucide-react";
 import Link from "next/link";
 import { AiConcierge } from "@/components/ai/AiConcierge";
@@ -13,6 +14,12 @@ import { businesses, categories, cities, cityLinks, directoryFeatureChecklist, p
 import { getSortedBlogPosts, siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
 import { buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   const latestBlogPosts = getSortedBlogPosts().slice(0, 3);

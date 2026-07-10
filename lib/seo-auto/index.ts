@@ -13,10 +13,15 @@ export {
 export { suggestInternalLinks, type InternalLinkSuggestion } from "./internal-links";
 export {
   allSitemapEntries,
+  getAuthorSitemapEntries,
   getBlogSitemapEntries,
   getCategorySitemapEntries,
   getListingSitemapEntries,
+  getPageSitemapEntries,
+  getStaticSitemapEntries,
+  sitemapIndexXml,
   sitemapXml,
+  type SitemapIndexEntry,
   type SitemapEntry,
 } from "./sitemaps";
 export { buildHreflangAlternates } from "./hreflang";
