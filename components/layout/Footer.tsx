@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/layout/Logo";
-import { getCityHref } from "@/lib/city-pages";
-import { cityLinks } from "@/lib/data";
+import { cityDirectoryPages } from "@/lib/city-pages";
 import { footerGroups, routes } from "@/lib/routes";
 
 export function Footer() {
@@ -31,9 +30,9 @@ export function Footer() {
           <div>
             <h2 className="footer__title">City Guides</h2>
             <div className="footer__cities">
-              {cityLinks.slice(0, 12).map((city) => (
-                <Link key={city} href={getCityHref(city)}>
-                  {city}
+              {cityDirectoryPages.map((city) => (
+                <Link key={city.slug} href={city.href}>
+                  {city.name}
                 </Link>
               ))}
             </div>

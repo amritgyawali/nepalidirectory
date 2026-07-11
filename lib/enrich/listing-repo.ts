@@ -27,11 +27,18 @@ export function businessToListing(b: Business, id: number): Listing {
     address: b.address,
     phone: b.phone,
     website: b.website,
+    email: b.email,
     hoursToday: b.hoursToday,
+    rating: b.rating,
+    reviews: b.reviews,
+    price: b.price,
+    status: b.status,
+    image: b.image,
     photosCount: b.image ? 1 : 0,
     coordinates: b.coordinates,
     claimed: Boolean(b.claimed),
     verified: Boolean(b.verified),
+    active: true,
     services: b.services,
     amenities: b.amenities ?? [],
     description: undefined,
@@ -43,7 +50,9 @@ export function businessToListing(b: Business, id: number): Listing {
     attributes: {},
     qualityScore: 0,
     aiEnrichedAt: null,
-    dataSource: "user",
+    dataSource: "demo",
+    createdAt: new Date("2026-06-28T00:00:00.000Z"),
+    updatedAt: new Date("2026-06-28T00:00:00.000Z"),
   };
   listing.qualityScore = computeQualityScore(listing);
   return listing;
@@ -70,11 +79,18 @@ export function makeNewListing(
     address: partial.address,
     phone: partial.phone,
     website: partial.website,
+    email: partial.email,
     hoursToday: partial.hoursToday,
+    rating: partial.rating,
+    reviews: partial.reviews,
+    price: partial.price,
+    status: partial.status,
+    image: partial.image,
     photosCount: partial.photosCount ?? 0,
     coordinates: partial.coordinates,
     claimed: partial.claimed ?? false,
     verified: partial.verified ?? false,
+    active: partial.active ?? true,
     services: partial.services,
     amenities: partial.amenities ?? [],
     description: partial.description,
@@ -102,6 +118,8 @@ export function makeNewListing(
     municipality: partial.municipality,
     ward: partial.ward,
     mergedFrom: partial.mergedFrom,
+    createdAt: partial.createdAt ?? null,
+    updatedAt: partial.updatedAt ?? null,
   };
   base.qualityScore = computeQualityScore({ ...base, id: 0 });
   return base;
@@ -147,6 +165,11 @@ export class InMemoryListingRepository implements ListingRepository {
   async get(id: number): Promise<Listing | null> {
     const l = this.map.get(id);
     return l ? structuredClone(l) : null;
+  }
+
+  async getBySlug(slug: string): Promise<Listing | null> {
+    const listing = [...this.map.values()].find((item) => item.slug === slug);
+    return listing ? structuredClone(listing) : null;
   }
 
   async update(listing: Listing): Promise<void> {

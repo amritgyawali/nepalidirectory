@@ -37,7 +37,7 @@ export default function HomePage() {
     ...buildWebPageJsonLd({
       name: "Nepali Directory | Nepal's trusted local business directory",
       description:
-        "Find verified local businesses, restaurants, doctors, hotels, services and city guides across Nepal.",
+        "Find and compare local business profiles, restaurants, doctors, hotels, services and city guides across Nepal.",
       url: siteUrl,
       keywords,
       dateModified: "2026-06-28"
@@ -88,7 +88,7 @@ export default function HomePage() {
             Find <mark>trusted</mark> local businesses across Nepal.
           </h1>
           <span>
-            Restaurants, plumbers, doctors, hotels and 50,000+ listings across all 7 provinces.
+            Compare current directory profiles, practical city guides and local service research across Nepal.
           </span>
           <form className="hero-search" action={routes.search}>
             <label>
@@ -207,13 +207,13 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <SectionHeader
-            title="Featured local businesses"
-            description="Recently verified listings with strong reviews and complete contact details."
+            title="Directory profile previews"
+            description="Preview records demonstrate the profile experience but remain outside rankings and public business schema until reviewed."
             action={{ label: "Search all businesses", href: routes.search }}
           />
           <div className="home-featured">
-            {businesses.slice(0, 3).map((business, index) => (
-              <BusinessCard key={business.slug} business={business} sponsored={index === 0} priceSymbol="रू" />
+            {businesses.slice(0, 3).map((business) => (
+              <BusinessCard key={business.slug} business={business} />
             ))}
           </div>
         </div>

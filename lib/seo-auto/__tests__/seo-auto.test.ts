@@ -14,8 +14,8 @@ import {
 
 describe("SEO/AEO automation (prompt Module G)", () => {
   it("publishes only quality-gated evergreen category-city pages", () => {
-    const pages = getEvergreenPages();
-    const page = getEvergreenPage("restaurants", "kathmandu");
+    const pages = getEvergreenPages({ includePreview: true });
+    const page = getEvergreenPage("restaurants", "kathmandu", { includePreview: true });
 
     expect(pages.length).toBeGreaterThan(0);
     expect(page).not.toBeNull();
@@ -25,7 +25,7 @@ describe("SEO/AEO automation (prompt Module G)", () => {
   });
 
   it("emits ItemList/LocalBusiness schema and never emits deprecated HowTo", () => {
-    const page = getEvergreenPage("restaurants", "kathmandu")!;
+    const page = getEvergreenPage("restaurants", "kathmandu", { includePreview: true })!;
     const jsonLd = buildEvergreenItemListJsonLd(page);
     const serialized = JSON.stringify(jsonLd);
 
@@ -39,11 +39,11 @@ describe("SEO/AEO automation (prompt Module G)", () => {
     const xml = sitemapXml(getCategorySitemapEntries());
 
     expect(xml).toContain("<urlset");
-    expect(xml).toContain("/best/restaurants/kathmandu");
+    expect(xml).not.toContain("/best/restaurants/kathmandu");
   });
 
-  it("publishes each canonical public URL once and excludes private routes", () => {
-    const entries = allSitemapEntries();
+  it("publishes each canonical public URL once and excludes private routes", async () => {
+    const entries = await allSitemapEntries();
     const urls = entries.map((entry) => entry.url);
     const paths = urls.map((url) => new URL(url).pathname);
     const excludedPrefixes = [
@@ -68,12 +68,12 @@ describe("SEO/AEO automation (prompt Module G)", () => {
     ).toBe(false);
   });
 
-  it("generates a true sitemap index and omits invented crawl hints", () => {
+  it("generates a true sitemap index and omits invented crawl hints", async () => {
     const indexXml = sitemapIndexXml([
       { url: "https://www.nepalidirectory.com/sitemap-pages.xml" },
       { url: "https://www.nepalidirectory.com/sitemap-blog.xml" },
     ]);
-    const urlXml = sitemapXml(allSitemapEntries());
+    const urlXml = sitemapXml(await allSitemapEntries());
 
     expect(indexXml).toContain("<sitemapindex");
     expect(indexXml).toContain("/sitemap-pages.xml");

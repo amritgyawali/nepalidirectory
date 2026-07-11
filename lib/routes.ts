@@ -5,8 +5,7 @@ export const routes = {
   nearMe: "/near-me",
   topRated: "/top-rated",
   categories: "/categories",
-  business: "/business/newa-lahana",
-  city: "/city/kathmandu",
+  city: "/city",
   about: "/about",
   contact: "/contact",
   advertise: "/advertise",
@@ -58,15 +57,31 @@ export const routes = {
 } as const;
 
 export const primaryNav = [
-  { label: "Find People", href: routes.findPeople },
-  { label: "Deals", href: routes.deals },
+  { label: "Categories", href: routes.categories },
+  { label: "Cities", href: routes.city },
+  { label: "Guides", href: routes.blog },
+  { label: "Compare", href: routes.compareBusiness },
   { label: "Add Business", href: routes.claimListing },
-  { label: "Advertise", href: routes.advertise },
-  { label: "Write a Review", href: routes.writeReview },
-  { label: "Super Admin", href: `${routes.login}?role=superadmin` },
   { label: "Log In", href: routes.login },
   { label: "Sign Up", href: routes.register, featured: true }
 ];
+
+/** Canonical public profile URL for a listing slug. */
+export function getBusinessHref(slug: string): string {
+  return `/business/${encodeURIComponent(slug)}`;
+}
+
+/** Canonical comparison-guide URL for an available category slug. */
+export function getCompareHref(slug: string): string {
+  return `/compare-business/${encodeURIComponent(slug)}`;
+}
+
+/** Search URL that preserves category and optional location intent. */
+export function getSearchHref(query: string, location?: string): string {
+  const params = new URLSearchParams({ q: query });
+  if (location) params.set("location", location);
+  return `${routes.search}?${params.toString()}`;
+}
 
 export const footerGroups = [
   {

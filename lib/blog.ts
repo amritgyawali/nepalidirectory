@@ -27,6 +27,11 @@ export type BlogPost = {
   tags: string[];
   sections: BlogSection[];
   faqs: BlogFaq[];
+  contextLinks?: Array<{ label: string; href: string }>;
+  citySlugs?: string[];
+  categorySlugs?: string[];
+  sources?: Array<{ label: string; url: string }>;
+  disclaimer?: string;
 };
 
 export const siteUrl = "https://www.nepalidirectory.com";

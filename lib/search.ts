@@ -1,5 +1,5 @@
 import { blogPosts, businesses, categories, cities, cityLinks, questions } from "@/lib/data";
-import { footerGroups, routes } from "@/lib/routes";
+import { footerGroups, getBusinessHref, routes } from "@/lib/routes";
 
 export type SearchKind = "business" | "category" | "city" | "guide" | "question" | "page";
 
@@ -82,7 +82,7 @@ export const searchIndex: SearchRecord[] = [
     kind: "business",
     title: business.name,
     description: business.quote,
-    href: business.slug === "newa-lahana" ? routes.business : `${routes.search}?q=${encodeURIComponent(business.name)}`,
+    href: getBusinessHref(business.slug),
     location: business.area,
     tags: [
       ...business.categories,

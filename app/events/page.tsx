@@ -5,16 +5,17 @@ export default function EventsPage() {
   return (
     <main>
       <Breadcrumbs items={[{ label: "Local Events" }]} />
-      <PageHero title="Local events" subtitle="Festivals, restaurant nights, business workshops and neighborhood events." />
+      <PageHero title="Local events" subtitle="Reviewed community and business events with clear organizers, dates, venues and source details." />
       <section className="section">
         <div className="container qa-list">
-          {["Bhaktapur food walk", "Small business marketing clinic", "Patan heritage night"].map((event) => (
-            <article key={event}>
-              <span>June 2026</span>
-              <h2>{event}</h2>
-              <p>Community event listed by local organizers and verified businesses.</p>
-            </article>
-          ))}
+          <article className="answer-summary">
+            <span>Publication status</span>
+            <h2>No source-verified events are live right now</h2>
+            <p>
+              Events appear only after the organizer, venue, date, public source and contact route
+              can be checked. Nepali Directory does not publish sample event names as real listings.
+            </p>
+          </article>
         </div>
       </section>
     </main>

@@ -1,58 +1,64 @@
 "use client";
 
-import { ArrowRight, BarChart3, CheckCircle2, Lock, UserRound } from "lucide-react";
+import { ArrowRight, CheckCircle2, Lock, ShieldCheck, UserRound } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { routes } from "@/lib/routes";
+import { createClient } from "@/utils/supabase/client";
 
-const sessionKey = "nd-admin-session";
+function safeNextPath(value: string | null): string | null {
+  return value && value.startsWith("/") && !value.startsWith("//") ? value : null;
+}
 
 export default function LoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    const reason = new URLSearchParams(window.location.search).get("error");
+    if (reason === "auth-not-configured") {
+      setError("Secure sign-in is not configured yet. Add the Supabase public environment variables before using private dashboards.");
+    } else if (reason === "auth-unavailable") {
+      setError("The authentication service is temporarily unavailable. Please try again.");
+    }
+  }, []);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (username.trim() === "superadmin" && password === "superadmin") {
-      localStorage.setItem(
-        "nd-superadmin-session",
-        JSON.stringify({
-          name: "Super Admin",
-          role: "Platform Owner",
-          signedInAt: new Date().toISOString()
-        })
-      );
-      localStorage.setItem(
-        sessionKey,
-        JSON.stringify({
-          name: "Super Admin",
-          role: "Platform Owner",
-          signedInAt: new Date().toISOString()
-        })
-      );
-      const nextPath = new URLSearchParams(window.location.search).get("next");
-      router.push(nextPath?.startsWith("/") ? nextPath : routes.superAdmin);
+    setError("");
+
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+      setError("Secure sign-in is not configured for this deployment.");
       return;
     }
 
-    if (username.trim() === "admin" && password === "admin") {
-      localStorage.setItem(
-        sessionKey,
-        JSON.stringify({
-          name: "Admin",
-          role: "Directory Administrator",
-          signedInAt: new Date().toISOString()
-        })
-      );
-      const nextPath = new URLSearchParams(window.location.search).get("next");
-      router.push(nextPath?.startsWith("/") ? nextPath : routes.dashboard);
-      return;
-    }
+    setSubmitting(true);
+    try {
+      const supabase = createClient();
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+      if (signInError || !data.user) {
+        setError("Sign-in failed. Check your email and password, then try again.");
+        return;
+      }
 
-    setError("Use admin/admin for business dashboard or superadmin/superadmin for super admin.");
+      const params = new URLSearchParams(window.location.search);
+      const requested = safeNextPath(params.get("next"));
+      const role = String(data.user.app_metadata?.role ?? "").toLowerCase().replace(/[_\s-]+/g, "");
+      const fallback = role === "superadmin" ? routes.superAdmin : routes.dashboard;
+      router.replace(requested ?? fallback);
+      router.refresh();
+    } catch {
+      setError("The authentication service could not be reached. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -60,20 +66,23 @@ export default function LoginPage() {
       <section className="auth-split">
         <form className="auth-panel" onSubmit={onSubmit}>
           <div>
-            <h1>Welcome back.</h1>
-            <p>Sign in to manage reviews, listings, leads, directory analytics or platform controls.</p>
+            <h1>Secure account sign in</h1>
+            <p>Manage your claimed listings, reviews and account using a server-verified session.</p>
           </div>
 
           <div className="auth-fields">
             <label>
-              <span>Username</span>
+              <span>Email</span>
               <div>
                 <UserRound size={17} aria-hidden />
                 <input
-                  autoComplete="username"
-                  onChange={(event) => setUsername(event.target.value)}
-                  placeholder="admin"
-                  value={username}
+                  autoComplete="email"
+                  inputMode="email"
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  type="email"
+                  value={email}
                 />
               </div>
             </label>
@@ -83,8 +92,10 @@ export default function LoginPage() {
                 <Lock size={17} aria-hidden />
                 <input
                   autoComplete="current-password"
+                  minLength={8}
                   onChange={(event) => setPassword(event.target.value)}
-                  placeholder="admin"
+                  placeholder="Your password"
+                  required
                   type="password"
                   value={password}
                 />
@@ -92,10 +103,10 @@ export default function LoginPage() {
             </label>
           </div>
 
-          {error ? <p className="auth-error">{error}</p> : null}
+          {error ? <p className="auth-error" role="alert">{error}</p> : null}
 
-          <button className="auth-submit" type="submit">
-            Log in to dashboard
+          <button className="auth-submit" disabled={submitting} type="submit">
+            {submitting ? "Signing in…" : "Sign in securely"}
             <ArrowRight size={16} aria-hidden />
           </button>
 
@@ -107,17 +118,17 @@ export default function LoginPage() {
 
         <aside className="auth-value">
           <span>For business owners</span>
-          <h2>Run your listing like a local growth console.</h2>
+          <h2>Manage your public profile with protected account access.</h2>
           <p>
-            Claim profiles, respond to reviews, track search demand and keep contact information
-            fresh across Nepali Directory.
+            Authentication is handled by Supabase on the server. Private and administrator routes
+            are blocked before page content renders.
           </p>
           <ul>
             {[
               "Manage hours, photos and services",
               "Reply to public reviews",
-              "Track calls, directions and profile views",
-              "Promote high-performing listings"
+              "Review calls and profile activity",
+              "Keep contact information current"
             ].map((item) => (
               <li key={item}>
                 <CheckCircle2 size={18} aria-hidden />
@@ -126,9 +137,9 @@ export default function LoginPage() {
             ))}
           </ul>
           <div className="auth-value__stat">
-            <BarChart3 size={22} aria-hidden />
-            <strong>1.2M monthly searches</strong>
-            <small>across restaurants, home services, healthcare and travel.</small>
+            <ShieldCheck size={22} aria-hidden />
+            <strong>Server-verified sessions</strong>
+            <small>with role checks for administrator areas.</small>
           </div>
         </aside>
       </section>

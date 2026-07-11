@@ -15,6 +15,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { loadAiConfig } from "@/lib/ai-core";
 import { runAutoBlogCycle } from "@/lib/blog-engine";
+import { siteUrl } from "@/lib/blog";
+import { submitIndexNow } from "@/lib/indexnow";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -60,7 +62,10 @@ async function handle(request: NextRequest) {
   }
 
   const result = await runAutoBlogCycle();
-  return NextResponse.json({ ranAt: new Date().toISOString(), result }, { status: 200 });
+  const indexNow = result.published && result.post
+    ? await submitIndexNow([`${siteUrl}/blog/${result.post.slug}`])
+    : { submitted: false, count: 0, reason: "No new public URL." };
+  return NextResponse.json({ ranAt: new Date().toISOString(), result, indexNow }, { status: 200 });
 }
 
 // Vercel Cron uses GET; POST is accepted for manual/local triggering and external schedulers.

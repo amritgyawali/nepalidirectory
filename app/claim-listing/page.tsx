@@ -10,8 +10,7 @@ import {
   type NewDashboardListing
 } from "@/components/dashboard/DashboardProvider";
 import { routes } from "@/lib/routes";
-
-const sessionKey = "nd-admin-session";
+import { createClient } from "@/utils/supabase/client";
 
 const defaultForm: NewDashboardListing = {
   name: "",
@@ -73,7 +72,7 @@ export default function ClaimListingPage() {
 function ClaimListingForm() {
   const router = useRouter();
   const { addListing, isReady } = useDashboardData();
-  const [sessionReady, setSessionReady] = useState(false);
+  const [sessionState, setSessionState] = useState<"checking" | "authenticated" | "guest">("checking");
   const [form, setForm] = useState(defaultForm);
   const [amenitiesText, setAmenitiesText] = useState("");
   const [keywordsText, setKeywordsText] = useState("");
@@ -81,13 +80,22 @@ function ClaimListingForm() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!localStorage.getItem(sessionKey)) {
-      router.replace(`${routes.login}?next=${encodeURIComponent(routes.claimListing)}`);
-      return;
+    let active = true;
+    async function checkSession() {
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+        if (active) setSessionState("guest");
+        return;
+      }
+      try {
+        const { data } = await createClient().auth.getUser();
+        if (active) setSessionState(data.user ? "authenticated" : "guest");
+      } catch {
+        if (active) setSessionState("guest");
+      }
     }
-
-    setSessionReady(true);
-  }, [router]);
+    void checkSession();
+    return () => { active = false; };
+  }, []);
 
   function updateField(field: keyof NewDashboardListing, value: string) {
     setForm((current) => ({
@@ -160,12 +168,44 @@ function ClaimListingForm() {
     router.push(`${routes.dashboardListings}?created=${slug}`);
   }
 
-  if (!sessionReady || !isReady) {
+  if (sessionState !== "authenticated") {
     return (
-      <main className="dashboard-loading">
-        <strong>Checking login before opening listing form...</strong>
+      <main>
+        <section className="page-head">
+          <div className="container">
+            <span className="eyebrow">Business owners</span>
+            <h1 className="page-title">Claim or add your business in Nepal</h1>
+            <p className="page-copy">
+              Create a secure account to submit a business profile, verify ownership and keep
+              contact details, services and opening information current. New and edited profiles
+              remain outside public search and sitemaps until their source and category pass review.
+            </p>
+            <div className="seo-hero__actions">
+              <Link className="button button--primary" href={`${routes.login}?next=${encodeURIComponent(routes.claimListing)}`}>
+                Sign in to continue
+              </Link>
+              <Link className="button button--outline" href={routes.register}>Create an account</Link>
+            </div>
+          </div>
+        </section>
+        <section className="section section--soft">
+          <div className="container seo-answer-grid">
+            <article className="answer-summary">
+              <h2>Prepare your public details</h2>
+              <p>Use the exact business name, address, phone, category, service area and current hours customers can verify.</p>
+            </article>
+            <article className="answer-summary">
+              <h2>Complete ownership review</h2>
+              <p>Ownership and provenance checks protect customers and prevent sample, duplicate or unapproved records from ranking.</p>
+            </article>
+          </div>
+        </section>
       </main>
     );
+  }
+
+  if (!isReady) {
+    return <main className="dashboard-loading"><strong>Opening your secure listing form…</strong></main>;
   }
 
   return (

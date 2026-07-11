@@ -3,9 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CheckCircle2, Phone, Star } from "lucide-react";
 import { BusinessComparisonTool } from "@/components/compare/BusinessComparisonTool";
+import { RelatedGuideLinks } from "@/components/content/RelatedGuideLinks";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { compareCategories, getCompareCategory, getSortedCompareCategories } from "@/lib/compare";
+import { getGuidesForCategory } from "@/lib/content-clusters";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
 import { buildCompareKeywords, buildWebPageJsonLd, getCompareQuickAnswer, publisher } from "@/lib/seo";
@@ -99,7 +101,8 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
   const quickAnswer = getCompareQuickAnswer(category);
   const bestBusiness = category.businesses[0];
   const otherCategories = getSortedCompareCategories().filter((candidate) => candidate.slug !== category.slug);
-  const itemListJsonLd = {
+  const relatedGuides = getGuidesForCategory(category.slug);
+  const itemListJsonLd = category.businesses.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: category.title,
@@ -121,7 +124,7 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
         }
       }
     }))
-  };
+  } : null;
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -155,27 +158,24 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
     }))
   };
 
+  const comparisonFaqs = [
+    {
+      question: `How should I compare ${category.category.toLowerCase()} options?`,
+      answer: quickAnswer,
+    },
+    {
+      question: `How were these ${category.category.toLowerCase()} criteria chosen?`,
+      answer: `Use the same evidence for every option: ${category.criteria.join(", ").toLowerCase()}. Confirm current prices, availability, credentials and terms directly before booking.`,
+    },
+  ];
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `What is the best ${category.category.toLowerCase()} option in this comparison?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: quickAnswer
-        }
-      },
-      {
-        "@type": "Question",
-        name: `How were these ${category.category.toLowerCase()} businesses compared?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `Nepali Directory compared ${category.category.toLowerCase()} businesses using ${category.criteria.join(", ").toLowerCase()}, ratings, review counts, price notes and best-fit use cases.`
-        }
-      }
-    ]
+    mainEntity: comparisonFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
   };
 
   const webPageJsonLd = buildWebPageJsonLd({
@@ -216,7 +216,7 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([webPageJsonLd, articleJsonLd, itemListJsonLd, breadcrumbJsonLd, faqJsonLd])
+          __html: JSON.stringify([webPageJsonLd, articleJsonLd, itemListJsonLd, breadcrumbJsonLd, faqJsonLd].filter(Boolean))
         }}
       />
       <Breadcrumbs
@@ -254,15 +254,35 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
         </div>
       </section>
 
-      <BusinessComparisonTool
-        businesses={category.businesses}
-        category={category.category}
-        criteria={category.criteria}
-      />
+      {category.businesses.length > 1 ? (
+        <BusinessComparisonTool
+          businesses={category.businesses}
+          category={category.category}
+          criteria={category.criteria}
+        />
+      ) : null}
 
       <section className="section">
         <div className="container compare-layout">
           <div className="compare-list">
+            {category.businesses.length === 0 ? (
+              <div className="article-body">
+                <section className="answer-summary">
+                  <h2>Qualified provider list pending</h2>
+                  <p>
+                    This guide does not publish placeholder businesses, invented ratings or sample
+                    prices. Named options will appear here only when production listing data passes
+                    location, category, provenance and completeness checks.
+                  </p>
+                </section>
+                {category.guideSections.map((section) => (
+                  <section key={section.heading}>
+                    <h2>{section.heading}</h2>
+                    <p>{section.body}</p>
+                  </section>
+                ))}
+              </div>
+            ) : null}
             {category.businesses.map((business) => (
               <article className="compare-business-card" key={business.name}>
                 <div className="compare-business-card__image">
@@ -313,48 +333,63 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
         </div>
       </section>
 
-      <section className="section section--soft">
-        <div className="container">
-          <h2 className="compact-title">Best overall pick</h2>
-          <p className="compact-copy">
-            {bestBusiness.name} is the top-ranked {category.category.toLowerCase()} option in this
-            comparison because it combines a {bestBusiness.rating}/5 rating, {bestBusiness.reviews}{" "}
-            reviews, clear pricing at {bestBusiness.price}, and a strong fit for{" "}
-            {bestBusiness.bestFor.toLowerCase()}.
-          </p>
-        </div>
-      </section>
+      {bestBusiness ? (
+        <>
+          <section className="section section--soft">
+            <div className="container">
+              <h2 className="compact-title">Highest-ranked qualified profile</h2>
+              <p className="compact-copy">
+                {bestBusiness.name} is currently first because its published profile combines a{" "}
+                {bestBusiness.rating}/5 rating, {bestBusiness.reviews} reviews, clear pricing at{" "}
+                {bestBusiness.price}, and a fit for {bestBusiness.bestFor.toLowerCase()}.
+              </p>
+            </div>
+          </section>
 
-      <section className="section section--soft">
-        <div className="container">
-          <h2 className="compact-title">Side-by-side comparison</h2>
-          <p className="compact-copy">
-            Use this quick table to shortlist the businesses that match your budget, location and use case.
-          </p>
-          <div className="responsive-table compare-table-wrap">
-            <table className="compare-table">
-              <thead>
-                <tr>
-                  <th>Business</th>
-                  <th>Area</th>
-                  <th>Rating</th>
-                  <th>Price</th>
-                  <th>Best for</th>
-                </tr>
-              </thead>
-              <tbody>
-                {category.businesses.map((business) => (
-                  <tr key={business.name}>
-                    <td>{business.name}</td>
-                    <td>{business.area}</td>
-                    <td>{business.rating} / 5</td>
-                    <td>{business.price}</td>
-                    <td>{business.bestFor}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <section className="section section--soft">
+            <div className="container">
+              <h2 className="compact-title">Side-by-side comparison</h2>
+              <p className="compact-copy">
+                Use this table as a shortlist, then confirm every time-sensitive detail directly.
+              </p>
+              <div className="responsive-table compare-table-wrap">
+                <table className="compare-table">
+                  <thead>
+                    <tr>
+                      <th>Business</th>
+                      <th>Area</th>
+                      <th>Rating</th>
+                      <th>Price</th>
+                      <th>Best for</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {category.businesses.map((business) => (
+                      <tr key={business.name}>
+                        <td>{business.name}</td>
+                        <td>{business.area}</td>
+                        <td>{business.rating} / 5</td>
+                        <td>{business.price}</td>
+                        <td>{business.bestFor}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </>
+      ) : null}
+
+      <section className="section">
+        <div className="container article-faq">
+          <h2>Comparison questions</h2>
+          {comparisonFaqs.map((faq) => (
+            <details key={faq.question}>
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
         </div>
       </section>
 
@@ -364,11 +399,13 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
           <p>
             This comparison is maintained by Nepali Directory and was last reviewed on{" "}
             <time dateTime={category.updatedAt}>{category.updatedAt}</time>. Rankings use visible
-            directory signals including rating, review count, price notes, category fit, location,
-            strengths and practical user intent.
+            This page currently publishes a comparison method, not a synthetic ranking. Named
+            providers and rating schema are added only from qualified public listing records.
           </p>
         </div>
       </section>
+
+      <RelatedGuideLinks title={`Guides for comparing ${category.category.toLowerCase()}`} posts={relatedGuides} />
     </main>
   );
 }

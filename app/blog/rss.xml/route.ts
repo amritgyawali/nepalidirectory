@@ -1,5 +1,6 @@
 import { getBlogPostUrl, getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
 import { getPublishedEnginePosts } from "@/lib/blog-engine";
+import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 
 export const revalidate = 300;
 
@@ -27,7 +28,7 @@ function itemXml(post: BlogPost): string {
 
 export async function GET(): Promise<Response> {
   const enginePosts = await getPublishedEnginePosts();
-  const posts = [...getSortedBlogPosts(), ...enginePosts].sort((a, b) =>
+  const posts = removeRetiredDuplicatePosts([...getSortedBlogPosts(), ...enginePosts]).sort((a, b) =>
     b.publishedAt.localeCompare(a.publishedAt),
   );
 

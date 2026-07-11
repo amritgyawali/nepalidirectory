@@ -6,7 +6,7 @@ import { useMemo, useState, type CSSProperties } from "react";
 import { useDashboardData, type DashboardRange } from "@/components/dashboard/DashboardProvider";
 import { FillImage } from "@/components/ui/FillImage";
 import { Stars } from "@/components/ui/Stars";
-import { routes } from "@/lib/routes";
+import { getBusinessHref, routes } from "@/lib/routes";
 
 const rangeMetrics: Record<
   DashboardRange,
@@ -84,7 +84,7 @@ export default function DashboardPage() {
   const completedSeoTasks = seoTasks.filter((task) => task.done).length;
 
   function copyPublicLink() {
-    const path = listing.slug === "newa-lahana" ? routes.business : `${routes.search}?q=${encodeURIComponent(listing.name)}`;
+    const path = getBusinessHref(listing.slug);
     const url = `${window.location.origin}${path}`;
     void navigator.clipboard?.writeText(url);
     setToolMessage("Public listing link copied.");
@@ -126,7 +126,7 @@ export default function DashboardPage() {
             <option value="30">Last 30 days</option>
             <option value="90">Last 90 days</option>
           </select>
-          <Link className="button button--dark" href={routes.business}>
+          <Link className="button button--dark" href={getBusinessHref(listing.slug)}>
             View public listing <ExternalLink size={15} aria-hidden />
           </Link>
         </div>

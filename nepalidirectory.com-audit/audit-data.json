@@ -1,0 +1,315 @@
+{
+  "summary": {
+    "health_score": 57,
+    "business_type": "Local business directory / marketplace (Yelp-style), Nepal-focused",
+    "top_findings": [
+      "CRITICAL: The core 'business listing' page type effectively does not exist in production. Every 'view business' link sitewide points to one hardcoded demo page (/business/newa-lahana). lib/seo-auto/sitemaps.ts::getListingSitemapEntries() returns a single hardcoded entry instead of enumerating real listings, and no app/business/[slug]/page.tsx dynamic route exists. Homepage claims '50,000+ local businesses'; sitemap-listings-1.xml has 1 URL.",
+      "CRITICAL SECURITY (non-SEO): app/login/page.tsx ships hardcoded admin credentials (superadmin/superadmin, admin/admin) in client-side JavaScript with client-only localStorage 'auth' and no server-side session verification. /super-admin/* returns HTTP 200 with no server-side auth gate. The public nav links directly to this login path.",
+      "CRITICAL: 12 live blog posts (5 near-duplicate topic clusters, 85-90% text overlap, published 1-2 days apart) are indexed via llms.txt/RSS but absent from the XML sitemap, indicating the auto-blog 'embedding dedup' pipeline is not preventing near-duplicate republishing.",
+      "HIGH: Host canonicalization relies solely on rel=canonical -- nepalidirectory.com (non-www) serves HTTP 200 directly instead of a 308 redirect to www, creating two fully crawlable copies of every page.",
+      "HIGH: 34 of 103 pages (33%) share the identical fallback title 'Nepali Directory | Nepal's trusted local business directory' because they never set page-specific metadata.",
+      "HIGH: Zero security headers beyond HSTS (no CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy) on a site with login/admin/UGC flows.",
+      "HIGH: Live sitemap.xml exposes all 10 /super-admin/* and /admin/ai URLs (noindexed but not disallowed in robots.txt) -- already fixed in current repo source but not deployed to production."
+    ],
+    "quick_wins": [
+      "Redeploy origin/main to production -- current repo source already fixes the admin-sitemap leakage and robots.txt gaps; production is stale at an older commit.",
+      "Add a 308 host redirect (non-www -> www) at the Vercel/middleware edge layer.",
+      "Add unique metadata.title/description to the 21 public static pages inheriting the homepage default.",
+      "Fix the malformed priceRange: \"Rs Rs Rs\" value in the Restaurant schema template (also a visible UI bug on the business page).",
+      "Add a next.config.ts headers() block for CSP/X-Frame-Options/X-Content-Type-Options/Referrer-Policy.",
+      "Remove the 'Super Admin' link from the public mobile navigation and replace client-only auth with real server-verified sessions."
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 46,
+      "weight": "22%",
+      "note": "Blended from a holistic technical audit (findings/technical.md, 64/100 across 9 sub-areas) and a dedicated sitemap/crawlability deep-dive (findings/sitemap.md, 28/100) that surfaced the audit's most severe issue. See both files for full detail.",
+      "what_works": [
+        "robots.txt explicitly allows Googlebot, Bingbot, OAI-SearchBot, ChatGPT-User, GPTBot, PerplexityBot, ClaudeBot",
+        "All 103 crawled URLs return HTTP 200, well-formed XML sitemaps, correct 404 handling",
+        "Canonical tags present and correct on 100% of crawled pages",
+        "Clean, human-readable URL structure with no query-string pollution",
+        "Current repo source already contains fixes for the admin-sitemap leakage and robots.txt gaps -- just needs deployment"
+      ],
+      "findings": [
+        {
+          "title": "Core business-listing page type does not exist in production",
+          "severity": "Critical",
+          "description": "lib/seo-auto/sitemaps.ts::getListingSitemapEntries() hardcodes a single entry; no app/business/[slug]/page.tsx dynamic route exists; only app/business/newa-lahana/page.tsx (static demo) is live.",
+          "recommendation": "Wire getListingSitemapEntries() to lib/enrich/factory.ts::createListingRepository() and build app/business/[slug]/page.tsx with generateMetadata() and LocalBusiness/Restaurant schema. Full code-level plan in findings/sitemap.md section 1."
+        },
+        {
+          "title": "Hardcoded admin credentials in client-side JavaScript",
+          "severity": "Critical",
+          "description": "app/login/page.tsx contains literal 'superadmin'/'superadmin' and 'admin'/'admin' credential checks shipped in the browser bundle, with localStorage-only session state and no server-side verification. /super-admin/* returns HTTP 200 with no server-side gate.",
+          "recommendation": "Replace with Supabase Auth (already wired via utils/supabase/) enforced server-side in middleware.ts before any /super-admin or /admin route renders. Remove the public nav link to it."
+        },
+        {
+          "title": "Host canonicalization missing a hard redirect",
+          "severity": "Critical",
+          "description": "nepalidirectory.com (non-www) returns HTTP 200 directly with byte-identical content to www, mitigated only by rel=canonical, not a 308 redirect. No host-redirect logic exists anywhere in the codebase.",
+          "recommendation": "Add a Vercel host-based redirect rule or a middleware.ts host check returning a 308 before Supabase session logic runs."
+        },
+        {
+          "title": "Admin panel URLs exposed in the public sitemap and not disallowed in robots.txt",
+          "severity": "High",
+          "description": "Live sitemap.xml lists all 10 /super-admin/* + /admin/ai URLs; robots.txt does not disallow /admin/ or /super-admin/. Already fixed in current repo source (lib/seo-config.ts, app/robots.ts) but production is deployed at a stale commit.",
+          "recommendation": "Trigger a fresh Vercel production deployment and verify the live diff post-deploy."
+        },
+        {
+          "title": "No security headers beyond HSTS",
+          "severity": "High",
+          "description": "No CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, or Permissions-Policy on a site with login/admin/UGC flows (write-review, claim-listing, ask-question).",
+          "recommendation": "Add a headers() block in next.config.ts or extend middleware.ts to set these site-wide."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 52,
+      "weight": "23%",
+      "what_works": [
+        "14 original blog posts with consistent, well-formed unique metadata and og/twitter tags",
+        "Author-desk attribution system (Health Desk, Food Desk, etc.) with Organization-typed schema and knowsAbout arrays",
+        "Custom ai-content-declaration meta tag signaling human-reviewed content -- good transparency practice"
+      ],
+      "findings": [
+        {
+          "title": "12 blog posts form 5 near-duplicate content clusters (85-90% text overlap)",
+          "severity": "Critical",
+          "description": "Verified via direct text diff: 3 posts on 'comparing local services before booking' published 1-2 days apart share 686-703 of ~800 five-word phrase sequences. Same pattern across 4 more topic clusters. The project's auto-blog 'embedding dedup' is not preventing this.",
+          "recommendation": "Fix the dedup similarity threshold in the blog cron; consolidate each cluster to one canonical post via redirect."
+        },
+        {
+          "title": "Blog posts are thin for their topic competitiveness (500-660 words)",
+          "severity": "High",
+          "description": "Commercial-investigation topics (dental clinics, contractors) run 504-658 words with generic, interchangeable advice rather than specific local detail.",
+          "recommendation": "Expand highest-intent posts with concrete NPR price ranges, named neighborhoods, and (once available) real listing references."
+        },
+        {
+          "title": "Author bylines are organizational desks, not named individuals with credentials",
+          "severity": "Medium",
+          "description": "Healthcare content (YMYL-adjacent) is bylined to 'Nepali Directory Health Desk' rather than a named reviewer with stated qualifications.",
+          "recommendation": "Add a named human reviewer byline for healthcare content specifically."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 58,
+      "weight": "20%",
+      "what_works": [
+        "Sound title-template architecture in app/layout.tsx",
+        "100% of crawled pages have a meta description and og:title",
+        "0 pages exceed the meta description upper bound meaningfully"
+      ],
+      "findings": [
+        {
+          "title": "34 pages inherit the homepage's default title/meta instead of page-specific values",
+          "severity": "High",
+          "description": "21 public static pages plus 10 admin pages never export their own metadata, falling back to the root layout default and creating a large duplicate-title cluster.",
+          "recommendation": "Add unique metadata to each of the 21 public static route files."
+        },
+        {
+          "title": "9 pages have a duplicated 'Nepali Directory' brand suffix in the title",
+          "severity": "Medium",
+          "description": "/attribution and 8 /authors/* pages include the brand name in their own title string, which then gets the layout template's suffix appended a second time.",
+          "recommendation": "Remove the manual brand-name inclusion from these 9 pages' title strings."
+        },
+        {
+          "title": "55 of 103 titles exceed 60 characters, risking SERP truncation",
+          "severity": "Medium",
+          "description": "Author desk page titles run 77-92 characters, cutting off the brand suffix in typical search result display.",
+          "recommendation": "Shorten author desk titles to keep unique content within ~50-55 characters."
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 74,
+      "weight": "10%",
+      "what_works": [
+        "Organization + WebSite schema on all 103 crawled pages",
+        "Contextual types layered correctly: FAQPage (34), BreadcrumbList (33), ItemList (30), CollectionPage (25), BlogPosting/Article, ProfilePage",
+        "The one live Restaurant listing has a genuinely thorough schema graph: address, aggregateRating, hasMenu with real NPR-priced MenuItems, amenityFeature, openingHoursSpecification"
+      ],
+      "findings": [
+        {
+          "title": "priceRange value is malformed (\"Rs Rs Rs\")",
+          "severity": "High",
+          "description": "Not a valid schema.org priceRange format; also renders visibly broken in the UI next to the star rating.",
+          "recommendation": "Use standard $-style tier symbols or a real numeric range derived from the existing MenuItem offer prices."
+        },
+        {
+          "title": "openingHoursSpecification only covers 4 of 7 days with no explanation",
+          "severity": "Medium",
+          "description": "Tuesday, Friday, Saturday are silently absent rather than marked closed.",
+          "recommendation": "Populate all 7 days or add explicit closed markers before this template is reused at scale."
+        },
+        {
+          "title": "No GeoCoordinates on the listing schema",
+          "severity": "Medium",
+          "description": "Full PostalAddress exists but no geo lat/long, limiting map-adjacent rich-result eligibility.",
+          "recommendation": "Add geo to the listing schema template before scaling to more listings."
+        }
+      ]
+    },
+    {
+      "name": "Performance (Core Web Vitals)",
+      "score": 60,
+      "weight": "10%",
+      "note": "Lab-only estimate from source/response inspection -- no Google PageSpeed/CrUX API credentials were configured for this audit.",
+      "what_works": [
+        "next/image used throughout with responsive srcset, lazy loading, and automatic WebP negotiation",
+        "images.remotePatterns tightly scoped to images.unsplash.com only",
+        "Brotli compression and Vercel edge caching active; webfont preloaded and self-hosted via next/font"
+      ],
+      "findings": [
+        {
+          "title": "TTFB inconsistent, up to 1.7s on some routes",
+          "severity": "Medium",
+          "description": "Median ~980ms across 103 URLs from this crawl; expectation for cached/prerendered routes is sub-200ms.",
+          "recommendation": "Verify with real CrUX/PageSpeed field data; confirm ISR/static caching is consistently hit in production."
+        },
+        {
+          "title": "Large HTML payloads on hub pages (up to 193KB)",
+          "severity": "Medium",
+          "description": "City/category grid pages ship verbose repeated srcset markup per card image.",
+          "recommendation": "Trim srcset breakpoint counts for small grid thumbnails; consider pagination once real listing volume grows."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness (GEO)",
+      "score": 61,
+      "weight": "10%",
+      "what_works": [
+        "robots.txt explicitly allows every major AI crawler",
+        "A genuinely well-built llms.txt with organized sections and per-link descriptions written for LLM consumers",
+        "FAQ schema and clear H2 structure across blog/comparison content aids passage-level extraction"
+      ],
+      "findings": [
+        {
+          "title": "llms.txt actively links to 12 near-duplicate blog posts across 5 topic clusters",
+          "severity": "Critical",
+          "description": "AI crawlers following llms.txt's own guidance will hit 2-3 near-identical answers per topic with no canonical signal, undermining the citability the file is trying to build.",
+          "recommendation": "Fix the dedup pipeline, consolidate clusters, then curate llms.txt's Local Guides section to one entry per topic."
+        },
+        {
+          "title": "Individual-business AI citability capped at 1 real page",
+          "severity": "High",
+          "description": "Same root cause as the audit-wide Critical finding -- AI engines have zero citable pages for the vast majority of real local business queries.",
+          "recommendation": "Prioritize the listings fix; re-run a GEO citability check once real listings exist."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 78,
+      "weight": "5%",
+      "what_works": [
+        "All 301 crawled <img> tags have non-empty alt text",
+        "next/image with full responsive srcset, lazy loading, and automatic WebP delivery confirmed via Accept-header negotiation",
+        "OG images present with explicit width/height/alt on homepage and blog posts"
+      ],
+      "findings": [
+        {
+          "title": "All production imagery is generic Unsplash stock photography, not real business photos",
+          "severity": "High",
+          "description": "Every hero/card image sampled across city, category, and blog pages is stock photography, undermining trust/E-E-A-T for a 'verified local directory' positioning.",
+          "recommendation": "Prioritize owner-uploaded photos in the listing-claim flow once real listings launch."
+        },
+        {
+          "title": "Homepage OG image is just the 512x512 logo, not a branded social card",
+          "severity": "Medium",
+          "description": "Undersized for link-preview rendering on social/messaging platforms versus the ideal 1200x630.",
+          "recommendation": "Generate a dedicated branded 1200x630 OG image for the homepage."
+        }
+      ]
+    }
+  ],
+  "supplementary_categories": [
+    {
+      "name": "Sitemap Architecture (deep-dive)",
+      "score": 28,
+      "note": "Not a top-level weighted category per the scoring model -- folded into Technical SEO's blended score, but reported separately because it contains the audit's single most severe, most thoroughly root-caused finding. See findings/sitemap.md for the full code-level fix plan."
+    },
+    {
+      "name": "Search Experience (SXO)",
+      "score": 40,
+      "note": "Query-by-query page-type-mismatch analysis. See findings/sxo.md."
+    },
+    {
+      "name": "Local SEO",
+      "score": 45,
+      "note": "Platform-level local landing page and NAP-template assessment. See findings/local.md."
+    },
+    {
+      "name": "Content Cluster / Architecture",
+      "score": 32,
+      "note": "Hub-and-spoke interlinking maturity between blog and category/city pages. See findings/cluster.md."
+    },
+    {
+      "name": "Backlink Profile",
+      "score": 8,
+      "note": "Informational floor, not a diagnostic failure -- this is an expected, unconcerning score for a pre-launch site with no link-building activity yet. No Moz/Bing API credentials configured; Common Crawl tier only. See findings/backlinks.md."
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Redeploy origin/main to production (fixes admin-sitemap leakage and robots.txt gaps that are already coded but not live)",
+          "Fix hardcoded admin credentials in app/login/page.tsx; implement real server-side auth via Supabase before /super-admin and /admin routes render",
+          "Add a 308 host redirect from nepalidirectory.com to www.nepalidirectory.com",
+          "Wire lib/seo-auto/sitemaps.ts::getListingSitemapEntries() to the real listing repository and build app/business/[slug]/page.tsx",
+          "Fix the auto-blog dedup pipeline and consolidate the 5 near-duplicate topic clusters (12 posts) to one canonical post each"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Add unique metadata.title/description to the 21 public static pages sharing the homepage default title",
+          "Add a next.config.ts headers() block for CSP/X-Frame-Options/X-Content-Type-Options/Referrer-Policy",
+          "Fix the priceRange: \"Rs Rs Rs\" schema/UI bug",
+          "Remove the public 'Super Admin' nav link",
+          "Fix the 9 pages with duplicated brand-suffix titles; shorten the 55 titles exceeding 60 characters"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Expand the highest commercial-intent blog posts with concrete local specifics (prices, neighborhoods)",
+          "Add named human reviewer bylines for healthcare content",
+          "Differentiate the 8 city pages beyond the current ~85%-shared template",
+          "Add GeoCoordinates and complete openingHoursSpecification to the listing schema template",
+          "Begin real link-building outreach (Nepal tourism boards, business associations, claimed-business backlinks)"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Set up Google PageSpeed Insights / CrUX / Search Console API access (free) to replace lab-only performance and indexation estimates with real field data",
+          "Re-run this audit's GEO and SXO categories once real listings exist to measure the post-fix improvement",
+          "Add ItemList schema to city pages once real listing data exists to populate it",
+          "Establish a sitemap pagination scheme (sitemap-listings-2.xml, etc.) before listing volume approaches a few thousand URLs"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/",
+    "crawl_data": "crawl-data.json",
+    "raw_sitemaps": ["sitemap.xml", "sitemap-listings-1.xml", "sitemap-blog.xml", "sitemap-categories.xml"],
+    "robots_txt": "robots.txt",
+    "llms_txt": "llms.txt"
+  }
+}

@@ -17,8 +17,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { DashboardProvider, useDashboardData } from "@/components/dashboard/DashboardProvider";
 import { routes } from "@/lib/routes";
-
-const sessionKey = "nd-admin-session";
+import { createClient } from "@/utils/supabase/client";
 
 const navItems = [
   { label: "Overview", href: routes.dashboard, icon: BarChart3 },
@@ -41,19 +40,17 @@ export function DashboardShell({ children }: DashboardShellProps) {
   useEffect(() => {
     document.body.classList.add("dashboard-mode");
 
-    if (!localStorage.getItem(sessionKey)) {
-      router.replace(routes.login);
-      return () => document.body.classList.remove("dashboard-mode");
-    }
-
     setReady(true);
 
     return () => document.body.classList.remove("dashboard-mode");
   }, [router]);
 
-  function logout() {
-    localStorage.removeItem(sessionKey);
-    router.push(routes.login);
+  async function logout() {
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+      await createClient().auth.signOut();
+    }
+    router.replace(routes.login);
+    router.refresh();
   }
 
   if (!ready) {

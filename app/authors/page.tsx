@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     canonical: "/authors"
   },
   openGraph: {
-    title: "Nepali Directory Editorial Authors",
+    title: "Editorial Authors and Review Desks",
     description:
       "Editorial desks and subject areas behind Nepali Directory guides and local comparison content.",
     url: `${siteUrl}/authors`,

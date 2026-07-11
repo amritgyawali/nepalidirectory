@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { getBlogCategories, getBlogPostUrl, getLatestBlogModifiedAt, getSortedBlogPosts, siteUrl } from "@/lib/blog";
 import { getPublishedEnginePosts } from "@/lib/blog-engine";
+import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { routes } from "@/lib/routes";
 import { buildBlogKeywords, buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
 
@@ -80,7 +81,8 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   const enginePosts = await getPublishedEnginePosts();
-  const allPosts = [...curatedPosts, ...enginePosts].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  const allPosts = removeRetiredDuplicatePosts([...curatedPosts, ...enginePosts])
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
   const [featuredPost, ...remainingPosts] = allPosts;
   const itemListJsonLd = {
     "@context": "https://schema.org",

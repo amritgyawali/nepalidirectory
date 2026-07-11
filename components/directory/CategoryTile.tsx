@@ -16,7 +16,7 @@ export function CategoryTile({ name, count, href, icon: Icon, color }: CategoryT
         <Icon size={23} aria-hidden />
       </span>
       <span className="category-tile__name">{name}</span>
-      {count ? <span className="category-tile__count">{count} listings</span> : null}
+      {count ? <span className="category-tile__count">{count} current profiles</span> : null}
     </Link>
   );
 }

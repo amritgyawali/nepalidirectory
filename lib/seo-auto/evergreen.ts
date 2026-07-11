@@ -143,7 +143,12 @@ function buildIntro({
   return `${cityName} has ${listings.length} data-backed ${categoryName.toLowerCase()} listings in this directory sample, with an average rating of ${averageRating.toFixed(1)} from raw customer-review counts. Use this page to compare providers around ${localities} by rating, review volume, verified status, service notes and contact completeness. For a practical shortlist, start with businesses that publish a phone number, service area, payment methods and recent operating notes, then confirm hours, availability and exact pricing directly before visiting or booking. ${claimed} listings are marked owner-managed and ${openOr24h} are currently shown as open or 24-hour in the structured data. The ranking below is based on real listing fields in Nepali Directory, not invented descriptions or paid claims.`;
 }
 
-export function getEvergreenPages(options: { minListings?: number; minAverageQuality?: number } = {}): EvergreenPage[] {
+export function getEvergreenPages(
+  options: { minListings?: number; minAverageQuality?: number; includePreview?: boolean } = {},
+): EvergreenPage[] {
+  // The bundled businesses are demo fixtures. Never publish derived "best" rankings unless an
+  // explicit local preview asks for them; production evergreen pages must come from qualified DB rows.
+  if (!options.includePreview) return [];
   const minListings = options.minListings ?? 5;
   const minAverageQuality = options.minAverageQuality ?? 60;
   const now = new Date();
@@ -191,8 +196,12 @@ export function getEvergreenPages(options: { minListings?: number; minAverageQua
   return pages.slice(0, 50);
 }
 
-export function getEvergreenPage(categorySlug: string, citySlug: string): EvergreenPage | null {
-  return getEvergreenPages().find((page) => page.categorySlug === categorySlug && page.citySlug === citySlug) ?? null;
+export function getEvergreenPage(
+  categorySlug: string,
+  citySlug: string,
+  options: { includePreview?: boolean } = {},
+): EvergreenPage | null {
+  return getEvergreenPages(options).find((page) => page.categorySlug === categorySlug && page.citySlug === citySlug) ?? null;
 }
 
 export function getEvergreenUrl(page: EvergreenPage): string {

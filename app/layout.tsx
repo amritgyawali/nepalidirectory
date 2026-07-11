@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
-import { AiAssistant } from "@/components/ai/AiAssistant";
+import { LazyAiAssistant } from "@/components/ai/LazyAiAssistant";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { siteUrl } from "@/lib/blog";
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Nepali Directory"
   },
   description:
-    "Find verified local businesses, restaurants, doctors, hotels, services and city guides across Nepal.",
+    "Find and compare local business profiles, restaurants, doctors, hotels, services and city guides across Nepal.",
   metadataBase: new URL(siteUrl),
   keywords: [
     "Nepali Directory",
@@ -48,26 +48,26 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Nepali Directory | Nepal's trusted local business directory",
     description:
-      "Find verified local businesses, restaurants, doctors, hotels, services and city guides across Nepal.",
+      "Find and compare local business profiles, restaurants, doctors, hotels, services and city guides across Nepal.",
     url: siteUrl,
     siteName: "Nepali Directory",
     type: "website",
     locale: "en_US",
     images: [
       {
-        url: "/logo.svg",
-        width: 512,
-        height: 512,
-        alt: "Nepali Directory logo"
+        url: "/nepali-directory-og.png",
+        width: 1729,
+        height: 909,
+        alt: "Nepali Directory — find trusted local businesses across Nepal"
       }
     ]
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Nepali Directory",
     description:
-      "Find verified local businesses, restaurants, doctors, hotels, services and city guides across Nepal.",
-    images: ["/logo.svg"]
+      "Find and compare local business profiles, restaurants, doctors, hotels, services and city guides across Nepal.",
+    images: ["/nepali-directory-og.png"]
   },
   robots: {
     index: true,
@@ -103,7 +103,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         {children}
         <Footer />
-        <AiAssistant />
+        <LazyAiAssistant />
       </body>
     </html>
   );

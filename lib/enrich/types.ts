@@ -18,11 +18,18 @@ export type Listing = {
   address: string;
   phone?: string;
   website?: string;
+  email?: string;
   hoursToday?: string;
+  rating?: number;
+  reviews?: number;
+  price?: number;
+  status?: "open" | "closed" | "24h";
+  image?: string;
   photosCount: number;
   coordinates?: { lat: number; lng: number };
   claimed: boolean;
   verified: boolean;
+  active?: boolean;
   services?: string[];
   amenities: string[];
 
@@ -56,6 +63,8 @@ export type Listing = {
   ward?: string;
   /** Reversible-merge snapshots of records merged into this one (prompt sec. 6.6). */
   mergedFrom?: unknown[];
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
 };
 
 /** A listing prior to persistence (no id yet). */
@@ -63,6 +72,7 @@ export type NewListing = Omit<Listing, "id">;
 
 export interface ListingRepository {
   get(id: number): Promise<Listing | null>;
+  getBySlug(slug: string): Promise<Listing | null>;
   update(listing: Listing): Promise<void>;
   all(): Promise<Listing[]>;
   /** Insert a new listing, assigning an id. */

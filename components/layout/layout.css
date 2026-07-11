@@ -226,32 +226,35 @@
 
 @media (max-width: 760px) {
   .site-header__inner {
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: column;
     max-width: 100%;
-    overflow-x: hidden;
-    padding-inline: 18px;
+    padding: 10px 0 8px;
     width: 100%;
   }
 
+  .site-header__inner > .logo {
+    margin-inline: 18px;
+  }
+
   .site-nav {
-    gap: 8px;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    overflow-x: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    margin-left: 0;
+    overflow-x: auto;
+    padding: 2px 18px 6px;
+    scrollbar-width: thin;
     width: 100%;
   }
 
   .site-nav__link {
     justify-content: center;
-    min-width: 0;
+    min-width: max-content;
     padding-inline: 10px;
     text-align: center;
-    width: 100%;
-  }
-
-  .site-nav__link--featured {
-    grid-column: 1 / -1;
+    white-space: nowrap;
+    width: auto;
   }
 
   .footer__grid {

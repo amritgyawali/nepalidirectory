@@ -1,0 +1,93 @@
+# Nepali Directory
+
+> A Nepal-focused local business directory with city guides, category discovery, business comparisons, reviews, and practical editorial guidance.
+
+Nepali Directory publishes public directory and guide pages as crawlable server-rendered HTML. Use the XML sitemap for complete canonical URL discovery; this file is a curated context guide for language models and other AI agents.
+
+When citing this site, link to the exact canonical page. Confirm time-sensitive details such as opening hours, prices, availability, contact details, and regulations directly with the relevant provider or primary authority.
+
+## Main directories
+
+- [Home](https://www.nepalidirectory.com/): Browse local businesses, services, cities, and guides across Nepal.
+- [Categories](https://www.nepalidirectory.com/categories): Explore the directory by business and service category.
+- [Best Businesses](https://www.nepalidirectory.com/best-businesses): Open data-backed category and city shortlists.
+- [Near Me](https://www.nepalidirectory.com/near-me): Discover nearby business categories and local services.
+- [Top Rated](https://www.nepalidirectory.com/top-rated): Browse highly rated directory listings.
+- [Business Comparisons](https://www.nepalidirectory.com/compare-business): Compare providers using consistent decision criteria.
+- [Business Profile: Newa Lahana](https://www.nepalidirectory.com/business/newa-lahana): Restaurant details, contact information, hours, photos, and reviews.
+- [Blog](https://www.nepalidirectory.com/blog): Practical Nepal travel, food, services, healthcare, and business guides.
+
+## City directories
+
+- [Kathmandu local business directory](https://www.nepalidirectory.com/city/kathmandu): Find verified restaurants, hotels, doctors, salons, contractors and home services across Kathmandu Valley.
+- [Pokhara local business directory](https://www.nepalidirectory.com/city/pokhara): Find Pokhara hotels, travel agencies, restaurants, cafes, adventure desks and local services around Lakeside and nearby areas.
+- [Lalitpur local business directory](https://www.nepalidirectory.com/city/lalitpur): Browse Lalitpur businesses including Patan restaurants, clinics, schools, salons, repair services and professional providers.
+- [Bhaktapur local business directory](https://www.nepalidirectory.com/city/bhaktapur): Find Bhaktapur restaurants, hotels, heritage dining rooms, shops, repair providers and local services.
+- [Chitwan local business directory](https://www.nepalidirectory.com/city/chitwan): Explore Chitwan hotels, safari operators, restaurants, transport providers, clinics and local services.
+- [Biratnagar local business directory](https://www.nepalidirectory.com/city/biratnagar): Find Biratnagar doctors, schools, hotels, restaurants, shops, repair providers and professional services.
+- [Butwal local business directory](https://www.nepalidirectory.com/city/butwal): Browse Butwal hotels, restaurants, clinics, schools, auto repair shops, contractors and local services.
+- [Dharan local business directory](https://www.nepalidirectory.com/city/dharan): Find Dharan restaurants, clinics, hotels, schools, repair providers, salons and local business services.
+
+## Business comparison guides
+
+- [Compare Beauty Salons in Kathmandu](https://www.nepalidirectory.com/compare-business/beauty-salons): Compare beauty salons in Kathmandu by services, ratings, reviews, price ranges, location and best-fit beauty needs.
+- [Compare Cafes in Lalitpur](https://www.nepalidirectory.com/compare-business/cafes-lalitpur): Compare cafes in Lalitpur and Patan by coffee quality, Wi-Fi, quiet seating, outlet access, food menu and meeting suitability.
+- [Compare Contractors in Nepal](https://www.nepalidirectory.com/compare-business/contractors): Compare Nepal contractors for renovation, structural work and finishing projects using ratings, price ranges and practical selection criteria.
+- [Compare Dental Clinics in Kathmandu](https://www.nepalidirectory.com/compare-business/dental-clinics): Compare Kathmandu dental clinics by treatment fit, consultation cost, dentist experience, equipment, reviews and follow-up care.
+- [Compare Doctors in Kathmandu](https://www.nepalidirectory.com/compare-business/doctors): Compare doctors in Kathmandu using specialty fit, ratings, patient reviews, consultation price and availability signals.
+- [Compare Electricians in Kathmandu](https://www.nepalidirectory.com/compare-business/electricians): Compare Kathmandu electricians by safety practices, visit fee, response speed, ratings, reviews and service strengths.
+- [Compare Gyms and Fitness Centers in Kathmandu](https://www.nepalidirectory.com/compare-business/gyms-fitness-centers): Compare Kathmandu gyms and fitness centers by equipment quality, trainer support, class schedule, hygiene, location and membership cost.
+- [Compare Healthcare Clinics in Kathmandu](https://www.nepalidirectory.com/compare-business/healthcare-clinics): Compare Kathmandu healthcare clinics by specialty, rating, consultation cost, best-use case and patient support.
+- [Compare Home Service Providers in Kathmandu](https://www.nepalidirectory.com/compare-business/home-services): Compare home service providers in Kathmandu by rating, visit cost, strengths, response speed and best-fit repair needs.
+- [Compare Best Hotels in Nepal](https://www.nepalidirectory.com/compare-business/hotels): Compare Nepal hotels by location, rating, price level, guest strengths and best-fit travel use case.
+- [Compare Photography Businesses in Nepal](https://www.nepalidirectory.com/compare-business/photography): Compare top photography businesses in Nepal with ratings, price level, best-use cases, strengths and contact details.
+- [Compare Plumbers in Kathmandu](https://www.nepalidirectory.com/compare-business/plumbers): Compare Kathmandu plumbers by visit fee, response speed, repair strengths, ratings, reviews and service area.
+- [Compare Restaurants in Kathmandu](https://www.nepalidirectory.com/compare-business/restaurants): Compare Kathmandu restaurants for Newari food, Thakali sets, cafes and group dining with practical decision notes.
+- [Compare Schools in Nepal](https://www.nepalidirectory.com/compare-business/schools): Compare schools in Nepal with ratings, admission notes, facilities, best-fit student needs and parent decision criteria.
+- [Compare Travel Agencies in Nepal](https://www.nepalidirectory.com/compare-business/travel-agencies): Compare Nepal travel agencies by specialization, reviews, price level, support quality and best-fit travel use case.
+- [Compare Wedding Planners in Nepal](https://www.nepalidirectory.com/compare-business/wedding-planners): Compare wedding planners in Nepal by event size, decor style, vendor network, budget control, coordination strength and review signals.
+- [Compare Wedding Venues in Nepal](https://www.nepalidirectory.com/compare-business/wedding-venues): Compare wedding venues in Nepal with ratings, capacity notes, price ranges, best-use cases and planning strengths.
+
+## Local guides
+
+- [Questions to Ask Before Choosing a Restaurant or Cafe in Nepal: A Comprehensive Guide](https://www.nepalidirectory.com/blog/questions-to-ask-before-choosing-a-restaurant-or-cafe-in-nepal-a-comprehensive-g): A practical guide to help you choose the best restaurant or cafe in Nepal by asking the right questions and considering essential factors.
+- [How to Compare Local Services in Nepal Before Booking: A Practical Guide](https://www.nepalidirectory.com/blog/how-to-compare-local-services-in-nepal-before-booking-a-practical-guide): Learn how to effectively compare local services in Nepal, from restaurants to plumbers, ensuring you make informed booking decisions with confidence.
+- [How to Compare Event Venues and Vendors in Nepal](https://www.nepalidirectory.com/blog/how-to-compare-event-venues-and-vendors-in-nepal): Get expert advice on comparing event venues and vendors in Nepal, including tips on shortlisting, questions to ask, and checks to make before making a...
+- [How to Compare Clinics and Book Appointments in Nepal: A Practical Guide](https://www.nepalidirectory.com/blog/how-to-compare-clinics-and-book-appointments-in-nepal-a-practical-guide): A comprehensive guide to comparing clinics and booking appointments in Nepal, offering practical advice for Nepali readers.
+- [How to Compare Repair Providers in Nepal before Hiring](https://www.nepalidirectory.com/blog/how-to-compare-repair-providers-in-nepal-before-hiring): Learn how to compare repair providers in Nepal before hiring plumbers or electricians with our step-by-step guide.
+- [Questions to Ask before Choosing a Restaurant or Cafe in Nepal](https://www.nepalidirectory.com/blog/questions-to-ask-before-choosing-a-restaurant-or-cafe-in-nepal): A practical NepaliDirectory guide to questions to ask before choosing a restaurant or cafe in nepal.
+- [Compare Local Services in Nepal: A Practical Guide](https://www.nepalidirectory.com/blog/compare-local-services-in-nepal-a-practical-guide): Learn how to compare local services in Nepal before booking, including restaurants, hotels, plumbers, and electricians, with our practical guide.
+- [How to Compare Event Venues and Vendors in Nepal: A Practical Guide](https://www.nepalidirectory.com/blog/how-to-compare-event-venues-and-vendors-in-nepal-a-practical-guide): Compare event venues and vendors in Nepal with this step-by-step guide, ensuring a successful event with our local business comparison tips.
+- [How to Compare Clinics and Appointments in Nepal](https://www.nepalidirectory.com/blog/how-to-compare-clinics-and-appointments-in-nepal): Learn how to compare clinics in Nepal based on location, services, reviews, and booking options. Get practical tips for scheduling appointments and...
+- [Compare Plumbers and Electricians in Nepal: A Guide to Hiring the Right Repair Provider](https://www.nepalidirectory.com/blog/compare-plumbers-and-electricians-in-nepal-a-guide-to-hiring-the-right-repair-pr): Learn how to compare repair providers in Nepal, including plumbers and electricians, before hiring the right one for your needs.
+- [Choosing the Right Restaurant or Cafe in Nepal: Questions to Ask](https://www.nepalidirectory.com/blog/choosing-the-right-restaurant-or-cafe-in-nepal-questions-to-ask): A practical guide to selecting a restaurant or cafe in Nepal, including essential questions to ask and checks to make before your visit.
+- [How to Compare Local Services in Nepal before Booking](https://www.nepalidirectory.com/blog/how-to-compare-local-services-in-nepal-before-booking): A practical NepaliDirectory guide to how to compare local services in nepal before booking.
+- [Kathmandu Dental Clinic Guide: Costs, Questions and Reviews](https://www.nepalidirectory.com/blog/kathmandu-dental-clinic-guide): Choose a dental clinic in Kathmandu with a practical checklist for consultation fees, treatment estimates, hygiene, dental scans, specialist care and reviews.
+- [Best Cafes in Lalitpur for Work Meetings and Quiet Coffee](https://www.nepalidirectory.com/blog/lalitpur-cafes-work-meetings): Find work-friendly cafes in Lalitpur by comparing Wi-Fi, seating comfort, outlet access, food menu, parking, noise level and meeting suitability.
+- [Nepal Wedding Planning Checklist: Venues, Photography and Budget](https://www.nepalidirectory.com/blog/nepal-wedding-planning-checklist): Plan a wedding in Nepal with a practical checklist for venues, photography, decor, makeup, catering, guest capacity, budget and vendor comparison.
+- [How to Compare Schools in Kathmandu for Admissions](https://www.nepalidirectory.com/blog/compare-schools-kathmandu-admissions): Compare schools in Kathmandu by curriculum, admission process, fees, transport, teacher support, facilities, parent communication and student fit.
+- [The Ultimate Guide to Trekking the Annapurna Circuit](https://www.nepalidirectory.com/blog/annapurna-circuit-guide): Plan the Annapurna Circuit trek with route stages, permit guidance, cost ranges, packing advice, teahouse tips and safety checks for Nepal travellers.
+- [Best Newari Food in Kathmandu: Where Locals Eat](https://www.nepalidirectory.com/blog/kathmandu-newari-food): Find the best Newari food in Kathmandu with dish recommendations, neighborhood tips, ordering advice and local restaurant guidance.
+- [How to Choose a Verified Contractor in Nepal](https://www.nepalidirectory.com/blog/verified-contractor-nepal): Use this Nepal contractor checklist to compare licenses, references, estimates, payment terms, safety practices and review signals before hiring.
+- [Kathmandu Restaurant Guide: Best Areas for Every Meal](https://www.nepalidirectory.com/blog/kathmandu-restaurant-guide): Explore the best Kathmandu restaurant areas by meal type, cuisine, budget and neighborhood, with practical booking and review tips.
+
+## Data-backed local answers
+
+- [Best Restaurants in Kathmandu](https://www.nepalidirectory.com/best/restaurants/kathmandu): Compare 6 restaurants in Kathmandu by rating, reviews, locality, services and contact details.
+
+## Trust and machine-readable resources
+
+- [Editorial Policy](https://www.nepalidirectory.com/editorial-policy): How content is researched, reviewed, corrected, and updated.
+- [Authors](https://www.nepalidirectory.com/authors): Editorial desks, subject coverage, and author information.
+- [Attribution](https://www.nepalidirectory.com/attribution): Third-party data, imagery, and source acknowledgements.
+- [XML Sitemap Index](https://www.nepalidirectory.com/sitemap.xml): Complete canonical discovery map for all public indexable pages.
+- [Blog RSS Feed](https://www.nepalidirectory.com/blog/rss.xml): Machine-readable feed of published guides.
+- [Robots Policy](https://www.nepalidirectory.com/robots.txt): Crawler permissions and private-route exclusions.
+
+## Optional
+
+- [About](https://www.nepalidirectory.com/about): Background and purpose of Nepali Directory.
+- [Contact](https://www.nepalidirectory.com/contact): How to contact the directory team.
+- [Claim a Listing](https://www.nepalidirectory.com/claim-listing): Information for business owners managing a directory listing.
+- [Privacy Policy](https://www.nepalidirectory.com/privacy): Privacy and data-handling information.
+- [Terms of Service](https://www.nepalidirectory.com/terms): Terms governing use of the website.

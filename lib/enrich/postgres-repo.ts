@@ -25,12 +25,19 @@ type ListingRow = {
   address: string | null;
   phone: string | null;
   website: string | null;
+  email: string | null;
   hours_today: string | null;
+  rating: number | string | null;
+  reviews: number | null;
+  price: number | null;
+  status: string | null;
+  image: string | null;
   photos_count: number | null;
   lat: number | string | null;
   lng: number | string | null;
   claimed: boolean | null;
   verified: boolean | null;
+  active: boolean | null;
   services: string[] | null;
   amenities: string[] | null;
   description_en: string | null;
@@ -55,6 +62,8 @@ type ListingRow = {
   municipality: string | null;
   ward: string | null;
   merged_from: unknown[] | null;
+  created_at: string | Date | null;
+  updated_at: string | Date | null;
 };
 
 function mapRow(r: ListingRow, faqs: ListingFaq[]): Listing {
@@ -68,11 +77,18 @@ function mapRow(r: ListingRow, faqs: ListingFaq[]): Listing {
     address: r.address ?? "",
     phone: r.phone ?? undefined,
     website: r.website ?? undefined,
+    email: r.email ?? undefined,
     hoursToday: r.hours_today ?? undefined,
+    rating: r.rating != null ? Number(r.rating) : undefined,
+    reviews: r.reviews ?? undefined,
+    price: r.price ?? undefined,
+    status: r.status === "open" || r.status === "closed" || r.status === "24h" ? r.status : undefined,
+    image: r.image ?? undefined,
     photosCount: r.photos_count ?? 0,
     coordinates: r.lat != null && r.lng != null ? { lat: Number(r.lat), lng: Number(r.lng) } : undefined,
     claimed: Boolean(r.claimed),
     verified: Boolean(r.verified),
+    active: r.active !== false,
     services: r.services ?? undefined,
     amenities: r.amenities ?? [],
     description: r.description_en ?? undefined,
@@ -98,6 +114,8 @@ function mapRow(r: ListingRow, faqs: ListingFaq[]): Listing {
     municipality: r.municipality ?? undefined,
     ward: r.ward ?? undefined,
     mergedFrom: r.merged_from ?? undefined,
+    createdAt: r.created_at ? new Date(r.created_at) : null,
+    updatedAt: r.updated_at ? new Date(r.updated_at) : null,
   };
 }
 
@@ -136,6 +154,14 @@ export class PostgresListingRepository implements ListingRepository {
   async get(id: number): Promise<Listing | null> {
     const rows = await this.sql<ListingRow>(`SELECT * FROM listings WHERE id=$1`, [id]);
     if (!rows.length) return null;
+    const faqs = (await this.faqsFor([id])).get(id) ?? [];
+    return mapRow(rows[0], faqs);
+  }
+
+  async getBySlug(slug: string): Promise<Listing | null> {
+    const rows = await this.sql<ListingRow>(`SELECT * FROM listings WHERE slug=$1 AND active=true`, [slug]);
+    if (!rows.length) return null;
+    const id = Number(rows[0].id);
     const faqs = (await this.faqsFor([id])).get(id) ?? [];
     return mapRow(rows[0], faqs);
   }

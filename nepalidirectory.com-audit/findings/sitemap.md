@@ -230,6 +230,53 @@ data per city, not just a swapped city name in a template) before scaling any su
 
 ---
 
+---
+
+## 4. NEW (orchestrator, post-hoc) — 12 live blog posts orphaned from the sitemap, forming 5 near-duplicate content clusters
+
+Found by cross-referencing `llms.txt` and `/blog/rss.xml` (both dynamic, both correctly track live
+content) against `sitemap-blog.xml` (static, 15 URLs including the index page) and against
+`lib/blog.ts`'s hardcoded `blogPosts` array (14 entries — the same array `sitemap-blog.xml`
+serializes). **12 blog posts exist live (HTTP 200, spot-checked 7 of them directly), are listed in
+both `llms.txt` and `/blog/rss.xml`, but are completely absent from `sitemap-blog.xml`** — same
+root-cause shape as §1's listings bug (a static seed array in `lib/blog.ts` not reflecting real
+published content), but this time affecting a content type that genuinely *is* being published
+live (via the daily `/api/cron/blog` job, `vercel.json`: `0 3 * * *`), just not sitemap-tracked.
+
+The 12 orphaned slugs cluster into **5 topic groups with 2-3 near-duplicate posts each**,
+published within 1-2 days of each other:
+
+| Topic cluster | Slugs | Published |
+|---|---|---|
+| Choosing a restaurant/cafe | `questions-to-ask-before-choosing-a-restaurant-or-cafe-in-nepal`, `questions-to-ask-before-choosing-a-restaurant-or-cafe-in-nepal-a-comprehensive-g`, `choosing-the-right-restaurant-or-cafe-in-nepal-questions-to-ask` | 3 posts |
+| Comparing local services before booking | `how-to-compare-local-services-in-nepal-before-booking`, `how-to-compare-local-services-in-nepal-before-booking-a-practical-guide`, `compare-local-services-in-nepal-a-practical-guide` | 3 posts |
+| Comparing event venues/vendors | `how-to-compare-event-venues-and-vendors-in-nepal`, `how-to-compare-event-venues-and-vendors-in-nepal-a-practical-guide` | 2 posts |
+| Comparing clinics/appointments | `how-to-compare-clinics-and-appointments-in-nepal`, `how-to-compare-clinics-and-book-appointments-in-nepal-a-practical-guide` | 2 posts |
+| Comparing repair providers | `how-to-compare-repair-providers-in-nepal-before-hiring`, `compare-plumbers-and-electricians-in-nepal-a-guide-to-hiring-the-right-repair-pr` | 2 posts |
+
+**Verified, not assumed**: fetched and text-diffed the 3-post "local services" cluster directly.
+Published 2026-07-05/2026-07-06 (1 day apart), 886-972 words each, and share **85-90% of their
+5-word phrase sequences** pairwise (686/771, 703/819, 687/771 shared 5-grams) — this is
+near-verbatim duplicate content under three different slugs and titles, not three genuinely
+distinct angles on the same topic.
+
+**Why this matters beyond "missing from sitemap"**: the project's own build docs describe the
+auto-blog cron as having "embedding dedup" specifically to prevent this. Live evidence shows
+dedup is not preventing near-identical republishing across at least 5 topic clusters. This is a
+Critical-severity finding in its own right (separate from, and in addition to, the sitemap-only
+gap): duplicate content dilutes ranking signal across near-identical URLs, wastes crawl budget,
+and — because these posts aren't in the sitemap — Google's primary discovery path for them is
+whatever internal links exist plus (if Google chooses to fetch it, which is not guaranteed the way
+XML sitemap submission is) the RSS feed, no structured discovery guarantee at all.
+**Recommend**: (1) fix the dedup embedding-similarity threshold in the auto-blog cron so near-
+duplicate topics are rejected or merged before publish, not after; (2) 301-redirect or canonicalize
+the 7 weaker duplicates in each cluster to one surviving canonical post per topic rather than
+leaving 2-3 live URLs per topic; (3) once deduped, make sure `lib/blog.ts`/`sitemap-blog.xml`'s
+data source matches whatever store `llms.txt` and `/blog/rss.xml` already correctly read from, so
+this doesn't recur for future legitimately-distinct posts.
+
+---
+
 ## Files referenced
 
 - `lib/seo-auto/sitemaps.ts` — sitemap entry generators, `getListingSitemapEntries()` bug

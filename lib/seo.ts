@@ -3,6 +3,7 @@ import type { CompareCategory } from "@/lib/compare";
 
 export const publisher = {
   "@type": "Organization",
+  "@id": "https://www.nepalidirectory.com/#organization",
   name: "Nepali Directory",
   url: "https://www.nepalidirectory.com",
   logo: {
@@ -25,14 +26,19 @@ export const publisher = {
 };
 
 export function buildOrganizationJsonLd() {
+  const sameAs = [
+    process.env.NEXT_PUBLIC_FACEBOOK_URL,
+    process.env.NEXT_PUBLIC_INSTAGRAM_URL,
+    process.env.NEXT_PUBLIC_LINKEDIN_URL,
+    process.env.NEXT_PUBLIC_YOUTUBE_URL,
+  ].filter((value): value is string => Boolean(value && /^https:\/\//.test(value)));
   return {
     "@context": "https://schema.org",
     ...publisher,
-    "@id": `${publisher.url}/#organization`,
     description:
-      "Nepali Directory helps people find, compare and contact local businesses, restaurants, hotels, doctors and services across Nepal.",
+      "Nepali Directory helps people find, compare and contact reviewed local business profiles, restaurants, hotels, doctors and services across Nepal.",
     foundingDate: "2026",
-    sameAs: [],
+    sameAs: sameAs.length ? sameAs : undefined,
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
@@ -131,6 +137,9 @@ export function getBlogQuickAnswer(post: BlogPost) {
 
 export function getCompareQuickAnswer(category: CompareCategory) {
   const best = category.businesses[0];
+  if (!best) {
+    return `Compare ${category.category.toLowerCase()} using ${category.criteria.join(", ").toLowerCase()}. Named providers appear only after their public listing data passes the directory's publication checks.`;
+  }
   return `${best.name} ranks first for ${category.category.toLowerCase()} because it is best for ${best.bestFor.toLowerCase()}, has a ${best.rating}/5 rating from ${best.reviews} reviews, and ${best.verdict.charAt(0).toLowerCase()}${best.verdict.slice(1)}`;
 }
 

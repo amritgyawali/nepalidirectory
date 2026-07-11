@@ -1,8 +1,10 @@
 import { contentAuthors } from "@/lib/authors";
 import { blogPosts, getBlogCategories, siteUrl, type BlogPost } from "@/lib/blog";
+import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
-import { routes } from "@/lib/routes";
+import { getBusinessHref, routes } from "@/lib/routes";
+import { getIndexableListings } from "@/lib/public-listings";
 import { isIndexableRoute } from "@/lib/seo-config";
 import { getEvergreenPages } from "./evergreen";
 
@@ -20,8 +22,6 @@ export type SitemapIndexEntry = {
 
 const separatelyMappedRoutes = new Set<string>([
   routes.blogPost,
-  routes.business,
-  routes.city,
 ]);
 
 export function getStaticSitemapEntries(): SitemapEntry[] {
@@ -37,7 +37,7 @@ export function getStaticSitemapEntries(): SitemapEntry[] {
 
 export function getBlogSitemapEntries(additionalPosts: BlogPost[] = []): SitemapEntry[] {
   const posts = uniqueSitemapEntries(
-    [...blogPosts, ...additionalPosts].map((post) => ({
+    removeRetiredDuplicatePosts([...blogPosts, ...additionalPosts]).map((post) => ({
       url: `${siteUrl}${post.href}`,
       lastModified: post.modifiedAt,
     })),
@@ -68,13 +68,12 @@ export function getCategorySitemapEntries(): SitemapEntry[] {
   ];
 }
 
-export function getListingSitemapEntries(): SitemapEntry[] {
-  return [
-    {
-      url: `${siteUrl}${routes.business}`,
-      lastModified: "2026-06-28",
-    },
-  ];
+export async function getListingSitemapEntries(): Promise<SitemapEntry[]> {
+  return (await getIndexableListings()).map((listing) => ({
+    url: `${siteUrl}${getBusinessHref(listing.slug)}`,
+    lastModified: listing.updatedAt ?? listing.aiEnrichedAt ?? listing.createdAt ?? undefined,
+    images: listing.image ? [listing.image] : undefined,
+  }));
 }
 
 export function getAuthorSitemapEntries(): SitemapEntry[] {
@@ -90,12 +89,12 @@ export function getPageSitemapEntries(): SitemapEntry[] {
   ]);
 }
 
-export function allSitemapEntries(additionalBlogPosts: BlogPost[] = []): SitemapEntry[] {
+export async function allSitemapEntries(additionalBlogPosts: BlogPost[] = []): Promise<SitemapEntry[]> {
   return uniqueSitemapEntries([
     ...getPageSitemapEntries(),
     ...getBlogSitemapEntries(additionalBlogPosts),
     ...getCategorySitemapEntries(),
-    ...getListingSitemapEntries(),
+    ...(await getListingSitemapEntries()),
   ]);
 }
 

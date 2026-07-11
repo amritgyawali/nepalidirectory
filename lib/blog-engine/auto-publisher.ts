@@ -2,6 +2,7 @@ import { loadAiConfig } from "../ai-core";
 import { canAutoPublish } from "./editorial";
 import type { BlogEngineRuntime } from "./runtime";
 import { getDefaultBlogEngineRuntime } from "./singleton";
+import { isDuplicateTopic } from "./generate/seo";
 
 type AutoBlogPostResult = {
   id: number;
@@ -156,7 +157,9 @@ function pickFallbackCategories(taxonomy: string[], preferred: readonly string[]
 
 async function seedFallbackCluster(runtime: BlogEngineRuntime): Promise<number | null> {
   const existingPosts = await runtime.blogPosts.list();
-  const topic = FALLBACK_TOPICS[existingPosts.length % FALLBACK_TOPICS.length];
+  const existingTitles = existingPosts.map((post) => post.title);
+  const topic = FALLBACK_TOPICS.find((candidate) => !isDuplicateTopic(candidate.angle, existingTitles));
+  if (!topic) return null;
   const categories = pickFallbackCategories(runtime.taxonomy, topic.categories);
   if (categories.length === 0) return null;
 

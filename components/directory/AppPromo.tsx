@@ -24,8 +24,8 @@ export function AppPromo() {
           <p className="eyebrow">Available on mobile</p>
           <h2>Take Nepali Directory with you. It&apos;s free.</h2>
           <p>
-            Search 50,000+ local businesses on the go. Save favourites, read reviews and get
-            directions from one clean mobile experience.
+            Search directory profiles on the go. Save favourites, read reviews and get directions
+            from one clean mobile experience.
           </p>
           <div className="app-promo__buttons">
             <Link className="store-button" href={routes.getApp}>

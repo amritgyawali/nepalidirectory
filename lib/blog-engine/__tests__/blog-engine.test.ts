@@ -11,6 +11,11 @@ import type { Listing } from "../../enrich";
 import { createBlogEngineRuntime } from "../runtime";
 import { isBrandSafe } from "../safety";
 import { injectLinks } from "../generate/link-injection";
+import {
+  isDuplicateEmbedding,
+  isDuplicateTopic,
+  isNearDuplicateContent,
+} from "../generate/seo";
 
 function respond(body: unknown, status = 200): Response {
   return new Response(typeof body === "string" ? body : JSON.stringify(body), { status });
@@ -23,6 +28,30 @@ describe("Brand-safety hard filter (prompt §8.3)", () => {
     expect(isBrandSafe("Prime minister announces election date")).toBe(false);
     expect(isBrandSafe("Man arrested after crime in Kathmandu")).toBe(false);
     expect(isBrandSafe("Explicit adult content site shut down")).toBe(false);
+  });
+});
+
+describe("SEO duplicate suppression", () => {
+  it("rejects reordered versions of an existing topic while allowing a distinct intent", () => {
+    const existing = ["Questions to Ask Before Choosing a Restaurant or Cafe in Nepal"];
+
+    expect(isDuplicateTopic("Choosing the Right Restaurant or Cafe in Nepal: Questions to Ask", existing)).toBe(true);
+    expect(isDuplicateTopic("Pokhara Hotel Accessibility and Arrival Checklist", existing)).toBe(false);
+  });
+
+  it("rejects substantially shared long-form copy and keeps unrelated copy", () => {
+    const shared = Array.from({ length: 90 }, (_, index) => `detail${index}`);
+    const original = shared.join(" ");
+    const closeCopy = [...shared.slice(0, 78), ...Array.from({ length: 12 }, (_, index) => `change${index}`)].join(" ");
+    const distinct = Array.from({ length: 90 }, (_, index) => `different${index}`).join(" ");
+
+    expect(isNearDuplicateContent(closeCopy, [original])).toBe(true);
+    expect(isNearDuplicateContent(distinct, [original])).toBe(false);
+  });
+
+  it("uses the stricter embedding similarity threshold", () => {
+    expect(isDuplicateEmbedding([1, 0], [[0.85, 0.5267826876]])).toBe(true);
+    expect(isDuplicateEmbedding([1, 0], [[0.83, 0.557763]])).toBe(false);
   });
 });
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Data Attribution & Licensing | Nepali Directory",
+  title: "Data Attribution and Licensing",
   description:
     "Sources and licenses behind Nepali Directory listings, including © OpenStreetMap contributors (ODbL).",
   alternates: { canonical: "/attribution" }

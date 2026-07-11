@@ -12,7 +12,7 @@ import {
   Wrench,
   Zap
 } from "lucide-react";
-import { routes } from "@/lib/routes";
+import { getBusinessHref, getCompareHref, getSearchHref } from "@/lib/routes";
 export { blogPosts } from "@/lib/blog";
 
 export type Business = {
@@ -50,22 +50,34 @@ export type Business = {
   faqs?: Array<{ question: string; answer: string }>;
   owner?: { name: string; role: string };
   coordinates?: { lat: number; lng: number };
+  weeklyHours?: Array<{ dayOfWeek: string; opens: string; closes: string; closed?: boolean }>;
+  factsCheckedAt?: string;
 };
+
+export function isDemoBusiness(business: Business): boolean {
+  if (business.email?.toLowerCase().endsWith(".example")) return true;
+  if (!business.website) return false;
+  try {
+    return new URL(business.website).hostname.toLowerCase().endsWith("example.com");
+  } catch {
+    return true;
+  }
+}
 
 const image = (id: string, size = "600") =>
   `https://images.unsplash.com/${id}?w=${size}&h=${size}&fit=crop&auto=format`;
 
 export const categories = [
-  { name: "Restaurants", count: "12,400", icon: Utensils, color: "#fff7d1", href: routes.search },
-  { name: "Doctors", count: "4,820", icon: HeartPulse, color: "#e8f4fd", href: routes.search },
-  { name: "Plumbers", count: "2,140", icon: Wrench, color: "#e8f5ed", href: routes.search },
-  { name: "Electricians", count: "1,760", icon: Zap, color: "#fff7d1", href: routes.search },
-  { name: "Hotels", count: "3,950", icon: Hotel, color: "#fce8ec", href: routes.search },
-  { name: "Lawyers", count: "1,280", icon: Scale, color: "#ecf0fb", href: routes.search },
-  { name: "Auto Repair", count: "2,310", icon: Car, color: "#f0f0f0", href: routes.search },
-  { name: "Beauty Salons", count: "1,940", icon: Sparkles, color: "#f3e8fd", href: routes.search },
-  { name: "Schools", count: "4,220", icon: GraduationCap, color: "#e0f4f4", href: routes.search },
-  { name: "Contractors", count: "1,620", icon: Building2, color: "#fff1e0", href: routes.search }
+  { name: "Restaurants", count: "3", icon: Utensils, color: "#fff7d1", href: getCompareHref("restaurants") },
+  { name: "Doctors", count: "1", icon: HeartPulse, color: "#e8f4fd", href: getCompareHref("doctors") },
+  { name: "Plumbers", count: "1", icon: Wrench, color: "#e8f5ed", href: getCompareHref("plumbers") },
+  { name: "Electricians", count: "1", icon: Zap, color: "#fff7d1", href: getCompareHref("electricians") },
+  { name: "Hotels", count: "1", icon: Hotel, color: "#fce8ec", href: getCompareHref("hotels") },
+  { name: "Lawyers", count: "1", icon: Scale, color: "#ecf0fb", href: getSearchHref("Lawyers") },
+  { name: "Auto Repair", count: "0", icon: Car, color: "#f0f0f0", href: getCompareHref("auto-repair") },
+  { name: "Beauty Salons", count: "0", icon: Sparkles, color: "#f3e8fd", href: getCompareHref("beauty-salons") },
+  { name: "Schools", count: "0", icon: GraduationCap, color: "#e0f4f4", href: getCompareHref("schools") },
+  { name: "Contractors", count: "0", icon: Building2, color: "#fff1e0", href: getCompareHref("contractors") }
 ];
 
 export const categoryGroups = [
@@ -150,31 +162,31 @@ export const categoryGroups = [
 export const cities = [
   {
     name: "Kathmandu",
-    listings: "12,840",
+    listings: "8",
     image: image("photo-1605640840605-14ac1855827b", "700"),
     href: "/city/kathmandu"
   },
   {
     name: "Pokhara",
-    listings: "4,210",
+    listings: "1",
     image: image("photo-1626621341517-bbf3d9990a23", "700"),
     href: "/city/pokhara"
   },
   {
     name: "Lalitpur",
-    listings: "6,580",
+    listings: "1",
     image: image("photo-1561361513-2d000a50f0dc", "700"),
     href: "/city/lalitpur"
   },
   {
     name: "Bhaktapur",
-    listings: "2,940",
+    listings: "1",
     image: image("photo-1614107707379-283a65774553", "700"),
     href: "/city/bhaktapur"
   },
   {
     name: "Chitwan",
-    listings: "1,820",
+    listings: "0",
     image: image("photo-1571401835393-8c5f35328320", "700"),
     href: "/city/chitwan"
   }
@@ -249,7 +261,17 @@ export const businesses: Business[] = [
       }
     ],
     owner: { name: "Sumesh Maharjan", role: "Chef-owner" },
-    coordinates: { lat: 27.6722, lng: 85.4298 }
+    coordinates: { lat: 27.6722, lng: 85.4298 },
+    weeklyHours: [
+      { dayOfWeek: "Monday", opens: "11:30", closes: "21:00" },
+      { dayOfWeek: "Tuesday", opens: "00:00", closes: "00:00", closed: true },
+      { dayOfWeek: "Wednesday", opens: "11:30", closes: "21:00" },
+      { dayOfWeek: "Thursday", opens: "11:30", closes: "21:00" },
+      { dayOfWeek: "Friday", opens: "11:30", closes: "22:30" },
+      { dayOfWeek: "Saturday", opens: "11:30", closes: "22:30" },
+      { dayOfWeek: "Sunday", opens: "11:30", closes: "21:00" }
+    ],
+    factsCheckedAt: "2026-06-28"
   },
   {
     rank: 2,
@@ -670,10 +692,10 @@ export const plans = [
 ];
 
 export const stats = [
-  ["50K+", "verified listings"],
-  ["7", "provinces covered"],
-  ["1.2M", "monthly searches"],
-  ["48K+", "mobile downloads"]
+  [String(businesses.length), "preview business profiles"],
+  [String(cities.length), "featured city directories"],
+  [String(categories.length), "search categories"],
+  ["Daily", "content quality checks"]
 ];
 
 export const directoryFeatureChecklist = [
@@ -712,5 +734,5 @@ export const peopleProfiles = businesses
     business: business.name,
     location: business.area,
     phone: business.phone,
-    href: business.slug === "newa-lahana" ? routes.business : `${routes.search}?q=${encodeURIComponent(business.name)}`
+    href: getBusinessHref(business.slug)
   }));

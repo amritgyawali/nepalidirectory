@@ -13,7 +13,7 @@ export function makeEvergreenPageHandler(options: {
   return async ({ job }) => {
     const categorySlug = typeof job.payload.categorySlug === "string" ? job.payload.categorySlug : "";
     const citySlug = typeof job.payload.citySlug === "string" ? job.payload.citySlug : "";
-    const page = getEvergreenPage(categorySlug, citySlug);
+    const page = getEvergreenPage(categorySlug, citySlug, { includePreview: true });
     if (!page) throw new Error(`evergreen page failed quality gates: ${categorySlug}/${citySlug}`);
 
     const rendered = options.prompts.render("CATEGORY_INTRO_V1", {

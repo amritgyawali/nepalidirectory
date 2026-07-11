@@ -1,4 +1,7 @@
 import type { Business } from "@/lib/data";
+import type { Listing } from "@/lib/enrich";
+import { siteUrl } from "@/lib/blog";
+import { getBusinessHref } from "@/lib/routes";
 import { publisher } from "@/lib/seo";
 import { getEvergreenUrl, type EvergreenPage } from "./evergreen";
 
@@ -18,6 +21,11 @@ export function localBusinessSubtype(categories: string[]): string {
   return subtypeByCategory.find(([needle]) => text.includes(needle))?.[1] ?? "LocalBusiness";
 }
 
+export function priceTierLabel(tier?: number): string | undefined {
+  if (!tier || tier < 1) return undefined;
+  return "₨".repeat(Math.min(4, Math.max(1, Math.round(tier))));
+}
+
 export function buildLocalBusinessJsonLd(business: Business, url: string) {
   return {
     "@context": "https://schema.org",
@@ -28,7 +36,7 @@ export function buildLocalBusinessJsonLd(business: Business, url: string) {
     image: business.image,
     description: business.quote,
     telephone: business.phone,
-    priceRange: Array.from({ length: business.price }, () => "Rs").join(" "),
+    priceRange: priceTierLabel(business.price),
     address: {
       "@type": "PostalAddress",
       streetAddress: business.address,
@@ -52,7 +60,76 @@ export function buildLocalBusinessJsonLd(business: Business, url: string) {
             worstRating: 1,
           }
         : undefined,
+    openingHoursSpecification: business.weeklyHours?.map((hours) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: hours.dayOfWeek,
+      opens: hours.opens,
+      closes: hours.closes,
+    })),
     amenityFeature: business.amenities.map((amenity) => ({
+      "@type": "LocationFeatureSpecification",
+      name: amenity,
+      value: true,
+    })),
+    publisher,
+  };
+}
+
+type WeeklyHoursValue = { dayOfWeek: string; opens: string; closes: string };
+
+function listingWeeklyHours(listing: Listing): WeeklyHoursValue[] | undefined {
+  const value = listing.attributes.weeklyHours;
+  if (!Array.isArray(value)) return undefined;
+  const hours = value.filter((item): item is WeeklyHoursValue => {
+    if (!item || typeof item !== "object") return false;
+    const record = item as Record<string, unknown>;
+    return [record.dayOfWeek, record.opens, record.closes].every((field) => typeof field === "string");
+  });
+  return hours.length ? hours : undefined;
+}
+
+/** Schema for the normalized production listing model used by /business/[slug]. */
+export function buildListingLocalBusinessJsonLd(listing: Listing, url: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": localBusinessSubtype(listing.categories),
+    "@id": `${url}#localbusiness`,
+    name: listing.name,
+    url,
+    image: listing.image,
+    description: listing.description,
+    telephone: listing.phone,
+    email: listing.email,
+    priceRange: priceTierLabel(listing.price),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: listing.address,
+      addressLocality: listing.municipality ?? listing.area,
+      addressRegion: listing.province,
+      addressCountry: "NP",
+    },
+    geo: listing.coordinates
+      ? {
+          "@type": "GeoCoordinates",
+          latitude: listing.coordinates.lat,
+          longitude: listing.coordinates.lng,
+        }
+      : undefined,
+    aggregateRating:
+      listing.rating != null && listing.reviews != null && listing.reviews > 0
+        ? {
+            "@type": "AggregateRating",
+            ratingValue: listing.rating,
+            reviewCount: listing.reviews,
+            bestRating: 5,
+            worstRating: 1,
+          }
+        : undefined,
+    openingHoursSpecification: listingWeeklyHours(listing)?.map((hours) => ({
+      "@type": "OpeningHoursSpecification",
+      ...hours,
+    })),
+    amenityFeature: listing.amenities.map((amenity) => ({
       "@type": "LocationFeatureSpecification",
       name: amenity,
       value: true,
@@ -84,7 +161,7 @@ export function buildEvergreenItemListJsonLd(page: EvergreenPage) {
     itemListElement: page.listings.map((business, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      item: buildLocalBusinessJsonLd(business, getEvergreenUrl(page)),
+      item: buildLocalBusinessJsonLd(business, `${siteUrl}${getBusinessHref(business.slug)}`),
     })),
   };
 }

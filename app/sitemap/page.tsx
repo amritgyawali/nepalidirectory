@@ -3,9 +3,12 @@ import { PageHero } from "@/components/directory/PageHero";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { contentAuthors } from "@/lib/authors";
 import { blogPosts, getBlogCategories } from "@/lib/blog";
+import { getPublishedEnginePosts } from "@/lib/blog-engine";
+import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
-import { routes } from "@/lib/routes";
+import { getIndexableListings } from "@/lib/public-listings";
+import { getBusinessHref, routes } from "@/lib/routes";
 import { isIndexableRoute } from "@/lib/seo-config";
 import { getEvergreenPages } from "@/lib/seo-auto";
 
@@ -19,7 +22,21 @@ const pages = Object.entries(routes).filter(
 const blogCategories = getBlogCategories();
 const evergreenPages = getEvergreenPages();
 
-export default function SitemapPage() {
+export const revalidate = 300;
+
+export default async function SitemapPage() {
+  let generatedPosts: Awaited<ReturnType<typeof getPublishedEnginePosts>> = [];
+  let listings: Awaited<ReturnType<typeof getIndexableListings>> = [];
+  try {
+    [generatedPosts, listings] = await Promise.all([
+      getPublishedEnginePosts(),
+      getIndexableListings(),
+    ]);
+  } catch (error) {
+    console.error("Unable to load dynamic records for the human sitemap", error);
+  }
+  const publicPosts = removeRetiredDuplicatePosts([...blogPosts, ...generatedPosts]);
+
   return (
     <main>
       <Breadcrumbs items={[{ label: "Sitemap" }]} />
@@ -31,9 +48,14 @@ export default function SitemapPage() {
               {key.replace(/([A-Z])/g, " $1").replace(/^./, (char) => char.toUpperCase())}
             </Link>
           ))}
-          {blogPosts.map((post) => (
+          {publicPosts.map((post) => (
             <Link key={post.slug} href={post.href}>
               Blog: {post.title}
+            </Link>
+          ))}
+          {listings.map((listing) => (
+            <Link key={listing.slug} href={getBusinessHref(listing.slug)}>
+              Business: {listing.name}
             </Link>
           ))}
           {blogCategories.map((category) => (

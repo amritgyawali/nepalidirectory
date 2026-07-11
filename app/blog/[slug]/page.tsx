@@ -3,11 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock } from "lucide-react";
 import { GuideCard } from "@/components/content/GuideCard";
+import { SafeRichParagraph } from "@/components/content/SafeRichParagraph";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { getAuthorByName, getAuthorUrl } from "@/lib/authors";
 import { blogPosts, getBlogPost, getBlogPostUrl, getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
 import { ENGINE_AUTHOR, getPublishedEnginePost, getPublishedEnginePosts } from "@/lib/blog-engine";
+import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { routes } from "@/lib/routes";
 import {
   buildBlogKeywords,
@@ -119,7 +121,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const author = getAuthorByName(post.author);
   const isEngineAuthored = post.author === ENGINE_AUTHOR;
   const enginePosts = await getPublishedEnginePosts();
-  const relatedPosts = [...getSortedBlogPosts(), ...enginePosts]
+  const relatedPosts = removeRetiredDuplicatePosts([...getSortedBlogPosts(), ...enginePosts])
     .filter((candidate) => candidate.slug !== post.slug)
     .filter((candidate) => candidate.category === post.category || candidate.tags.some((tag) => post.tags.includes(tag)))
     .slice(0, 3);
@@ -161,7 +163,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     mentions: post.sections.map((section) => ({
       "@type": "Thing",
       name: section.heading
-    }))
+    })),
+    citation: post.sources?.map((source) => source.url)
   };
 
   const webPageJsonLd = buildWebPageJsonLd({
@@ -248,12 +251,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               ))}
             </ul>
           </section>
+          {post.contextLinks?.length ? (
+            <section className="answer-summary" aria-labelledby="local-research-links-title">
+              <h2 id="local-research-links-title">Related city and category research</h2>
+              <p>Use these directory hubs alongside this guide to continue with the same local intent.</p>
+              <div className="article-tags article-tags--inline">
+                {post.contextLinks.map((link) => (
+                  <Link href={link.href} key={link.href}>{link.label}</Link>
+                ))}
+              </div>
+            </section>
+          ) : null}
           <div className="article-body">
             {post.sections.map((section) => (
               <section key={section.heading}>
                 <h2>{section.heading}</h2>
                 {section.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                  <SafeRichParagraph key={paragraph}>{paragraph}</SafeRichParagraph>
                 ))}
               </section>
             ))}
@@ -285,6 +299,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 </>
               ) : null}
             </p>
+            {post.disclaimer ? <p><strong>Important:</strong> {post.disclaimer}</p> : null}
+            {post.sources?.length ? (
+              <>
+                <h3>Primary sources and verification links</h3>
+                <ul>
+                  {post.sources.map((source) => (
+                    <li key={source.url}>
+                      <a href={source.url} rel="noopener noreferrer" target="_blank">{source.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
           </section>
           {isEngineAuthored ? (
             <section className="answer-summary" aria-labelledby="ai-page-metadata-title">

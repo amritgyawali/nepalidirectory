@@ -10,7 +10,8 @@ export const noIndexRoutes = new Set<string>([
   routes.dashboard,
   routes.dashboardListings,
   routes.dashboardReviews,
-  routes.dashboardAnalytics
+  routes.dashboardAnalytics,
+  routes.gallery
 ]);
 
 /**
@@ -36,6 +37,7 @@ export const robotsDisallowPaths = [
   routes.login,
   routes.register,
   routes.forgotPassword,
+  routes.gallery,
 ] as const;
 
 function matchesRoutePrefix(pathname: string, prefix: string): boolean {

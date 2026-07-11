@@ -7,8 +7,10 @@ export {
 export {
   buildBreadcrumbJsonLd,
   buildEvergreenItemListJsonLd,
+  buildListingLocalBusinessJsonLd,
   buildLocalBusinessJsonLd,
   localBusinessSubtype,
+  priceTierLabel,
 } from "./schema";
 export { suggestInternalLinks, type InternalLinkSuggestion } from "./internal-links";
 export {

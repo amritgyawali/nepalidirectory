@@ -14,7 +14,13 @@ import type { ArticleType, BlogPostRepository, TrendClusterRepository, TrendItem
 import { buildSourcePack } from "../generate/source-pack";
 import { writeDraft } from "../generate/writer";
 import { factCheck } from "../generate/factcheck";
-import { baseSlug, buildSeo, isDuplicateEmbedding } from "../generate/seo";
+import {
+  baseSlug,
+  buildSeo,
+  isDuplicateEmbedding,
+  isDuplicateTopic,
+  isNearDuplicateContent,
+} from "../generate/seo";
 import { injectLinks } from "../generate/link-injection";
 
 export type BlogGenerateDeps = {
@@ -91,6 +97,14 @@ export function makeBlogGenerateHandler(deps: BlogGenerateDeps): JobHandler {
       embedding = undefined;
     }
     const existingPosts = await deps.posts.list();
+    if (isDuplicateTopic(draft.title, existingPosts.map((post) => post.title))) {
+      await deps.clusters.update(clusterId, { status: "generated" });
+      return { clusterId, discarded: "duplicate-topic" };
+    }
+    if (isNearDuplicateContent(draft.bodyMarkdown, existingPosts.map((post) => post.bodyMd))) {
+      await deps.clusters.update(clusterId, { status: "generated" });
+      return { clusterId, discarded: "duplicate-content" };
+    }
     const existingEmbeddings = existingPosts.map((p) => p.embedding).filter((e): e is number[] => Boolean(e));
     if (embedding && isDuplicateEmbedding(embedding, existingEmbeddings)) {
       await deps.clusters.update(clusterId, { status: "generated" });

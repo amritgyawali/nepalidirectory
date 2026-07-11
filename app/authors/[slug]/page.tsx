@@ -23,12 +23,15 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
     return { title: "Author not found", robots: { index: false, follow: false } };
   }
 
+  const titleName = author.name.replace(/^Nepali\s*Directory\s*/i, "").trim() || "Editorial Team";
+  const title = `${titleName}: ${author.role}`;
+
   return {
-    title: `${author.name}: ${author.role}`,
+    title,
     description: author.description,
     alternates: { canonical: `/authors/${author.slug}` },
     openGraph: {
-      title: `${author.name}: ${author.role}`,
+      title,
       description: author.description,
       url: getAuthorUrl(author),
       siteName: "Nepali Directory",

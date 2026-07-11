@@ -19,8 +19,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { routes } from "@/lib/routes";
 import { SuperAdminProvider, useSuperAdminData } from "@/components/superadmin/SuperAdminProvider";
-
-const sessionKey = "nd-superadmin-session";
+import { createClient } from "@/utils/supabase/client";
 
 const navItems = [
   { label: "Overview", href: routes.superAdmin, icon: Gauge },
@@ -42,19 +41,17 @@ export function SuperAdminShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.body.classList.add("superadmin-mode");
 
-    if (!localStorage.getItem(sessionKey)) {
-      router.replace(`${routes.login}?next=${encodeURIComponent(routes.superAdmin)}&role=superadmin`);
-      return () => document.body.classList.remove("superadmin-mode");
-    }
-
     setReady(true);
 
     return () => document.body.classList.remove("superadmin-mode");
   }, [router]);
 
-  function logout() {
-    localStorage.removeItem(sessionKey);
-    router.push(`${routes.login}?role=superadmin`);
+  async function logout() {
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+      await createClient().auth.signOut();
+    }
+    router.replace(routes.login);
+    router.refresh();
   }
 
   if (!ready) {

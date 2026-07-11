@@ -1,3 +1,5 @@
+import { businesses, categories, cities } from "@/lib/data";
+
 export type LandingStat = {
   value: string;
   label: string;
@@ -46,8 +48,8 @@ export const landingPages: SeoLandingPage[] = [
     ],
     primaryCta: "Explore best businesses",
     stats: [
-      { value: "50K+", label: "directory listings" },
-      { value: "7", label: "provinces" },
+      { value: String(businesses.length), label: "current profiles" },
+      { value: String(cities.length), label: "featured cities" },
       { value: "4.6", label: "average featured rating" },
       { value: "24h", label: "listing updates" }
     ],
@@ -125,7 +127,7 @@ export const landingPages: SeoLandingPage[] = [
     primaryCta: "See top-rated listings",
     stats: [
       { value: "4.8", label: "top rating band" },
-      { value: "1K+", label: "review-rich listings" },
+      { value: String(categories.length), label: "search categories" },
       { value: "Daily", label: "fresh ranking checks" },
       { value: "Trust", label: "decision-first layout" }
     ],

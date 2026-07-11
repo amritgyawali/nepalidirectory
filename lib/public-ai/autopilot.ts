@@ -1,4 +1,5 @@
 import { businesses, type Business } from "@/lib/data";
+import { getBusinessHref } from "@/lib/routes";
 import {
   buildFollowups,
   explainMatch,
@@ -67,7 +68,7 @@ function norm(value: string): string {
 }
 
 function businessHref(business: Business): string {
-  return business.slug === "newa-lahana" ? "/business/newa-lahana" : `/search?q=${encodeURIComponent(business.name)}`;
+  return getBusinessHref(business.slug);
 }
 
 function mapsHref(business: Business): string {

@@ -1,8 +1,10 @@
 import { getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
 import { getPublishedEnginePosts } from "@/lib/blog-engine";
+import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { getSortedCompareCategories } from "@/lib/compare";
-import { routes } from "@/lib/routes";
+import { getBusinessHref, routes } from "@/lib/routes";
+import { getIndexableListings } from "@/lib/public-listings";
 import { getEvergreenPages } from "@/lib/seo-auto";
 
 export const revalidate = 300;
@@ -20,7 +22,7 @@ function resource(title: string, pathname: string, description: string): string 
 }
 
 function uniquePosts(posts: BlogPost[]): BlogPost[] {
-  return [...new Map(posts.map((post) => [post.href, post])).values()];
+  return removeRetiredDuplicatePosts([...new Map(posts.map((post) => [post.href, post])).values()]);
 }
 
 export async function GET() {
@@ -29,6 +31,12 @@ export async function GET() {
     generatedPosts = await getPublishedEnginePosts();
   } catch (error) {
     console.error("Unable to load generated posts for llms.txt", error);
+  }
+  let publicListings: Awaited<ReturnType<typeof getIndexableListings>> = [];
+  try {
+    publicListings = await getIndexableListings();
+  } catch (error) {
+    console.error("Unable to load qualified listings for llms.txt", error);
   }
 
   const guides = uniquePosts([...getSortedBlogPosts(), ...generatedPosts])
@@ -52,8 +60,10 @@ export async function GET() {
     resource("Near Me", routes.nearMe, "Discover nearby business categories and local services."),
     resource("Top Rated", routes.topRated, "Browse highly rated directory listings."),
     resource("Business Comparisons", routes.compareBusiness, "Compare providers using consistent decision criteria."),
-    resource("Business Profile: Newa Lahana", routes.business, "Restaurant details, contact information, hours, photos, and reviews."),
     resource("Blog", routes.blog, "Practical Nepal travel, food, services, healthcare, and business guides."),
+    ...publicListings.slice(0, 20).map((listing) =>
+      resource(`Business Profile: ${listing.name}`, getBusinessHref(listing.slug), `Published contact, location and service details for ${listing.name} in ${listing.area}.`),
+    ),
     "",
     "## City directories",
     "",

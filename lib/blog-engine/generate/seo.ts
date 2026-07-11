@@ -65,7 +65,68 @@ export function buildSeo(
 export function isDuplicateEmbedding(
   embedding: number[],
   existingEmbeddings: number[][],
-  threshold = 0.9,
+  threshold = 0.84,
 ): boolean {
   return existingEmbeddings.some((e) => cosineSimilarity(e, embedding) >= threshold);
+}
+
+const TOPIC_STOP_WORDS = new Set([
+  "a", "an", "and", "before", "best", "choosing", "compare", "comprehensive", "for",
+  "guide", "how", "in", "nepal", "of", "or", "practical", "right", "the", "to", "your",
+]);
+
+function normalizedWords(value: string): string[] {
+  return value
+    .toLowerCase()
+    .replace(/https?:\/\/\S+/g, " ")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => (word.endsWith("s") && word.length > 4 ? word.slice(0, -1) : word));
+}
+
+export function topicFingerprint(title: string): string {
+  return [...new Set(normalizedWords(title).filter((word) => !TOPIC_STOP_WORDS.has(word)))]
+    .sort()
+    .join("|");
+}
+
+function tokenJaccard(a: string, b: string): number {
+  const left = new Set(topicFingerprint(a).split("|").filter(Boolean));
+  const right = new Set(topicFingerprint(b).split("|").filter(Boolean));
+  if (!left.size || !right.size) return 0;
+  const intersection = [...left].filter((token) => right.has(token)).length;
+  return intersection / new Set([...left, ...right]).size;
+}
+
+export function isDuplicateTopic(title: string, existingTitles: string[], threshold = 0.72): boolean {
+  const fingerprint = topicFingerprint(title);
+  return existingTitles.some((existing) =>
+    topicFingerprint(existing) === fingerprint || tokenJaccard(title, existing) >= threshold,
+  );
+}
+
+function shingles(value: string, size = 5): Set<string> {
+  const words = normalizedWords(value);
+  const result = new Set<string>();
+  for (let index = 0; index <= words.length - size; index += 1) {
+    result.add(words.slice(index, index + size).join(" "));
+  }
+  return result;
+}
+
+export function isNearDuplicateContent(
+  content: string,
+  existingContent: string[],
+  threshold = 0.55,
+): boolean {
+  const candidate = shingles(content);
+  if (candidate.size < 20) return false;
+  return existingContent.some((value) => {
+    const existing = shingles(value);
+    if (existing.size < 20) return false;
+    const intersection = [...candidate].filter((part) => existing.has(part)).length;
+    const union = new Set([...candidate, ...existing]).size;
+    return union > 0 && intersection / union >= threshold;
+  });
 }
