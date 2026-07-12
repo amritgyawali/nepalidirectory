@@ -7,6 +7,7 @@ import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
+import { directoryCategories } from "@/lib/directory-categories";
 import { getIndexableListings } from "@/lib/public-listings";
 import { getBusinessHref, routes } from "@/lib/routes";
 import { isIndexableRoute } from "@/lib/seo-config";
@@ -17,6 +18,7 @@ const pages = Object.entries(routes).filter(
     key !== "home" &&
     key !== "blogPost" &&
     key !== "city" &&
+    key !== "topRated" &&
     isIndexableRoute(href),
 );
 const blogCategories = getBlogCategories();
@@ -63,9 +65,14 @@ export default async function SitemapPage() {
               Blog Category: {category.name}
             </Link>
           ))}
-          {compareCategories.map((category) => (
+          {compareCategories.filter((category) => category.businesses.length > 0).map((category) => (
             <Link key={category.slug} href={category.href}>
               Compare: {category.category}
+            </Link>
+          ))}
+          {directoryCategories.map((category) => (
+            <Link key={`directory-${category.slug}`} href={category.href}>
+              Category: {category.priorityKeyword}
             </Link>
           ))}
           {contentAuthors.map((author) => (

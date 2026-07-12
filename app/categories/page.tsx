@@ -2,7 +2,13 @@ import Link from "next/link";
 import { CategoryTile } from "@/components/directory/CategoryTile";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { categories, categoryGroups } from "@/lib/data";
-import { routes } from "@/lib/routes";
+import { getDirectoryCategory } from "@/lib/directory-categories";
+import { getSearchHref } from "@/lib/routes";
+
+function getCategoryDestination(label: string): string {
+  const slug = label.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  return getDirectoryCategory(slug)?.href ?? getSearchHref(label);
+}
 
 export default function CategoriesPage() {
   return (
@@ -10,15 +16,15 @@ export default function CategoriesPage() {
       <Breadcrumbs items={[{ label: "Categories" }]} />
       <section className="page-head">
         <div className="container">
-          <h1 className="page-title">Browse business categories</h1>
+          <h1 className="page-title">Nepal services directory and business categories</h1>
           <p className="page-copy">
-            Find verified local businesses across 140+ categories in every district of Nepal, from
-            plumbers in Pokhara to wedding photographers in Kathmandu.
+            Explore common local business and service categories in Nepal. Open a directory guide
+            where one is available, or search by service and city while profiles complete review.
           </p>
           <div className="filter-row filter-row--top">
             <strong>Most searched:</strong>
             {categories.slice(0, 8).map((category, index) => (
-              <Link className={index === 0 ? "chip chip--active" : "chip"} key={category.name} href={routes.search}>
+              <Link className={index === 0 ? "chip chip--active" : "chip"} key={category.name} href={category.href}>
                 {category.name}
               </Link>
             ))}
@@ -48,7 +54,7 @@ export default function CategoriesPage() {
                   </div>
                   <div className="category-group__links">
                     {group.items.map((item) => (
-                      <Link href={routes.search} key={item}>
+                      <Link href={getCategoryDestination(item)} key={item}>
                         {item}
                       </Link>
                     ))}

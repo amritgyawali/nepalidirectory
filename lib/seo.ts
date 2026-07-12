@@ -5,6 +5,7 @@ export const publisher = {
   "@type": "Organization",
   "@id": "https://www.nepalidirectory.com/#organization",
   name: "Nepali Directory",
+  alternateName: ["NepaliDirectory", "Nepal Directory"],
   url: "https://www.nepalidirectory.com",
   logo: {
     "@type": "ImageObject",
@@ -55,6 +56,7 @@ export function buildWebSiteJsonLd() {
     "@type": "WebSite",
     "@id": `${publisher.url}/#website`,
     name: "Nepali Directory",
+    alternateName: ["NepaliDirectory", "Nepal Directory"],
     url: publisher.url,
     inLanguage: "en",
     publisher: {

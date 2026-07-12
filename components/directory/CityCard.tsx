@@ -15,7 +15,7 @@ export function CityCard({ name, listings, image, href }: CityCardProps) {
       <span className="city-card__shade" />
       <span className="city-card__content">
         <strong>{name}</strong>
-        <span>{listings} current profiles</span>
+        <span>{listings}</span>
       </span>
     </Link>
   );

@@ -19,11 +19,11 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   applicationName: "Nepali Directory",
   title: {
-    default: "Nepali Directory | Nepal's trusted local business directory",
+    default: "Nepali Directory: Nepal Business Directory & Local Listings",
     template: "%s | Nepali Directory"
   },
   description:
-    "Find and compare local business profiles, restaurants, doctors, hotels, services and city guides across Nepal.",
+    "Use Nepali Directory, Nepal's online business directory, to find local services, restaurants, hotels, hospitals, schools, shops and IT companies by city.",
   metadataBase: new URL(siteUrl),
   keywords: [
     "Nepali Directory",
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
     apple: "/icon.svg"
   },
   openGraph: {
-    title: "Nepali Directory | Nepal's trusted local business directory",
+    title: "Nepali Directory: Nepal Business Directory & Local Listings",
     description:
-      "Find and compare local business profiles, restaurants, doctors, hotels, services and city guides across Nepal.",
+      "Find businesses and local services across Nepal by category and city.",
     url: siteUrl,
     siteName: "Nepali Directory",
     type: "website",
@@ -64,9 +64,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nepali Directory",
+    title: "Nepali Directory: Nepal Business Directory & Local Listings",
     description:
-      "Find and compare local business profiles, restaurants, doctors, hotels, services and city guides across Nepal.",
+      "Find businesses and local services across Nepal by category and city.",
     images: ["/nepali-directory-og.png"]
   },
   robots: {

@@ -32,7 +32,8 @@ export const robotsDisallowPaths = [
   "/super-admin/",
   "/dashboard/",
   "/account/",
-  routes.search,
+  // /search remains crawlable so bots can read its noindex directive; it is still excluded from
+  // every sitemap and canonical category hubs carry the indexable search intent.
   routes.profile,
   routes.login,
   routes.register,

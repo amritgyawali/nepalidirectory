@@ -22,9 +22,9 @@ const compareKeywords = uniqueKeywords([
 ]);
 
 export const metadata: Metadata = {
-  title: "Compare Businesses in Nepal: Hotels, Photography, Restaurants and Services",
+  title: "Business Comparison Guides for Nepal: Hotels, Services and More",
   description:
-    "Compare Nepal businesses by rating, price, reviews and best fit, including photography, hotels, restaurants, clinics, contractors and home services.",
+    "Use consistent checklists to compare Nepal business categories. Named providers, ratings and prices appear only after their listing data passes publication review.",
   keywords: compareKeywords,
   alternates: {
     canonical: routes.compareBusiness
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Compare Businesses in Nepal: Hotels, Photography, Restaurants and Services",
+    title: "Business Comparison Guides for Nepal: Hotels, Services and More",
     description:
-      "Side-by-side comparisons for popular business categories across Nepal.",
+      "Practical category checklists with review-gated provider comparisons.",
     url: `${siteUrl}${routes.compareBusiness}`,
     siteName: "Nepali Directory",
     locale: "en_US",
@@ -59,8 +59,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compare Businesses in Nepal",
-    description: "Compare Nepal businesses by rating, price, strengths and best fit.",
+    title: "Business Comparison Guides for Nepal",
+    description: "Use practical category checklists; named provider comparisons are review-gated.",
     images: [sortedCompareCategories[0].image]
   },
   other: {
@@ -87,7 +87,7 @@ export default function CompareBusinessPage() {
     ...buildWebPageJsonLd({
       name: "Compare Businesses in Nepal",
       description:
-        "Compare Nepal businesses by rating, price, reviews and best fit, including photography, hotels, restaurants, clinics, contractors and home services.",
+        "Use consistent decision criteria across Nepal business categories. Named providers appear only after publication review.",
       url: `${siteUrl}${routes.compareBusiness}`,
       keywords: compareKeywords,
       dateModified: sortedCompareCategories[0].updatedAt
@@ -105,8 +105,8 @@ export default function CompareBusinessPage() {
       />
       <Breadcrumbs items={[{ label: "Compare Business" }]} />
       <PageHero
-        title="Compare businesses before you choose"
-        subtitle="Side-by-side local comparisons for photography, hotels, restaurants, home services, healthcare clinics, contractors and more."
+        title="Use the same evidence when comparing businesses"
+        subtitle="Open practical checklists for photography, hotels, restaurants, home services, healthcare, contractors and more. Named provider comparisons publish only after review."
         cta={{ label: "Browse all categories", href: routes.categories }}
       />
       <section className="section compare-index">

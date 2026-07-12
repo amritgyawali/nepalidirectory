@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getCityEditorialDetail, type CityDirectoryPage } from "@/lib/city-pages";
 import { categories } from "@/lib/data";
+import { getDirectoryCategory } from "@/lib/directory-categories";
 import { getGuidesForCity } from "@/lib/content-clusters";
 import type { Listing } from "@/lib/enrich";
 import { listingDescription } from "@/lib/public-listings";
@@ -16,6 +17,11 @@ type CityLandingPageProps = {
   nearbyCities: CityDirectoryPage[];
   listings: Listing[];
 };
+
+function getCategoryDestination(name: string, city: string): string {
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  return getDirectoryCategory(slug)?.href ?? getSearchHref(name, city);
+}
 
 export function CityLandingPageView({ city, nearbyCities, listings }: CityLandingPageProps) {
   const detail = getCityEditorialDetail(city.slug);
@@ -100,7 +106,7 @@ export function CityLandingPageView({ city, nearbyCities, listings }: CityLandin
                 key={category.name}
                 {...category}
                 count={undefined}
-                href={getSearchHref(category.name, city.name)}
+                href={getCategoryDestination(category.name, city.name)}
               />
             ))}
           </div>

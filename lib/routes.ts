@@ -104,7 +104,6 @@ export const footerGroups = [
       { label: "Find a Business", href: routes.search },
       { label: "Best Businesses", href: routes.bestBusinesses },
       { label: "Near Me", href: routes.nearMe },
-      { label: "Top Rated", href: routes.topRated },
       { label: "Categories", href: routes.categories },
       { label: "Deals & Offers", href: routes.deals },
       { label: "Map & Directions", href: routes.map },

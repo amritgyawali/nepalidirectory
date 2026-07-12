@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/layout/Logo";
 import { cityDirectoryPages } from "@/lib/city-pages";
+import { directoryCategories } from "@/lib/directory-categories";
 import { footerGroups, routes } from "@/lib/routes";
 
 export function Footer() {
@@ -11,8 +12,9 @@ export function Footer() {
           <div>
             <Logo inverted />
             <p className="footer__copy">
-              Nepal&apos;s trusted local business directory. Find verified restaurants, doctors,
-              plumbers, hotels and services across all 7 provinces.
+              Nepal&apos;s local business directory for reviewed profiles and practical city and
+              category guides. Find restaurants, hotels, professionals and services as qualified
+              listings go live.
             </p>
           </div>
           {footerGroups.map((group) => (
@@ -27,6 +29,16 @@ export function Footer() {
               </ul>
             </div>
           ))}
+          <div>
+            <h2 className="footer__title">Popular Categories</h2>
+            <div className="footer__cities">
+              {directoryCategories.map((category) => (
+                <Link key={category.slug} href={category.href}>
+                  {category.name}
+                </Link>
+              ))}
+            </div>
+          </div>
           <div>
             <h2 className="footer__title">City Guides</h2>
             <div className="footer__cities">

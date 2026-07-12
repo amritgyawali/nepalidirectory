@@ -3,6 +3,7 @@ import { blogPosts, getBlogCategories, siteUrl, type BlogPost } from "@/lib/blog
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
+import { directoryCategories } from "@/lib/directory-categories";
 import { getBusinessHref, routes } from "@/lib/routes";
 import { getIndexableListings } from "@/lib/public-listings";
 import { isIndexableRoute } from "@/lib/seo-config";
@@ -22,6 +23,8 @@ export type SitemapIndexEntry = {
 
 const separatelyMappedRoutes = new Set<string>([
   routes.blogPost,
+  // Consolidated into /best-businesses to avoid two thin, competing rating landers.
+  routes.topRated,
 ]);
 
 export function getStaticSitemapEntries(): SitemapEntry[] {
@@ -55,7 +58,11 @@ export function getBlogSitemapEntries(additionalPosts: BlogPost[] = []): Sitemap
 
 export function getCategorySitemapEntries(): SitemapEntry[] {
   return [
-    ...compareCategories.map((category) => ({
+    ...directoryCategories.map((category) => ({
+      url: `${siteUrl}${category.href}`,
+      lastModified: "2026-07-12",
+    })),
+    ...compareCategories.filter((category) => category.businesses.length > 0).map((category) => ({
       url: `${siteUrl}${category.href}`,
       lastModified: category.updatedAt,
     })),

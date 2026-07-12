@@ -16,6 +16,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { siteUrl } from "@/lib/blog";
 import { cityDirectoryPages } from "@/lib/city-pages";
+import { getDirectoryCategory } from "@/lib/directory-categories";
 import {
   canPreviewListing,
   getAllDirectoryListings,
@@ -107,6 +108,8 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
   const description = listingDescription(listing);
   const factsCheckedAt = listingFactsCheckedAt(listing);
   const categories = listing.categories.map(titleCase);
+  const primaryCategory = getDirectoryCategory(listing.categories[0] ?? "");
+  const primaryCategoryHref = primaryCategory?.href ?? routes.categories;
   const cityPage = cityDirectoryPages.find((city) => listingMatchesCity(listing, city.slug));
   const locationHref = cityPage?.href ?? routes.city;
   const keywords = uniqueKeywords([listing.name, listing.area, listing.neighborhood ?? "", ...categories]);
@@ -119,6 +122,7 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
   });
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
     { name: "Home", url: siteUrl },
+    { name: primaryCategory?.name ?? categories[0] ?? "Businesses", url: `${siteUrl}${primaryCategoryHref}` },
     { name: cityPage?.name ?? listing.area, url: `${siteUrl}${locationHref}` },
     { name: listing.name, url },
   ]);
@@ -138,8 +142,8 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
       />
       <Breadcrumbs
         items={[
+          { label: primaryCategory?.name ?? categories[0] ?? "Businesses", href: primaryCategoryHref },
           { label: cityPage?.name ?? listing.area, href: locationHref },
-          { label: categories[0] ?? "Business", href: routes.compareBusiness },
           { label: listing.name },
         ]}
       />
@@ -185,7 +189,7 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
               {categories.map((category, index) => (
                 <span key={category}>
                   {index ? " / " : ""}
-                  <Link href={getSearchHref(category, listing.area)}>{category}</Link>
+                  <Link href={getDirectoryCategory(listing.categories[index])?.href ?? getSearchHref(category, listing.area)}>{category}</Link>
                 </span>
               ))}
             </p>

@@ -35,10 +35,12 @@ describe("SEO/AEO automation (prompt Module G)", () => {
     expect(localBusinessSubtype(["Doctors", "Healthcare"])).toBe("MedicalClinic");
   });
 
-  it("adds split sitemap entries for category-city pages", () => {
+  it("publishes useful directory hubs and withholds empty comparison pages", () => {
     const xml = sitemapXml(getCategorySitemapEntries());
 
     expect(xml).toContain("<urlset");
+    expect(xml).toContain("/category/restaurants");
+    expect(xml).not.toContain("/compare-business/restaurants");
     expect(xml).not.toContain("/best/restaurants/kathmandu");
   });
 
@@ -87,7 +89,7 @@ describe("SEO/AEO automation (prompt Module G)", () => {
     expect(suggestions.length).toBeGreaterThan(0);
     expect(suggestions[0].score).toBeGreaterThan(0);
     expect(suggestions[0].sourceHref).toMatch(/^\/blog\//);
-    expect(suggestions[0].targetHref).toMatch(/^\/best\//);
+    expect(suggestions[0].targetHref).toMatch(/^\/category\//);
   });
 
   it("runs EVERGREEN_PAGE through the queue against MockAiProvider", async () => {
@@ -108,6 +110,6 @@ describe("SEO/AEO automation (prompt Module G)", () => {
 
     expect(result.suggestions).toBeGreaterThan(0);
     expect(stored).toHaveLength(result.suggestions);
-    expect(stored[0].targetHref).toMatch(/^\/best\//);
+    expect(stored[0].targetHref).toMatch(/^\/category\//);
   });
 });

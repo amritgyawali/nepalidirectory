@@ -1,6 +1,5 @@
 import { blogPosts } from "@/lib/blog";
-import { getEvergreenPages } from "./evergreen";
-import { slugify } from "./slug";
+import { directoryCategories } from "@/lib/directory-categories";
 
 export type InternalLinkSuggestion = {
   sourceTitle: string;
@@ -30,24 +29,25 @@ function overlapScore(a: Set<string>, b: Set<string>): number {
 }
 
 export function suggestInternalLinks(): InternalLinkSuggestion[] {
-  const pages = getEvergreenPages({ minListings: 3 });
   const suggestions: InternalLinkSuggestion[] = [];
 
   for (const post of blogPosts) {
     const postTokens = tokens([post.title, post.description, post.category, ...post.tags, ...post.keywords].join(" "));
-    for (const page of pages) {
-      const pageTokens = tokens(`${page.categoryName} ${page.cityName} ${page.notableLocalities.join(" ")}`);
+    for (const page of directoryCategories) {
+      const pageTokens = tokens(`${page.priorityKeyword} ${page.name} ${page.aliases.join(" ")}`);
       const score = overlapScore(postTokens, pageTokens);
-      const categorySlug = slugify(post.category);
-      const boosted = categorySlug === page.categorySlug ? score + 0.35 : score;
-      if (boosted >= 0.18 && boosted <= 0.9) {
+      const explicitlyTagged = post.categorySlugs?.includes(page.slug) ?? false;
+      const boosted = Math.min(0.95, explicitlyTagged ? Math.max(0.55, score + 0.35) : score);
+      if (boosted >= 0.18) {
         suggestions.push({
           sourceTitle: post.title,
           sourceHref: post.href,
           targetTitle: page.title,
           targetHref: page.href,
           score: Number(boosted.toFixed(2)),
-          reason: `${post.category} context overlaps with ${page.categoryName} in ${page.cityName}.`,
+          reason: explicitlyTagged
+            ? `${post.title} is explicitly tagged for the ${page.name} directory.`
+            : `${post.category} context overlaps with ${page.priorityKeyword}.`,
         });
       }
     }

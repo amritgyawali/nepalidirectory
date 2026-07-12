@@ -1,4 +1,5 @@
-import { businesses, categories, cities } from "@/lib/data";
+import { cityDirectoryPages } from "@/lib/city-pages";
+import { categories } from "@/lib/data";
 
 export type LandingStat = {
   value: string;
@@ -34,37 +35,36 @@ export const landingPages: SeoLandingPage[] = [
     slug: "best-businesses",
     href: "/best-businesses",
     title: "Best businesses in Nepal",
-    seoTitle: "Best Businesses in Nepal by Category, City, Rating and Reviews",
+    seoTitle: "Best Businesses in Nepal: Review-Gated Directory Method",
     description:
-      "Browse the best businesses in Nepal across restaurants, hotels, doctors, contractors, salons, schools, travel agencies and home services.",
+      "Explore how Nepali Directory qualifies the best businesses in Nepal, then browse reviewed profiles by category and city as they become available.",
     image: image("photo-1556742049-0cfed4f6a45d"),
     imageAlt: "Local business owners serving customers",
     keywords: [
       "best businesses Nepal",
       "top businesses in Nepal",
       "best local businesses Kathmandu",
-      "Nepal business directory",
       "verified businesses Nepal"
     ],
     primaryCta: "Explore best businesses",
     stats: [
-      { value: String(businesses.length), label: "current profiles" },
-      { value: String(cities.length), label: "featured cities" },
-      { value: "4.6", label: "average featured rating" },
-      { value: "24h", label: "listing updates" }
+      { value: "Review-gated", label: "public rankings" },
+      { value: String(cityDirectoryPages.length), label: "city guides" },
+      { value: String(categories.length), label: "category paths" },
+      { value: "Direct", label: "detail confirmation" }
     ],
     sections: [
       {
-        title: "Find high-intent local winners",
+        title: "How a business qualifies",
         body:
-          "This page is built for people who want a shortlist before they call, book or visit. It groups strong local businesses by category, location, rating and practical fit.",
-        bullets: ["Verified contact details", "Recent review signals", "Category-specific shortlists"]
+          "A named business can enter public category and city results only after its source, location, category and profile completeness pass the directory's publication checks.",
+        bullets: ["Meaningful source provenance", "Reviewed category and location", "Complete public details"]
       },
       {
-        title: "Compare before you choose",
+        title: "How future rankings work",
         body:
-          "Use the business cards, comparison pages and local guides to move from broad discovery to a confident decision.",
-        bullets: ["Ratings and review counts", "Best-for notes", "City and category paths"]
+          "Ranked pages publish only when enough qualified profiles support a useful comparison. Ratings are considered with review volume, completeness and practical fit instead of being treated as a guarantee.",
+        bullets: ["Minimum inventory gates", "Transparent comparison fields", "Direct detail confirmation"]
       }
     ],
     quickLinks: ["Restaurants", "Hotels", "Doctors", "Schools", "Contractors", "Beauty Salons"]
@@ -87,10 +87,10 @@ export const landingPages: SeoLandingPage[] = [
     ],
     primaryCta: "Search near me",
     stats: [
-      { value: "28", label: "Kathmandu neighborhoods" },
-      { value: "15", label: "popular city links" },
-      { value: "10+", label: "service groups" },
-      { value: "Fast", label: "local discovery" }
+      { value: String(cityDirectoryPages.length), label: "reviewed city guides" },
+      { value: String(categories.length), label: "category paths" },
+      { value: "Area-first", label: "local discovery" },
+      { value: "Review-gated", label: "public profiles" }
     ],
     sections: [
       {

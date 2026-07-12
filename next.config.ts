@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import { duplicateBlogRedirects } from "./lib/blog-dedup";
 
 const legacyRedirects: Record<string, string> = {
+  "/top-rated": "/best-businesses",
   "/Home.dc.html": "/",
   "/Search%20Results.dc.html": "/search",
   "/Business%20Detail.dc.html": "/business/newa-lahana",

@@ -10,6 +10,7 @@ import { getAuthorByName, getAuthorUrl } from "@/lib/authors";
 import { blogPosts, getBlogPost, getBlogPostUrl, getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
 import { ENGINE_AUTHOR, getPublishedEnginePost, getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
+import { getDirectoryCategory } from "@/lib/directory-categories";
 import { routes } from "@/lib/routes";
 import {
   buildBlogKeywords,
@@ -125,6 +126,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     .filter((candidate) => candidate.slug !== post.slug)
     .filter((candidate) => candidate.category === post.category || candidate.tags.some((tag) => post.tags.includes(tag)))
     .slice(0, 3);
+  const relatedResearchLinks = [...new Map([
+    ...(post.contextLinks ?? []),
+    ...(post.categorySlugs ?? []).flatMap((categorySlug) => {
+      const category = getDirectoryCategory(categorySlug);
+      return category ? [{ href: category.href, label: `Browse ${category.name} in Nepal` }] : [];
+    }),
+  ].map((link) => [link.href, link] as const)).values()];
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -251,12 +259,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               ))}
             </ul>
           </section>
-          {post.contextLinks?.length ? (
+          {relatedResearchLinks.length ? (
             <section className="answer-summary" aria-labelledby="local-research-links-title">
               <h2 id="local-research-links-title">Related city and category research</h2>
               <p>Use these directory hubs alongside this guide to continue with the same local intent.</p>
               <div className="article-tags article-tags--inline">
-                {post.contextLinks.map((link) => (
+                {relatedResearchLinks.map((link) => (
                   <Link href={link.href} key={link.href}>{link.label}</Link>
                 ))}
               </div>

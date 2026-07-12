@@ -11,11 +11,31 @@ import { FillImage } from "@/components/ui/FillImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getCityHref } from "@/lib/city-pages";
 import { businesses, categories, cities, cityLinks, directoryFeatureChecklist, popularSearches, questions, stats } from "@/lib/data";
+import { directoryCategories } from "@/lib/directory-categories";
 import { getSortedBlogPosts, siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
 import { buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
 
+const nationalDirectoryKeywords = [
+  "NepaliDirectory",
+  "Nepali Directory",
+  "Nepal Directory",
+  "Business Directory Nepal",
+  "Nepal Business Directory",
+  "Local Businesses Nepal",
+  "Nepal Yellow Pages",
+  "Nepal Business Listing",
+  "Business Listings Nepal",
+  "Find Businesses in Nepal",
+  "Nepal Online Directory",
+  "Nepal Services Directory",
+  "Nepal Local Directory",
+  "Companies in Nepal",
+  "Nepal Companies",
+];
+
 export const metadata: Metadata = {
+  keywords: nationalDirectoryKeywords,
   alternates: {
     canonical: "/",
   },
@@ -24,6 +44,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   const latestBlogPosts = getSortedBlogPosts().slice(0, 3);
   const keywords = uniqueKeywords([
+    ...nationalDirectoryKeywords,
     "Nepal business directory",
     "local businesses Nepal",
     "restaurants Nepal",
@@ -35,12 +56,12 @@ export default function HomePage() {
   ]);
   const homeJsonLd = {
     ...buildWebPageJsonLd({
-      name: "Nepali Directory | Nepal's trusted local business directory",
+      name: "Nepali Directory: Nepal Business Directory & Local Listings",
       description:
-        "Find and compare local business profiles, restaurants, doctors, hotels, services and city guides across Nepal.",
+        "Find businesses and local services across Nepal with category pages, city guides and review-gated public profiles.",
       url: siteUrl,
       keywords,
-      dateModified: "2026-06-28"
+      dateModified: "2026-07-12"
     }),
     "@type": "CollectionPage",
     publisher,
@@ -48,7 +69,7 @@ export default function HomePage() {
       {
         "@type": "ItemList",
         name: "Popular business categories",
-        itemListElement: categories.map((category, index) => ({
+        itemListElement: directoryCategories.map((category, index) => ({
           "@type": "ListItem",
           position: index + 1,
           name: category.name,
@@ -150,6 +171,57 @@ export default function HomePage() {
           <div className="home-hero__trust">
             <BadgeCheck size={17} aria-hidden />
             Verified profiles, real contact details, city pages, offers and owner tools in one directory.
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--soft" aria-labelledby="national-directory-title">
+        <div className="container">
+          <p className="eyebrow">Nepal online business directory</p>
+          <h2 className="compact-title" id="national-directory-title">
+            A Nepal business directory for useful local decisions
+          </h2>
+          <p className="compact-copy">
+            Nepali Directory brings crawlable category pages, practical city guides and
+            review-gated business profiles into one Nepal local directory. It is a modern online
+            alternative to a paper Nepal Yellow Pages: browse local businesses and services, then
+            confirm current hours, prices, availability and credentials directly.
+          </p>
+          <div className="seo-link-strip" aria-label="Popular Nepal directory categories">
+            {directoryCategories.map((category) => (
+              <Link key={category.slug} href={category.href}>{category.priorityKeyword}</Link>
+            ))}
+          </div>
+          <div className="seo-answer-grid">
+            <article className="answer-summary">
+              <h2>Find businesses in Nepal</h2>
+              <p>
+                Start with an indexable category or city guide, then open a qualified profile when
+                one is available. Unreviewed preview records stay outside public rankings.
+              </p>
+              <p>
+                People looking for companies in Nepal can use the same industry and city path.
+                Nepal companies, independent professionals and neighborhood businesses enter
+                public results only after their records pass review.
+              </p>
+              <Link href={routes.categories}>Browse the Nepal services directory</Link>
+            </article>
+            <article className="answer-summary">
+              <h2>Add a Nepal business listing</h2>
+              <p>
+                Owners can submit or claim a profile and provide the location, services and
+                contact details needed for publication review.
+              </p>
+              <Link href={routes.claimListing}>Add or claim your business</Link>
+            </article>
+            <article className="answer-summary">
+              <h2>Browse businesses by city</h2>
+              <p>
+                Use locally specific pages for Kathmandu, Pokhara, Lalitpur, Bhaktapur, Chitwan,
+                Biratnagar, Butwal and Dharan instead of a generic national result.
+              </p>
+              <Link href={routes.city}>Open Nepal city directories</Link>
+            </article>
           </div>
         </div>
       </section>
@@ -305,7 +377,7 @@ export default function HomePage() {
               <Link key={question.title} href={question.href}>
                 <span>{question.topic}</span>
                 <strong>{question.title}</strong>
-                <small>{question.answers} answers</small>
+                <small>{question.answerLabel}</small>
               </Link>
             ))}
           </aside>

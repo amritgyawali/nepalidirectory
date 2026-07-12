@@ -3,6 +3,7 @@ import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { getSortedCompareCategories } from "@/lib/compare";
+import { directoryCategories } from "@/lib/directory-categories";
 import { getBusinessHref, routes } from "@/lib/routes";
 import { getIndexableListings } from "@/lib/public-listings";
 import { getEvergreenPages } from "@/lib/seo-auto";
@@ -56,10 +57,12 @@ export async function GET() {
     "",
     resource("Home", routes.home, "Browse local businesses, services, cities, and guides across Nepal."),
     resource("Categories", routes.categories, "Explore the directory by business and service category."),
-    resource("Best Businesses", routes.bestBusinesses, "Open data-backed category and city shortlists."),
+    ...directoryCategories.map((category) =>
+      resource(category.priorityKeyword, category.href, category.metaDescription),
+    ),
+    resource("Best Businesses", routes.bestBusinesses, "See the review-gated ranking method and available category and city paths."),
     resource("Near Me", routes.nearMe, "Discover nearby business categories and local services."),
-    resource("Top Rated", routes.topRated, "Browse highly rated directory listings."),
-    resource("Business Comparisons", routes.compareBusiness, "Compare providers using consistent decision criteria."),
+    resource("Business Comparisons", routes.compareBusiness, "Use consistent decision criteria; named providers appear only after publication review."),
     resource("Blog", routes.blog, "Practical Nepal travel, food, services, healthcare, and business guides."),
     ...publicListings.slice(0, 20).map((listing) =>
       resource(`Business Profile: ${listing.name}`, getBusinessHref(listing.slug), `Published contact, location and service details for ${listing.name} in ${listing.area}.`),
@@ -71,7 +74,7 @@ export async function GET() {
     "",
     "## Business comparison guides",
     "",
-    ...getSortedCompareCategories().map((category) =>
+    ...getSortedCompareCategories().filter((category) => category.businesses.length > 0).map((category) =>
       resource(category.title, category.href, category.description),
     ),
     "",

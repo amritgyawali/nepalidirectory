@@ -104,7 +104,9 @@ export function createBlogEngineRuntime(overrides: BlogEngineRuntimeOverrides = 
       // generate job finally runs in a later invocation (BLOG_GENERATE_PRIORITY in auto-publisher.ts).
       await acquisition.repo.enqueue({ type: "BLOG_GENERATE", payload: { clusterId: s.clusterId }, priority: 10 });
       const job = await acquisition.worker.runOnce();
-      if (job?.status === "DONE") generated++;
+      // DONE also covers an intentional duplicate discard. Count only jobs that actually created a
+      // REVIEW post so cron metrics and fallback decisions do not report phantom generation.
+      if (job?.status === "DONE" && typeof job.result?.postId === "number") generated++;
     }
 
     return { scanned, clustered, selected: selected.length, generated };

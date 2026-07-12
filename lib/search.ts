@@ -108,8 +108,8 @@ export const searchIndex: SearchRecord[] = [
     id: `category-${category.name}`,
     kind: "category",
     title: category.name,
-    description: `${category.count} listings in ${category.name.toLowerCase()} across Nepal.`,
-    href: `${routes.search}?q=${encodeURIComponent(category.name)}`,
+    description: `Browse the ${category.name.toLowerCase()} category in Nepal.`,
+    href: category.href,
     location: "Nepal",
     tags: ["category", category.name]
   })),
@@ -117,7 +117,7 @@ export const searchIndex: SearchRecord[] = [
     id: `city-${city.name}`,
     kind: "city",
     title: city.name,
-    description: `${city.listings} verified listings and local businesses.`,
+    description: `Open the ${city.name} city directory and local guide.`,
     href: city.href,
     location: city.name,
     tags: ["city", "province", city.name]

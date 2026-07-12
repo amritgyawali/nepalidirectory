@@ -21,7 +21,7 @@ export default function QAPage() {
               <span>{question.topic}</span>
               <h2>{question.title}</h2>
               <p>{question.excerpt}</p>
-              <small>{question.answers} answers</small>
+              <small>{question.answerLabel}</small>
             </Link>
           ))}
         </div>

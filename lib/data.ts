@@ -4,14 +4,18 @@ import {
   Car,
   GraduationCap,
   HeartPulse,
+  Hospital,
   Hotel,
   Home,
+  Laptop,
   Scale,
+  ShoppingBag,
   Sparkles,
   Utensils,
   Wrench,
   Zap
 } from "lucide-react";
+import { getDirectoryCategoryHref } from "@/lib/directory-categories";
 import { getBusinessHref, getCompareHref, getSearchHref } from "@/lib/routes";
 export { blogPosts } from "@/lib/blog";
 
@@ -68,16 +72,19 @@ const image = (id: string, size = "600") =>
   `https://images.unsplash.com/${id}?w=${size}&h=${size}&fit=crop&auto=format`;
 
 export const categories = [
-  { name: "Restaurants", count: "3", icon: Utensils, color: "#fff7d1", href: getCompareHref("restaurants") },
-  { name: "Doctors", count: "1", icon: HeartPulse, color: "#e8f4fd", href: getCompareHref("doctors") },
-  { name: "Plumbers", count: "1", icon: Wrench, color: "#e8f5ed", href: getCompareHref("plumbers") },
-  { name: "Electricians", count: "1", icon: Zap, color: "#fff7d1", href: getCompareHref("electricians") },
-  { name: "Hotels", count: "1", icon: Hotel, color: "#fce8ec", href: getCompareHref("hotels") },
-  { name: "Lawyers", count: "1", icon: Scale, color: "#ecf0fb", href: getSearchHref("Lawyers") },
-  { name: "Auto Repair", count: "0", icon: Car, color: "#f0f0f0", href: getCompareHref("auto-repair") },
-  { name: "Beauty Salons", count: "0", icon: Sparkles, color: "#f3e8fd", href: getCompareHref("beauty-salons") },
-  { name: "Schools", count: "0", icon: GraduationCap, color: "#e0f4f4", href: getCompareHref("schools") },
-  { name: "Contractors", count: "0", icon: Building2, color: "#fff1e0", href: getCompareHref("contractors") }
+  { name: "Restaurants", count: undefined, icon: Utensils, color: "#fff7d1", href: getDirectoryCategoryHref("restaurants") },
+  { name: "Doctors", count: undefined, icon: HeartPulse, color: "#e8f4fd", href: getCompareHref("doctors") },
+  { name: "Plumbers", count: undefined, icon: Wrench, color: "#e8f5ed", href: getCompareHref("plumbers") },
+  { name: "Electricians", count: undefined, icon: Zap, color: "#fff7d1", href: getCompareHref("electricians") },
+  { name: "Hotels", count: undefined, icon: Hotel, color: "#fce8ec", href: getDirectoryCategoryHref("hotels") },
+  { name: "Hospitals", count: undefined, icon: Hospital, color: "#e8f4fd", href: getDirectoryCategoryHref("hospitals") },
+  { name: "Schools", count: undefined, icon: GraduationCap, color: "#e0f4f4", href: getDirectoryCategoryHref("schools") },
+  { name: "IT Companies", count: undefined, icon: Laptop, color: "#ecf0fb", href: getDirectoryCategoryHref("it-companies") },
+  { name: "Shops", count: undefined, icon: ShoppingBag, color: "#fff1e0", href: getDirectoryCategoryHref("shops") },
+  { name: "Lawyers", count: undefined, icon: Scale, color: "#ecf0fb", href: getSearchHref("Lawyers") },
+  { name: "Auto Repair", count: undefined, icon: Car, color: "#f0f0f0", href: getSearchHref("Auto Repair") },
+  { name: "Beauty Salons", count: undefined, icon: Sparkles, color: "#f3e8fd", href: getCompareHref("beauty-salons") },
+  { name: "Contractors", count: undefined, icon: Building2, color: "#fff1e0", href: getCompareHref("contractors") }
 ];
 
 export const categoryGroups = [
@@ -162,31 +169,31 @@ export const categoryGroups = [
 export const cities = [
   {
     name: "Kathmandu",
-    listings: "8",
+    listings: "City directory guide",
     image: image("photo-1605640840605-14ac1855827b", "700"),
     href: "/city/kathmandu"
   },
   {
     name: "Pokhara",
-    listings: "1",
+    listings: "City directory guide",
     image: image("photo-1626621341517-bbf3d9990a23", "700"),
     href: "/city/pokhara"
   },
   {
     name: "Lalitpur",
-    listings: "1",
+    listings: "City directory guide",
     image: image("photo-1561361513-2d000a50f0dc", "700"),
     href: "/city/lalitpur"
   },
   {
     name: "Bhaktapur",
-    listings: "1",
+    listings: "City directory guide",
     image: image("photo-1614107707379-283a65774553", "700"),
     href: "/city/bhaktapur"
   },
   {
     name: "Chitwan",
-    listings: "0",
+    listings: "City directory guide",
     image: image("photo-1571401835393-8c5f35328320", "700"),
     href: "/city/chitwan"
   }
@@ -646,23 +653,23 @@ export const questions = [
   {
     title: "Best season for Annapurna Circuit if I want fewer crowds?",
     href: "/questions/trekking-annapurna",
-    answers: 12,
+    answerLabel: "1 directory answer",
     topic: "Travel",
     excerpt:
       "Locals recommend late November for clear views and quieter teahouses, but pack warmer layers for Thorong La."
   },
   {
     title: "Where can I find reliable vegetarian Newari restaurants in Patan?",
-    href: "/questions/trekking-annapurna",
-    answers: 7,
+    href: "/blog/kathmandu-newari-food",
+    answerLabel: "Read practical guide",
     topic: "Restaurants",
     excerpt:
       "Community members listed courtyard spots near Mangal Bazaar and several family-run bhatti options."
   },
   {
     title: "Do plumbers in Kathmandu usually bring parts or should I buy first?",
-    href: "/questions/trekking-annapurna",
-    answers: 18,
+    href: "/blog/kathmandu-plumber-callout-cost-guide",
+    answerLabel: "Read practical guide",
     topic: "Home Services",
     excerpt:
       "Most verified plumbers carry common fittings, but photos and measurements make the visit faster."

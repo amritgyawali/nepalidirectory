@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { buildPublicPageMetadata } from "@/lib/site-metadata";
 import { routes } from "@/lib/routes";
+
+export const metadata: Metadata = buildPublicPageMetadata({
+  title: "Best Time for the Annapurna Circuit With Fewer Crowds",
+  description:
+    "Compare October, November and early December conditions for the Annapurna Circuit, including crowds, cold, visibility and weather buffers.",
+  path: "/questions/trekking-annapurna",
+});
 
 export default function QuestionDetailPage() {
   return (

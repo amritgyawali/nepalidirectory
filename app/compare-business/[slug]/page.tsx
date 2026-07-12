@@ -35,6 +35,7 @@ export async function generateMetadata({ params }: CompareCategoryPageProps): Pr
   }
 
   const keywords = buildCompareKeywords(category);
+  const hasQualifiedProviders = category.businesses.length > 0;
 
   return {
     title: category.seoTitle,
@@ -45,10 +46,12 @@ export async function generateMetadata({ params }: CompareCategoryPageProps): Pr
       canonical: category.href
     },
     robots: {
-      index: true,
+      // A comparison page becomes a search landing page only after it has real providers.
+      // The guide remains crawlable and useful to visitors while an empty result is noindex.
+      index: hasQualifiedProviders,
       follow: true,
       googleBot: {
-        index: true,
+        index: hasQualifiedProviders,
         follow: true,
         "max-image-preview": "large",
         "max-snippet": -1,

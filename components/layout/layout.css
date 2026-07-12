@@ -130,8 +130,8 @@
 
 .footer__grid {
   display: grid;
-  gap: 48px;
-  grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+  gap: 32px;
+  grid-template-columns: 1.35fr repeat(4, minmax(0, 1fr));
 }
 
 .footer__copy {
@@ -221,6 +221,10 @@
 
   .site-nav {
     margin-left: auto;
+  }
+
+  .footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

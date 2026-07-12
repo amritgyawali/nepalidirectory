@@ -1,3 +1,5 @@
+import { expansionGuidePosts } from "@/lib/expansion-guides";
+
 export type BlogSection = {
   heading: string;
   paragraphs: string[];
@@ -39,7 +41,7 @@ export const siteUrl = "https://www.nepalidirectory.com";
 const image = (id: string, width = "1200", height = "675") =>
   `https://images.unsplash.com/${id}?w=${width}&h=${height}&fit=crop&auto=format`;
 
-export const blogPosts: BlogPost[] = [
+const coreBlogPosts: BlogPost[] = [
   {
     title: "The Ultimate Guide to Trekking the Annapurna Circuit",
     seoTitle: "Annapurna Circuit Trek Guide: Route, Permits, Cost and Packing",
@@ -817,6 +819,13 @@ export const blogPosts: BlogPost[] = [
     ]
   }
 ];
+
+/**
+ * One canonical collection for every curated guide. Expansion guides used to live in a
+ * disconnected module, so Google, the XML sitemap and contextual city/category links could not
+ * discover them. Keeping the merge here makes every consumer use the same public set.
+ */
+export const blogPosts: BlogPost[] = [...coreBlogPosts, ...expansionGuidePosts];
 
 export function getBlogPost(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
