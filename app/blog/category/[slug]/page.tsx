@@ -4,6 +4,7 @@ import { GuideCard } from "@/components/content/GuideCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/directory/PageHero";
 import { getBlogCategories, getBlogCategory, getBlogPostUrl, siteUrl } from "@/lib/blog";
+import { isIndexableBlogCategory } from "@/lib/blog-quality";
 import { routes } from "@/lib/routes";
 import { buildBlogKeywords, buildWebPageJsonLd, uniqueKeywords } from "@/lib/seo";
 
@@ -31,12 +32,18 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
   ]);
   const title = `${category.name} Guides in Nepal`;
   const description = `Read ${category.name.toLowerCase()} guides from Nepali Directory, including practical answers, FAQs and local decision help for Nepal.`;
+  const indexable = isIndexableBlogCategory(category.posts);
 
   return {
     title,
     description,
     keywords,
     alternates: { canonical: category.href },
+    robots: {
+      index: indexable,
+      follow: true,
+      googleBot: { index: indexable, follow: true },
+    },
     openGraph: {
       title,
       description,

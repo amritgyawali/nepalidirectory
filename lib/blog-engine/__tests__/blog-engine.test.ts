@@ -5,10 +5,12 @@
  * attached, and a human editorial action can publish one with links already injected.
  * Zero external calls (fetchFn always 404s; MockAiProvider is deterministic).
  */
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import type { FetchFn } from "../../ai-core";
 import type { Listing } from "../../enrich";
 import { createBlogEngineRuntime } from "../runtime";
+import { canAutoPublish, canAutoPublishForListingCount } from "../editorial";
+import type { BlogPost } from "../types";
 import { isBrandSafe } from "../safety";
 import { injectLinks } from "../generate/link-injection";
 import {
@@ -52,6 +54,27 @@ describe("SEO duplicate suppression", () => {
   it("uses the stricter embedding similarity threshold", () => {
     expect(isDuplicateEmbedding([1, 0], [[0.85, 0.5267826876]])).toBe(true);
     expect(isDuplicateEmbedding([1, 0], [[0.83, 0.557763]])).toBe(false);
+  });
+});
+
+describe("Autopublish editorial floor", () => {
+  it("cannot be weakened below 0.8 by environment configuration", () => {
+    vi.stubEnv("BLOG_AUTOPUBLISH_MIN_CONFIDENCE", "0.2");
+    const post = {
+      confidence: 0.79,
+      factcheck: { verdict: "pass", unsupportedClaims: [] },
+    } as BlogPost;
+
+    expect(canAutoPublish(post, true)).toBe(false);
+    expect(canAutoPublish({ ...post, confidence: 0.8 }, true)).toBe(true);
+    vi.unstubAllEnvs();
+  });
+
+  it("requires a meaningful qualified-listing base before automatic publishing", () => {
+    vi.stubEnv("BLOG_AUTOPUBLISH_MIN_LISTINGS", "1");
+    expect(canAutoPublishForListingCount(24)).toBe(false);
+    expect(canAutoPublishForListingCount(25)).toBe(true);
+    vi.unstubAllEnvs();
   });
 });
 
@@ -112,7 +135,9 @@ describe("End-to-end trending blog engine (mock provider, zero network)", () => 
       embedding: ipoEmbedding,
     });
 
-    const result = await rt.runDailySweep();
+    // This integration case intentionally exercises multiple distinct clusters; production's
+    // unattended default remains one candidate per day.
+    const result = await rt.runDailySweep({ maxPerDay: 3 });
 
     expect(result.selected).toBeGreaterThanOrEqual(2);
     expect(result.generated).toBeGreaterThanOrEqual(1);

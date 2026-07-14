@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteUrl } from "@/lib/blog";
+import { noIndexRoutes } from "@/lib/seo-config";
 
 type PublicPageMetadataInput = {
   title: string;
@@ -17,6 +18,7 @@ export function buildPublicPageMetadata({
 }: PublicPageMetadataInput): Metadata {
   const url = new URL(path, `${siteUrl}/`).toString();
   const socialTitle = `${title} | Nepali Directory`;
+  const indexable = !noIndexRoutes.has(path);
   return {
     title,
     description,
@@ -36,5 +38,12 @@ export function buildPublicPageMetadata({
       description,
       images: [image],
     },
+    robots: indexable
+      ? undefined
+      : {
+          index: false,
+          follow: true,
+          googleBot: { index: false, follow: true },
+        },
   };
 }

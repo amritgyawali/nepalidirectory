@@ -1,6 +1,7 @@
 import { contentAuthors } from "@/lib/authors";
 import { blogPosts, getBlogCategories, siteUrl, type BlogPost } from "@/lib/blog";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
+import { isIndexableBlogCategory } from "@/lib/blog-quality";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
 import { directoryCategories } from "@/lib/directory-categories";
@@ -46,12 +47,14 @@ export function getBlogSitemapEntries(additionalPosts: BlogPost[] = []): Sitemap
     })),
   );
 
-  const categories = getBlogCategories().map((category) => ({
-    url: `${siteUrl}${category.href}`,
-    lastModified: category.posts
-      .map((post) => post.modifiedAt)
-      .sort((a, b) => b.localeCompare(a))[0],
-  }));
+  const categories = getBlogCategories()
+    .filter((category) => isIndexableBlogCategory(category.posts))
+    .map((category) => ({
+      url: `${siteUrl}${category.href}`,
+      lastModified: category.posts
+        .map((post) => post.modifiedAt)
+        .sort((a, b) => b.localeCompare(a))[0],
+    }));
 
   return [...posts, ...categories];
 }

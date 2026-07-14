@@ -53,6 +53,7 @@ export const routes = {
   province: "/province",
   authors: "/authors",
   editorialPolicy: "/editorial-policy",
+  directoryMethodology: "/directory-methodology",
   attribution: "/attribution"
 } as const;
 
@@ -93,6 +94,7 @@ export const footerGroups = [
       { label: "Blog", href: routes.blog },
       { label: "Authors", href: routes.authors },
       { label: "Editorial Policy", href: routes.editorialPolicy },
+      { label: "Directory Methodology", href: routes.directoryMethodology },
       { label: "Compare Business", href: routes.compareBusiness },
       { label: "Become a Partner", href: routes.claimListing },
       { label: "Careers", href: routes.help }

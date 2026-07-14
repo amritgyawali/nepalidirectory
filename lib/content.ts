@@ -13,25 +13,28 @@ export const contentPages: Record<string, ContentPage> = {
     slug: "about",
     title: "About Nepali Directory",
     subtitle:
-      "A modern local directory built for people who need reliable businesses, practical reviews and city-level guidance across Nepal.",
+      "A Nepal-focused directory built to make local business research clearer, more transparent and easier to verify.",
     body: [
-      "Nepali Directory helps residents, travellers and business owners discover trusted local services with clear contact details, practical reviews, opening hours and neighborhood context.",
-      "The platform is organized around verified listings, rich category pages, local Q&A and editorial city guides so discovery feels useful instead of noisy.",
-      "We are building for long-term trust: cleaner listings, transparent advertising, helpful content and tools that make local businesses easier to reach."
+      "Nepali Directory helps residents, travellers and organizations research businesses and services across Nepal. Category pages explain what to compare, city guides add local context, and qualified business profiles provide published facts when a record has enough source, location and contact evidence to go live.",
+      "The directory is deliberately being built in stages. Preview records demonstrate the product but remain outside search-engine sitemaps, public rankings and LocalBusiness structured data. A named profile is published only after it passes the directory's active, category, completeness and provenance checks.",
+      "Directory inclusion is not a government registration certificate, professional licence, safety approval or endorsement. For regulated or high-risk work, readers should verify the responsible person or organization through the appropriate Nepal authority and confirm current terms directly.",
+      "Business information changes. Hours, staff, prices, menus, stock, service areas and contact details can become outdated even when they were accurate when collected. Pages therefore encourage direct confirmation and show source or review dates where the underlying record provides them.",
+      "Owners can submit or claim a profile and provide stronger first-party information. Corrections should identify the business, location, field that needs changing and evidence that supports the update. Material changes remain subject to review rather than appearing automatically.",
+      "Advertising should be visibly separate from independent editorial guidance. Payment does not create a verified badge, customer rating or editorial recommendation, and sponsored placement should not be described as an organic ranking.",
+      "Our long-term goal is a useful Nepal business directory built from accurate profiles, transparent methods, original local research and accountable corrections—not inflated listing counts or repeated keyword pages."
     ],
-    cta: { label: "Explore categories", href: routes.categories }
+    cta: { label: "Read our directory methodology", href: routes.directoryMethodology }
   },
   contact: {
     slug: "contact",
     title: "Contact Us",
     subtitle: "Questions, corrections, partnership ideas or listing support. Send the details and our team will route it quickly.",
     body: [
-      "Email: hello@nepalidirectory.com",
-      "Phone: (01) 555-0198",
-      "Office: Kamaladi, Kathmandu, Nepal",
-      "For listing corrections, include the business name, location, phone number and the update you want reviewed."
+      "Nepali Directory does not publish a phone number, office address or support mailbox until that contact channel has been configured and verified.",
+      "Business owners can currently use the listing claim workflow to submit ownership and correction information.",
+      "For a correction, include the business name, exact location, field that needs changing and evidence supporting the requested update."
     ],
-    cta: { label: "Request a callback", href: routes.requestCallback }
+    cta: { label: "Submit or claim a listing", href: routes.claimListing }
   },
   privacy: {
     slug: "privacy",

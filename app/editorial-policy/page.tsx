@@ -42,7 +42,7 @@ const standards = [
   },
   {
     title: "AI-assisted articles with publish gates",
-    body: "Posts bylined \"NepaliDirectory Team\" start as an AI draft grounded only in cited source articles, run through automated fact-checking, and publish only when the configured quality gate passes. Editors can still review, update or reject AI-assisted posts after generation."
+    body: "Posts bylined \"NepaliDirectory Team\" start as AI-assisted drafts grounded in cited sources and pass duplicate, safety, fact-check and confidence gates. Unattended publishing is paused until the directory has a meaningful base of qualified public profiles."
   }
 ];
 
@@ -59,7 +59,7 @@ export default function EditorialPolicyPage() {
       "How Nepali Directory creates, reviews and updates local guides, comparison pages, business information and user decision content.",
     url: `${siteUrl}${routes.editorialPolicy}`,
     keywords,
-    dateModified: "2026-06-28"
+      dateModified: "2026-07-15"
   });
   const aboutJsonLd = {
     "@context": "https://schema.org",
@@ -104,6 +104,9 @@ export default function EditorialPolicyPage() {
             </p>
             <Link className="button button--primary" href={routes.contact}>
               Report an update
+            </Link>
+            <Link className="button button--outline" href={routes.directoryMethodology}>
+              Read the directory methodology
             </Link>
           </section>
         </div>

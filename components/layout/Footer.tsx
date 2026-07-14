@@ -55,6 +55,7 @@ export function Footer() {
             <Link href={routes.privacy}>Privacy</Link>
             <Link href={routes.terms}>Terms of Use</Link>
             <Link href={routes.editorialPolicy}>Editorial Policy</Link>
+            <Link href={routes.directoryMethodology}>Directory Methodology</Link>
             <Link href={routes.sitemap}>Sitemap</Link>
             <Link href={routes.attribution}>Data Attribution</Link>
           </div>

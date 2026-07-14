@@ -5,6 +5,7 @@ import { contentAuthors } from "@/lib/authors";
 import { blogPosts, getBlogCategories } from "@/lib/blog";
 import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
+import { isIndexableBlogCategory } from "@/lib/blog-quality";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
 import { directoryCategories } from "@/lib/directory-categories";
@@ -21,7 +22,9 @@ const pages = Object.entries(routes).filter(
     key !== "topRated" &&
     isIndexableRoute(href),
 );
-const blogCategories = getBlogCategories();
+const blogCategories = getBlogCategories().filter((category) =>
+  isIndexableBlogCategory(category.posts),
+);
 const evergreenPages = getEvergreenPages();
 
 export const revalidate = 300;

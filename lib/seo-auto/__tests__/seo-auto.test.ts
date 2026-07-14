@@ -63,6 +63,7 @@ describe("SEO/AEO automation (prompt Module G)", () => {
 
     expect(new Set(urls).size).toBe(urls.length);
     expect(paths).toContain("/questions/trekking-annapurna");
+    expect(paths).toContain("/directory-methodology");
     expect(
       paths.some((path) =>
         excludedPrefixes.some((prefix) => path === prefix || path.startsWith(`${prefix}/`)),

@@ -7,7 +7,20 @@ import type { BlogPost, BlogPostRepository } from "./types";
 
 function autopublishMinConfidence(): number {
   const n = Number(process.env.BLOG_AUTOPUBLISH_MIN_CONFIDENCE);
-  return Number.isFinite(n) && n >= 0 && n <= 1 ? n : 0.8;
+  // Environment configuration may make the gate stricter, never weaker than the editorial floor.
+  return Number.isFinite(n) && n >= 0 && n <= 1 ? Math.max(0.8, n) : 0.8;
+}
+
+function autopublishMinListings(): number {
+  const configured = Number(process.env.BLOG_AUTOPUBLISH_MIN_LISTINGS);
+  // A directory should establish its core product before automatically expanding editorial URLs.
+  return Number.isFinite(configured) && configured >= 0
+    ? Math.max(25, Math.floor(configured))
+    : 50;
+}
+
+export function canAutoPublishForListingCount(qualifiedListingCount: number): boolean {
+  return qualifiedListingCount >= autopublishMinListings();
 }
 
 export class EditorialService {

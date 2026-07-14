@@ -1,5 +1,6 @@
 import { loadAiConfig } from "../ai-core";
-import { canAutoPublish } from "./editorial";
+import { isIndexableListing } from "../public-listings";
+import { canAutoPublish, canAutoPublishForListingCount } from "./editorial";
 import type { BlogEngineRuntime } from "./runtime";
 import { getDefaultBlogEngineRuntime } from "./singleton";
 import { isDuplicateTopic } from "./generate/seo";
@@ -229,6 +230,14 @@ export async function runAutoBlogCycle(): Promise<AutoBlogCycleResult> {
 
   try {
     const runtime = getDefaultBlogEngineRuntime();
+    const qualifiedListingCount = (await runtime.listings.all()).filter(isIndexableListing).length;
+    if (!canAutoPublishForListingCount(qualifiedListingCount)) {
+      s.lastResult = {
+        published: false,
+        reason: `Autopublish paused: only ${qualifiedListingCount} qualified public listings are available.`,
+      };
+      return s.lastResult;
+    }
     const before = new Set((await runtime.blogPosts.list()).map((post) => post.id));
     let sweep = await runtime.runDailySweep({ maxPerDay: 1 });
     let fallbackReason: string | undefined;

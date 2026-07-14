@@ -402,8 +402,9 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
           <p>
             This comparison is maintained by Nepali Directory and was last reviewed on{" "}
             <time dateTime={category.updatedAt}>{category.updatedAt}</time>. Rankings use visible
-            This page currently publishes a comparison method, not a synthetic ranking. Named
-            providers and rating schema are added only from qualified public listing records.
+            listing evidence and the criteria explained above. Until qualified providers exist,
+            this page publishes a comparison method rather than a synthetic ranking. Named
+            providers and rating schema are added only from qualified public records.
           </p>
         </div>
       </section>

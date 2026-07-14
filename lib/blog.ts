@@ -1,4 +1,5 @@
 import { expansionGuidePosts } from "@/lib/expansion-guides";
+import { nationalDirectoryGuidePosts } from "@/lib/national-directory-guides";
 
 export type BlogSection = {
   heading: string;
@@ -825,7 +826,11 @@ const coreBlogPosts: BlogPost[] = [
  * disconnected module, so Google, the XML sitemap and contextual city/category links could not
  * discover them. Keeping the merge here makes every consumer use the same public set.
  */
-export const blogPosts: BlogPost[] = [...coreBlogPosts, ...expansionGuidePosts];
+export const blogPosts: BlogPost[] = [
+  ...coreBlogPosts,
+  ...expansionGuidePosts,
+  ...nationalDirectoryGuidePosts,
+];
 
 export function getBlogPost(slug: string) {
   return blogPosts.find((post) => post.slug === slug);

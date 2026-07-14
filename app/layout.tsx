@@ -16,6 +16,9 @@ const manrope = Manrope({
   variable: "--font-manrope"
 });
 
+const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
+const bingSiteVerification = process.env.BING_SITE_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
   applicationName: "Nepali Directory",
   title: {
@@ -84,6 +87,12 @@ export const metadata: Metadata = {
     telephone: true,
     address: true,
     email: false
+  },
+  verification: {
+    ...(googleSiteVerification ? { google: googleSiteVerification } : {}),
+    ...(bingSiteVerification
+      ? { other: { "msvalidate.01": bingSiteVerification } }
+      : {}),
   },
   other: {
     "content-language": "en",

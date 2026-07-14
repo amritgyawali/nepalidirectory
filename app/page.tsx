@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { BadgeCheck, Building2, Grid3X3, MapPin, Search, Star, Tag } from "lucide-react";
 import Link from "next/link";
-import { AiConcierge } from "@/components/ai/AiConcierge";
+import { LazyAiConcierge } from "@/components/ai/LazyAiConcierge";
 import { GuideCard } from "@/components/content/GuideCard";
 import { AppPromo } from "@/components/directory/AppPromo";
 import { BusinessCard } from "@/components/directory/BusinessCard";
@@ -103,13 +103,21 @@ export default function HomePage() {
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }} />
       <section className="home-hero">
-        <div className="home-hero__media" />
+        <div className="home-hero__media" aria-hidden>
+          <FillImage
+            src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=2000&h=980&fit=crop&auto=format"
+            alt=""
+            sizes="100vw"
+            priority
+          />
+        </div>
         <div className="container home-hero__content">
           <h1>
-            Find <mark>trusted</mark> local businesses across Nepal.
+            Nepali Directory: find <mark>trusted</mark> local businesses across Nepal.
           </h1>
           <span>
-            Compare current directory profiles, practical city guides and local service research across Nepal.
+            Search Nepal&apos;s business directory by category and city, then compare current profiles,
+            practical local guides and service research.
           </span>
           <form className="hero-search" action={routes.search}>
             <label>
@@ -170,7 +178,7 @@ export default function HomePage() {
           </div>
           <div className="home-hero__trust">
             <BadgeCheck size={17} aria-hidden />
-            Verified profiles, real contact details, city pages, offers and owner tools in one directory.
+            City guides, category research, owner submissions and publication checks in one directory.
           </div>
         </div>
       </section>
@@ -226,17 +234,64 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section" aria-labelledby="directory-method-title">
+        <div className="container">
+          <p className="eyebrow">Transparent directory method</p>
+          <h2 className="compact-title" id="directory-method-title">
+            How a business profile qualifies for publication
+          </h2>
+          <p className="compact-copy">
+            Nepali Directory separates product previews from public evidence. A named profile must
+            identify a real business, match a relevant category, provide usable location data and
+            carry documented provenance before it can enter sitemaps, city results or business
+            structured data.
+          </p>
+          <div className="seo-answer-grid">
+            <article className="answer-summary">
+              <h3>Source before scale</h3>
+              <p>
+                Owner submissions, appropriately licensed OpenStreetMap records and reviewed
+                imports keep their source context. Placeholder contacts never count as publication
+                evidence.
+              </p>
+            </article>
+            <article className="answer-summary">
+              <h3>Quality gate before indexing</h3>
+              <p>
+                Demo, inactive, incomplete and unresolved records remain outside XML sitemaps,
+                public rankings, aggregate ratings and LocalBusiness schema.
+              </p>
+            </article>
+            <article className="answer-summary">
+              <h3>Confirmation before decisions</h3>
+              <p>
+                Hours, prices, availability, staff and service areas change. Directory pages help
+                build a shortlist; users should confirm important current details directly.
+              </p>
+            </article>
+          </div>
+          <div className="directory-package__actions">
+            <Link className="button button--primary" href={routes.directoryMethodology}>
+              Read the full methodology
+            </Link>
+            <Link className="button button--outline" href={routes.editorialPolicy}>
+              Editorial standards
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="section ai-home-band">
         <div className="container ai-home-band__grid">
           <div>
             <p className="eyebrow">AI Autopilot</p>
             <h2>Let AI handle local discovery, matching and follow-up.</h2>
             <p>
-              The assistant searches grounded directory data, ranks options, writes useful answers and hands visitors straight to calls,
-              websites and verified profiles.
+              The assistant searches directory data and explains its matches. Calls, websites and
+              named recommendations appear only when a qualified public profile is available.
             </p>
           </div>
-          <AiConcierge />
+          <LazyAiConcierge />
         </div>
       </section>
 

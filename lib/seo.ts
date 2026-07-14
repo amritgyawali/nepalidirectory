@@ -64,7 +64,10 @@ export function buildWebSiteJsonLd() {
     },
     potentialAction: {
       "@type": "SearchAction",
-      target: `${publisher.url}/search?q={search_term_string}`,
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${publisher.url}/search?q={search_term_string}`,
+      },
       "query-input": "required name=search_term_string"
     }
   };

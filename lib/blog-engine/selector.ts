@@ -31,7 +31,7 @@ export type SelectedCluster = {
 const ARTICLE_TYPES: ArticleType[] = ["news_explainer", "guide", "listicle"];
 
 export async function selectClusters(deps: SelectorDeps): Promise<SelectedCluster[]> {
-  const maxPerDay = deps.maxPerDay ?? Number(process.env.BLOG_MAX_PER_DAY ?? 3);
+  const maxPerDay = deps.maxPerDay ?? Number(process.env.BLOG_MAX_PER_DAY ?? 1);
   const newClusters = await deps.clusters.list({ status: "new" });
   const selected: SelectedCluster[] = [];
 

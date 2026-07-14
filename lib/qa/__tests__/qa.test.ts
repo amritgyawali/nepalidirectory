@@ -18,26 +18,22 @@ function useMockEnv(overrides: Record<string, string> = {}) {
 afterEach(() => vi.unstubAllEnvs());
 
 describe("answerQuestion (free-local floor)", () => {
-  it("always answers with grounded listings when no provider is configured", async () => {
+  it("answers honestly without exposing demo listings when no provider is configured", async () => {
     useMockEnv({ AI_ENABLED: "false", CONCIERGE_ENABLED: "false" });
     const res = await answerQuestion("best momo in Patan");
     expect(res.mode).toBe("free-local");
     expect(res.answer.length).toBeGreaterThan(0);
-    expect(res.listings.length).toBeGreaterThan(0);
-    // Grounding: every returned source is a real directory listing with an internal link.
-    for (const l of res.listings) {
-      expect(l.name.length).toBeGreaterThan(0);
-      expect(l.href.startsWith("/")).toBe(true);
-    }
+    expect(res.listings).toHaveLength(0);
+    expect(res.answer).toContain("couldn't find a grounded match");
   });
 });
 
 describe("answerQuestion (provider path)", () => {
-  it("upgrades to the provider answer over the grounded set", async () => {
+  it("upgrades the wording without inventing a provider when the grounded set is empty", async () => {
     useMockEnv({ AI_ENABLED: "true", CONCIERGE_ENABLED: "true" });
     const res = await answerQuestion("where can I find a dentist in Kathmandu?");
     expect(res.mode).toBe("provider");
     expect(res.answer).toContain("mock"); // MockAiProvider completion marker
-    expect(res.listings.length).toBeGreaterThan(0);
+    expect(res.listings).toHaveLength(0);
   });
 });

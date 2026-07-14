@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
+import { businesses } from "@/lib/data";
 import { interpretQuery } from "../brain";
 import { localAutopilotSearch } from "../autopilot";
+
+const publishedCatalog = businesses.map((business) => ({
+  ...business,
+  website: `https://${business.slug}.example.org`,
+  email: `contact@${business.slug}.example.org`,
+}));
 
 describe("public AI brain — intent + entity extraction", () => {
   it("classifies a greeting", () => {
@@ -29,7 +36,7 @@ describe("public AI brain — intent + entity extraction", () => {
 
 describe("public AI autopilot — enriched grounded output", () => {
   it("still ranks the plumber first and includes a reason + follow-ups", () => {
-    const reply = localAutopilotSearch("emergency plumber kathmandu");
+    const reply = localAutopilotSearch("emergency plumber kathmandu", undefined, 5, publishedCatalog);
     expect(reply.intent).toBe("emergency");
     expect(reply.listings[0].name).toContain("Plumbing");
     expect(reply.listings[0].why.length).toBeGreaterThan(0);
@@ -37,7 +44,7 @@ describe("public AI autopilot — enriched grounded output", () => {
   });
 
   it("prioritises businesses with live offers for deals intent", () => {
-    const reply = localAutopilotSearch("restaurant deals in bhaktapur");
+    const reply = localAutopilotSearch("restaurant deals in bhaktapur", undefined, 5, publishedCatalog);
     expect(reply.intent).toBe("deals");
     expect(reply.listings.length).toBeGreaterThan(0);
     // The deals action should route to the deals page.
@@ -45,7 +52,7 @@ describe("public AI autopilot — enriched grounded output", () => {
   });
 
   it("returns open/24h results first when asked what's open now", () => {
-    const reply = localAutopilotSearch("plumber open now");
+    const reply = localAutopilotSearch("plumber open now", undefined, 5, publishedCatalog);
     expect(reply.listings[0].status === "open" || reply.listings[0].status === "24h").toBe(true);
   });
 });

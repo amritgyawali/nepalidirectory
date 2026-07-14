@@ -1,4 +1,4 @@
-import { businesses, type Business } from "@/lib/data";
+import { businesses, isDemoBusiness, type Business } from "@/lib/data";
 import { getBusinessHref } from "@/lib/routes";
 import {
   buildFollowups,
@@ -164,8 +164,11 @@ function toListing(business: Business, score: number, interp: QueryInterpretatio
   };
 }
 
-function rankBusinesses(interp: QueryInterpretation): Array<{ business: Business; score: number }> {
-  return businesses
+function rankBusinesses(
+  interp: QueryInterpretation,
+  catalog: readonly Business[],
+): Array<{ business: Business; score: number }> {
+  return catalog
     .map((business) => ({ business, score: scoreBusiness(business, interp) }))
     .sort((a, b) => b.score - a.score);
 }
@@ -231,9 +234,14 @@ function buildActions(interp: QueryInterpretation, top: Business | undefined): A
  * Grounded local autopilot: interprets the query, ranks real directory businesses, and returns an
  * intent-aware answer with follow-ups and quick actions. Zero external calls.
  */
-export function localAutopilotSearch(query: string, location?: string, limit = 5): PublicAiReply {
+export function localAutopilotSearch(
+  query: string,
+  location?: string,
+  limit = 5,
+  catalog: readonly Business[] = businesses.filter((business) => !isDemoBusiness(business)),
+): PublicAiReply {
   const interp = interpretQuery(query, location);
-  const ranked = rankBusinesses(interp);
+  const ranked = rankBusinesses(interp, catalog);
 
   // Keep only meaningfully-scored results, but never return empty when the directory has data:
   // fall back to the best overall picks so the visitor always gets a grounded starting point.
