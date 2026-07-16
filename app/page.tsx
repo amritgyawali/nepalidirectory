@@ -109,6 +109,7 @@ export default function HomePage() {
             alt=""
             sizes="100vw"
             priority
+            quality={55}
           />
         </div>
         <div className="container home-hero__content">

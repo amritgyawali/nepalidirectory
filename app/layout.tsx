@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
 import { LazyAiAssistant } from "@/components/ai/LazyAiAssistant";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { MobileTabBar } from "@/components/layout/MobileTabBar";
 import { siteUrl } from "@/lib/blog";
 import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "@/lib/seo";
 import "@/components/layout/layout.css";
 import "@/components/ui/ui.css";
 import "@/components/directory/directory.css";
 import "./globals.css";
+import "./mobile.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -18,6 +20,13 @@ const manrope = Manrope({
 
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
 const bingSiteVerification = process.env.BING_SITE_VERIFICATION?.trim();
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#ffd400"
+};
 
 export const metadata: Metadata = {
   applicationName: "Nepali Directory",
@@ -88,6 +97,11 @@ export const metadata: Metadata = {
     address: true,
     email: false
   },
+  appleWebApp: {
+    capable: true,
+    title: "Nepali Directory",
+    statusBarStyle: "default"
+  },
   verification: {
     ...(googleSiteVerification ? { google: googleSiteVerification } : {}),
     ...(bingSiteVerification
@@ -112,6 +126,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         {children}
         <Footer />
+        <MobileTabBar />
         <LazyAiAssistant />
       </body>
     </html>

@@ -5,9 +5,10 @@ type FillImageProps = {
   alt: string;
   sizes: string;
   priority?: boolean;
+  quality?: number;
 };
 
-export function FillImage({ src, alt, sizes, priority = false }: FillImageProps) {
+export function FillImage({ src, alt, sizes, priority = false, quality }: FillImageProps) {
   return (
     <Image
       src={src}
@@ -16,6 +17,7 @@ export function FillImage({ src, alt, sizes, priority = false }: FillImageProps)
       sizes={sizes}
       priority={priority}
       fetchPriority={priority ? "high" : undefined}
+      quality={quality}
     />
   );
 }
