@@ -2,6 +2,7 @@
 
 import { CheckCircle2, ClipboardCheck, ShieldAlert, XCircle } from "lucide-react";
 import { useSuperAdminData } from "@/components/superadmin/SuperAdminProvider";
+import { RealPendingListings } from "@/components/superadmin/RealPendingListings";
 
 export default function SuperAdminApprovalsPage() {
   const { listings, approveListing, rejectListing, approveAllPending, rejectLowCompleteness } = useSuperAdminData();
@@ -40,6 +41,8 @@ export default function SuperAdminApprovalsPage() {
           <small>Email or phone missing</small>
         </article>
       </section>
+
+      <RealPendingListings />
 
       <section className="superadmin-panel">
         <div className="superadmin-panel__head">

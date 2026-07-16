@@ -1,134 +1,162 @@
-# Action Plan — nepalidirectory.com
+# Action Plan — nepalidirectory.com (RE-AUDIT, 2026-07-16)
 
 Prioritized Critical → High → Medium → Low. Each item links to the findings file with full
-evidence and code-level detail.
+evidence and code-level detail. Sequencing matters this cycle: items 1–3 under Critical are one
+project, not three, and should be planned together.
 
 ---
 
-## Critical (fix immediately)
+## Critical (fix this sprint)
 
-1. **Fix the core listings pipeline.** Wire `lib/seo-auto/sitemaps.ts::getListingSitemapEntries()`
-   to `lib/enrich/factory.ts::createListingRepository()` (already built, already used by the
-   enrichment pipeline — just never called by the sitemap) and build
-   `app/business/[slug]/page.tsx` with `generateMetadata()` and `LocalBusiness`/`Restaurant`
-   schema matching the existing `newa-lahana` template. Both changes are required together — one
-   without the other either produces an unchanged sitemap or 404s on new URLs.
-   → `findings/sitemap.md` §1 (full code diff included)
+1. **Connect a real listing-data supply pipeline.** This is the single highest-leverage fix in the
+   entire audit — it unblocks the Sitemap, Schema, Local, SXO, and GEO findings simultaneously.
+   `isIndexableListing()` (`lib/public-listings.ts`) is correct and should **not** be relaxed; the
+   problem is that nothing live can ever produce a row that passes it. Two independent paths, either
+   sufficient to unblock:
+   - **(a) Owner-submission path:** wire `app/claim-listing`'s `DashboardProvider.addListing()` (or
+     a new server action) to write into `createListingRepository()` with `dataSource: "owner"`,
+     and connect `app/super-admin/approvals`/`app/super-admin/businesses` (currently disconnected
+     mock UI) to the same repository so an approval actually flips `listing.verified = true`.
+   - **(b) Bulk-import path:** run the already-built `lib/acquire/osm` importer (seed data already
+     exists at `db/seeds/osm_tag_map.sql`) against real Nepal business data with
+     `dataSource: "osm"` — already in the `trustedSource` allowlist, needs no per-record manual
+     claim.
+   Either path, even at 20–50 real reviewed listings, is enough to validate the entire pipeline
+   end-to-end. → `findings/sitemap.md` §VERDICT, `findings/schema.md`, `findings/local.md`
 
-2. **Replace client-side admin auth with real server-side authentication.** `app/login/page.tsx`
-   ships hardcoded credentials (`superadmin`/`superadmin`, `admin`/`admin`) in the browser bundle
-   with `localStorage`-only session state. Implement Supabase Auth (already wired via
-   `utils/supabase/`) enforced in `middleware.ts` before any `/super-admin/*` or `/admin/*` route
-   renders. Remove the public "Super Admin" nav link in `lib/routes.ts`. **Do this before
-   `DATABASE_URL` is set in production.**
-   → `findings/technical.md` §0, `findings/visual.md`
+2. **Build sitemap chunking before real listing volume lands.** `app/sitemap-listings-1.xml/route.ts`
+   is a literal filename with no `[chunk]`/`[page]` dynamic segment. Once item 1 starts producing
+   real rows, an unbounded query past 50,000 URLs will silently under-report with no overflow index
+   entry. Build this concurrently with item 1, not after. → `findings/sitemap.md` §N2
 
-3. **Fix the auto-blog duplicate-content pipeline.** 12 live posts across 5 topic clusters share
-   85–90% of their text, published 1–2 days apart. Tighten the embedding-dedup similarity
-   threshold in the blog cron; consolidate each cluster to one canonical post (301 the rest).
-   → `findings/sitemap.md` §4, `findings/content.md`, `findings/geo.md`
-
-4. **Add a hard host redirect.** `nepalidirectory.com` (non-www) serves HTTP 200 directly instead
-   of a 308 to `www.nepalidirectory.com`. Add a Vercel host-based redirect rule or a
-   `middleware.ts` host check.
-   → `findings/technical.md` §4
-
-5. **Redeploy `origin/main` to production.** Several issues below (admin URLs in the public
-   sitemap, incomplete robots.txt disallow rules) are already fixed in the current repo source —
-   production is simply running an older commit.
-   → `findings/technical.md` §1, `findings/sitemap.md` §2
+3. **Extend `localBusinessSubtype()` to cover all 6 published category verticals.** Currently only
+   maps 8 needles (`restaurant`, `cafe`, `hotel`, `doctor`, `dentist`, `plumber`, `electrician`,
+   `lawyer`); `hospitals`, `schools`, `it-companies`, and `shops` will fall back to generic
+   `LocalBusiness` the moment real listings populate them. Fix before item 1 ships data into these
+   categories, not after — incorrect primary category is Whitespark 2026's #1 negative local-ranking
+   factor. → `findings/local.md` (Medium there, sequenced Critical here as a blocking dependency)
 
 ---
 
 ## High (fix within 1 week)
 
-6. Add unique `metadata.title`/`description` to the 21 public static pages currently inheriting
-   the homepage's default title (`/about`, `/advertise`, `/contact`, `/pricing`, `/help`, `/map`,
-   `/gallery`, `/write-review`, `/find-people`, `/get-app`, and 11 more).
-   → `findings/on-page.md`
+4. **Resolve the marketing-claims contradiction.** Homepage/city copy ("50,000+ local businesses,"
+   "12,840 listings" for Kathmandu) is now directly, visibly contradicted by the moderation-gate
+   banner a real visitor sees on the one example listing. Either scale back the numbers until
+   backed by real approved listings (from item 1), or explicitly label them as target/aspirational
+   figures. Zero engineering cost, real trust risk if left as-is. → `findings/sxo.md`
 
-7. Add a `headers()` security block to `next.config.ts`: CSP, `X-Frame-Options`,
-   `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`; extend HSTS with
-   `includeSubDomains; preload`.
-   → `findings/technical.md` §3
+5. **Consolidate the 4 residual duplicate blog posts.** `/blog/how-to-compare-local-services-in-
+   nepal-before-booking`, `-clinics-and-appointments-in-nepal`, `-repair-providers-in-nepal-before-
+   hiring`, `-event-venues-and-vendors-in-nepal` (published 07-05/06) score 0.62–0.66 pairwise
+   similarity against each other by the site's own current dedup threshold. Use the exact
+   redirect pattern already proven on the other 7 in `lib/blog-dedup.ts` — either regenerate 3 of
+   the 4 through the current pipeline or merge into one hub post and 301 the rest.
+   → `findings/content.md` (High)
 
-8. Fix `priceRange: "Rs Rs Rs"` in the Restaurant schema template — a malformed schema value that
-   is also visibly broken in the live UI.
-   → `findings/schema.md`, `findings/visual.md`
+6. **Wire the blog ↔ city hub ↔ compare-business internal links.** `findings/cluster.md` proves
+   zero bidirectional links exist between any blog post and its topically-matching hub page —
+   the site's one working content funnel is three disconnected silos. Pure linking fix against
+   data that already exists, no new content required. → `findings/sxo.md`, `findings/cluster.md`
 
-9. Add real per-listing lat/long (`GeoCoordinates`) and complete `openingHoursSpecification` to
-   all 7 days in the listing schema template before it scales to more businesses.
-   → `findings/schema.md`
+7. **Add `priority` to the LCP `next/image` element on 3 templates** (homepage hero, business-hero
+   photo, blog featured image). One line per template; addresses a confirmed `fetchpriority="high"`
+   gap contributing directly to LCP of 2.69s (homepage) and 3.37s (blog post). Expected 100–300ms
+   LCP improvement. → `findings/performance.md`
+
+8. **Re-compress or re-source the homepage's Unsplash hero image.** Lighthouse flags 89% (70KB of
+   80KB) avoidable file size, specific to this one image/URL configuration. Combine with item 7.
+   → `findings/performance.md`
+
+9. **Fix the `/claim-listing` sales-pitch contradiction.** No H1, only 133 words of copy, and the
+   one visible "example" listing shows a preview-gate banner at the exact moment a prospective
+   business owner is evaluating the product. Add an H1 and substantive copy; consider a
+   purpose-built "what your listing will look like" example that doesn't carry live moderation UI.
+   → `findings/sxo.md`, `findings/visual.md`
+
+10. **Add `QAPage` JSON-LD to `/questions/trekking-annapurna`.** Currently ships zero page-specific
+    schema (no `WebPage`, `BreadcrumbList`, or `QAPage`) despite being a textbook single-question
+    Q&A page. Highest novel-content schema ROI found this cycle. → `findings/schema.md`
+
+11. **Backfill the original ~14 baseline blog posts** (still 160–410 real words) through the current,
+    much stronger generation pipeline so the oldest, most commercially competitive content (dental,
+    contractors, wedding, schools) isn't also the thinnest. → `findings/content.md`
 
 ---
 
 ## Medium (fix within 1 month)
 
-10. Fix the 9 pages with a duplicated "Nepali Directory" brand suffix in their titles
-    (`/attribution` + 8 `/authors/*` pages); shorten the 55 titles exceeding 60 characters.
-    → `findings/on-page.md`
+12. **Promote CSP from `Report-Only` to enforcing.** Add a `report-to`/`report-uri` endpoint first
+    (none exists today, so report-only violations aren't even being collected), monitor briefly,
+    then flip to enforcing `Content-Security-Policy`. Consider replacing `'unsafe-inline'` in
+    `script-src`/`style-src` with nonces/hashes before enforcing. → `findings/technical.md`
 
-11. Add an `<h1>` to `/claim-listing` and `/gallery`.
-    → `findings/on-page.md`, `findings/sxo.md`
+13. **Fix the font-load CLS regression on `/category/*` pages.** The only CLS metric that fails
+    "Good" across the four pages tested (0.110); root cause is a webfont-load reflow on the
+    "Quick answer" block. Verify the preload link present on the homepage also fires on category
+    templates. → `findings/performance.md`
 
-12. Differentiate the 8 `/city/*` pages beyond the current ~85%-shared template — real
-    neighborhoods, landmarks, and category emphasis per city (verified: Kathmandu vs. Dharan text
-    diff shares 85% of phrasing despite the cities having nothing in common).
-    → `findings/local.md`
+14. **Reinstate explicit per-bot `Allow` rules in robots.txt** for GPTBot, OAI-SearchBot,
+    ClaudeBot, PerplexityBot. Functionally harmless today (wildcard covers everything), but
+    restores the auditable AI-crawler-access signal and the ability to later differentiate
+    search-citation bots from training-only scrapers (CCBot, anthropic-ai). 5-minute fix.
+    → `findings/geo.md`
 
-13. Expand the 3–4 highest commercial-intent blog posts (dental, contractors, wedding, schools)
-    with concrete local specifics instead of generic checklist advice.
-    → `findings/content.md`
+15. **Clean up `llms.txt` curation.** Either remove the two now-empty section headers ("Business
+    comparison guides," "Data-backed local answers") or add a one-line note explaining the gate;
+    widen "Local guides" to track the full 89-post sitemap rather than a ~20-post snapshot.
+    → `findings/geo.md`
 
-14. Add a named human reviewer byline to healthcare-related blog posts specifically (YMYL E-E-A-T
-    gap).
-    → `findings/content.md`
+16. **Add a named human reviewer byline for health-vertical blog content.** YMYL-adjacent posts
+    (dental, clinics, veterinary, hospitals) are still attributed to anonymous "desk" bylines;
+    this gap now covers more posts than at the last audit. → `findings/content.md`
 
-15. Generate a proper 1200×630 branded OG/social image for the homepage (currently the 512×512
-    logo).
-    → `findings/images.md`
-
-16. Add `ItemList` schema to `/city/*` pages, matching the pattern already used on
-    `/compare-business/*` pages.
+17. **Add `ItemList` schema to `/city/*` and `/category/*` hub pages** once item 1 lands real
+    listing data to populate it meaningfully. Now applies to 14 pages (8 city + 6 category).
     → `findings/schema.md`, `findings/local.md`
 
-17. Reduce the mobile nav's pre-content scroll distance (currently ~580px of stacked menu items
-    before hero content).
-    → `findings/visual.md`
+18. **Bump mobile nav tap targets to 44–48px min-height** (currently 38px) at the mobile breakpoint
+    only. → `findings/visual.md`
+
+19. **Re-verify `/claim-listing` has an `<h1>`; add one if still missing** (overlaps item 9's
+    broader fix). → `findings/technical.md`
 
 ---
 
-## Low (backlog)
+## Low / Backlog
 
-18. Set up free Google PageSpeed Insights / CrUX API access (`GOOGLE_API_KEY`) to replace lab-only
-    performance estimates with real field data.
-    → `findings/performance.md`
+20. **Create and link official social profiles** (Facebook, Instagram, LinkedIn) from the footer —
+    zero cost, unblocks citation-directory submissions, the top recommended fix for the backlinks
+    category. → `findings/backlinks.md`
 
-19. Audit `srcset` breakpoint counts on card-grid images for over-fetching relative to actual
-    rendered card size.
-    → `findings/performance.md`
+21. **Delete the dead `app/[indexNowKey].txt` route folder** (no `route.ts` inside, cosmetic).
+    → `findings/technical.md`
 
-20. Migrate city/category hero images from Unsplash hotlinking to owned/self-hosted assets before
-    they become permanent production content.
-    → `findings/images.md`
+22. **Fix the duplicated paragraph on `/authors/team`**; give it the same guide-listing treatment
+    as the other desk pages. → `findings/content.md`
 
-21. Build a sitemap pagination scheme (`sitemap-listings-2.xml`, etc.) before listing volume
-    approaches a few thousand URLs — no chunking logic exists yet.
-    → `findings/sitemap.md` §3
+23. **Enforce 5-decimal geo-coordinate precision** at the data-import/validation layer ahead of
+    item 1's real data landing (current seed data is 3–4 decimals, ~11m accuracy vs. the
+    recommended ~1.1m). → `findings/local.md`
 
----
+24. **Confirm the site-wide floating AI-assistant button** never overlaps sticky/bottom CTAs on
+    longer pages and meets the 48×48px touch-target minimum. → `findings/visual.md`
 
-## Ongoing / Monitoring
+25. **Get a free Moz API key** (2,500 rows/month, no cost) — single highest-leverage improvement
+    available to the Backlinks category for the next audit cycle. → `findings/backlinks.md`
 
-22. Re-run the GEO and SXO categories of this audit once real listings exist to measure post-fix
-    improvement — both are structurally capped by the Critical listings bug today.
-    → `findings/geo.md`, `findings/sxo.md`
-
-23. Begin real link-building outreach (Nepal tourism boards, chambers of commerce, encouraging
-    claimed businesses to link back) — current backlink profile is an expected, unconcerning
-    near-zero for a pre-launch site.
+26. **Submit to 3–5 free, high-relevance Nepal business directories/chambers of commerce** (FNCCI,
+    Nepal Tourism Board, city chambers) — prerequisite is item 20 (social presence) landing first.
     → `findings/backlinks.md`
 
-24. Once listings scale, interlink blog posts into relevant city/category pages and vice versa —
-    current interlinking is thin/nav-driven rather than contextual.
-    → `findings/cluster.md`, `findings/on-page.md`
+---
+
+## What NOT to do
+
+- **Do not relax `isIndexableListing()`** to "solve" the empty-sitemap problem faster. The gate is
+  correct and doing its job — the fix is upstream (supply real, verified data), not downstream
+  (index unverified data).
+- **Do not add new `FAQPage` schema expecting a Google SERP benefit** — Google retired FAQ rich
+  results for all sites as of 2026-05-07. Existing `FAQPage` blocks are fine to keep for AI/GEO
+  citation value; don't invest further effort chasing a SERP feature that no longer exists.
+- **Do not recommend `HowTo` schema** anywhere — deprecated since September 2023.

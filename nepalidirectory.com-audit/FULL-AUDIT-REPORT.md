@@ -1,258 +1,335 @@
-# Full SEO Audit — nepalidirectory.com
+# Full SEO Audit — nepalidirectory.com (RE-AUDIT)
 
-**Date:** 2026-07-11 · **Scope:** https://www.nepalidirectory.com (103 pages crawled from 4 live
+**Date:** 2026-07-16 · **Scope:** https://www.nepalidirectory.com (141 URLs across 4 live
 sitemaps, cross-referenced against the production Next.js 15 source at
-`c:\Users\amrit\Downloads\NepaliDirectory page claude`) · **Overall SEO Health Score: 57 / 100**
+`d:\15 july files\NepaliDirectory page claude`) · **Overall SEO Health Score: 70 / 100** (was
+57/100 on 2026-07-11)
+
+**Baseline:** `AUDIT-CONTEXT.md` / `FULL-AUDIT-REPORT.md` dated 2026-07-11 (prior HEAD `81a7115`,
+deployed stale). This pass verifies production against current `main` (`fc8c5ba`) after 5 commits
+(`0d1ac8f` sitemap, `4a63e56` seo, `52367a5`/`023320a` "seo for ranking at top", `fc8c5ba` fix seo
+issues). Ten specialist passes ran: Technical, Content, Schema, Sitemap, Performance, Visual, GEO,
+SXO, Local, Backlinks. Full detail for each lives in `findings/*.md`; this report synthesizes.
 
 ---
 
 ## Executive Summary
 
-Nepali Directory has strong technical bones — clean URLs, solid schema markup, good image
-optimization, a genuinely well-built `llms.txt`, and an attractively designed UI (verified via
-screenshots) — but the audit surfaced **three critical, code-level bugs that cap almost every
-other category's real-world impact**, plus **one critical security issue that is outside SEO scope
-but was found during this audit and needs immediate, independent attention.**
+The team shipped a genuinely large amount of real engineering since the last audit — every single
+Critical/High technical and security finding from 2026-07-11 is fixed and verified live: hardcoded
+admin credentials are gone, the host-canonicalization redirect works, admin URLs no longer leak
+into the sitemap, security headers are live site-wide, duplicate page titles are fixed, and the
+blog's original 12-post duplicate-content cluster has been resolved with real dedup guards that
+have now held up cleanly across an 8x volume increase (12→97 posts). Technical (64→91), Visual
+(68→87), and Sitemap hygiene (28→44) all show large, well-verified gains, and Performance now has
+real Lighthouse lab data for the first time (87/100 homepage) instead of a manual estimate.
 
-This is not a typical "polish an established site" audit. It is a pre-launch/mid-build product
-where fixing three specific bugs will move the needle more than any amount of content or metadata
-work — and that work is already substantially scoped, in some cases already coded and just not
-deployed.
+**But the site's single most important problem — the one the 2026-07-11 audit called
+Critical — is not fixed. It has changed shape and gotten more visible.** In fixing the sitemap
+*function* (it now correctly reads from a real listing repository instead of a hardcoded literal)
+the team also correctly wired a data-integrity gate that excludes unverified "demo" data from the
+index. That gate is well-built and doing exactly what it should. The problem is that **nothing in
+the live product can ever produce a listing that isn't demo data** — the owner "claim a listing"
+form only writes to `localStorage`, the admin approval screens are disconnected mock UI, and the
+OSM/CSV import pipelines that could bulk-load real Nepal business data have zero production
+wiring. The result: `sitemap-listings-1.xml` — the entire reason a business directory exists —
+has **zero URLs**, down from 1 at the last audit. Five independent specialist passes
+(Sitemap, Schema, Local, SXO, GEO) converged on this same root cause from five different angles.
 
-### Top 5 critical issues
+This is no longer just a missing-inventory problem. The one demo listing a real visitor can reach
+(`/business/newa-lahana`) now displays an explicit banner reading *"excluded from search indexing,
+sitemaps and business ranking schema until its source and public details pass review"* — directly
+beside homepage and city-page copy still claiming "50,000+ local businesses" and "12,840 listings"
+for Kathmandu. That is a **trust problem**, not just a discovery-gap problem, and it is new
+user-visible evidence of the gap that didn't exist at the last audit.
 
-1. **The core "business listing" page type does not exist in production.** Every "view business"
-   link sitewide — homepage, `/near-me`, `/best-businesses`, every category page — points to one
-   hardcoded demo page (`/business/newa-lahana`). `lib/seo-auto/sitemaps.ts::getListingSitemapEntries()`
-   is hardcoded to return that single URL instead of enumerating real listings, and no
-   `app/business/[slug]/page.tsx` dynamic route exists anywhere in the codebase. The homepage
-   markets "50,000+ local businesses" and category counts like "12,840 listings" for Kathmandu —
-   none of it is backed by indexable pages. **A real listing repository already exists and is
-   fully wired for exactly this purpose** (`lib/enrich/factory.ts::createListingRepository()`) —
-   the sitemap function simply never calls it. Full code-level fix in `findings/sitemap.md` §1.
+### Top 5 critical/high issues
 
-2. **Hardcoded admin credentials are shipped in client-side JavaScript** (`app/login/page.tsx`:
-   `superadmin`/`superadmin`, `admin`/`admin`), with `localStorage`-only session state and no
-   server-side verification. `/super-admin/*` returns HTTP 200 with no server-side auth gate —
-   the `noindex` tag and a trivially bypassable client check are the only things standing between
-   any visitor and the full admin panel. The public mobile navigation links directly to this login
-   path. This is flagged outside the normal SEO scoring but is the single most urgent fix in this
-   report — **fix before `DATABASE_URL` is set and real data starts flowing in.**
-
-3. **12 live blog posts form 5 near-duplicate content clusters** (85–90% shared text, published
-   1–2 days apart), discoverable via `llms.txt` and the RSS feed but absent from the XML sitemap —
-   meaning the auto-blog pipeline's "embedding dedup" is not preventing near-identical republishing,
-   and Google's primary discovery path for these 12 pages doesn't exist at all.
-
-4. **Host canonicalization relies solely on `rel=canonical`.** `nepalidirectory.com` (non-www)
-   serves HTTP 200 directly instead of a 308 redirect to `www.nepalidirectory.com` — two fully
-   crawlable, fully indexable copies of every page on the site exist right now.
-
-5. **Production is running stale code.** Several of the above issues (admin pages in the public
-   sitemap, incomplete robots.txt) are **already fixed in the current repo source** but the live
-   site is deployed from an older commit. A redeploy alone resolves them — no new engineering
-   required for that portion.
+1. **Zero live, indexable business listings — the site's core product has no supply pipeline.**
+   The routing, sitemap, and schema code are now genuinely correct (`app/business/[slug]/page.tsx`
+   exists, `getListingSitemapEntries()` reads from the real repository). But every one of the 11
+   seed businesses is permanently tagged `dataSource: "demo"`, which the (correct) indexability
+   gate excludes unconditionally — and no live UI or import job can ever write a non-demo row.
+   Two independent unlock paths exist and either would work: (a) wire `claim-listing`'s
+   `DashboardProvider.addListing()` to a real server write + a connected admin-approval flow, or
+   (b) bulk-import real Nepal business data via the already-built `lib/acquire/osm` importer with
+   `dataSource: "osm"` (already trusted by the gate). → `findings/sitemap.md` §"VERDICT", `findings/schema.md`, `findings/local.md`, `findings/sxo.md`, `findings/geo.md`
+2. **Homepage/city marketing copy ("50,000+ local businesses," "12,840 listings" for Kathmandu)
+   is now directly, visibly contradicted by the platform's own moderation-gate messaging.** A real
+   visitor who clicks through to the one example listing is told in the site's own words that it
+   isn't indexed. → `findings/sxo.md` (High)
+3. **A residual pre-fix duplicate-content cluster of 4 blog posts (published 07-05/06) is still
+   live** and scores 62–66% pairwise similarity against each other by the site's own current
+   dedup threshold (0.55) — verbatim instances of a deterministic fallback template that predates
+   the 07-11 fix. → `findings/content.md` (High)
+4. **CSP ships as `Content-Security-Policy-Report-Only`, not enforcing.** XSS/injection mitigation
+   from CSP specifically is not active yet (clickjacking protection via `X-Frame-Options` *is*
+   active independently). → `findings/technical.md` (Medium, downgraded from the baseline's
+   Critical admin-credentials finding, which is fixed)
+5. **LCP images across all three main templates (homepage hero, business photo, blog featured
+   image) are missing `fetchpriority="high"`**, contributing directly to LCP of 2.69s (homepage)
+   and 3.37s (blog post) — both in the "Needs improvement" band. A one-line `priority` prop fix
+   per template. → `findings/performance.md` (High)
 
 ### Top 5 quick wins
 
-1. Redeploy `origin/main` to production — resolves the admin-sitemap leakage and robots.txt gaps
-   immediately, no new code needed.
-2. Add a 308 host redirect (non-www → www) at the edge.
-3. Add unique `metadata.title`/`description` to the 21 public static pages currently sharing the
-   homepage's default title (33% of the crawled site).
-4. Fix `priceRange: "Rs Rs Rs"` — a one-line bug that is both a schema defect and a visible,
-   customer-facing UI bug on the one live business page.
-5. Add a `headers()` security block (CSP, X-Frame-Options, X-Content-Type-Options,
-   Referrer-Policy) — currently only HSTS is present.
-
-### Business type detected
-
-Local business directory / marketplace (Yelp-style), Nepal-focused — restaurants, hotels, home
-services, healthcare, education, and more across 8 major Nepali cities.
+1. Add `priority` to the `next/image` LCP element on the homepage hero, business-hero photo, and
+   blog featured-image templates — one line per template, directly targets the LCP finding above.
+2. Consolidate or 301-redirect the 4 residual duplicate blog posts using the exact pattern already
+   proven in `lib/blog-dedup.ts` for the other 7.
+3. Reinstate explicit per-bot `Allow` rules (GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot) in
+   `robots.txt` — 5-minute change, restores an auditable AI-crawler-access signal that was
+   simplified away.
+4. Add `QAPage` JSON-LD to `/questions/trekking-annapurna` — a genuine Q&A page currently shipping
+   zero schema at all.
+5. Delete the dead `app/[indexNowKey].txt` route folder; fix the duplicated paragraph on
+   `/authors/team`; re-compress the homepage's Unsplash hero image (89% file-size savings
+   available per Lighthouse).
 
 ---
 
 ## Category Scores
 
-| Category | Weight | Score | Status |
+| Category | Score | Prior (2026-07-11) | Change | Weight in Health Score |
+|---|---|---|---|---|
+| Technical SEO | 91/100 | 64/100 | ↑ 27 | 22% |
+| Content Quality | 60/100 | 52/100 | ↑ 8 | 23% |
+| On-Page SEO (est., see note) | 58/100 | 50/100 | ↑ 8 | 20% |
+| Schema / Structured Data | 61/100 | 74/100 | ↓ 13 | 10% |
+| Performance (CWV) | 87/100 | ~60/100 (manual est.) | ↑ (not directly comparable) | 10% |
+| AI Search Readiness (GEO) | 62/100 | 61/100 | flat | 10% |
+| Images (est., see note) | 62/100 | — | new this pass | 5% |
+| **Weighted Health Score** | **70/100** | **57/100** | **↑ 13** | **100%** |
+
+**Supplementary specialist scores** (not part of the weighted Health Score formula, but core to a
+full audit — see each finding file for detail):
+
+| Category | Score | Prior | Change |
 |---|---|---|---|
-| Technical SEO | 22% | **46/100** | Critical issues present (blended with sitemap deep-dive) |
-| Content Quality | 23% | **52/100** | Duplicate content + thin depth |
-| On-Page SEO | 20% | **58/100** | Large duplicate-title cluster |
-| Schema / Structured Data | 10% | **74/100** | Strong foundation, a few real bugs |
-| Performance (CWV, lab estimate) | 10% | **60/100** | No field data configured |
-| AI Search Readiness (GEO) | 10% | **61/100** | Excellent llms.txt undermined by duplicate content |
-| Images | 5% | **78/100** | Well-optimized, stock-photo trust gap |
+| Sitemap Architecture | 44/100 | 28/100 | ↑ 16 |
+| SXO (search experience) | 30/100 | 40/100 | ↓ 10 |
+| Local SEO | 40/100 | 45/100 | ↓ 5 |
+| Backlinks | 8/100 (informational floor) | 8/100 | flat |
 
-**Overall SEO Health Score: 57/100**
+**Note on On-Page and Images:** this re-audit did not spawn dedicated on-page or image-optimization
+specialists (no `seo-on-page`/`seo-images` subagent ran this cycle). The figures above are
+synthesized from evidence gathered by the Technical, Content, Schema, and Performance passes
+(clean title/meta hygiene now confirmed; homepage/category copy still very thin at 63–119 words;
+one specific, fixable image-compression finding on the homepage hero). Treat these two figures as
+directional, not independently audited to the same depth as the other eight — recommend a
+dedicated on-page/images pass next cycle.
 
-Supplementary deep-dives (not in the weighted total, reported for completeness):
-
-| Category | Score | Note |
-|---|---|---|
-| Sitemap Architecture (deep-dive) | 28/100 | Contains the audit's single most severe finding |
-| Search Experience (SXO) | 40/100 | Structurally capped by the listings bug |
-| Local SEO | 45/100 | City pages ~85% templated across different cities |
-| Content Cluster Architecture | 32/100 | Thin blog↔category interlinking |
-| Backlink Profile | 8/100 (informational floor) | Expected for a pre-launch site, not a diagnostic failure |
-
----
-
-## Technical SEO
-
-**Score: 46/100** (blended: `findings/technical.md` 64/100 holistic audit + `findings/sitemap.md`
-28/100 crawlability deep-dive)
-
-**What works:** AI-crawler-friendly robots.txt, 100% canonical-tag coverage, clean URL structure,
-correct 404 handling, and — notably — the current repo source already contains fixes for two of
-the issues below; they just haven't been deployed.
-
-**Critical/High findings:**
-- Core listing pages don't exist (see Executive Summary #1) — full fix plan in `findings/sitemap.md`.
-- Hardcoded admin credentials in client-side code (see Executive Summary #2).
-- Host canonicalization missing a hard redirect (see Executive Summary #4).
-- Admin panel URLs (`/super-admin/*`, `/admin/ai`) exposed in the public sitemap, not disallowed
-  in robots.txt — already fixed in repo source, pending deploy.
-- Zero security headers beyond HSTS.
-
-Full detail: `findings/technical.md`, `findings/sitemap.md`.
+**Why the Health Score went up (57→70) while two specialist scores went down:** the weighted
+formula rewards the technical/content/schema/performance work that genuinely improved. SXO and
+Local dropped because they measure something the formula doesn't directly weight — whether a real
+searcher's *core intent* ("find and evaluate a specific business") can be fulfilled at all — and
+that got structurally worse (1 URL → 0 URLs), even as the code quality around it improved. Read
+the Health Score as "is this a well-built site," not "is this directory doing its job for a user
+today" — the SXO score (30/100) is the more honest answer to the second question.
 
 ---
 
-## Content Quality
+## 1. The Core Finding: Zero Indexable Business Listings
 
-**Score: 52/100**
+This is not one bug — it's the same root cause discovered independently by five specialists.
+Presenting the convergence here because no single findings file captures the full weight of it.
 
-**What works:** 14 original blog posts with consistent metadata, an author-desk attribution
-system with `Organization`-typed schema, and a custom AI-content-transparency meta tag.
+**What's fixed:** `lib/seo-auto/sitemaps.ts::getListingSitemapEntries()` now genuinely calls
+`getIndexableListings()` → `createListingRepository().all()`, exactly the fix the 07-11 audit
+recommended. `app/business/[slug]/page.tsx` is a real dynamic route with `generateMetadata()`,
+per-listing `robots` gating, and conditional `LocalBusiness`/`Restaurant` JSON-LD. All 11 seed
+business slugs return HTTP 200. This is substantial, correct engineering — not a redeploy artifact.
 
-**Critical/High findings:**
-- 12 posts form 5 near-duplicate topic clusters (see Executive Summary #3).
-- Blog posts are thin (500–660 words) for competitive commercial-intent topics.
-- Healthcare content is bylined to an organizational "desk," not a named individual with stated
-  credentials — a real E-E-A-T gap for YMYL-adjacent content.
+**What's still broken, and why it's worse than the original bug:** `isIndexableListing()`
+(`lib/public-listings.ts`) correctly requires `dataSource` to be `owner`/`osm`/`import`/
+`google_ondemand_reviewed` — not `"demo"`. Every one of the 11 seed businesses in `lib/data.ts` is
+unconditionally tagged `dataSource: "demo"` at creation (`businessToListing()`), and a test
+(`public-listings.test.ts`) proves this exclusion is total regardless of quality score. **Nothing
+live can ever write a non-demo row**:
+- `app/claim-listing` + `DashboardProvider.addListing()` — the only "add a business" UI — writes
+  only to React state and `localStorage`, never calls `fetch()` or reaches the database.
+- `app/super-admin/approvals` and `app/super-admin/businesses` — the moderation UI — never import
+  `createListingRepository` or any real listing accessor; same client-side/mock pattern.
+- `lib/acquire/osm`, `lib/acquire/csv`, `lib/acquire/crawler` — real, tested import pipelines that
+  exist in the repo but are wired into zero cron jobs and zero routes (`grep -rl "lib/acquire"
+  app/` returns nothing). `vercel.json` only crons blog-publish and listing-enrichment (which
+  enriches existing rows, never imports new ones).
+
+**Business impact, confirmed by fresh SERP checks (`findings/sxo.md`):** `site:nepalidirectory.com`
+returns zero Google results today, while five competing Nepal directory/marketplace sites surface
+instead. For "IT companies Nepal directory," "wedding planners Nepal," and similar queries, the
+SERP is dominated by exactly the product type this site is — working directories and marketplaces
+with real inventories (TechBehemoths, WedTayari, Bhoj Planner) — proving the page type is right and
+the gap is purely inventory.
+
+**The fix does not require touching the gate.** `isIndexableListing()` is correct and should stay
+strict. It requires either (a) connecting the owner-claim flow to a real database write with a
+genuinely-wired admin approval step, or (b) running the existing OSM importer against real Nepal
+business data with `dataSource: "osm"`. Either path, even at small scale (20–50 real, reviewed
+listings), unblocks the sitemap, the schema, the SXO personas, and the GEO citability findings
+simultaneously — it is the single highest-leverage fix available anywhere in this audit.
+
+---
+
+## 2. Technical SEO — 91/100 (was 64/100)
+
+All four Critical/High findings from the baseline (hardcoded admin credentials, missing host
+redirect, admin URLs leaking into the sitemap, stale production deploy) are **fixed and verified
+live**, not just in-repo. Security headers (CSP, X-Frame-Options, HSTS with preload,
+Content-Type-Options, Referrer-Policy, Permissions-Policy) are now live site-wide. Duplicate page
+titles (24 pages) are fixed via new per-page `layout.tsx` metadata. IndexNow now has an active
+submission mechanism wired into the daily blog cron.
+
+**Remaining, all Medium or lower:** CSP is Report-Only (not enforcing, and no reporting endpoint
+configured to even collect violation data); `/claim-listing` H1 presence not re-verified; thin
+content on ~21 pages not re-measured this pass (likely improved given large content-expansion
+commits, not confirmed); a dead `app/[indexNowKey].txt` route folder remains; robots.txt lost its
+explicit per-AI-bot `Allow` lines in favor of an equivalent wildcard.
+
+Full detail: `findings/technical.md`.
+
+## 3. Content Quality — 60/100 (was 52/100)
+
+**The most important question for this re-audit was whether the blog's duplicate-content problem
+got worse at 8x scale (12→97 posts). It did not — the fix genuinely worked.** A 43-post sample
+using the site's own dedup algorithm found 0.00–0.03 pairwise similarity across every post-fix
+template family, including same-topic/different-city pairs — genuinely distinct, AI-written
+articles, not template swaps. However, **4 posts published 07-05/06, right before the fix landed,
+remain live and still fail the site's own current 0.55 threshold against each other** (0.62–0.66
+similarity) — verbatim instances of a deterministic fallback scaffold. The original ~14 baseline
+posts also remain thin (160–410 real words once templated boilerplate is excluded) and haven't
+been backfilled through the now-much-stronger pipeline.
+
+New positive signals: `/authors/*` desk pages now function as real topical hubs; `/editorial-policy`,
+`/directory-methodology`, and `/attribution` are good-faith trust additions; AI-content-disclosure
+metadata carries through to new posts. The structural ceiling on this category remains the same one
+driving the Critical finding above — the homepage (63 words) and category pages (119 words) are
+thin because `getEvergreenPages()` (the code that would generate data-backed "Best X in Y" pages
+from real listings) is gated behind an `includePreview` flag and returns `[]` in production.
 
 Full detail: `findings/content.md`.
 
----
+## 4. Schema / Structured Data — 61/100 (was 74/100)
 
-## On-Page SEO
-
-**Score: 58/100**
-
-**What works:** sound title-template architecture, 100% meta description coverage.
-
-**Findings:** 34 pages (33% of the crawled site) share one fallback title; 9 pages have a
-duplicated brand suffix from a template-interaction bug; 55 titles exceed 60 characters; 12 pages
-lack an `<h1>` (2 of them real, indexable, conversion-relevant pages: `/claim-listing`,
-`/gallery`).
-
-Full detail: `findings/on-page.md`.
-
----
-
-## Schema & Structured Data
-
-**Score: 74/100**
-
-**What works:** `Organization`+`WebSite` on all 103 pages, well-layered contextual types
-(`FAQPage`, `BreadcrumbList`, `ItemList`, `CollectionPage`), and a genuinely thorough `Restaurant`
-schema on the one live listing — the template this will scale from once the listings bug is fixed.
-
-**Findings:** malformed `priceRange` (also a visible UI bug), incomplete
-`openingHoursSpecification` (4 of 7 days), missing `GeoCoordinates`.
+The score **dropped** despite three genuine code-level fixes (`priceRange` malformed string fixed,
+`geo`/`GeoCoordinates` added, `openingHoursSpecification` now maps full week data) because the
+flagship schema surface — `/business/[slug]` — currently emits **zero** `LocalBusiness`/`Restaurant`
+schema on any live page, for the same root cause as the Critical finding above. The improved
+template has no live instance to validate. A capability regression independent of the indexability
+issue: the entire menu graph (`hasMenu`/`MenuSection`/`MenuItem`/`Offer`, `servesCuisine`) that
+existed in the old static template has no equivalent in the new schema builder. Separately,
+`/questions/trekking-annapurna` — a genuine Q&A page — ships zero page-specific schema and should
+get `QAPage` (not `FAQPage`).
 
 Full detail: `findings/schema.md`.
 
----
+## 5. Sitemap Architecture — 44/100 (was 28/100)
 
-## Performance (Core Web Vitals)
+Hygiene and structure are now genuinely clean (sitemap index format, robots.txt alignment, zero
+admin leakage, no priority/changefreq cruft, blog dedup + thin-category filtering) — that slice
+alone would score in the 80s-90s. The category score is capped at 44 because the one sitemap that
+matters most for a directory product — listings — has zero URLs, and the root cause is now a
+missing data-supply pipeline rather than a one-line hardcoded literal, which is arguably a harder
+fix. Also flagged: no chunking/pagination logic exists yet for when real listing volume exceeds
+50,000 URLs — build this concurrently with the listings fix, not after.
 
-**Score: 60/100 (lab estimate — no PageSpeed/CrUX API configured)**
+Full detail: `findings/sitemap.md`.
 
-**What works:** `next/image` throughout with responsive srcset and automatic WebP delivery,
-tightly-scoped remote image patterns, Brotli compression, edge caching, self-hosted preloaded
-fonts.
+## 6. Performance (Core Web Vitals) — 87/100 homepage (first real lab measurement)
 
-**Findings:** inconsistent TTFB (median ~980ms, up to 1.7s on some routes) worth validating
-against real field data; large HTML payloads on hub pages from verbose per-card srcset markup.
+Unlike the 07-11 baseline (source/header inspection only, no actual timing), this pass ran real
+Lighthouse 13.4.0 mobile lab tests. Homepage LCP 2.69s (needs improvement), CLS 0.083 (good), TBT
+273ms (needs improvement, used as the INP lab-proxy since INP itself requires real interaction
+data). No page fails outright, but no page passes all three CWV metrics simultaneously. Top
+findings: all three LCP-image templates are missing `fetchpriority="high"` (one-line `priority`
+prop fix, expected 100–300ms LCP improvement); the homepage's Unsplash hero has 89% avoidable file
+size; a web-font-load reflow causes the only CLS "needs improvement" result, on `/category/*`. The
+baseline's ~980ms TTFB claim was re-measured and largely not reproduced (70–160ms real TTFB
+measured this pass) — likely a false positive from the prior manual-timing methodology.
 
 Full detail: `findings/performance.md`.
 
----
+## 7. Visual / Mobile — 87/100 (was 68/100)
 
-## AI Search Readiness (GEO)
+Both High/Medium findings from the baseline are fixed and confirmed both visually and in source:
+the "Super Admin" nav link is gone, and the mobile nav was rebuilt as a compact horizontal-scroll
+pill bar (down from a 580px stacked list). The "Rs Rs Rs" broken price display can no longer be
+reproduced — that entire class of unverified fields is now correctly suppressed for non-indexed
+listings. The core mobile value proposition (search bar, FIND CTA) is fully visible above the fold
+with zero scrolling on a 375×812 viewport. New minor findings: mobile nav tap targets are 38px
+(below the 44–48px guideline); a new site-wide floating AI-assistant button needs a spot-check for
+CTA overlap on longer pages; the previously-rich listing template (badges, deals, owner profile) is
+currently invisible on the one live listing, consistent with the preview-gate finding above.
 
-**Score: 61/100**
+Full detail: `findings/visual.md`.
 
-**What works:** every major AI crawler explicitly allowed in robots.txt; a genuinely strong
-`llms.txt` with organized, LLM-oriented descriptions; FAQ schema and clean heading structure aid
-passage extraction.
+## 8. AI Search Readiness (GEO) — 62/100 (was 61/100, net flat)
 
-**Findings:** `llms.txt` actively links to the 12 duplicate-content posts (Executive Summary #3),
-undermining its own goal; individual-business AI citability capped at 1 real page.
+A genuine Critical fix (the 12-post duplicate-blog cluster is resolved at the URL level — 7
+duplicates now 308-redirect to canonicals, both sitemap and `llms.txt` reflect only canonical URLs)
+is offset by a new, worse citability gap: **zero AI-citable individual-business or named-comparison
+pages exist sitewide.** `/business/newa-lahana` is now `noindex,nofollow`; comparison pages like
+`/compare-business/beauty-salons` are `noindex` with no named providers; `/best/restaurants/kathmandu`
+(live with 6 named restaurants at the last audit) now 404s. `llms.txt`'s "Business comparison
+guides" and "Data-backed local answers" sections are present but completely empty. New/scaled blog
+posts show materially stronger GEO structure (Quick-answer blocks, FAQPage-backed FAQ sections,
+Source-and-fact-notes sections). robots.txt lost its explicit per-AI-bot directives (functionally
+harmless — wildcard still covers every bot — but loses the auditable signal).
 
 Full detail: `findings/geo.md`.
 
----
+## 9. Search Experience Optimization (SXO) — 30/100 (was 40/100, regressed)
 
-## Images
+Confirms, via fresh live SERP analysis, that the site's core commercial query class ("[category]
+in [city]," "IT companies Nepal directory," "wedding planners Nepal") is won by individual-listing
+pages or real multi-vendor marketplaces — a page type this site is built to be but currently isn't,
+inventory-wise. The weakest persona, "searcher trying to find and evaluate one specific real
+business" (the core directory promise), scores 4/100. New this cycle: `findings/cluster.md` proves
+the site's one working content funnel (blog ↔ city hub ↔ compare-business) is actually three
+disconnected silos with zero bidirectional internal links — a pure linking fix, no new content
+required. Also new: the marketing-claims-vs-moderation-gate contradiction described in the
+Executive Summary.
 
-**Score: 78/100**
+Full detail: `findings/sxo.md`.
 
-**What works:** universal alt-text coverage, `next/image` responsive optimization, correct OG
-image metadata.
+## 10. Local SEO — 40/100 (was 45/100)
 
-**Findings:** all production imagery is stock photography (Unsplash), not real business photos —
-a trust/differentiation gap once real listings launch; homepage OG image is undersized (512×512
-logo vs. ideal 1200×630).
+The routing/sitemap-function half of the Critical finding is genuinely fixed (all 11 seed slugs
+return 200, `getListingSitemapEntries()` reads from the real repository) — but the live outcome is
+unchanged or worse: zero indexable, schema-bearing business pages, for a data-pipeline reason
+rather than a code-bug reason. New finding: 4 of 6 published category verticals (hospitals, schools,
+it-companies, shops) have no schema-subtype mapping and will default to generic `LocalBusiness` once
+real listings populate them — fix this before the listings pipeline ships, not after. The platform's
+own decision not to publish placeholder NAP for itself is confirmed appropriate, not a defect.
 
-Full detail: `findings/images.md`.
+Full detail: `findings/local.md`.
 
----
+## 11. Backlinks — 8/100 informational floor (unchanged)
 
-## Supplementary Deep-Dives
+Expected for a young, pre-launch directory with no active link-building yet — not a defect. Common
+Crawl shows zero referring domains (re-confirmed with a forced cache-bypass fetch). One real fix
+since the last audit: the homepage no longer links out to `example.com` placeholder businesses (the
+same `isDemoListing()` gate that's suppressing the listings sitemap also removed these from the
+homepage's featured surface). The `/attribution` page's OpenStreetMap credit links correctly carry
+`rel="nofollow"`. Still zero social-profile footprint in the footer — the top recommended zero-cost
+fix for this category.
 
-### Sitemap Architecture — 28/100
-Contains the audit's single most severe, most thoroughly root-caused finding (the listings bug)
-plus a full code-level fix plan, discovery that the current repo source already fixes the
-admin-leakage issue, and a forward-looking pagination gap. **Read this file first if you only read
-one.** Full detail: `findings/sitemap.md`.
-
-### Search Experience (SXO) — 40/100
-Query-by-query analysis showing the site is structurally locked out of the highest-intent local
-query class ("X near me") until the listings bug ships, but performs reasonably for
-comparison/research-intent queries today. Full detail: `findings/sxo.md`.
-
-### Local SEO — 45/100
-City pages are ~85% templated/duplicate across genuinely different cities (verified: Kathmandu vs.
-Dharan text diff). Full detail: `findings/local.md`.
-
-### Content Cluster Architecture — 32/100
-Assessment of hub-and-spoke interlinking maturity between blog and category/city pages, with a
-prioritized list of net-new cluster topics. Full detail: `findings/cluster.md`.
-
-### Backlink Profile — 8/100 (informational floor)
-Expected, unconcerning score for a pre-launch site with no link-building activity yet — not a
-diagnostic failure. Includes a forward-looking link-building strategy. Full detail:
-`findings/backlinks.md`.
-
-### Visual / Mobile
-Screenshot-based review surfaced two additional findings not captured elsewhere: the "Super Admin"
-link appears in the public mobile navigation (ties to the security finding above), and the
-malformed `priceRange` bug is visible to real users, not just in schema. Full detail:
-`findings/visual.md`.
+Full detail: `findings/backlinks.md`.
 
 ---
 
 ## Methodology Notes
 
-- 103 unique URLs crawled from all 4 live sitemaps (`sitemap.xml`, `sitemap-listings-1.xml`,
-  `sitemap-blog.xml`, `sitemap-categories.xml`), all returning HTTP 200.
-- Findings are evidence-backed: live HTTP checks, rendered-page capture, and direct inspection of
-  the production Next.js source repository (not HTML-only inference) — root causes are cited to
-  specific files and line numbers throughout the `findings/` directory.
-- No Google PageSpeed Insights/CrUX API or Moz/Bing Webmaster API credentials were configured for
-  this audit; Performance scores are lab estimates and the Backlink category uses Common Crawl
-  only. Both are clearly disclosed in their respective findings files.
-- DataForSEO MCP tools were not available in this environment.
+- No Google API credentials configured (`google_auth.py --check` → Tier -1) — Performance and GEO
+  findings are lab-only/heuristic; no CrUX field data, GSC indexation status, or GA4 traffic data
+  available. Recommend configuring free-tier Google API access before the next audit cycle.
+- Backlinks analysis is Tier 0 (Common Crawl + verification crawler only) — no Moz/Bing/DataForSEO
+  keys configured. Free Moz (2,500 rows/month) and Bing Webmaster keys would materially improve
+  this category at zero cost.
+- No DataForSEO MCP access — Local SEO and Maps intelligence are free-tier only (no GBP API data,
+  no geo-grid rank tracking).
+- Every specialist agent was instructed to independently re-verify carried-over findings against
+  live production rather than trust the prior audit's conclusions — several findings changed
+  status in non-obvious ways (e.g., the listings sitemap issue moved from "hardcoded literal" to
+  "no supply pipeline," a harder problem with the same symptom) precisely because of this
+  independent verification.

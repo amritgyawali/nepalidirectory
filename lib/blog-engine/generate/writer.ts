@@ -308,9 +308,23 @@ function ensureBodyMarkdown(
 
   const categoryText = vars.categories.length ? vars.categories.join(", ") : "local businesses";
   const sourceNote = vars.sourcePack.split("\n").slice(0, 8).join(" ").replace(/\s+/g, " ").slice(0, 600);
+  // Multiple fallback openings, chosen deterministically from the angle so repeated fallback
+  // hits on different topics don't collapse into a near-identical scaffold (see the 2026-07-16
+  // SEO audit finding: 4 posts generated back-to-back on this exact scaffold scored 62-66%
+  // pairwise similarity). Deterministic (not random) so the same angle always regenerates the
+  // same variant, keeping output reproducible for tests and re-runs.
+  const introVariants = [
+    `Use this guide as a practical checklist for ${vars.angle.toLowerCase()}. It is written for people comparing Nepal businesses through NepaliDirectory, where category fit, location, contact details, service notes and public review signals all matter before making a booking decision.`,
+    `This guide walks through how to approach ${vars.angle.toLowerCase()} in Nepal, covering the checks worth doing before you commit to a provider -- category fit, location, contact details, service notes and public review signals all shape the decision.`,
+    `Before you commit to a provider for ${vars.angle.toLowerCase()}, work through this checklist. NepaliDirectory lists providers by category, location, contact details and service notes, and this guide explains how to weigh those signals against public reviews.`,
+  ];
+  const variantIndex =
+    Math.abs(
+      Array.from(vars.angle).reduce((hash, char) => (hash * 31 + char.charCodeAt(0)) | 0, 7),
+    ) % introVariants.length;
   return [
     `## ${vars.title}`,
-    `Use this guide as a practical checklist for ${vars.angle.toLowerCase()}. It is written for people comparing Nepal businesses through NepaliDirectory, where category fit, location, contact details, service notes and public review signals all matter before making a booking decision.`,
+    introVariants[variantIndex],
     "",
     "## Start with the search intent",
     `Decide what you need before comparing providers. For ${categoryText}, the best option depends on urgency, location, price expectations, availability and whether the provider clearly explains what they can do. A short list is better than opening many profiles without a decision plan.`,

@@ -25,6 +25,8 @@ export type { OsmTagMapRow } from "./osm/tag-map";
 export { OsmImporter } from "./osm/importer";
 export type { OsmElement, OsmImportResult, OsmImportStats } from "./osm/importer";
 export { SAMPLE_OSM_ELEMENTS } from "./osm/sample";
+export { fetchOsmElements, CITY_BOUNDING_BOXES } from "./osm/overpass";
+export type { BoundingBox, FetchOsmElementsOptions } from "./osm/overpass";
 
 export { PlacesClient } from "./places/client";
 export type { PlaceMatch, PlaceSpotCheck, PlacesConfig } from "./places/client";

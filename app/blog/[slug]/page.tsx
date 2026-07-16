@@ -10,8 +10,10 @@ import { getAuthorByName, getAuthorUrl } from "@/lib/authors";
 import { blogPosts, getBlogPost, getBlogPostUrl, getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
 import { ENGINE_AUTHOR, getPublishedEnginePost, getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
+import { cityDirectoryPages } from "@/lib/city-pages";
 import { getDirectoryCategory } from "@/lib/directory-categories";
 import { routes } from "@/lib/routes";
+import { relatedCompareHubsForPost } from "@/lib/seo-auto";
 import {
   buildBlogKeywords,
   buildWebPageJsonLd,
@@ -132,6 +134,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       const category = getDirectoryCategory(categorySlug);
       return category ? [{ href: category.href, label: `Browse ${category.name} in Nepal` }] : [];
     }),
+    // City hubs (2026-07-16 SEO audit / cluster.md: blog posts and their topically-matching
+    // city/compare-business hubs had zero bidirectional links, unlike category hubs above).
+    ...(post.citySlugs ?? []).flatMap((citySlug) => {
+      const city = cityDirectoryPages.find((candidate) => candidate.slug === citySlug);
+      return city ? [{ href: city.href, label: `Browse businesses in ${city.name}` }] : [];
+    }),
+    ...relatedCompareHubsForPost(post, 2).map((hub) => ({ href: hub.href, label: hub.title })),
   ].map((link) => [link.href, link] as const)).values()];
 
   const articleJsonLd = {

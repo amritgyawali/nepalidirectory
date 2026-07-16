@@ -1,21 +1,14 @@
 User-Agent: *
 Allow: /
 Disallow: /api/
+Disallow: /admin/
+Disallow: /super-admin/
 Disallow: /dashboard/
+Disallow: /account/
+Disallow: /profile
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /gallery
 
-User-Agent: Googlebot
-User-Agent: Bingbot
-User-Agent: OAI-SearchBot
-User-Agent: ChatGPT-User
-User-Agent: GPTBot
-User-Agent: PerplexityBot
-User-Agent: ClaudeBot
-Allow: /
-Disallow: /api/
-Disallow: /dashboard/
-
-Host: https://www.nepalidirectory.com
 Sitemap: https://www.nepalidirectory.com/sitemap.xml
-Sitemap: https://www.nepalidirectory.com/sitemap-listings-1.xml
-Sitemap: https://www.nepalidirectory.com/sitemap-blog.xml
-Sitemap: https://www.nepalidirectory.com/sitemap-categories.xml

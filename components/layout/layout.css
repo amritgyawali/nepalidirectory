@@ -254,6 +254,7 @@
 
   .site-nav__link {
     justify-content: center;
+    min-height: 44px;
     min-width: max-content;
     padding-inline: 10px;
     text-align: center;

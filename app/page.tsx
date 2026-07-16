@@ -105,7 +105,7 @@ export default function HomePage() {
       <section className="home-hero">
         <div className="home-hero__media" aria-hidden>
           <FillImage
-            src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=2000&h=980&fit=crop&auto=format"
+            src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=2000&h=980&fit=crop&auto=format&q=60"
             alt=""
             sizes="100vw"
             priority

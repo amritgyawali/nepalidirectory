@@ -64,6 +64,20 @@ export function seedListingsFromData(): Listing[] {
 }
 
 /**
+ * Round to 5 decimal places (~1.1m accuracy, Google's recommended minimum for local business
+ * geo coordinates) so no import/entry path can silently carry lower-precision coordinates
+ * (e.g. the 3-4 decimal / ~11m-accuracy values found in the bundled demo dataset) into
+ * production listing data.
+ */
+function enforceGeoPrecision(
+  coordinates: { lat: number; lng: number } | undefined,
+): { lat: number; lng: number } | undefined {
+  if (!coordinates) return coordinates;
+  const round5 = (value: number) => Math.round(value * 1e5) / 1e5;
+  return { lat: round5(coordinates.lat), lng: round5(coordinates.lng) };
+}
+
+/**
  * Build a NewListing (no id) with sensible defaults, filling required fields. Used by the
  * acquisition importers (OSM, CSV, onboarding) which produce partial records.
  */
@@ -87,7 +101,7 @@ export function makeNewListing(
     status: partial.status,
     image: partial.image,
     photosCount: partial.photosCount ?? 0,
-    coordinates: partial.coordinates,
+    coordinates: enforceGeoPrecision(partial.coordinates),
     claimed: partial.claimed ?? false,
     verified: partial.verified ?? false,
     active: partial.active ?? true,

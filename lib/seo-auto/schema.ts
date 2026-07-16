@@ -7,13 +7,20 @@ import { getEvergreenUrl, type EvergreenPage } from "./evergreen";
 
 const subtypeByCategory: Array<[string, string]> = [
   ["restaurant", "Restaurant"],
-  ["cafe", "Restaurant"],
+  ["cafe", "CafeOrCoffeeShop"],
   ["hotel", "Hotel"],
+  ["hospital", "Hospital"],
+  ["clinic", "MedicalClinic"],
   ["doctor", "MedicalClinic"],
   ["dentist", "Dentist"],
   ["plumber", "Plumber"],
   ["electrician", "Electrician"],
   ["lawyer", "LegalService"],
+  ["legal", "LegalService"],
+  ["school", "School"],
+  ["it-compan", "ProfessionalService"],
+  ["software", "ProfessionalService"],
+  ["shop", "Store"],
 ];
 
 export function localBusinessSubtype(categories: string[]): string {

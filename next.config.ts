@@ -60,6 +60,18 @@ const nextConfig: NextConfig = {
       permanent: true
     }));
   },
+  async rewrites() {
+    // Next.js route folders can't mix literal text with a dynamic segment (a
+    // `sitemap-listings-[chunk].xml` folder never registers as a route), so the public,
+    // sitemap-index-referenced /sitemap-listings-N.xml URL is rewritten to the real dynamic
+    // route at app/sitemap-listings/[chunk]/route.ts.
+    return [
+      {
+        source: "/sitemap-listings-:chunk(\\d+).xml",
+        destination: "/sitemap-listings/:chunk"
+      }
+    ];
+  },
   async headers() {
     const contentSecurityPolicy = [
       "default-src 'self'",
@@ -73,13 +85,22 @@ const nextConfig: NextConfig = {
       "img-src 'self' data: blob: https://images.unsplash.com",
       "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
       "media-src 'self'",
-      "worker-src 'self' blob:"
+      "worker-src 'self' blob:",
+      // Collect real violation data via /api/csp-report before flipping this header from
+      // Report-Only to enforcing (see the audit follow-up note below).
+      "report-uri /api/csp-report"
     ].join("; ");
 
     return [
       {
         source: "/(.*)",
         headers: [
+          // TODO(SEO audit 2026-07-16): still Report-Only, not enforcing. A static audit of
+          // every script/style/font/image/connect target in app/ and components/ found nothing
+          // outside this allowlist, but per the user's stated condition this should only flip to
+          // enforcing after watching real /api/csp-report violation data for a few days —
+          // 'unsafe-inline' is still present in script-src/style-src and should move to nonces/
+          // hashes before this is promoted to a plain `Content-Security-Policy` header.
           { key: "Content-Security-Policy-Report-Only", value: contentSecurityPolicy },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "X-Content-Type-Options", value: "nosniff" },

@@ -12,17 +12,25 @@ export {
   localBusinessSubtype,
   priceTierLabel,
 } from "./schema";
-export { suggestInternalLinks, type InternalLinkSuggestion } from "./internal-links";
+export {
+  suggestInternalLinks,
+  relatedCompareHubsForPost,
+  relatedPostsForCompareHub,
+  type InternalLinkSuggestion,
+} from "./internal-links";
 export {
   allSitemapEntries,
   getAuthorSitemapEntries,
   getBlogSitemapEntries,
   getCategorySitemapEntries,
   getListingSitemapEntries,
+  getListingSitemapChunk,
+  getListingSitemapChunkCount,
   getPageSitemapEntries,
   getStaticSitemapEntries,
   sitemapIndexXml,
   sitemapXml,
+  LISTING_SITEMAP_CHUNK_SIZE,
   type SitemapIndexEntry,
   type SitemapEntry,
 } from "./sitemaps";

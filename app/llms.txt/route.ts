@@ -42,7 +42,7 @@ export async function GET() {
 
   const guides = uniquePosts([...getSortedBlogPosts(), ...generatedPosts])
     .sort((a, b) => b.modifiedAt.localeCompare(a.modifiedAt))
-    .slice(0, 20);
+    .slice(0, 60);
 
   const lines = [
     "# Nepali Directory",
@@ -74,17 +74,27 @@ export async function GET() {
     "",
     "## Business comparison guides",
     "",
-    ...getSortedCompareCategories().filter((category) => category.businesses.length > 0).map((category) =>
-      resource(category.title, category.href, category.description),
-    ),
+    ...(getSortedCompareCategories().filter((category) => category.businesses.length > 0).length > 0
+      ? getSortedCompareCategories()
+          .filter((category) => category.businesses.length > 0)
+          .map((category) => resource(category.title, category.href, category.description))
+      : [
+          "Comparison pages are gated pending business data review -- see the Editorial Policy. This is an intentional content-integrity control, not a missing file.",
+        ]),
     "",
     "## Local guides",
+    "",
+    `Most recent ${guides.length} guides, newest first. See the XML Sitemap Index below for the complete, canonical list as the corpus grows.`,
     "",
     ...guides.map((post) => resource(post.title, post.href, post.description)),
     "",
     "## Data-backed local answers",
     "",
-    ...getEvergreenPages().map((page) => resource(page.title, page.href, page.metaDescription)),
+    ...(getEvergreenPages().length > 0
+      ? getEvergreenPages().map((page) => resource(page.title, page.href, page.metaDescription))
+      : [
+          "Data-backed local answer pages are gated pending business data review -- see the Editorial Policy. This is an intentional content-integrity control, not a missing file.",
+        ]),
     "",
     "## Trust and machine-readable resources",
     "",

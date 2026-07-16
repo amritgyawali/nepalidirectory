@@ -124,7 +124,7 @@ function ClaimListingForm() {
     }));
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const missingField = requiredFields.find((field) => {
       const value = form[field];
@@ -146,12 +146,52 @@ function ClaimListingForm() {
       return;
     }
 
+    const amenities = amenitiesText
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    // Real submission: writes a dataSource:"owner" row via POST /api/listings so this listing
+    // can actually appear in the sitemap/schema once a super admin approves it (2026-07-16 SEO
+    // audit — previously `addListing` below only ever wrote to localStorage).
+    try {
+      const response = await fetch("/api/listings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          ownerName: form.ownerName,
+          category: form.category,
+          area: form.area,
+          address: form.address,
+          phone: form.phone,
+          email: form.email,
+          website: form.website,
+          hours: form.hours,
+          image: form.image,
+          description: form.description,
+          amenities,
+          seo: {
+            metaTitle: form.seo.metaTitle,
+            metaDescription: form.seo.metaDescription,
+            urlSlug: form.seo.urlSlug
+          }
+        })
+      });
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null);
+        setError(payload?.error || "Could not submit this listing for review. Please try again.");
+        return;
+      }
+    } catch {
+      setError("Could not reach the listing service. Please try again.");
+      return;
+    }
+
     const slug = addListing({
       ...form,
-      amenities: amenitiesText
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean),
+      amenities,
       seo: {
         ...form.seo,
         keywords: keywordsText

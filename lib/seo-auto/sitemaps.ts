@@ -86,6 +86,26 @@ export async function getListingSitemapEntries(): Promise<SitemapEntry[]> {
   }));
 }
 
+/**
+ * Comfortably under the sitemap protocol's 50,000-URL-per-file ceiling (prompt sec. 6, 2026-07-16
+ * SEO audit N2: the single hardcoded `sitemap-listings-1.xml` filename had no chunking logic and
+ * would silently under-report once real listing volume landed). `app/sitemap-listings-[chunk].xml`
+ * and `app/sitemap.xml` both read this so the index and the chunk count always agree.
+ */
+export const LISTING_SITEMAP_CHUNK_SIZE = 40_000;
+
+export async function getListingSitemapChunkCount(): Promise<number> {
+  const entries = await getListingSitemapEntries();
+  return Math.max(1, Math.ceil(entries.length / LISTING_SITEMAP_CHUNK_SIZE));
+}
+
+/** 1-indexed to match the existing `sitemap-listings-1.xml` URL convention. */
+export async function getListingSitemapChunk(chunk: number): Promise<SitemapEntry[]> {
+  const entries = await getListingSitemapEntries();
+  const start = (chunk - 1) * LISTING_SITEMAP_CHUNK_SIZE;
+  return entries.slice(start, start + LISTING_SITEMAP_CHUNK_SIZE);
+}
+
 export function getAuthorSitemapEntries(): SitemapEntry[] {
   return contentAuthors.map((author) => ({
     url: `${siteUrl}/authors/${author.slug}`,
