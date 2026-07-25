@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SearchExperience } from "@/components/search/SearchExperience";
+import { getIndexableListings, listingToBusiness } from "@/lib/public-listings";
 import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
@@ -23,8 +24,11 @@ type SearchPageProps = {
   }>;
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = (await searchParams) ?? {};
+  const businesses = (await getIndexableListings()).map(listingToBusiness);
 
   return (
     <>
@@ -34,7 +38,11 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           { label: "Search" }
         ]}
       />
-      <SearchExperience initialQuery={params.q ?? ""} initialLocation={params.location ?? "Kathmandu, Bagmati"} />
+      <SearchExperience
+        initialQuery={params.q ?? ""}
+        initialLocation={params.location ?? ""}
+        businesses={businesses}
+      />
     </>
   );
 }

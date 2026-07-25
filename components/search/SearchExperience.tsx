@@ -14,11 +14,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useCallback, useMemo, useState } from "react";
 import { AiConcierge } from "@/components/ai/AiConcierge";
 import { BusinessCard } from "@/components/directory/BusinessCard";
 import { Stars } from "@/components/ui/Stars";
-import { businesses, categories, cityLinks, popularSearches } from "@/lib/data";
+import { categories, cityLinks, popularSearches, type Business } from "@/lib/data";
 import { routes } from "@/lib/routes";
 import { searchRecords, type SearchKind } from "@/lib/search";
 
@@ -49,11 +49,8 @@ const quickFilters = [
 type SearchExperienceProps = {
   initialQuery: string;
   initialLocation: string;
+  businesses: Business[];
 };
-
-const businessBySlug = new Map(businesses.map((business) => [business.slug, business]));
-
-const businessFromRecord = (id: string) => businessBySlug.get(id.replace("business-", ""));
 
 function iconForKind(kind: SearchKind) {
   if (kind === "business") return Building2;
@@ -62,22 +59,30 @@ function iconForKind(kind: SearchKind) {
   return FileText;
 }
 
-export function SearchExperience({ initialQuery, initialLocation }: SearchExperienceProps) {
+export function SearchExperience({ initialQuery, initialLocation, businesses }: SearchExperienceProps) {
   const router = useRouter();
   const [query, setQuery] = useState(initialQuery);
-  const [location, setLocation] = useState(initialLocation || "Kathmandu, Bagmati");
+  const [location, setLocation] = useState(initialLocation);
   const [kind, setKind] = useState<SearchKind | "all">("all");
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [sort, setSort] = useState("relevance");
   const [minRating, setMinRating] = useState("0");
   const [price, setPrice] = useState("all");
+  const businessBySlug = useMemo(
+    () => new Map(businesses.map((business) => [business.slug, business])),
+    [businesses],
+  );
+  const businessFromRecord = useCallback(
+    (id: string) => businessBySlug.get(id.replace("business-", "")),
+    [businessBySlug],
+  );
 
   const results = useMemo(() => {
     const specialFilters = new Set(["Open Now", "Open 24 Hours", "Verified", "Offers", "Request Quote", "Delivery"]);
     const filterQuery = [query, ...activeFilters.filter((filter) => !specialFilters.has(filter))]
       .filter(Boolean)
       .join(" ");
-    let records = searchRecords(filterQuery, location, kind);
+    let records = searchRecords(filterQuery, location, kind, businesses);
 
     if (activeFilters.includes("Open Now")) {
       records = records.filter((record) => record.kind !== "business" || record.status === "open" || record.status === "24h");
@@ -113,7 +118,7 @@ export function SearchExperience({ initialQuery, initialLocation }: SearchExperi
       if (sort === "name") return a.title.localeCompare(b.title);
       return 0;
     });
-  }, [activeFilters, kind, location, minRating, price, query, sort]);
+  }, [activeFilters, businessFromRecord, businesses, kind, location, minRating, price, query, sort]);
 
   const businessResults = results.filter((record) => record.kind === "business");
   const otherResults = results.filter((record) => record.kind !== "business");

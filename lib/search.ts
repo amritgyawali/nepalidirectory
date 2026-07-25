@@ -1,4 +1,4 @@
-import { blogPosts, businesses, categories, cities, cityLinks, questions } from "@/lib/data";
+import { blogPosts, businesses, categories, cities, cityLinks, questions, type Business } from "@/lib/data";
 import { footerGroups, getBusinessHref, routes } from "@/lib/routes";
 
 export type SearchKind = "business" | "category" | "city" | "guide" | "question" | "page";
@@ -76,8 +76,8 @@ const footerPages = footerGroups.flatMap((group) =>
   }))
 );
 
-export const searchIndex: SearchRecord[] = [
-  ...businesses.map<SearchRecord>((business) => ({
+function businessRecords(catalog: readonly Business[]): SearchRecord[] {
+  return catalog.map<SearchRecord>((business) => ({
     id: `business-${business.slug}`,
     kind: "business",
     title: business.name,
@@ -103,7 +103,10 @@ export const searchIndex: SearchRecord[] = [
     rating: business.rating,
     reviews: business.reviews,
     status: business.status
-  })),
+  }));
+}
+
+const nonBusinessSearchIndex: SearchRecord[] = [
   ...categories.map<SearchRecord>((category) => ({
     id: `category-${category.name}`,
     kind: "category",
@@ -153,6 +156,12 @@ export const searchIndex: SearchRecord[] = [
   ...footerPages
 ];
 
+/** Default index retained for callers that use the bundled development catalog. */
+export const searchIndex: SearchRecord[] = [
+  ...businessRecords(businesses),
+  ...nonBusinessSearchIndex,
+];
+
 const normalize = (value: string) => value.toLowerCase().trim();
 const variantsFor = (term: string) => {
   const variants = new Set([term]);
@@ -161,7 +170,12 @@ const variantsFor = (term: string) => {
   return [...variants];
 };
 
-export function searchRecords(query: string, location: string, kind: SearchKind | "all" = "all") {
+export function searchRecords(
+  query: string,
+  location: string,
+  kind: SearchKind | "all" = "all",
+  businessCatalog: readonly Business[] = businesses,
+) {
   const q = normalize(query);
   const where = normalize(location);
   const terms = q.split(/\s+/).filter(Boolean);
@@ -169,7 +183,11 @@ export function searchRecords(query: string, location: string, kind: SearchKind 
 
   const seenIds = new Set<string>();
 
-  return searchIndex
+  const index = businessCatalog === businesses
+    ? searchIndex
+    : [...businessRecords(businessCatalog), ...nonBusinessSearchIndex];
+
+  return index
     .map((record) => {
       const haystack = normalize(
         [record.title, record.description, record.location, ...record.tags, record.kind].join(" ")
