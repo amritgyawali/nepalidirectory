@@ -314,9 +314,9 @@ export function SearchExperience({ initialQuery, initialLocation, businesses }: 
               <select value={price} onChange={(event) => setPrice(event.target.value)}>
                 <option value="all">Any price</option>
                 <option value="1">Rs</option>
-                <option value="2">â‚¨â‚¨ Moderate</option>
-                <option value="3">â‚¨â‚¨â‚¨ Higher</option>
-                <option value="4">â‚¨â‚¨â‚¨â‚¨ Premium</option>
+                <option value="2">₨₨ Moderate</option>
+                <option value="3">₨₨₨ Higher</option>
+                <option value="4">₨₨₨₨ Premium</option>
               </select>
             </label>
             <div className="filter-card__mini">
@@ -368,4 +368,3 @@ export function SearchExperience({ initialQuery, initialLocation, businesses }: 
     </main>
   );
 }
-

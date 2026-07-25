@@ -136,4 +136,3 @@ export function listingMatchesCity(listing: Listing, citySlug: string): boolean 
   if (values.some((value) => value === citySlug || value.includes(citySlug))) return true;
   return citySlug === "kathmandu" && values.some((value) => kathmanduLocalities.has(value));
 }
-
