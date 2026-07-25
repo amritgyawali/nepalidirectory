@@ -83,7 +83,7 @@ const nextConfig: NextConfig = {
       "style-src 'self' 'unsafe-inline'",
       "font-src 'self' data:",
       "img-src 'self' data: blob: https://images.unsplash.com",
-      "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
+      "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://tiles.openfreemap.org",
       "media-src 'self'",
       "worker-src 'self' blob:",
       // Collect real violation data via /api/csp-report before flipping this header from
