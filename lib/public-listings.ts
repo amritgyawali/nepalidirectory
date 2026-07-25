@@ -51,6 +51,60 @@ export async function getIndexableListings(): Promise<Listing[]> {
   return (await getAllDirectoryListings()).filter(isIndexableListing);
 }
 
+function titleCaseSlug(value: string): string {
+  return value
+    .split("-")
+    .filter(Boolean)
+    .map((part) => `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
+    .join(" ");
+}
+
+/**
+ * Convert the persisted listing shape into the card/search shape used by the public directory.
+ * Optional marketing-only values are read from `attributes` when an importer supplied them.
+ */
+export function listingToBusiness(listing: Listing): Business {
+  const attributes = listing.attributes ?? {};
+  const stringArray = (key: string): string[] => {
+    const value = attributes[key];
+    return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+  };
+  const years = typeof attributes.years === "number" ? attributes.years : undefined;
+  const delivery = typeof attributes.delivery === "boolean" ? attributes.delivery : undefined;
+
+  return {
+    rank: listing.id,
+    name: listing.name,
+    slug: listing.slug,
+    categories: listing.categories.map(titleCaseSlug),
+    area: listing.area,
+    neighborhood: listing.neighborhood,
+    address: listing.address,
+    phone: listing.phone ?? "",
+    website: listing.website,
+    email: listing.email,
+    rating: listing.rating ?? 0,
+    reviews: listing.reviews ?? 0,
+    price: listing.price ?? 1,
+    status: listing.status ?? "closed",
+    hoursToday: listing.hoursToday ?? "Hours not provided",
+    image: listing.image ?? "/icon.svg",
+    quote: listingDescription(listing),
+    amenities: listing.amenities,
+    years,
+    delivery,
+    verified: listing.verified,
+    claimed: listing.claimed,
+    coordinates: listing.coordinates,
+    serviceAreas: stringArray("serviceAreas"),
+    services: listing.services,
+    specialties: stringArray("specialties"),
+    paymentMethods: stringArray("paymentMethods"),
+    languages: stringArray("languages"),
+    credentials: stringArray("credentials"),
+  };
+}
+
 export function getSeedBusiness(slug: string): Business | undefined {
   return businesses.find((business) => business.slug === slug);
 }
@@ -82,3 +136,4 @@ export function listingMatchesCity(listing: Listing, citySlug: string): boolean 
   if (values.some((value) => value === citySlug || value.includes(citySlug))) return true;
   return citySlug === "kathmandu" && values.some((value) => kathmanduLocalities.has(value));
 }
+
