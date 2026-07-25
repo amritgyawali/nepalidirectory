@@ -1,32 +1,49 @@
-import { MapPin } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { businesses } from "@/lib/data";
+import { BusinessMap, type MapBusiness } from "@/components/map/BusinessMap";
+import { getIndexableListings, listingToBusiness } from "@/lib/public-listings";
 
-export default function MapPage() {
+export const dynamic = "force-dynamic";
+
+export default async function MapPage() {
+  const listings = await getIndexableListings();
+  const businesses: MapBusiness[] = listings.flatMap((listing) => {
+    const coordinates = listing.coordinates;
+    if (
+      !coordinates ||
+      !Number.isFinite(coordinates.lat) ||
+      !Number.isFinite(coordinates.lng) ||
+      coordinates.lat < -90 ||
+      coordinates.lat > 90 ||
+      coordinates.lng < -180 ||
+      coordinates.lng > 180
+    ) {
+      return [];
+    }
+
+    const business = listingToBusiness(listing);
+    return [
+      {
+        slug: business.slug,
+        name: business.name,
+        categories: business.categories,
+        area: business.area,
+        neighborhood: business.neighborhood,
+        address: business.address,
+        phone: business.phone,
+        rating: business.rating,
+        reviews: business.reviews,
+        status: business.status,
+        verified: Boolean(business.verified),
+        lat: coordinates.lat,
+        lng: coordinates.lng,
+      },
+    ];
+  });
+
   return (
     <main>
-      <Breadcrumbs items={[{ label: "Map & Directions" }]} />
-      <section className="map-page">
-        <div className="container map-page__grid">
-          <div className="map-page__canvas">
-            {businesses.slice(0, 5).map((business, index) => (
-              <span key={business.slug} style={{ left: `${18 + index * 14}%`, top: `${28 + index * 9}%` }}>
-                <MapPin size={24} fill="#FFD400" />
-              </span>
-            ))}
-          </div>
-          <aside>
-            <h1>Map directions</h1>
-            <p>Explore verified listings around Kathmandu Valley and open individual profiles for directions.</p>
-            {businesses.slice(0, 5).map((business) => (
-              <div className="mini-listing" key={business.slug}>
-                <strong>{business.name}</strong>
-                <span>{business.address}</span>
-              </div>
-            ))}
-          </aside>
-        </div>
-      </section>
+      <Breadcrumbs items={[{ label: "Business map" }]} />
+      <BusinessMap businesses={businesses} />
     </main>
   );
 }

@@ -1,4 +1,6 @@
 import { buildPublicPageMetadata } from "@/lib/site-metadata";
+import "maplibre-gl/dist/maplibre-gl.css";
+import "./map.css";
 
 export const metadata = buildPublicPageMetadata({
   title: "Business Map and Directions in Nepal",
