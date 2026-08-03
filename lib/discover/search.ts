@@ -7,6 +7,7 @@
  */
 import { cosineSimilarity } from "../acquire";
 import type { EmbeddingRepository, Listing, ListingRepository } from "../enrich";
+import { isIndexableListing } from "../public-listings";
 import type { ParsedQuery } from "./types";
 
 export type SearchResult = { listing: Listing; score: number };
@@ -52,7 +53,7 @@ export async function hybridSearch(
   limit = 20,
 ): Promise<SearchResult[]> {
   const all = await deps.listings.all();
-  const filtered = all.filter((l) => matchesFilters(l, parsed));
+  const filtered = all.filter((l) => isIndexableListing(l) && matchesFilters(l, parsed));
   if (filtered.length === 0) return [];
 
   const terms = [...tokenize(query), ...parsed.keywords];

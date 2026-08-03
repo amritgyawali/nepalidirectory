@@ -50,7 +50,7 @@ describe("Review intelligence (prompt Module F)", () => {
     expect(stored[0].listingSlug).toBe("newa-lahana");
   });
 
-  it("runs REVIEW_SUMMARY and TRANSLATE_NE jobs through MockAiProvider", async () => {
+  it("keeps review summaries disabled while still running translation jobs", async () => {
     const listings = new InMemoryListingRepository([]);
     const listing = await listings.insert(
       makeNewListing({
@@ -66,7 +66,8 @@ describe("Review intelligence (prompt Module F)", () => {
 
     await rt.repo.enqueue({ type: "REVIEW_SUMMARY", payload: { listingSlug: "newa-lahana" } });
     const summaryJob = await rt.worker.runOnce();
-    expect(summaryJob?.status).toBe("DONE");
+    expect(summaryJob?.status).toBe("DEAD");
+    expect(summaryJob?.error).toContain("no handler");
 
     await rt.repo.enqueue({ type: "TRANSLATE_NE", payload: { listingId: listing.id } });
     const translateJob = await rt.worker.runOnce();

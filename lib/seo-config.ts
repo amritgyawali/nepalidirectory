@@ -2,6 +2,8 @@ import { routes } from "@/lib/routes";
 
 export const noIndexRoutes = new Set<string>([
   routes.search,
+  routes.bestBusinesses,
+  routes.topRated,
   routes.profile,
   routes.account,
   routes.login,

@@ -3,7 +3,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/directory/PageHero";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
-import { buildWebPageJsonLd, uniqueKeywords } from "@/lib/seo";
+import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 export default function ContactPage() {
   const configuredEmail = process.env.NEXT_PUBLIC_SUPPORT_EMAIL?.trim();
@@ -31,7 +31,7 @@ export default function ContactPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <Breadcrumbs items={[{ label: "Contact" }]} />
       <PageHero

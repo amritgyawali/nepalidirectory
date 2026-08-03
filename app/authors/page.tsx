@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/directory/PageHero";
 import { contentAuthors, getAuthorUrl } from "@/lib/authors";
 import { siteUrl } from "@/lib/blog";
-import { buildWebPageJsonLd, uniqueKeywords } from "@/lib/seo";
+import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Editorial Authors and Review Desks",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description:
       "Editorial desks and subject areas behind Nepali Directory guides and local comparison content.",
     url: `${siteUrl}/authors`,
-    siteName: "Nepali Directory",
+    siteName: "NepaliDirectory",
     type: "website"
   }
 };
@@ -37,7 +37,6 @@ export default function AuthorsPage() {
         "Editorial desks and subject areas behind Nepali Directory guides and local comparison content.",
       url: `${siteUrl}/authors`,
       keywords,
-      dateModified: "2026-06-28"
     }),
     "@type": "CollectionPage",
     mainEntity: {
@@ -53,7 +52,7 @@ export default function AuthorsPage() {
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(webPageJsonLd) }} />
       <Breadcrumbs items={[{ label: "Authors" }]} />
       <PageHero
         title="Editorial authors and review desks"

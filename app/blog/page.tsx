@@ -9,7 +9,7 @@ import { getBlogCategories, getBlogPostUrl, getLatestBlogModifiedAt, getSortedBl
 import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { routes } from "@/lib/routes";
-import { buildBlogKeywords, buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
+import { buildBlogKeywords, buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 // AI-generated posts publish after a human editorial review (prompt §8.5); revalidate
 // periodically so a freshly-published post appears in the index without a full redeploy.
@@ -33,7 +33,6 @@ export const metadata: Metadata = {
   title: "Nepal Blog: Travel, Restaurants, Local Services, Hotels and SEO Guides",
   description:
     "Read Nepal guides for travel, restaurants, hotels, healthcare, home services, business listings and local SEO with practical answers and FAQs.",
-  keywords: blogKeywords,
   alternates: {
     canonical: "/blog"
   },
@@ -53,7 +52,7 @@ export const metadata: Metadata = {
     description:
       "Practical Nepal guides with quick answers, FAQs and local decision help.",
     url: `${siteUrl}/blog`,
-    siteName: "Nepali Directory",
+    siteName: "NepaliDirectory",
     locale: "en_US",
     type: "website",
     images: [
@@ -129,7 +128,7 @@ export default async function BlogPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([collectionJsonLd, blogJsonLd, itemListJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([collectionJsonLd, blogJsonLd, itemListJsonLd]) }}
       />
       <Breadcrumbs items={[{ label: "Blog" }]} />
       <PageHero

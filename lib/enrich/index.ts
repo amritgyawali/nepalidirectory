@@ -6,6 +6,7 @@ export type {
   Listing,
   ListingFaq,
   ListingRepository,
+  ListingVerificationStatus,
   NewListing,
 } from "./types";
 export type { EnrichmentOutput } from "./facts";

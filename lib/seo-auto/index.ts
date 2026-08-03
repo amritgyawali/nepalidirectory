@@ -7,10 +7,9 @@ export {
 export {
   buildBreadcrumbJsonLd,
   buildEvergreenItemListJsonLd,
+  buildListingItemListJsonLd,
   buildListingLocalBusinessJsonLd,
-  buildLocalBusinessJsonLd,
   localBusinessSubtype,
-  priceTierLabel,
 } from "./schema";
 export {
   suggestInternalLinks,

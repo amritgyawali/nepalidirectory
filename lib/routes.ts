@@ -72,6 +72,11 @@ export function getBusinessHref(slug: string): string {
   return `/business/${encodeURIComponent(slug)}`;
 }
 
+/** Canonical crawlable city + category landing page. */
+export function getCityCategoryHref(citySlug: string, categorySlug: string): string {
+  return `/city/${encodeURIComponent(citySlug)}/${encodeURIComponent(categorySlug)}`;
+}
+
 /** Canonical comparison-guide URL for an available category slug. */
 export function getCompareHref(slug: string): string {
   return `/compare-business/${encodeURIComponent(slug)}`;
@@ -104,7 +109,7 @@ export const footerGroups = [
     title: "Directory",
     links: [
       { label: "Find a Business", href: routes.search },
-      { label: "Best Businesses", href: routes.bestBusinesses },
+      { label: "Publication Method", href: routes.bestBusinesses },
       { label: "Near Me", href: routes.nearMe },
       { label: "Categories", href: routes.categories },
       { label: "Deals & Offers", href: routes.deals },

@@ -15,6 +15,7 @@ import { SessionRateLimiter } from "./rate-limit";
 import { hybridSearch, type SearchResult } from "./search";
 import { parseQuery } from "./nl-query";
 import { handleConciergeMessage, type ConciergeReply } from "./concierge";
+import { isIndexableListing } from "../public-listings";
 import type {
   CategorySynonymRepository,
   ConversationRepository,
@@ -62,7 +63,7 @@ export function createDiscoverRuntime(overrides: DiscoverRuntimeOverrides = {}):
   async function knownPlaces(): Promise<string[]> {
     const all = await engine.listings.all();
     const places = new Set<string>();
-    for (const l of all) {
+    for (const l of all.filter(isIndexableListing)) {
       if (l.area) places.add(l.area);
       if (l.neighborhood) places.add(l.neighborhood);
     }

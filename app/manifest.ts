@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Nepali Directory",
-    short_name: "Nepali Directory",
+    name: "NepaliDirectory",
+    short_name: "NepaliDirectory",
     description:
       "Find, compare and contact local businesses, restaurants, doctors, hotels and services across Nepal.",
     start_url: "/",

@@ -9,7 +9,8 @@
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "seo:audit-listings": "node scripts/audit-listing-quality.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.0",

@@ -12,7 +12,6 @@ import {
   Phone,
   RotateCcw,
   Search,
-  Star,
   X,
 } from "lucide-react";
 import Link from "next/link";
@@ -37,8 +36,6 @@ export type MapBusiness = {
   neighborhood?: string;
   address: string;
   phone: string;
-  rating: number;
-  reviews: number;
   status: "open" | "closed" | "24h";
   verified: boolean;
   lat: number;
@@ -589,15 +586,6 @@ export function BusinessMap({ businesses }: BusinessMapProps) {
                       Verified
                     </span>
                   ) : null}
-                  {selectedBusiness.rating > 0 ? (
-                    <span>
-                      <Star size={14} fill="currentColor" aria-hidden />
-                      {selectedBusiness.rating.toFixed(1)}
-                      {selectedBusiness.reviews > 0
-                        ? ` (${selectedBusiness.reviews})`
-                        : ""}
-                    </span>
-                  ) : null}
                 </div>
                 <div className="directory-map__selection-actions">
                   <Link
@@ -664,12 +652,6 @@ export function BusinessMap({ businesses }: BusinessMapProps) {
                     <small>{business.categories[0] ?? "Local business"}</small>
                     <span>{business.address}</span>
                     <span className="directory-map__listing-meta">
-                      {business.rating > 0 ? (
-                        <span>
-                          <Star size={12} fill="currentColor" aria-hidden />
-                          {business.rating.toFixed(1)}
-                        </span>
-                      ) : null}
                       <span className={`directory-map__status directory-map__status--${business.status}`}>
                         {business.status === "24h"
                           ? "Open 24 hours"

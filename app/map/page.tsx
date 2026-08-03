@@ -30,8 +30,6 @@ export default async function MapPage() {
         neighborhood: business.neighborhood,
         address: business.address,
         phone: business.phone,
-        rating: business.rating,
-        reviews: business.reviews,
         status: business.status,
         verified: Boolean(business.verified),
         lat: coordinates.lat,

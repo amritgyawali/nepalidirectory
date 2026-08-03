@@ -189,7 +189,7 @@ function DashboardChrome({
           </nav>
           <div className="dashboard-upgrade">
             <strong>You are on Free</strong>
-            <p>Featured businesses get stronger placement in category and city searches.</p>
+            <p>Featured placements are labelled as sponsored and do not change organic publication eligibility.</p>
             <Link href={routes.pricing}>See plans</Link>
           </div>
         </aside>

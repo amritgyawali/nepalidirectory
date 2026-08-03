@@ -4,20 +4,17 @@ import {
   ArrowUpDown,
   Building2,
   Clock,
-  DollarSign,
   FileText,
   HelpCircle,
   MapPin,
   Search,
   SlidersHorizontal,
-  Star
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useCallback, useMemo, useState } from "react";
 import { AiConcierge } from "@/components/ai/AiConcierge";
 import { BusinessCard } from "@/components/directory/BusinessCard";
-import { Stars } from "@/components/ui/Stars";
 import { categories, cityLinks, popularSearches, type Business } from "@/lib/data";
 import { routes } from "@/lib/routes";
 import { searchRecords, type SearchKind } from "@/lib/search";
@@ -66,8 +63,6 @@ export function SearchExperience({ initialQuery, initialLocation, businesses }: 
   const [kind, setKind] = useState<SearchKind | "all">("all");
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [sort, setSort] = useState("relevance");
-  const [minRating, setMinRating] = useState("0");
-  const [price, setPrice] = useState("all");
   const businessBySlug = useMemo(
     () => new Map(businesses.map((business) => [business.slug, business])),
     [businesses],
@@ -102,23 +97,12 @@ export function SearchExperience({ initialQuery, initialLocation, businesses }: 
     if (activeFilters.includes("Delivery")) {
       records = records.filter((record) => record.kind !== "business" || Boolean(businessFromRecord(record.id)?.delivery));
     }
-    if (minRating !== "0") {
-      const ratingFloor = Number(minRating);
-      records = records.filter((record) => record.kind !== "business" || (record.rating ?? 0) >= ratingFloor);
-    }
-    if (price !== "all") {
-      const priceLevel = Number(price);
-      records = records.filter((record) => record.kind !== "business" || businessFromRecord(record.id)?.price === priceLevel);
-    }
-
     return records.sort((a, b) => {
-      if (sort === "rating") return (b.rating ?? 0) - (a.rating ?? 0);
-      if (sort === "reviews") return (b.reviews ?? 0) - (a.reviews ?? 0);
       if (sort === "distance") return (businessFromRecord(a.id)?.distanceKm ?? 9999) - (businessFromRecord(b.id)?.distanceKm ?? 9999);
       if (sort === "name") return a.title.localeCompare(b.title);
       return 0;
     });
-  }, [activeFilters, businessFromRecord, businesses, kind, location, minRating, price, query, sort]);
+  }, [activeFilters, businessFromRecord, businesses, kind, location, query, sort]);
 
   const businessResults = results.filter((record) => record.kind === "business");
   const otherResults = results.filter((record) => record.kind !== "business");
@@ -218,8 +202,6 @@ export function SearchExperience({ initialQuery, initialLocation, businesses }: 
               <select value={sort} onChange={(event) => setSort(event.target.value)}>
                 <option value="relevance">Relevance</option>
                 <option value="distance">Nearest</option>
-                <option value="rating">Rating</option>
-                <option value="reviews">Most reviews</option>
                 <option value="name">Name A-Z</option>
               </select>
             </label>
@@ -255,16 +237,7 @@ export function SearchExperience({ initialQuery, initialLocation, businesses }: 
                       <strong>{record.title}</strong>
                       <small>{record.description}</small>
                     </span>
-                    <span className="universal-result__meta">
-                      {record.rating ? (
-                        <>
-                          <Stars rating={record.rating} />
-                          {record.rating.toFixed(1)}
-                        </>
-                      ) : (
-                        record.location
-                      )}
-                    </span>
+                    <span className="universal-result__meta">{record.location}</span>
                   </Link>
                 );
               })}
@@ -288,7 +261,7 @@ export function SearchExperience({ initialQuery, initialLocation, businesses }: 
             </p>
             <div>
               <span>
-                <Star size={14} aria-hidden fill="currentColor" /> {businessResults.length} businesses
+                <Building2 size={14} aria-hidden /> {businessResults.length} businesses
               </span>
               <span>
                 <FileText size={14} aria-hidden /> {otherResults.length} other results
@@ -296,32 +269,6 @@ export function SearchExperience({ initialQuery, initialLocation, businesses }: 
               <span>
                 <Clock size={14} aria-hidden /> {businessResults.filter((item) => item.status === "open").length} open now
               </span>
-            </div>
-          </section>
-          <section className="filter-card">
-            <h2>Refine business results</h2>
-            <label className="stacked-control">
-              <span>Minimum rating</span>
-              <select value={minRating} onChange={(event) => setMinRating(event.target.value)}>
-                <option value="0">Any rating</option>
-                <option value="4.5">4.5 stars and up</option>
-                <option value="4">4 stars and up</option>
-                <option value="3.5">3.5 stars and up</option>
-              </select>
-            </label>
-            <label className="stacked-control">
-              <span>Price level</span>
-              <select value={price} onChange={(event) => setPrice(event.target.value)}>
-                <option value="all">Any price</option>
-                <option value="1">Rs</option>
-                <option value="2">₨₨ Moderate</option>
-                <option value="3">₨₨₨ Higher</option>
-                <option value="4">₨₨₨₨ Premium</option>
-              </select>
-            </label>
-            <div className="filter-card__mini">
-              <DollarSign size={15} aria-hidden />
-              Prices are approximate and vary by service, menu item or booking date.
             </div>
           </section>
           <section className="filter-card">

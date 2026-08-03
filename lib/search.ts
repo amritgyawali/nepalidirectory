@@ -11,8 +11,6 @@ export type SearchRecord = {
   href: string;
   location?: string;
   tags: string[];
-  rating?: number;
-  reviews?: number;
   status?: "open" | "closed" | "24h";
 };
 
@@ -100,8 +98,6 @@ function businessRecords(catalog: readonly Business[]): SearchRecord[] {
       business.claimed ? "claimed owner verified" : "",
       business.delivery ? "delivery order online" : ""
     ].filter(Boolean),
-    rating: business.rating,
-    reviews: business.reviews,
     status: business.status
   }));
 }
@@ -213,7 +209,6 @@ export function searchRecords(
         score += 25;
       }
       if (record.kind === "business") score += 12;
-      if (record.rating) score += record.rating * 4;
       if (record.status === "open" || record.status === "24h") score += 5;
 
       return { record, score, matches: kindMatch && queryMatch && locationMatch };

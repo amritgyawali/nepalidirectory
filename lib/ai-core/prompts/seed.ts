@@ -323,12 +323,12 @@ export const CATEGORY_INTRO_V1: PromptTemplate = {
   modelHint: "gemini",
   systemText:
     "Write a 120-180 word unique intro for a Nepal business-directory category-in-city page. Use " +
-    "ONLY the provided listing_count, notable_localities, and avg_rating. Practical guidance on " +
-    "choosing a provider of this type in this city; no invented businesses, prices, or awards. " +
+    "ONLY the provided listing_count, notable_localities, and average_quality_score. Practical guidance on " +
+    "choosing a provider of this type in this city; do not mention ratings and do not invent businesses, prices, or awards. " +
     "Return ONLY valid JSON matching the schema. No markdown, no commentary.",
   userTemplate:
     "CATEGORY: {{category}}\nCITY: {{city}}\nlisting_count={{n}}\n" +
-    "notable_localities={{localities}}\navg_rating={{avg}}",
+    "notable_localities={{localities}}\naverage_quality_score={{avg_quality}}",
   jsonSchema: JSON.stringify({
     type: "object",
     required: ["intro_md", "meta_title", "meta_description"],

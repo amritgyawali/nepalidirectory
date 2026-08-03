@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { createReviewsAiRuntime } from "@/lib/reviews-ai";
+import { makeNewListing } from "@/lib/enrich";
 import {
   allSitemapEntries,
-  buildEvergreenItemListJsonLd,
+  buildListingItemListJsonLd,
   getCategorySitemapEntries,
   getEvergreenPage,
   getEvergreenPages,
@@ -13,33 +14,44 @@ import {
 } from "../index";
 
 describe("SEO/AEO automation (prompt Module G)", () => {
-  it("publishes only quality-gated evergreen category-city pages", () => {
+  it("retires fixture-backed evergreen category-city ranking pages", () => {
     const pages = getEvergreenPages({ includePreview: true });
     const page = getEvergreenPage("restaurants", "kathmandu", { includePreview: true });
 
-    expect(pages.length).toBeGreaterThan(0);
-    expect(page).not.toBeNull();
-    expect(page?.listingCount).toBeGreaterThanOrEqual(5);
-    expect(page?.qualityAverage).toBeGreaterThanOrEqual(60);
-    expect(page?.intro).toContain("not invented");
+    expect(pages).toEqual([]);
+    expect(page).toBeNull();
   });
 
-  it("emits ItemList/LocalBusiness schema and never emits deprecated HowTo", () => {
-    const page = getEvergreenPage("restaurants", "kathmandu", { includePreview: true })!;
-    const jsonLd = buildEvergreenItemListJsonLd(page);
+  it("emits compact result ItemList schema without LocalBusiness review claims", () => {
+    const listing = {
+      ...makeNewListing({
+        name: "Schema Test",
+        slug: "schema-test",
+        area: "Kathmandu",
+        address: "Kathmandu",
+        categories: ["restaurants"],
+      }),
+      id: 1,
+    };
+    const jsonLd = buildListingItemListJsonLd(
+      "Restaurants in Kathmandu",
+      "https://www.nepalidirectory.com/city/kathmandu/restaurants",
+      [listing],
+    );
     const serialized = JSON.stringify(jsonLd);
 
     expect(jsonLd["@type"]).toBe("ItemList");
-    expect(serialized).toContain("Restaurant");
-    expect(serialized).not.toContain("HowTo");
+    expect(serialized).toContain("Schema Test");
+    expect(serialized).not.toContain("LocalBusiness");
+    expect(serialized).not.toContain("aggregateRating");
     expect(localBusinessSubtype(["Doctors", "Healthcare"])).toBe("MedicalClinic");
   });
 
-  it("publishes useful directory hubs and withholds empty comparison pages", () => {
-    const xml = sitemapXml(getCategorySitemapEntries());
+  it("withholds category, city, comparison and retired ranking pages without qualified inventory", async () => {
+    const xml = sitemapXml(await getCategorySitemapEntries());
 
     expect(xml).toContain("<urlset");
-    expect(xml).toContain("/category/restaurants");
+    expect(xml).not.toContain("/category/restaurants");
     expect(xml).not.toContain("/compare-business/restaurants");
     expect(xml).not.toContain("/best/restaurants/kathmandu");
   });
@@ -93,15 +105,15 @@ describe("SEO/AEO automation (prompt Module G)", () => {
     expect(suggestions[0].targetHref).toMatch(/^\/category\//);
   });
 
-  it("runs EVERGREEN_PAGE through the queue against MockAiProvider", async () => {
+  it("keeps retired EVERGREEN_PAGE jobs unpublished", async () => {
     const rt = createReviewsAiRuntime();
     await rt.repo.enqueue({ type: "EVERGREEN_PAGE", payload: { categorySlug: "restaurants", citySlug: "kathmandu" } });
     const job = await rt.worker.runOnce();
 
-    expect(job?.status).toBe("DONE");
-    expect(job?.result?.introGenerated).toBe(true);
+    expect(job?.status).toBe("PENDING");
+    expect(job?.error).toContain("failed quality gates");
     const stored = await rt.seoPageIntros.get("restaurants", "kathmandu");
-    expect(stored?.introMd).toContain("deterministic mock intro");
+    expect(stored).toBeNull();
   });
 
   it("persists internal-link suggestions for bulk admin approval", async () => {

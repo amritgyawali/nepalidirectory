@@ -1,17 +1,15 @@
 import { BadgeCheck, Clock, Globe2, MapPin, MessageSquareQuote, Phone, Tag } from "lucide-react";
 import Link from "next/link";
 import { FillImage } from "@/components/ui/FillImage";
-import { Stars } from "@/components/ui/Stars";
 import { isDemoBusiness, type Business } from "@/lib/data";
 import { getBusinessHref, routes } from "@/lib/routes";
 
 type BusinessCardProps = {
   business: Business;
   sponsored?: boolean;
-  priceSymbol?: string;
 };
 
-export function BusinessCard({ business, sponsored = false, priceSymbol = "₨" }: BusinessCardProps) {
+export function BusinessCard({ business, sponsored = false }: BusinessCardProps) {
   const href = getBusinessHref(business.slug);
   const demo = isDemoBusiness(business);
   const showSponsored = !demo && (sponsored || business.sponsored);
@@ -25,14 +23,13 @@ export function BusinessCard({ business, sponsored = false, priceSymbol = "₨" 
         <div className="business-card__top">
           <div>
             <div className="business-card__title-row">
-              {!showSponsored ? <span>{business.rank}.</span> : null}
-              <Link href={href}>{business.name}</Link>
+              <h3><Link href={href}>{business.name}</Link></h3>
               {demo ? (
                 <em className="business-card__verified">Preview</em>
               ) : business.verified ? (
                 <em className="business-card__verified">
                   <BadgeCheck size={14} aria-hidden />
-                  Verified
+                  Reviewed profile
                 </em>
               ) : null}
             </div>
@@ -43,17 +40,11 @@ export function BusinessCard({ business, sponsored = false, priceSymbol = "₨" 
           </div>
           {showSponsored ? <span className="business-card__ad">AD</span> : null}
         </div>
-        {demo ? (
-          <div className="business-card__rating"><strong>Preview profile</strong><span>Excluded from rankings</span></div>
-        ) : (
-          <div className="business-card__rating">
-            <strong>{business.rating.toFixed(1)}</strong>
-            <Stars rating={business.rating} />
-            <Link href={routes.writeReview}>({business.reviews} reviews)</Link>
-            <span>{Array.from({ length: business.price }, () => priceSymbol).join("")}</span>
-            {business.years ? <em>{business.years} years in business</em> : null}
-          </div>
-        )}
+        <div className="business-card__rating">
+          <strong>{demo ? "Preview profile" : "Source-checked profile"}</strong>
+          <span>{demo ? "Excluded from public results" : "No approved first-party reviews yet"}</span>
+          {!demo && business.years ? <em>{business.years} years in business</em> : null}
+        </div>
         <div className="business-card__meta">
           {!demo ? <span><Phone size={14} aria-hidden />{business.phone}</span> : null}
           <span>
@@ -71,7 +62,7 @@ export function BusinessCard({ business, sponsored = false, priceSymbol = "₨" 
             </span>
           ) : null}
         </div>
-        <p className="business-card__quote">&quot;{business.quote}&quot;</p>
+        <p className="business-card__quote">{business.quote}</p>
         <div className="business-card__amenities">
           {business.coupons?.length ? (
             <span className="business-card__offer">

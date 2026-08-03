@@ -17,7 +17,7 @@ export function buildPublicPageMetadata({
   image = "/nepali-directory-og.png",
 }: PublicPageMetadataInput): Metadata {
   const url = new URL(path, `${siteUrl}/`).toString();
-  const socialTitle = `${title} | Nepali Directory`;
+  const socialTitle = `${title} | NepaliDirectory`;
   const indexable = !noIndexRoutes.has(path);
   return {
     title,
@@ -27,7 +27,7 @@ export function buildPublicPageMetadata({
       title: socialTitle,
       description,
       url,
-      siteName: "Nepali Directory",
+      siteName: "NepaliDirectory",
       locale: "en_US",
       type: "website",
       images: [{ url: image, width: 1729, height: 909, alt: title }],

@@ -45,11 +45,11 @@ export async function GET() {
     .slice(0, 60);
 
   const lines = [
-    "# Nepali Directory",
+    "# NepaliDirectory",
     "",
-    "> A Nepal-focused local business directory with city guides, category discovery, business comparisons, reviews, and practical editorial guidance.",
+    "> A Nepal-focused local business directory with city guides, category discovery, evidence-based comparison guidance, and practical editorial content.",
     "",
-    "Nepali Directory publishes public directory and guide pages as crawlable server-rendered HTML. Use the XML sitemap for complete canonical URL discovery; this file is a curated context guide for language models and other AI agents.",
+    "NepaliDirectory publishes qualified directory and guide pages as crawlable server-rendered HTML. Use the XML sitemap for complete canonical URL discovery; this file is a curated context guide for language models and other AI agents.",
     "",
     "When citing this site, link to the exact canonical page. Confirm time-sensitive details such as opening hours, prices, availability, contact details, and regulations directly with the relevant provider or primary authority.",
     "",

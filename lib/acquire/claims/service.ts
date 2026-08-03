@@ -81,6 +81,9 @@ export class ClaimService {
     listing.claimStatus = "claimed";
     listing.claimed = true;
     listing.verified = true;
+    listing.verificationStatus = "owner_verified";
+    listing.sourceCheckedAt = new Date();
+    listing.lastMeaningfulUpdateAt = new Date();
     await this.listings.update(listing);
   }
 }
