@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/directory/PageHero";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
-import { buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
+import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 const title = "How Nepali Directory Reviews and Publishes Business Listings";
 const description =
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: `${siteUrl}${routes.directoryMethodology}`,
-    siteName: "Nepali Directory",
+    siteName: "NepaliDirectory",
     type: "article",
     images: [
       {
@@ -97,7 +97,6 @@ export default function DirectoryMethodologyPage() {
       dateModified: "2026-07-15",
     }),
     "@type": "AboutPage",
-    reviewedBy: publisher,
   };
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -122,7 +121,7 @@ export default function DirectoryMethodologyPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([webPageJsonLd, breadcrumbJsonLd, faqJsonLd]),
+          __html: serializeJsonLd([webPageJsonLd, breadcrumbJsonLd, faqJsonLd]),
         }}
       />
       <Breadcrumbs items={[{ label: "Directory Methodology" }]} />

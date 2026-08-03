@@ -1,22 +1,40 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import { CityLandingPageView } from "@/components/directory/CityLandingPage";
 import { cityDirectoryPages, getCityDirectoryPage, getCityEditorialDetail } from "@/lib/city-pages";
 import { siteUrl } from "@/lib/blog";
+import { directoryCategories, listingMatchesDirectoryCategory } from "@/lib/directory-categories";
 import { getIndexableListings, listingMatchesCity } from "@/lib/public-listings";
-import { getBusinessHref } from "@/lib/routes";
-import { buildWebPageJsonLd, uniqueKeywords } from "@/lib/seo";
-import { buildListingLocalBusinessJsonLd } from "@/lib/seo-auto";
+import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
+import { buildListingItemListJsonLd } from "@/lib/seo-auto";
+import { getCityCategoryHref } from "@/lib/routes";
+import {
+  DIRECTORY_PAGE_SIZE,
+  MIN_INDEXABLE_DIRECTORY_RESULTS,
+  paginateDirectoryItems,
+  paginatedDirectoryHref,
+  parseDirectoryPage,
+} from "@/lib/directory-pagination";
 
 type CityPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ page?: string }>;
 };
+
+export const revalidate = 300;
 
 export function generateStaticParams() {
   return cityDirectoryPages.map((city) => ({ slug: city.slug }));
 }
 
-export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
+const loadCityListings = cache(async (slug: string) =>
+  (await getIndexableListings())
+    .filter((listing) => listingMatchesCity(listing, slug))
+    .sort((a, b) => a.name.localeCompare(b.name, "en")),
+);
+
+export async function generateMetadata({ params, searchParams }: CityPageProps): Promise<Metadata> {
   const { slug } = await params;
   const city = getCityDirectoryPage(slug);
 
@@ -24,18 +42,31 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     return { title: "City not found", robots: { index: false, follow: false } };
   }
 
-  const keywords = uniqueKeywords([...city.keywords, ...city.popularSearches, city.name, city.province]);
+  const requestedPage = parseDirectoryPage((await searchParams)?.page);
+  const listings = await loadCityListings(city.slug);
+  const pagination = requestedPage ? paginateDirectoryItems(listings, requestedPage) : null;
+  const indexable = Boolean(
+    pagination?.valid && listings.length >= MIN_INDEXABLE_DIRECTORY_RESULTS,
+  );
+  const canonical = requestedPage ? paginatedDirectoryHref(city.href, requestedPage) : city.href;
+  const title = requestedPage && requestedPage > 1
+    ? `${city.seoTitle} - Page ${requestedPage}`
+    : city.seoTitle;
 
   return {
-    title: city.seoTitle,
+    title,
     description: city.description,
-    keywords,
-    alternates: { canonical: city.href },
+    alternates: { canonical },
+    robots: {
+      index: indexable,
+      follow: true,
+      googleBot: { index: indexable, follow: true, "max-image-preview": "large" },
+    },
     openGraph: {
-      title: city.seoTitle,
+      title,
       description: city.description,
-      url: `${siteUrl}${city.href}`,
-      siteName: "Nepali Directory",
+      url: `${siteUrl}${canonical}`,
+      siteName: "NepaliDirectory",
       locale: "en_US",
       type: "website",
       images: [{ url: city.image, width: 1800, height: 780, alt: city.imageAlt }]
@@ -49,7 +80,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
   };
 }
 
-export default async function CityPage({ params }: CityPageProps) {
+export default async function CityPage({ params, searchParams }: CityPageProps) {
   const { slug } = await params;
   const city = getCityDirectoryPage(slug);
 
@@ -57,17 +88,31 @@ export default async function CityPage({ params }: CityPageProps) {
     notFound();
   }
 
+  const requestedPage = parseDirectoryPage((await searchParams)?.page);
+  if (!requestedPage) notFound();
   const nearbyCities = cityDirectoryPages.filter((candidate) => candidate.slug !== city.slug).slice(0, 7);
-  const listings = (await getIndexableListings()).filter((listing) => listingMatchesCity(listing, city.slug));
+  const listings = await loadCityListings(city.slug);
+  const pagination = paginateDirectoryItems(listings, requestedPage);
+  if (!pagination.valid) notFound();
+  const cityCategoryLinks = Object.fromEntries(
+    directoryCategories
+      .filter(
+        (category) =>
+          listings.filter((listing) => listingMatchesDirectoryCategory(listing, category)).length >=
+          MIN_INDEXABLE_DIRECTORY_RESULTS,
+      )
+      .map((category) => [category.slug, getCityCategoryHref(city.slug, category.slug)]),
+  );
+  const canonicalPath = paginatedDirectoryHref(city.href, requestedPage);
+  const canonicalUrl = `${siteUrl}${canonicalPath}`;
   const detail = getCityEditorialDetail(city.slug);
   const keywords = uniqueKeywords([...city.keywords, ...city.popularSearches, city.name, city.province]);
   const webPageJsonLd = {
     ...buildWebPageJsonLd({
       name: city.seoTitle,
       description: city.description,
-      url: `${siteUrl}${city.href}`,
+      url: canonicalUrl,
       keywords,
-      dateModified: "2026-06-27"
     }),
     "@type": "CollectionPage",
     about: {
@@ -76,17 +121,14 @@ export default async function CityPage({ params }: CityPageProps) {
       containedInPlace: city.province
     }
   };
-  const itemListJsonLd = listings.length ? {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: `Qualified businesses in ${city.name}`,
-    numberOfItems: listings.length,
-    itemListElement: listings.map((listing, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: buildListingLocalBusinessJsonLd(listing, `${siteUrl}${getBusinessHref(listing.slug)}`),
-    })),
-  } : null;
+  const itemListJsonLd = pagination.items.length
+    ? buildListingItemListJsonLd(
+        `Qualified businesses in ${city.name}`,
+        canonicalUrl,
+        pagination.items,
+        (requestedPage - 1) * DIRECTORY_PAGE_SIZE,
+      )
+    : null;
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -101,9 +143,17 @@ export default async function CityPage({ params }: CityPageProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([webPageJsonLd, itemListJsonLd, faqJsonLd].filter(Boolean)) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([webPageJsonLd, itemListJsonLd, faqJsonLd].filter(Boolean)) }}
       />
-      <CityLandingPageView city={city} nearbyCities={nearbyCities} listings={listings} />
+      <CityLandingPageView
+        city={city}
+        nearbyCities={nearbyCities}
+        listings={pagination.items}
+        totalListings={pagination.totalItems}
+        currentPage={pagination.currentPage}
+        totalPages={pagination.totalPages}
+        cityCategoryLinks={cityCategoryLinks}
+      />
     </>
   );
 }

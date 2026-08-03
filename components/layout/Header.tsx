@@ -15,7 +15,7 @@ import {
   Menu,
   Scale,
   Search,
-  Star,
+  ShieldCheck,
   Tag,
   X
 } from "lucide-react";
@@ -32,7 +32,7 @@ const menuPrimary = [
 const menuQuick = [
   { label: "Search", href: routes.search, icon: Search },
   { label: "Deals & offers", href: routes.deals, icon: Tag },
-  { label: "Write a review", href: routes.writeReview, icon: Star },
+  { label: "Publication method", href: routes.directoryMethodology, icon: ShieldCheck },
   { label: "Events", href: routes.events, icon: CalendarDays },
   { label: "Map", href: routes.map, icon: Map },
   { label: "Help center", href: routes.help, icon: LifeBuoy }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Bot, ExternalLink, Loader2, MapPin, Navigation, Phone, Send, Sparkles, Star, Tag, X } from "lucide-react";
+import { Bot, ExternalLink, Loader2, MapPin, Navigation, Phone, Send, Sparkles, Tag, X } from "lucide-react";
 import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useConcierge } from "./useConcierge";
@@ -117,12 +117,6 @@ export function AiAssistant() {
                       {listing.why ? <small className="ai-concierge__why">{listing.why}</small> : null}
                     </div>
                     <div className="ai-concierge__meta">
-                      {typeof listing.rating === "number" ? (
-                        <span>
-                          <Star size={13} aria-hidden fill="currentColor" />
-                          {listing.rating.toFixed(1)} ({(listing.reviews ?? 0).toLocaleString()})
-                        </span>
-                      ) : null}
                       {listing.phone ? (
                         <a href={`tel:${listing.phone.replace(/[^0-9+]/g, "")}`}>
                           <Phone size={13} aria-hidden />

@@ -6,7 +6,7 @@ import { FillImage } from "@/components/ui/FillImage";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
-import { buildWebPageJsonLd } from "@/lib/seo";
+import { buildWebPageJsonLd, serializeJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Nepal Business Directory by City",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "Nepal Business Directory by City",
     description: "Choose a city, understand its local search areas and open qualified business profiles.",
     url: `${siteUrl}/city`,
-    siteName: "Nepali Directory",
+    siteName: "NepaliDirectory",
     type: "website",
     images: [{ url: "/nepali-directory-og.png", width: 1729, height: 909, alt: "Nepali Directory city guides" }],
   },
@@ -54,7 +54,7 @@ export default function CityIndexPage() {
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([collectionPage, itemList]) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd([collectionPage, itemList]) }} />
       <Breadcrumbs items={[{ label: "Cities" }]} />
       <section className="page-head">
         <div className="container">

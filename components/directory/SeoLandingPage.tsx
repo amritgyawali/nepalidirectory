@@ -10,7 +10,7 @@ import type { SeoLandingPage } from "@/lib/landing";
 import { getIndexableListings, listingDescription } from "@/lib/public-listings";
 import { getBusinessHref, getSearchHref, routes } from "@/lib/routes";
 import { siteUrl } from "@/lib/blog";
-import { buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
+import { buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 type SeoLandingPageProps = {
   page: SeoLandingPage;
@@ -29,7 +29,6 @@ export async function SeoLandingPageView({ page }: SeoLandingPageProps) {
     description: page.description,
     url: `${siteUrl}${page.href}`,
     keywords,
-    dateModified: "2026-06-27"
   });
   const collectionJsonLd = {
     ...webPageJsonLd,
@@ -51,7 +50,7 @@ export async function SeoLandingPageView({ page }: SeoLandingPageProps) {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(collectionJsonLd) }}
       />
       <Breadcrumbs items={[{ label: page.title }]} />
       <section className="seo-hero">
@@ -99,7 +98,7 @@ export async function SeoLandingPageView({ page }: SeoLandingPageProps) {
         <div className="container">
           <SectionHeader
             title="Browse useful categories"
-            description="Start from a common local need, then compare businesses by fit, rating, city and reviews."
+            description="Start from a common local need, then compare reviewed profile facts by service and city."
             action={{ label: "All categories", href: routes.categories }}
           />
           <div className="seo-category-cards">

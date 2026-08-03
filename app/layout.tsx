@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MobileTabBar } from "@/components/layout/MobileTabBar";
 import { siteUrl } from "@/lib/blog";
-import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "@/lib/seo";
+import { buildOrganizationJsonLd, buildWebSiteJsonLd, serializeJsonLd } from "@/lib/seo";
 import "@/components/layout/layout.css";
 import "@/components/ui/ui.css";
 import "@/components/directory/directory.css";
@@ -29,27 +29,17 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  applicationName: "Nepali Directory",
+  applicationName: "NepaliDirectory",
   title: {
     default: "Nepali Directory: Nepal Business Directory & Local Listings",
     template: "%s | Nepali Directory"
   },
   description:
-    "Use Nepali Directory, Nepal's online business directory, to find local services, restaurants, hotels, hospitals, schools, shops and IT companies by city.",
+    "Use NepaliDirectory, Nepal's online business directory, to find local services, restaurants, hotels, hospitals, schools, shops and IT companies by city.",
   metadataBase: new URL(siteUrl),
-  keywords: [
-    "Nepali Directory",
-    "Nepal business directory",
-    "local businesses Nepal",
-    "restaurants Nepal",
-    "doctors Nepal",
-    "hotels Nepal",
-    "home services Nepal",
-    "compare businesses Nepal"
-  ],
-  authors: [{ name: "Nepali Directory Editorial Team", url: "/authors" }],
-  creator: "Nepali Directory",
-  publisher: "Nepali Directory",
+  authors: [{ name: "NepaliDirectory Editorial Team", url: "/authors" }],
+  creator: "NepaliDirectory",
+  publisher: "NepaliDirectory",
   category: "Local business directory",
   classification: "Local search, business directory, Nepal city guides",
   icons: {
@@ -62,7 +52,7 @@ export const metadata: Metadata = {
     description:
       "Find businesses and local services across Nepal by category and city.",
     url: siteUrl,
-    siteName: "Nepali Directory",
+    siteName: "NepaliDirectory",
     type: "website",
     locale: "en_US",
     images: [
@@ -70,13 +60,13 @@ export const metadata: Metadata = {
         url: "/nepali-directory-og.png",
         width: 1729,
         height: 909,
-        alt: "Nepali Directory — find trusted local businesses across Nepal"
+        alt: "NepaliDirectory — find local businesses across Nepal"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nepali Directory: Nepal Business Directory & Local Listings",
+    title: "NepaliDirectory: Nepal Business Directory & Local Listings",
     description:
       "Find businesses and local services across Nepal by category and city.",
     images: ["/nepali-directory-og.png"]
@@ -99,7 +89,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    title: "Nepali Directory",
+    title: "NepaliDirectory",
     statusBarStyle: "default"
   },
   verification: {
@@ -122,7 +112,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={manrope.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteJsonLd) }} />
         <Header />
         {children}
         <Footer />

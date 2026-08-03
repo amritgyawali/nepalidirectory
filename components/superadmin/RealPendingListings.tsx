@@ -19,30 +19,38 @@ type PendingListing = {
   phone?: string;
   email?: string;
   dataSource: string;
+  verificationStatus: string;
   qualityScore: number;
   sourceRef?: string;
   createdAt?: string | null;
+  eligibilityReasons: string[];
 };
 
 export function RealPendingListings() {
   const [listings, setListings] = useState<PendingListing[] | null>(null);
   const [error, setError] = useState("");
   const [busySlug, setBusySlug] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const load = useCallback(async () => {
     try {
-      const response = await fetch("/api/admin/listings/pending");
+      const response = await fetch(`/api/admin/listings/pending?page=${page}&limit=50`);
       if (!response.ok) {
         setError("Could not load real pending submissions.");
         return;
       }
-      const payload = (await response.json()) as { listings: PendingListing[] };
+      const payload = (await response.json()) as {
+        listings: PendingListing[];
+        totalPages: number;
+      };
       setListings(payload.listings);
+      setTotalPages(payload.totalPages);
       setError("");
     } catch {
       setError("Could not load real pending submissions.");
     }
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     void load();
@@ -51,7 +59,18 @@ export function RealPendingListings() {
   async function decide(id: number, action: "approve" | "reject") {
     setBusySlug(String(id));
     try {
-      await fetch(`/api/admin/listings/${id}/${action}`, { method: "POST" });
+      const response = await fetch(`/api/admin/listings/${id}/${action}`, { method: "POST" });
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as
+          | { error?: string; reasons?: string[] }
+          | null;
+        setError(
+          [payload?.error, payload?.reasons?.join(", ")].filter(Boolean).join(" ") ||
+            `Could not ${action} this listing.`,
+        );
+        return;
+      }
+      setError("");
       await load();
     } finally {
       setBusySlug(null);
@@ -64,7 +83,7 @@ export function RealPendingListings() {
         <h2>Real submissions (database)</h2>
         <span>{listings?.length ?? 0} listings</span>
       </div>
-      {error ? <p className="superadmin-empty">{error}</p> : null}
+      {error ? <p className="superadmin-empty" role="alert">{error}</p> : null}
       <div className="superadmin-review-list">
         {(listings ?? []).map((listing) => (
           <article key={listing.slug}>
@@ -75,6 +94,7 @@ export function RealPendingListings() {
               <small>
                 Source: {listing.dataSource} - Quality score: {listing.qualityScore} - Email: {listing.email ?? "Missing"}
               </small>
+              <small>Required fixes: {listing.eligibilityReasons.join(", ")}</small>
             </div>
             <div className="superadmin-actions">
               <button disabled={busySlug === String(listing.id)} onClick={() => decide(listing.id, "approve")} type="button">
@@ -97,6 +117,17 @@ export function RealPendingListings() {
           <p className="superadmin-empty">No real submissions pending review.</p>
         ) : null}
       </div>
+      {totalPages > 1 ? (
+        <nav aria-label="Pending listing pages" className="superadmin-actions">
+          <button disabled={page <= 1} onClick={() => setPage((value) => value - 1)} type="button">
+            Previous
+          </button>
+          <span>Page {page} of {totalPages}</span>
+          <button disabled={page >= totalPages} onClick={() => setPage((value) => value + 1)} type="button">
+            Next
+          </button>
+        </nav>
+      ) : null}
     </article>
   );
 }

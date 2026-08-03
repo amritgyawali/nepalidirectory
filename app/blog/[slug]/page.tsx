@@ -19,7 +19,8 @@ import {
   buildWebPageJsonLd,
   estimateWordCount,
   getBlogQuickAnswer,
-  publisher
+  publisher,
+  serializeJsonLd
 } from "@/lib/seo";
 
 type BlogPostPageProps = {
@@ -57,7 +58,6 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   return {
     title: post.seoTitle,
     description: post.description,
-    keywords,
     authors: [{ name: post.author }],
     category: post.category,
     alternates: {
@@ -78,7 +78,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title: post.seoTitle,
       description: post.description,
       url: getBlogPostUrl(post),
-      siteName: "Nepali Directory",
+      siteName: "NepaliDirectory",
       locale: "en_US",
       type: "article",
       publishedTime: post.publishedAt,
@@ -164,7 +164,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       parentOrganization: publisher
     },
     publisher,
-    reviewedBy: publisher,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": getBlogPostUrl(post)
@@ -235,7 +234,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([webPageJsonLd, articleJsonLd, breadcrumbJsonLd, faqJsonLd])
+          __html: serializeJsonLd([webPageJsonLd, articleJsonLd, breadcrumbJsonLd, faqJsonLd])
         }}
       />
       <Breadcrumbs items={[{ label: "Blog", href: routes.blog }, { label: post.title }]} />

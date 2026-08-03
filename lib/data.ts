@@ -59,13 +59,11 @@ export type Business = {
 };
 
 export function isDemoBusiness(business: Business): boolean {
-  if (business.email?.toLowerCase().endsWith(".example")) return true;
-  if (!business.website) return false;
-  try {
-    return new URL(business.website).hostname.toLowerCase().endsWith("example.com");
-  } catch {
-    return true;
-  }
+  // Every row in this bundled catalog is UI/demo seed data. Production publication is driven by
+  // Listing records that pass the central evidence gate; a plausible-looking fixture URL must
+  // never turn a seed record into a public recommendation.
+  void business;
+  return true;
 }
 
 const image = (id: string, size = "600") =>
@@ -681,35 +679,35 @@ export const plans = [
     name: "Starter",
     price: "Free",
     description: "Basic listing for local visibility.",
-    features: ["Business profile", "Map pin", "Customer reviews", "Basic analytics"]
+    features: ["Submission review", "Qualified business profile", "Map pin", "Basic analytics"]
   },
   {
     name: "Featured",
     price: "Rs 2,500/mo",
-    description: "Higher placement in city and category searches.",
-    features: ["Priority placement", "Photo gallery", "Lead notifications", "Review response tools"],
+    description: "Clearly labelled promotion alongside an independently qualified profile.",
+    features: ["Sponsored placement label", "Photo gallery", "Lead notifications", "Campaign reporting"],
     highlighted: true
   },
   {
     name: "Premium",
     price: "Rs 7,500/mo",
     description: "Growth tools for multi-location businesses.",
-    features: ["Sponsored placements", "Deals and offers", "Dedicated support", "Campaign reporting"]
+    features: ["Sponsored placement labels", "Deals and offers", "Dedicated support", "Campaign reporting"]
   }
 ];
 
 export const stats = [
-  [String(businesses.length), "preview business profiles"],
   [String(cities.length), "featured city directories"],
   [String(categories.length), "search categories"],
-  ["Daily", "content quality checks"]
+  ["Evidence-gated", "public business profiles"],
+  ["Source-backed", "published profile facts"]
 ];
 
 export const directoryFeatureChecklist = [
   "Category and location search",
   "Open now and 24-hour filters",
-  "Sponsored and verified listings",
-  "Ratings, reviews and review writing",
+  "Source and ownership status labels",
+  "Evidence-gated public profiles",
   "Call, website, directions and quote actions",
   "Coupons and local offers",
   "Photo galleries and menu/service details",

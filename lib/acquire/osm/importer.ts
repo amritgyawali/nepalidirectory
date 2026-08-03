@@ -79,6 +79,8 @@ export class OsmImporter {
         hoursToday: el.tags.opening_hours,
         coordinates: coord,
         dataSource: "osm",
+        verificationStatus: "source_verified",
+        sourceCheckedAt: new Date(),
         licenseNote: "ODbL",
         sourceRef: `${el.type}/${el.id}`,
         osmType: el.type,

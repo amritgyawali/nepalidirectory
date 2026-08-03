@@ -24,7 +24,7 @@ type DonePayload = {
 
 const GREETING: ChatMessage = {
   role: "assistant",
-  text: "Namaste! Tell me what you need — a service, place, deal or professional — and I'll return grounded matches from Nepali Directory.",
+  text: "Namaste! Tell me what you need — a service, place, deal or professional — and I'll return grounded matches from NepaliDirectory.",
 };
 
 function parseSseEvent(block: string): { event: string; data: unknown } | null {

@@ -46,6 +46,7 @@ const legacyRedirects: Record<string, string> = {
 const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
+    qualities: [55, 75],
     remotePatterns: [
       {
         protocol: "https",

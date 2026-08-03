@@ -2,9 +2,6 @@ export type ComparedBusiness = {
   rank: number;
   name: string;
   area: string;
-  rating: number;
-  reviews: number;
-  price: string;
   bestFor: string;
   phone: string;
   image: string;
@@ -248,8 +245,8 @@ function makeGuideSections(seed: CompareSeed): CompareGuideSection[] {
       body: "Confirm the business identity, current contact details, what is included, payment milestones, cancellation terms and after-service support. Regulated work also requires checking the appropriate professional or government register."
     },
     {
-      heading: "Treat ratings as one signal",
-      body: "Read the substance and recency of reviews instead of sorting only by an average score. A complete profile and a detailed written response are useful evidence, but neither replaces direct verification."
+      heading: "Turn available evidence into questions",
+      body: "Use source-backed profile details to build a shortlist, then ask every provider the same questions. A complete profile and a detailed written response are useful evidence, but neither replaces direct verification."
     }
   ];
 }

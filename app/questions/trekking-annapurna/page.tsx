@@ -5,7 +5,7 @@ import { buildPublicPageMetadata } from "@/lib/site-metadata";
 import { routes } from "@/lib/routes";
 import { siteUrl } from "@/lib/blog";
 import { buildBreadcrumbJsonLd } from "@/lib/seo-auto/schema";
-import { buildWebPageJsonLd, uniqueKeywords } from "@/lib/seo";
+import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 const canonicalUrl = `${siteUrl}/questions/trekking-annapurna`;
 const question = "Best season for Annapurna Circuit if I want fewer crowds?";
@@ -54,7 +54,7 @@ export default function QuestionDetailPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([webPageJsonLd, breadcrumbJsonLd, qaPageJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([webPageJsonLd, breadcrumbJsonLd, qaPageJsonLd]) }}
       />
       <Breadcrumbs items={[{ label: "Q&A Hub", href: routes.qa }, { label: "Annapurna Circuit" }]} />
       <section className="section">
