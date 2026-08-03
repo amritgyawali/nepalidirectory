@@ -1,5 +1,6 @@
 import { expansionGuidePosts } from "@/lib/expansion-guides";
 import { nationalDirectoryGuidePosts } from "@/lib/national-directory-guides";
+import { ownerSeoGuidePosts } from "@/lib/owner-seo-guides";
 
 export type BlogSection = {
   heading: string;
@@ -830,6 +831,7 @@ export const blogPosts: BlogPost[] = [
   ...coreBlogPosts,
   ...expansionGuidePosts,
   ...nationalDirectoryGuidePosts,
+  ...ownerSeoGuidePosts,
 ];
 
 export function getBlogPost(slug: string) {

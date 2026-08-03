@@ -9,7 +9,11 @@ import { describe, it, expect, vi } from "vitest";
 import type { FetchFn } from "../../ai-core";
 import type { Listing } from "../../enrich";
 import { createBlogEngineRuntime } from "../runtime";
-import { canAutoPublish, canAutoPublishForListingCount } from "../editorial";
+import {
+  canAutoPublish,
+  canAutoPublishForListingCount,
+  meetsPublicEnginePostQuality,
+} from "../editorial";
 import type { BlogPost } from "../types";
 import { isBrandSafe } from "../safety";
 import { injectLinks } from "../generate/link-injection";
@@ -21,6 +25,30 @@ import {
 
 function respond(body: unknown, status = 200): Response {
   return new Response(typeof body === "string" ? body : JSON.stringify(body), { status });
+}
+
+function substantiveEnginePost(patch: Partial<BlogPost> = {}): BlogPost {
+  const bodyMd = Array.from({ length: 4 }, (_, sectionIndex) => {
+    const words = Array.from(
+      { length: 180 },
+      (_, wordIndex) => `detail-${sectionIndex}-${wordIndex}`,
+    ).join(" ");
+    return `## Evidence section ${sectionIndex + 1}\n\n${words}`;
+  }).join("\n\n");
+
+  return {
+    bodyMd,
+    confidence: 0.8,
+    factcheck: { verdict: "pass", unsupportedClaims: [] },
+    sources: ["https://one.example/source", "https://two.example/source"],
+    faq: [
+      { question: "First question?", answer: "First supported answer." },
+      { question: "Second question?", answer: "Second supported answer." },
+    ],
+    linksInjected: 3,
+    seo: { metaTitle: "Evidence-led guide", metaDescription: "A substantive test guide." },
+    ...patch,
+  } as BlogPost;
 }
 
 describe("Brand-safety hard filter (prompt §8.3)", () => {
@@ -60,14 +88,26 @@ describe("SEO duplicate suppression", () => {
 describe("Autopublish editorial floor", () => {
   it("cannot be weakened below 0.8 by environment configuration", () => {
     vi.stubEnv("BLOG_AUTOPUBLISH_MIN_CONFIDENCE", "0.2");
-    const post = {
-      confidence: 0.79,
-      factcheck: { verdict: "pass", unsupportedClaims: [] },
-    } as BlogPost;
+    const post = substantiveEnginePost({ confidence: 0.79 });
 
     expect(canAutoPublish(post, true)).toBe(false);
     expect(canAutoPublish({ ...post, confidence: 0.8 }, true)).toBe(true);
     vi.unstubAllEnvs();
+  });
+
+  it("withholds thin or weakly sourced automated posts from public publication", () => {
+    const eligible = substantiveEnginePost();
+
+    expect(meetsPublicEnginePostQuality(eligible)).toBe(true);
+    expect(meetsPublicEnginePostQuality({ ...eligible, bodyMd: "## Short\n\nToo short." })).toBe(false);
+    expect(meetsPublicEnginePostQuality({ ...eligible, sources: [eligible.sources[0]] })).toBe(false);
+    expect(meetsPublicEnginePostQuality({ ...eligible, linksInjected: 2 })).toBe(false);
+    expect(
+      meetsPublicEnginePostQuality({
+        ...eligible,
+        factcheck: { verdict: "pass", unsupportedClaims: [{ claim: "No proof", why: "Missing source" }] },
+      }),
+    ).toBe(false);
   });
 
   it("requires a meaningful qualified-listing base before automatic publishing", () => {
