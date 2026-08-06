@@ -8,7 +8,7 @@ import {
 } from "@/lib/directory-categories";
 
 describe("directory category definitions", () => {
-  it("publishes exactly the six requested category slugs with unique canonical hrefs", () => {
+  it("publishes exactly the declared category slugs with unique canonical hrefs", () => {
     expect(directoryCategorySlugs).toEqual([
       "restaurants",
       "hotels",
@@ -16,6 +16,12 @@ describe("directory category definitions", () => {
       "schools",
       "it-companies",
       "shops",
+      "dentists",
+      "tailors",
+      "hardware-stores",
+      "clothing-stores",
+      "footwear",
+      "construction",
     ]);
 
     const slugs = directoryCategories.map((category) => category.slug);
@@ -51,6 +57,20 @@ describe("listingMatchesDirectoryCategory", () => {
     ["it-companies", "IT & Software"],
     ["it-companies", "Software Companies"],
     ["shops", "Sweet Shops"],
+    // Verticals split out of the generic "shops" hub, matched against the category values the
+    // live importer actually writes.
+    ["dentists", "dental-clinic"],
+    ["dentists", "Dentists"],
+    ["tailors", "tailors"],
+    ["tailors", "boutique"],
+    ["hardware-stores", "hardware-store"],
+    ["hardware-stores", "building-supplies"],
+    ["clothing-stores", "clothing"],
+    ["clothing-stores", "fashion-store"],
+    ["footwear", "shoe-store"],
+    ["footwear", "footwear"],
+    ["construction", "contractors"],
+    ["construction", "construction"],
   ])("maps the %s alias %s", (slug, alias) => {
     expect(
       listingMatchesDirectoryCategory({ categories: [alias] }, slug),

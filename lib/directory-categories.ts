@@ -7,6 +7,15 @@ export const directoryCategorySlugs = [
   "schools",
   "it-companies",
   "shops",
+  // Verticals below are backed by substantial reviewed listing volume in the live directory.
+  // Each one previously fell through to the generic "shops" hub, which cost the specific,
+  // higher-intent query its own landing page.
+  "dentists",
+  "tailors",
+  "hardware-stores",
+  "clothing-stores",
+  "footwear",
+  "construction",
 ] as const;
 
 export type DirectoryCategorySlug = (typeof directoryCategorySlugs)[number];
@@ -450,6 +459,419 @@ export const directoryCategories: readonly DirectoryCategory[] = [
         question: "Does a shop listing guarantee that every product is genuine?",
         answer:
           "No. Directory inclusion does not authenticate individual products. Check applicable labels, serial details, seller documentation, invoice and manufacturer or authorized-channel information where relevant.",
+      },
+    ],
+  },
+  {
+    slug: "dentists",
+    href: getDirectoryCategoryHref("dentists"),
+    name: "Dentists",
+    priorityKeyword: "Dentists in Nepal",
+    title: "Dentists in Nepal: Dental Clinic Directory",
+    metaDescription:
+      "Dentists in Nepal listed by city. Compare dental clinics, then confirm the practitioner's registration, treatment scope, appointment availability and a written cost estimate directly.",
+    h1: "Dentists in Nepal",
+    aliases: [
+      "dentist",
+      "dentists",
+      "dental",
+      "dental clinic",
+      "dental clinics",
+      "dental care",
+      "dental hospital",
+      "dental home",
+      "orthodontist",
+      "orthodontics",
+      "oral surgeon",
+      "oral health",
+    ],
+    quickAnswer:
+      "Shortlist dental clinics by city and treatment type, then call the clinic to confirm which registered dentist performs the procedure, current appointment availability and an itemised written estimate before treatment begins.",
+    overviewHeading: "Choosing a dental clinic in Nepal",
+    overview: [
+      "Dental needs vary widely, from a routine scaling or filling to root canal treatment, extraction, braces, implants or prosthetics. Not every clinic offers every procedure, and a general dental surgeon may refer specialist work such as orthodontics or oral surgery elsewhere. Confirm that the specific treatment you need is performed at that location rather than assuming a broad listing covers it.",
+      "Ask which practitioner will carry out the treatment and confirm their registration with the Nepal Medical Council or Nepal Health Professional Council as applicable. For multi-visit treatment such as root canal, braces or implants, request the full course cost, the number of expected appointments, what happens if additional work is required, and what follow-up or adjustment is included.",
+    ],
+    comparisonHeading: "How to compare dental clinics",
+    comparisonIntro:
+      "Compare on the specific procedure you need, not on general impressions. Cost, materials and practitioner qualification vary considerably between clinics for the same named treatment.",
+    comparisonPoints: [
+      {
+        title: "Confirm practitioner registration",
+        body: "Ask for the treating dentist's name and registration details, and verify specialist qualifications separately where the procedure requires them, such as orthodontics, endodontics or oral surgery.",
+      },
+      {
+        title: "Get an itemised written estimate",
+        body: "Request the full course cost in writing, including consultation, imaging, materials, laboratory work and review visits. Ask what triggers additional charges before treatment starts.",
+      },
+      {
+        title: "Check materials and follow-up",
+        body: "For crowns, implants, braces and prosthetics, ask which material or brand is used, what warranty or review period applies, and who handles adjustments or complications afterwards.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Does a directory listing confirm a dentist's qualifications?",
+        answer:
+          "No. A listing records that the practice exists and passed the directory's publication checks. Verify the individual practitioner's registration and any specialist qualification directly with the clinic and the relevant Nepali regulatory council before treatment.",
+      },
+      {
+        question: "How much does dental treatment cost in Nepal?",
+        answer:
+          "Costs vary by clinic, city, practitioner experience, materials and the specific procedure, so this directory does not publish prices. Ask each shortlisted clinic for an itemised written estimate covering the complete course of treatment.",
+      },
+      {
+        question: "Can I book a dental appointment through this directory?",
+        answer:
+          "No. Contact the clinic directly using its published phone number to check current availability. Appointment slots, emergency provision and practitioner schedules change frequently and are not tracked here.",
+      },
+      {
+        question: "What should I do in a dental emergency?",
+        answer:
+          "Contact a clinic by phone immediately and describe the problem, or attend a hospital emergency department for severe swelling, bleeding or trauma. Do not rely on directory opening hours, which may not reflect emergency cover.",
+      },
+    ],
+  },
+  {
+    slug: "tailors",
+    href: getDirectoryCategoryHref("tailors"),
+    name: "Tailors",
+    priorityKeyword: "Tailors in Nepal",
+    title: "Tailors in Nepal: Tailoring and Boutique Directory",
+    metaDescription:
+      "Tailors in Nepal listed by city. Compare tailoring centres and boutiques, then confirm stitching charges, fabric requirements, fitting appointments and delivery timelines directly.",
+    h1: "Tailors in Nepal",
+    aliases: [
+      "tailor",
+      "tailors",
+      "tailoring",
+      "tailoring centre",
+      "tailoring center",
+      "boutique",
+      "boutiques",
+      "stitching",
+      "dressmaker",
+      "shirting suiting",
+      "suiting",
+      "ladies tailor",
+      "gents tailor",
+    ],
+    quickAnswer:
+      "Choose a tailor by garment type and city, then confirm the stitching charge, whether you supply fabric, how many fittings are included and the realistic delivery date before leaving material or paying a deposit.",
+    overviewHeading: "Finding the right tailor for the garment",
+    overview: [
+      "Tailoring work in Nepal ranges from everyday alterations and school uniforms to shirting and suiting, daura suruwal, sari blouses, kurta sets, bridal and occasion wear. A shop that excels at one of these will not necessarily be the right choice for another, and specialist occasion work usually needs to be commissioned well ahead of the date.",
+      "Agree the practical details before work begins: who supplies the fabric and lining, the measured stitching charge, how many fittings are included, what alteration after delivery costs, and the delivery date in writing. During festival and wedding seasons, workloads rise sharply and quoted timelines can extend, so confirm the date rather than assuming a usual turnaround.",
+    ],
+    comparisonHeading: "How to compare tailoring shops",
+    comparisonIntro:
+      "Compare tailors on the specific garment you need made, using the same fabric assumption and the same fitting expectations for each quote.",
+    comparisonPoints: [
+      {
+        title: "Match the shop to the garment",
+        body: "Ask to see recent finished work of the same type, whether that is formal suiting, traditional wear, a sari blouse or a uniform order, rather than judging on general shop appearance.",
+      },
+      {
+        title: "Settle fabric and charges up front",
+        body: "Confirm whether you bring fabric or the shop supplies it, the exact stitching charge for that garment, lining and accessory costs, and what deposit is required.",
+      },
+      {
+        title: "Fix fittings and the delivery date",
+        body: "Ask how many fittings are included, what post-delivery alteration costs, and get the delivery date confirmed in writing, especially for wedding or festival commissions.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How far in advance should I order occasion or wedding wear?",
+        answer:
+          "Commission well ahead of the date and confirm the timeline directly with the shop. Wedding and festival periods create significant backlogs in Nepal, and usual turnaround times do not apply during peak season.",
+      },
+      {
+        question: "Do tailors in this directory supply fabric as well as stitching?",
+        answer:
+          "It varies by shop. Some stitch customer-supplied fabric only, others hold shirting, suiting and boutique material in-house. Confirm with the specific shop, since this directory does not track current fabric stock.",
+      },
+      {
+        question: "Are stitching charges listed on these profiles?",
+        answer:
+          "No. Charges depend on the garment, fabric, finish and shop, so this directory does not publish them. Ask each shortlisted tailor to quote for the exact garment you need.",
+      },
+    ],
+  },
+  {
+    slug: "hardware-stores",
+    href: getDirectoryCategoryHref("hardware-stores"),
+    name: "Hardware Stores",
+    priorityKeyword: "Hardware Stores in Nepal",
+    title: "Hardware Stores in Nepal: Building Materials Directory",
+    metaDescription:
+      "Hardware Stores in Nepal listed by city. Compare building material suppliers, then confirm current stock, brand, grade, delivery to site and a written quotation before ordering.",
+    h1: "Hardware Stores in Nepal",
+    aliases: [
+      "hardware",
+      "hardware store",
+      "hardware stores",
+      "building supplies",
+      "building materials",
+      "building material",
+      "cement",
+      "bricks",
+      "brick",
+      "marble",
+      "tiles",
+      "sanitary",
+      "sanitaryware",
+      "glass centre",
+      "glass center",
+      "aggregate",
+      "concrete",
+      "steel",
+      "plywood",
+    ],
+    quickAnswer:
+      "Shortlist suppliers by material and city, then confirm current stock, the exact brand and grade, total delivered cost including transport to your site, and payment terms in a written quotation before ordering.",
+    overviewHeading: "Sourcing building materials in Nepal",
+    overview: [
+      "This category covers general hardware alongside the material suppliers a construction project depends on: cement, bricks, aggregate, steel, concrete products, marble and tiles, sanitaryware, glass, plywood and fittings. Requirements are usually specification-driven, so the grade, brand, size and quantity matter far more than a general shop description.",
+      "For anything beyond a small purchase, transport is a significant part of the real cost. Confirm whether the quoted rate includes delivery to your site, who unloads, what minimum order applies and how partial or staged deliveries are handled. Ask for the quotation in writing with the specification stated, so that what arrives can be checked against what was agreed.",
+    ],
+    comparisonHeading: "How to compare material suppliers",
+    comparisonIntro:
+      "Compare quotations on an identical specification and quantity, with delivery included, or the comparison will not be meaningful.",
+    comparisonPoints: [
+      {
+        title: "Fix the specification first",
+        body: "State the brand, grade, size, finish and quantity precisely, then ask every supplier to quote against that same specification rather than an approximate description.",
+      },
+      {
+        title: "Include delivery in the price",
+        body: "Ask whether transport to your site, unloading, minimum order quantity and staged delivery are included, since these frequently change which supplier is actually cheaper.",
+      },
+      {
+        title: "Confirm stock and documentation",
+        body: "Check current availability for the quantity you need, expected lead time, and what invoice, test certificate or warranty documentation is provided on delivery.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Are material prices shown on these listings?",
+        answer:
+          "No. Cement, steel, brick and aggregate rates move frequently and vary by quantity, brand and delivery distance. Request a current written quotation from each supplier for your exact specification.",
+      },
+      {
+        question: "Can I check stock availability through this directory?",
+        answer:
+          "No. Stock changes continuously and is not tracked here. Contact the supplier directly to confirm current availability and lead time before planning around a delivery date.",
+      },
+      {
+        question: "Does a listing confirm material quality or certification?",
+        answer:
+          "No. Directory inclusion does not certify products. Ask the supplier for brand, grade, applicable standard and any test certificate or warranty documentation, and check delivered material against the agreed specification.",
+      },
+    ],
+  },
+  {
+    slug: "clothing-stores",
+    href: getDirectoryCategoryHref("clothing-stores"),
+    name: "Clothing Stores",
+    priorityKeyword: "Clothing Stores in Nepal",
+    title: "Clothing Stores in Nepal: Fashion and Garment Directory",
+    metaDescription:
+      "Clothing Stores in Nepal listed by city. Compare fashion outlets and garment suppliers, then confirm sizing, current stock, wholesale terms and exchange policy directly with the shop.",
+    h1: "Clothing Stores in Nepal",
+    aliases: [
+      "clothing",
+      "clothing store",
+      "clothing stores",
+      "fashion",
+      "fashion store",
+      "garment",
+      "garments",
+      "apparel",
+      "apparels",
+      "readymade",
+      "saree",
+      "sarees",
+      "kurta",
+      "pashmina",
+      "woolens",
+      "hosiery",
+      "textile",
+      "leather",
+    ],
+    quickAnswer:
+      "Narrow by product type and city, then contact the shop to confirm current stock in your size, whether retail or wholesale terms apply, complete price and the written exchange or return policy before buying.",
+    overviewHeading: "Retail, wholesale and made-to-order clothing",
+    overview: [
+      "Nepal's clothing sector spans retail outlets, boutiques, readymade collections, saree and kurta specialists, pashmina and woollen producers, leather goods and garment manufacturers supplying wholesale or export. A single directory heading covers very different businesses, so establish early whether a listing serves walk-in retail customers, bulk buyers or both.",
+      "For retail, confirm size availability, fabric composition, care requirements and the exchange window before purchase, since policies differ substantially between shops. For wholesale or manufacturing enquiries, ask about minimum order quantity, sampling, lead time, fabric sourcing and payment terms rather than assuming a retail-style transaction.",
+    ],
+    comparisonHeading: "How to compare clothing suppliers",
+    comparisonIntro:
+      "Compare on the specific product and the transaction type you actually need, since retail and wholesale terms from the same business can differ completely.",
+    comparisonPoints: [
+      {
+        title: "Establish retail or wholesale",
+        body: "Confirm whether the business sells to individual customers, bulk buyers or both, and ask for the minimum order quantity where wholesale or manufacturing terms apply.",
+      },
+      {
+        title: "Check fabric, sizing and stock",
+        body: "Ask about fabric composition, available sizes, colours and current stock for the item you want, and whether stock can be held until you visit.",
+      },
+      {
+        title: "Read the exchange terms first",
+        body: "Confirm the exchange or return window, condition requirements and whether altered or sale items are excluded, before paying rather than afterwards.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do these shops sell wholesale as well as retail?",
+        answer:
+          "Some do and some do not. This category includes retail outlets, boutiques and garment manufacturers. Ask the specific business whether wholesale terms and a minimum order quantity apply to your enquiry.",
+      },
+      {
+        question: "Can I check size or colour availability in advance?",
+        answer:
+          "Not through this directory. Stock varies by branch and changes daily. Contact the shop directly to confirm the size and colour you need, and ask whether the item can be reserved.",
+      },
+      {
+        question: "Is a directory listing a guarantee of product authenticity?",
+        answer:
+          "No. Directory inclusion does not authenticate individual products or brands. Check labelling, fabric composition, seller documentation and invoice for higher-value or branded purchases.",
+      },
+    ],
+  },
+  {
+    slug: "footwear",
+    href: getDirectoryCategoryHref("footwear"),
+    name: "Footwear",
+    priorityKeyword: "Shoe Shops in Nepal",
+    title: "Shoe Shops in Nepal: Footwear Directory",
+    metaDescription:
+      "Shoe Shops in Nepal listed by city. Compare footwear retailers and suppliers, then confirm size availability, fit, materials, repair services and exchange terms directly.",
+    h1: "Shoe Shops in Nepal",
+    aliases: [
+      "shoe",
+      "shoes",
+      "shoe store",
+      "shoe shop",
+      "footwear",
+      "footwears",
+      "sandal",
+      "sandals",
+      "boot",
+      "boots",
+      "cobbler",
+      "shoe repair",
+    ],
+    quickAnswer:
+      "Shortlist by footwear type and city, then contact the shop to confirm your size is in stock, check materials and construction, and read the exchange terms before purchase.",
+    overviewHeading: "Buying footwear in Nepal",
+    overview: [
+      "This category includes retail shoe shops, footwear manufacturers and suppliers producing leather, canvas, school and formal footwear. Requirements differ sharply between a school shoe purchase, formal or occasion footwear, trekking and outdoor boots, and bulk or manufacturing enquiries.",
+      "Size conventions vary between manufacturers and imported ranges, so trying footwear on or confirming the measured length matters more than relying on a stated size alone. For trekking and outdoor use in particular, check materials, sole construction, water resistance and whether the shop offers resoling or repair before committing to a purchase.",
+    ],
+    comparisonHeading: "How to compare footwear suppliers",
+    comparisonIntro:
+      "Compare on intended use and fit rather than headline price, since construction and materials determine whether footwear lasts.",
+    comparisonPoints: [
+      {
+        title: "Confirm size and fit in person",
+        body: "Sizing differs between local manufacturers and imported ranges. Try footwear on where possible, or confirm the measured internal length before ordering remotely.",
+      },
+      {
+        title: "Check materials and construction",
+        body: "Ask about upper material, sole type, stitching or cementing, and water resistance, particularly for trekking, outdoor or daily-wear footwear expected to last.",
+      },
+      {
+        title: "Ask about repair and exchange",
+        body: "Confirm whether the shop offers resoling or repair, and check the exchange window and condition requirements before paying.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can I confirm my shoe size is in stock before visiting?",
+        answer:
+          "Not through this directory. Contact the shop directly, since stock by size and colour changes frequently and is not tracked here. Ask whether a pair can be held until you arrive.",
+      },
+      {
+        question: "Do these businesses supply footwear in bulk?",
+        answer:
+          "Some listings are manufacturers or suppliers rather than retail outlets. Ask the specific business whether wholesale terms, minimum order quantity and lead times apply to your enquiry.",
+      },
+      {
+        question: "Is shoe repair available at these shops?",
+        answer:
+          "It varies. Some retailers offer resoling or repair and others do not. Confirm directly with the shop, as repair services are not recorded on directory profiles.",
+      },
+    ],
+  },
+  {
+    slug: "construction",
+    href: getDirectoryCategoryHref("construction"),
+    name: "Construction",
+    priorityKeyword: "Construction Companies in Nepal",
+    title: "Construction Companies in Nepal: Contractor Directory",
+    metaDescription:
+      "Construction Companies in Nepal listed by city. Compare contractors and engineering consultancies, then verify registration, licensing, insurance and a written scope of work.",
+    h1: "Construction Companies in Nepal",
+    aliases: [
+      "construction",
+      "contractor",
+      "contractors",
+      "builder",
+      "builders",
+      "engineering consultancy",
+      "engineering services",
+      "civil engineering",
+      "prefab",
+      "housing",
+      "nirman",
+    ],
+    quickAnswer:
+      "Shortlist contractors by scope and location, then verify company registration and professional licensing, ask for comparable completed projects, and require a written scope, programme and payment schedule before any work starts.",
+    overviewHeading: "Appointing a contractor in Nepal",
+    overview: [
+      "This category covers building contractors, engineering and design consultancies, prefabricated construction specialists and construction service providers. Scope varies enormously, from a small renovation to a full structural build, and the right appointment depends on matching the contractor's demonstrated experience to your specific project type.",
+      "Construction in Nepal is subject to municipal building permit requirements and the National Building Code, and seismic design compliance is a material consideration rather than an optional extra. Establish clearly who is responsible for obtaining permits and approvals, which registered engineer takes design and supervision responsibility, and how variations to the agreed scope will be priced and approved.",
+    ],
+    comparisonHeading: "How to compare contractors",
+    comparisonIntro:
+      "Compare on a single written scope of work. Quotations built on different assumptions about materials, finishes and exclusions cannot be compared meaningfully.",
+    comparisonPoints: [
+      {
+        title: "Verify registration and licensing",
+        body: "Confirm company registration, applicable contractor licensing class and the Nepal Engineering Council registration of the engineer taking design or supervision responsibility.",
+      },
+      {
+        title: "Require a written scope and programme",
+        body: "Insist on a documented scope, material specification, exclusions, programme and stage-linked payment schedule before work begins, and agree how variations are priced and authorised.",
+      },
+      {
+        title: "Check permits, insurance and past work",
+        body: "Clarify who obtains municipal permits and approvals, confirm insurance cover, and ask to visit or review comparable completed projects rather than relying on described experience.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Does a directory listing verify a contractor's licence?",
+        answer:
+          "No. A listing records that the business exists and passed the directory's publication checks. Verify company registration, contractor licensing and Nepal Engineering Council registration directly before appointing anyone.",
+      },
+      {
+        question: "Who is responsible for obtaining building permits?",
+        answer:
+          "This must be agreed explicitly in writing. Municipal building permit requirements and National Building Code compliance apply to construction in Nepal, and responsibility for obtaining approvals should never be left ambiguous.",
+      },
+      {
+        question: "How should construction payments be structured?",
+        answer:
+          "Link payments to verified completed stages set out in a written contract, rather than paying large sums up front. Agree in advance how variations to the scope are priced and authorised.",
+      },
+      {
+        question: "Are project costs published on these listings?",
+        answer:
+          "No. Construction cost depends entirely on scope, specification, site conditions and programme. Obtain written quotations from several contractors against one identical scope of work.",
       },
     ],
   },

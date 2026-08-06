@@ -47,6 +47,20 @@ describe("SEO/AEO automation (prompt Module G)", () => {
     expect(localBusinessSubtype(["Doctors", "Healthcare"])).toBe("MedicalClinic");
   });
 
+  it("resolves the most specific schema.org subtype for each live listing vertical", () => {
+    // `dental-clinic` also contains the broader `clinic` needle; the specific match must win.
+    expect(localBusinessSubtype(["dentists", "dental-clinic"])).toBe("Dentist");
+    // `hardware-store` and `shoe-store` both contain `store`; again the specific match must win.
+    expect(localBusinessSubtype(["hardware-store", "building-supplies"])).toBe("HardwareStore");
+    expect(localBusinessSubtype(["shoe-store", "footwear"])).toBe("ShoeStore");
+    expect(localBusinessSubtype(["clothing", "fashion-store"])).toBe("ClothingStore");
+    expect(localBusinessSubtype(["tailors", "boutique"])).toBe("ClothingStore");
+    expect(localBusinessSubtype(["construction", "contractors"])).toBe("GeneralContractor");
+    expect(localBusinessSubtype(["it-services", "software-company"])).toBe("ProfessionalService");
+    expect(localBusinessSubtype(["furniture-store", "home-furnishing"])).toBe("FurnitureStore");
+    expect(localBusinessSubtype(["something-unmapped"])).toBe("LocalBusiness");
+  });
+
   it("withholds category, city, comparison and retired ranking pages without qualified inventory", async () => {
     const xml = sitemapXml(await getCategorySitemapEntries());
 

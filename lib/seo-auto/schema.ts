@@ -5,22 +5,45 @@ import { getBusinessHref } from "@/lib/routes";
 import { publisher } from "@/lib/seo";
 import { getEvergreenUrl, type EvergreenPage } from "./evergreen";
 
+/**
+ * Ordered most-specific first: `.find()` returns the first hit, so a broader needle placed above a
+ * narrower one would shadow it. `dental-clinic` must reach `Dentist` before `clinic` maps it to the
+ * vaguer `MedicalClinic`, and `shoe-store`/`hardware-store` must resolve before the bare `shop`
+ * catch-all. Every value is a real schema.org LocalBusiness subtype.
+ */
 const subtypeByCategory: Array<[string, string]> = [
+  ["dentist", "Dentist"],
+  ["dental", "Dentist"],
   ["restaurant", "Restaurant"],
   ["cafe", "CafeOrCoffeeShop"],
   ["hotel", "Hotel"],
   ["hospital", "Hospital"],
   ["clinic", "MedicalClinic"],
   ["doctor", "MedicalClinic"],
-  ["dentist", "Dentist"],
   ["plumber", "Plumber"],
   ["electrician", "Electrician"],
   ["lawyer", "LegalService"],
   ["legal", "LegalService"],
   ["school", "School"],
   ["it-compan", "ProfessionalService"],
+  ["it-services", "ProfessionalService"],
   ["software", "ProfessionalService"],
+  ["computer-services", "ProfessionalService"],
+  ["engineering", "ProfessionalService"],
+  ["contractor", "GeneralContractor"],
+  ["construction", "GeneralContractor"],
+  ["hardware", "HardwareStore"],
+  ["building-supplies", "HardwareStore"],
+  ["shoe", "ShoeStore"],
+  ["footwear", "ShoeStore"],
+  ["clothing", "ClothingStore"],
+  ["fashion", "ClothingStore"],
+  ["boutique", "ClothingStore"],
+  ["tailor", "ClothingStore"],
+  ["furniture", "FurnitureStore"],
+  ["home-furnishing", "FurnitureStore"],
   ["shop", "Store"],
+  ["store", "Store"],
 ];
 
 export function localBusinessSubtype(categories: string[]): string {
