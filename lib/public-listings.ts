@@ -173,15 +173,33 @@ export function listingFactsCheckedAt(listing: Listing): string | undefined {
   return date && !Number.isNaN(date.getTime()) ? date.toISOString() : undefined;
 }
 
-const kathmanduLocalities = new Set([
-  "kathmandu", "thamel", "boudha", "dilli bazar", "lazimpat", "putalisadak",
-  "new baneshwor", "tripureshwor", "baluwatar", "naxal", "durbar marg",
-]);
+/**
+ * Place names that belong to a city directory page but do not contain that page's slug as a
+ * substring, so the generic containment check below can never match them.
+ *
+ * Bharatpur is the metropolitan city and district headquarters of Chitwan, and Patan is the
+ * historic name for Lalitpur; listings carry the local name in `area` while the directory page is
+ * published under the district/official name. Without these, /city/chitwan renders none of the
+ * businesses actually located there.
+ */
+const cityLocalityAliases: Record<string, readonly string[]> = {
+  kathmandu: [
+    "kathmandu", "thamel", "boudha", "dilli bazar", "lazimpat", "putalisadak",
+    "new baneshwor", "tripureshwor", "baluwatar", "naxal", "durbar marg",
+  ],
+  chitwan: ["bharatpur", "narayangarh", "narayangadh", "ratnanagar"],
+  lalitpur: ["patan"],
+};
 
 export function listingMatchesCity(listing: Listing, citySlug: string): boolean {
   const values = [listing.area, listing.neighborhood, listing.municipality, listing.district]
     .filter((value): value is string => Boolean(value))
-    .map((value) => value.toLowerCase());
+    .map((value) => value.toLowerCase().trim());
   if (values.some((value) => value === citySlug || value.includes(citySlug))) return true;
-  return citySlug === "kathmandu" && values.some((value) => kathmanduLocalities.has(value));
+
+  const aliases = cityLocalityAliases[citySlug];
+  if (!aliases) return false;
+  // Exact match only: a substring test here would let "bharatpur" pull in unrelated place names
+  // that merely happen to contain it.
+  return values.some((value) => aliases.includes(value));
 }
