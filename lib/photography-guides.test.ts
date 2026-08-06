@@ -8,6 +8,22 @@ import { photographyGuidePosts } from "@/lib/photography-guides";
  * rather than left to reviewer diligence.
  */
 describe("photography guide cluster", () => {
+  it("covers every sub-cluster, so the guards below cannot silently skip a new one", () => {
+    // Core (Nepal + Butwal) + city guides + service guides. Update deliberately when adding a
+    // cluster — a mismatch means new posts are bypassing the disclosure checks in this file.
+    expect(photographyGuidePosts).toHaveLength(20);
+    for (const slug of [
+      "best-wedding-photographer-nepal",
+      "best-wedding-photography-butwal",
+      "best-wedding-photographer-kathmandu",
+      "best-pre-wedding-photographer-pokhara",
+      "wedding-videography-nepal",
+      "wedding-photography-checklist-nepal",
+    ]) {
+      expect(photographyGuidePosts.map((post) => post.slug)).toContain(slug);
+    }
+  });
+
   it("discloses the paid featured placement on every post", () => {
     for (const post of photographyGuidePosts) {
       expect(post.disclaimer, `${post.slug} must carry a disclosure`).toBeDefined();
