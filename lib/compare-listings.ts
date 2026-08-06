@@ -29,6 +29,7 @@ const compareCategorySources: Record<string, string> = {
   "footwear-shops": "footwear",
   photography: "photography",
   hotels: "hotels",
+  restaurants: "restaurants",
 };
 
 /**
