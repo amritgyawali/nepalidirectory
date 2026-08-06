@@ -26,6 +26,7 @@ const compareCategorySources: Record<string, string> = {
   "it-companies": "it-companies",
   tailors: "tailors",
   "footwear-shops": "footwear",
+  photography: "photography",
 };
 
 /**

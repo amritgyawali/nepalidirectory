@@ -30,6 +30,8 @@ const subtypeByCategory: Array<[string, string]> = [
   ["software", "ProfessionalService"],
   ["computer-services", "ProfessionalService"],
   ["engineering", "ProfessionalService"],
+  ["photograph", "ProfessionalService"],
+  ["videograph", "ProfessionalService"],
   ["contractor", "GeneralContractor"],
   ["construction", "GeneralContractor"],
   ["hardware", "HardwareStore"],

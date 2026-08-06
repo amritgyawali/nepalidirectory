@@ -16,6 +16,7 @@ export const directoryCategorySlugs = [
   "clothing-stores",
   "footwear",
   "construction",
+  "photography",
 ] as const;
 
 export type DirectoryCategorySlug = (typeof directoryCategorySlugs)[number];
@@ -872,6 +873,73 @@ export const directoryCategories: readonly DirectoryCategory[] = [
         question: "Are project costs published on these listings?",
         answer:
           "No. Construction cost depends entirely on scope, specification, site conditions and programme. Obtain written quotations from several contractors against one identical scope of work.",
+      },
+    ],
+  },
+  {
+    slug: "photography",
+    href: getDirectoryCategoryHref("photography"),
+    name: "Photography",
+    priorityKeyword: "Photographers in Nepal",
+    title: "Photographers in Nepal: Photography Studio Directory",
+    metaDescription:
+      "Photographers in Nepal listed by city and specialism. Compare wedding, pre-wedding, portrait and event studios, then confirm coverage, deliverables and contract terms directly.",
+    h1: "Photographers in Nepal",
+    aliases: [
+      "photography",
+      "photographer",
+      "photographers",
+      "photo studio",
+      "photography studio",
+      "wedding photography",
+      "wedding photographer",
+      "pre wedding photography",
+      "videography",
+      "videographer",
+      "cinematography",
+      "portrait photography",
+      "maternity photography",
+      "event photography",
+    ],
+    quickAnswer:
+      "Shortlist studios by the specific work you need — wedding, pre-wedding, portrait, maternity, event or commercial — then ask each for one complete recent job of that type, confirm who will actually shoot, and get deliverables, timelines and usage rights in writing before paying a deposit.",
+    overviewHeading: "Photography is a set of specialisms",
+    overview: [
+      "The skills behind excellent wedding coverage — reacting fast, working in uncontrolled light, staying unobtrusive across a long day — are close to the opposite of what product or portrait photography demands, which is controlled lighting, precision and repeatability. A studio strong in one is not automatically competent in another, so match the studio to the job rather than to a general reputation.",
+      "Judge a studio on one complete recent job of the type you need, not on a highlight reel. Highlights show the ceiling of what a team can produce; a full gallery shows the floor, which is what you are actually buying across a whole event.",
+    ],
+    comparisonHeading: "How to compare photography studios",
+    comparisonIntro:
+      "Quote every studio against one identical written brief. Packages that differ in crew, hours and deliverables are different products, not cheaper and dearer versions of the same thing.",
+    comparisonPoints: [
+      {
+        title: "Confirm who actually shoots",
+        body: "Studios booking several jobs on popular dates may assign an associate rather than the photographer whose portfolio sold you. That is not wrong, but it should be disclosed and named in the contract.",
+      },
+      {
+        title: "Hold the brief constant",
+        body: "Fix crew size, hours, days, whether film is included and the deliverable counts, then ask every studio to price that. Otherwise the quotes cannot be compared at all.",
+      },
+      {
+        title: "Settle deliverables and rights",
+        body: "Agree the number of edited images, file resolution and format, delivery date, backup and retention policy, and who may publish the images, before paying rather than afterwards.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How do I choose a photographer in Nepal?",
+        answer:
+          "Match the studio to your specific job type, ask for one complete recent gallery of that type rather than a highlight reel, quote several studios against one identical written brief, and confirm in the contract who will actually shoot and what you receive.",
+      },
+      {
+        question: "Does a directory listing verify a photographer's quality?",
+        answer:
+          "No. A listing records that the business exists and that its published record passed this directory's completeness and source checks. It is not an assessment of the work. Review portfolios and contracts yourself before booking.",
+      },
+      {
+        question: "What should be written into a photography contract?",
+        answer:
+          "The named photographer, exact coverage hours and dates, edited image count, delivery timeline, file resolution and format, backup and retention policy, usage and publishing rights, cancellation and postponement terms, and what happens if the lead shooter is unavailable.",
       },
     ],
   },

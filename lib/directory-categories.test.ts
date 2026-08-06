@@ -22,6 +22,7 @@ describe("directory category definitions", () => {
       "clothing-stores",
       "footwear",
       "construction",
+      "photography",
     ]);
 
     const slugs = directoryCategories.map((category) => category.slug);
@@ -71,6 +72,8 @@ describe("listingMatchesDirectoryCategory", () => {
     ["footwear", "footwear"],
     ["construction", "contractors"],
     ["construction", "construction"],
+    ["photography", "photography"],
+    ["photography", "wedding photography"],
   ])("maps the %s alias %s", (slug, alias) => {
     expect(
       listingMatchesDirectoryCategory({ categories: [alias] }, slug),
