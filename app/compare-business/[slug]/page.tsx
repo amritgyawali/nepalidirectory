@@ -21,12 +21,25 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: CompareCategoryPageProps): Promise<Metadata> {
   const category = getCompareCategory((await params).slug);
   if (!category) return { title: "Comparison not found", robots: { index: false, follow: false } };
+  // Only a guide with a real provider list is worth indexing. Without one the page is generic
+  // advice with no comparison on it, which is exactly the thin result the gate exists to withhold.
+  const indexable = (await getComparedBusinesses(category.slug)).length > 0;
   return {
     title: category.seoTitle,
     description: category.description,
     category: category.category,
     alternates: { canonical: category.href },
-    robots: { index: false, follow: true },
+    robots: {
+      index: indexable,
+      follow: true,
+      googleBot: {
+        index: indexable,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     openGraph: {
       title: category.seoTitle,
       description: category.description,

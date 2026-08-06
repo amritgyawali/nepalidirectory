@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { COMPARE_RANKING_BASIS, MIN_COMPARABLE_PROVIDERS } from "@/lib/compare-listings";
 import { compareCategories } from "@/lib/compare";
@@ -31,5 +32,17 @@ describe("comparison provider lists", () => {
     for (const category of compareCategories) {
       expect(category.href).toBe(`/compare-business/${category.slug}`);
     }
+  });
+});
+
+describe("comparison page indexability", () => {
+  it("keeps sitemap inclusion and meta robots driven by the same signal", () => {
+    // Regression guard: comparison pages hardcoded `index: false` while the sitemap listed the
+    // populated ones, so every populated guide was submitted for crawling and then told not to
+    // index. Both must key off whether the guide actually resolves a provider list.
+    const page = readFileSync("app/compare-business/[slug]/page.tsx", "utf8");
+    expect(page).toContain("const indexable = (await getComparedBusinesses(category.slug)).length > 0");
+    expect(page).toContain("index: indexable");
+    expect(page).not.toMatch(/robots:\s*\{\s*index:\s*false,\s*follow:\s*true\s*\}/);
   });
 });

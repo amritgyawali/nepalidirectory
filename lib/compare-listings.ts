@@ -1,3 +1,4 @@
+import { cache } from "react";
 import type { ComparedBusiness } from "./compare";
 import type { Listing } from "./enrich";
 import { getDirectoryCategory, listingMatchesDirectoryCategory } from "./directory-categories";
@@ -69,7 +70,9 @@ function verdictFor(listing: Listing, categoryName: string): string {
  * Builds the provider list for a comparison guide from real reviewed listings.
  * Returns an empty array when the category has no mapped source or too few providers to compare.
  */
-export async function getComparedBusinesses(compareSlug: string): Promise<ComparedBusiness[]> {
+export const getComparedBusinesses = cache(async function getComparedBusinesses(
+  compareSlug: string,
+): Promise<ComparedBusiness[]> {
   const directorySlug = compareCategorySources[compareSlug];
   if (!directorySlug) return [];
 
@@ -105,7 +108,7 @@ export async function getComparedBusinesses(compareSlug: string): Promise<Compar
       website: listing.website,
       summary: listingDescription(listing),
     }));
-}
+});
 
 /** Comparison slugs that currently resolve to a populated provider list. */
 export async function getPopulatedCompareSlugs(): Promise<Set<string>> {
