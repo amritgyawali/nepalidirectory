@@ -8,8 +8,11 @@
  */
 import { NextResponse, type NextRequest } from "next/server";
 import { cookies } from "next/headers";
+import { siteUrl } from "@/lib/blog";
 import { computeQualityScore, createListingRepository } from "@/lib/enrich";
+import { submitIndexNow } from "@/lib/indexnow";
 import { evaluateListingIndexEligibility } from "@/lib/public-listings";
+import { getBusinessHref } from "@/lib/routes";
 import { createClient } from "@/utils/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -61,6 +64,10 @@ export async function POST(_request: NextRequest, { params }: RouteContext) {
   }
 
   await repository.update(listing);
+
+  // Newly indexable listing: nudge IndexNow-consuming engines (Bing, Yandex) to crawl it before
+  // their next scheduled pass instead of waiting on discovery through the sitemap alone.
+  void submitIndexNow([`${siteUrl}${getBusinessHref(listing.slug)}`]);
 
   return NextResponse.json({ id: listing.id, slug: listing.slug, status: "approved" });
 }

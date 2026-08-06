@@ -19,6 +19,9 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createAcquisitionRuntime } from "@/lib/acquire";
 import { CITY_BOUNDING_BOXES, fetchOsmElements, isCommercial, mapTagsToCategory, type BoundingBox } from "@/lib/acquire";
+import { siteUrl } from "@/lib/blog";
+import { submitIndexNow } from "@/lib/indexnow";
+import { routes } from "@/lib/routes";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -80,6 +83,17 @@ export async function POST(request: NextRequest) {
 
   const runtime = createAcquisitionRuntime();
   const result = await runtime.osmImporter.import(commercial);
+
+  if (result.inserted > 0 || result.merged > 0) {
+    // New rows can flip a category/city page from below-threshold (noindex) to indexable — nudge
+    // IndexNow-consuming engines to re-crawl the hubs whose listing counts just changed, rather
+    // than waiting for the next scheduled pass.
+    void submitIndexNow([
+      siteUrl,
+      `${siteUrl}${routes.categories}`,
+      `${siteUrl}${routes.city}`,
+    ]);
+  }
 
   return NextResponse.json({ dryRun: false, bbox, ...result });
 }
