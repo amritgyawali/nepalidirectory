@@ -79,6 +79,53 @@ export default async function HomePage() {
     ...categories.map((category) => category.name),
     ...cities.map((city) => city.name)
   ]);
+  const homeFaqs = [
+    {
+      question: "What is NepaliDirectory?",
+      answer:
+        "NepaliDirectory is Nepal's online business directory. It groups local businesses, restaurants, hotels, hospitals, schools, shops and IT companies by city and category so people can research and compare options before contacting one directly.",
+    },
+    {
+      question: "Is NepaliDirectory free to use?",
+      answer:
+        "Yes. Searching, browsing categories and cities, reading local guides, and contacting listed businesses is free for everyone. Businesses can also submit or claim a free profile; paid advertising placements are optional.",
+    },
+    {
+      question: "How are businesses verified before they appear in results?",
+      answer:
+        "Every profile must identify a real business, match a relevant category, provide usable location data and carry documented provenance (an owner claim or a licensed data source) before it enters public search results, city pages or structured data. See the directory methodology page for the full publication checklist.",
+    },
+    {
+      question: "Which cities and categories does NepaliDirectory cover?",
+      answer:
+        "NepaliDirectory organizes listings by city — including Kathmandu, Pokhara, Lalitpur, Bhaktapur, Chitwan, Biratnagar, Butwal and Dharan — and by category, covering restaurants, hotels, doctors, dentists, hospitals, schools, IT companies, shops and home-service providers such as plumbers and electricians.",
+    },
+    {
+      question: "How do I add or claim my business on NepaliDirectory?",
+      answer:
+        "Open the claim-listing page and submit your business name, category, location and contact details. New submissions and claims go through the same publication review as every other profile before they appear publicly.",
+    },
+    {
+      question: "How is NepaliDirectory different from a printed Nepal Yellow Pages?",
+      answer:
+        "NepaliDirectory is a searchable, continuously updatable online alternative to a paper Yellow Pages: listings can be corrected, claimed and kept current, and every city or category page is reachable directly instead of requiring a printed index.",
+    },
+  ];
+
+  const homeFaqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${siteUrl}/#faq`,
+    mainEntity: homeFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   const homeJsonLd = {
     ...buildWebPageJsonLd({
       name: "NepaliDirectory: Nepal Business Directory & Local Listings",
@@ -125,7 +172,10 @@ export default async function HomePage() {
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(homeJsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([homeJsonLd, homeFaqJsonLd]) }}
+      />
       <section className="home-hero">
         <div className="home-hero__media" aria-hidden>
           <FillImage
@@ -464,6 +514,23 @@ export default async function HomePage() {
               </Link>
             ))}
           </aside>
+        </div>
+      </section>
+
+      <section className="section section--soft">
+        <div className="container">
+          <SectionHeader title="Frequently asked questions" />
+          <div className="article-faq" aria-labelledby="home-faq-title">
+            <h2 id="home-faq-title" className="sr-only">
+              NepaliDirectory frequently asked questions
+            </h2>
+            {homeFaqs.map((faq) => (
+              <details key={faq.question}>
+                <summary>{faq.question}</summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
     </main>
