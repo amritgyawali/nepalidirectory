@@ -3,6 +3,7 @@ import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { getSortedCompareCategories } from "@/lib/compare";
+import { getPopulatedCompareSlugs } from "@/lib/compare-listings";
 import { directoryCategories } from "@/lib/directory-categories";
 import { getBusinessHref, routes } from "@/lib/routes";
 import { getIndexableListings } from "@/lib/public-listings";
@@ -44,6 +45,8 @@ export async function GET() {
     .sort((a, b) => b.modifiedAt.localeCompare(a.modifiedAt))
     .slice(0, 60);
 
+  const populatedCompareSlugs = await getPopulatedCompareSlugs();
+
   const lines = [
     "# NepaliDirectory",
     "",
@@ -74,9 +77,9 @@ export async function GET() {
     "",
     "## Business comparison guides",
     "",
-    ...(getSortedCompareCategories().filter((category) => category.businesses.length > 0).length > 0
+    ...(getSortedCompareCategories().filter((category) => populatedCompareSlugs.has(category.slug)).length > 0
       ? getSortedCompareCategories()
-          .filter((category) => category.businesses.length > 0)
+          .filter((category) => populatedCompareSlugs.has(category.slug))
           .map((category) => resource(category.title, category.href, category.description))
       : [
           "Comparison pages are gated pending business data review -- see the Editorial Policy. This is an intentional content-integrity control, not a missing file.",

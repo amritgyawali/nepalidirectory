@@ -8,6 +8,11 @@ export type ComparedBusiness = {
   imageAlt: string;
   strengths: string[];
   verdict: string;
+  /** Present when the entry is backed by a published directory listing. */
+  slug?: string;
+  address?: string;
+  website?: string;
+  summary?: string;
 };
 
 export type CompareGuideSection = {
@@ -214,6 +219,56 @@ const seeds: CompareSeed[] = [
     imageId: "photo-1519225421980-715cb0215aed",
     imageAlt: "Wedding planner arranging decorated event tables",
     criteria: ["Scope", "Vendor process", "Budget controls", "Event-day team", "Contingency plan"]
+  },
+  {
+    slug: "hardware-stores",
+    category: "Hardware Stores",
+    title: "Compare Hardware Stores and Building Suppliers in Nepal",
+    seoTitle: "Compare Hardware Stores in Nepal by Stock and Delivery",
+    description: "Compare hardware stores and building material suppliers by stock, brand and grade, delivery to site, quotation clarity and payment terms.",
+    imageId: "photo-1581244277943-fe4a9c777189",
+    imageAlt: "Building materials stacked at a hardware supplier",
+    criteria: ["Stock availability", "Brand and grade", "Delivery to site", "Written quotation", "Payment terms"]
+  },
+  {
+    slug: "clothing-stores",
+    category: "Clothing Stores",
+    title: "Compare Clothing Stores and Garment Suppliers in Nepal",
+    seoTitle: "Compare Clothing Stores in Nepal by Range and Terms",
+    description: "Compare clothing stores and garment suppliers by product range, sizing, retail or wholesale terms, exchange policy and delivery.",
+    imageId: "photo-1445205170230-053b83016050",
+    imageAlt: "Clothing displayed on racks in a retail store",
+    criteria: ["Product range", "Sizing and stock", "Retail or wholesale", "Exchange policy", "Delivery"]
+  },
+  {
+    slug: "it-companies",
+    category: "IT Companies",
+    title: "Compare IT Companies and Software Providers in Nepal",
+    seoTitle: "Compare IT Companies in Nepal by Scope and Support",
+    description: "Compare IT and software companies by service scope, delivered work, support terms, contract clarity and ongoing maintenance.",
+    imageId: "photo-1518770660439-4636190af475",
+    imageAlt: "Software development team working at computers",
+    criteria: ["Service scope", "Delivered work", "Support terms", "Contract clarity", "Maintenance"]
+  },
+  {
+    slug: "tailors",
+    category: "Tailors",
+    title: "Compare Tailors and Boutiques in Nepal",
+    seoTitle: "Compare Tailors in Nepal by Garment and Turnaround",
+    description: "Compare tailors and boutiques by garment specialism, stitching charges, fabric supply, fittings included and delivery timeline.",
+    imageId: "photo-1556905055-8f358a7a47b2",
+    imageAlt: "Tailor working at a sewing machine",
+    criteria: ["Garment specialism", "Stitching charge", "Fabric supply", "Fittings included", "Delivery timeline"]
+  },
+  {
+    slug: "footwear-shops",
+    category: "Footwear",
+    title: "Compare Shoe Shops and Footwear Suppliers in Nepal",
+    seoTitle: "Compare Shoe Shops in Nepal by Range and Fit",
+    description: "Compare shoe shops and footwear suppliers by range, size availability, materials and construction, repair services and exchange terms.",
+    imageId: "photo-1549298916-b41d501d3772",
+    imageAlt: "Shoes displayed on shelves in a footwear shop",
+    criteria: ["Range", "Size availability", "Materials", "Repair service", "Exchange terms"]
   },
   {
     slug: "gyms-fitness-centers",

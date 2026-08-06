@@ -6,6 +6,7 @@ import { RelatedGuideLinks } from "@/components/content/RelatedGuideLinks";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { compareCategories, getCompareCategory, getSortedCompareCategories } from "@/lib/compare";
+import { COMPARE_RANKING_BASIS, getComparedBusinesses } from "@/lib/compare-listings";
 import { getGuidesForCategory } from "@/lib/content-clusters";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
@@ -48,6 +49,7 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
   const category = getCompareCategory((await params).slug);
   if (!category) notFound();
 
+  const businesses = await getComparedBusinesses(category.slug);
   const keywords = buildCompareKeywords(category);
   const quickAnswer = getCompareQuickAnswer(category);
   const otherCategories = getSortedCompareCategories().filter((candidate) => candidate.slug !== category.slug);
@@ -129,14 +131,60 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
       <section className="section">
         <div className="container compare-layout">
           <div className="article-body">
-            <section className="answer-summary">
-              <h2>Qualified provider comparison pending</h2>
-              <p>
-                This guide does not publish placeholder businesses, invented ratings or sample
-                prices. Named providers will appear only after production listing data passes the
-                location, category, provenance and content-review checks.
-              </p>
-            </section>
+            {businesses.length ? (
+              <section className="compare-providers" aria-labelledby="compare-providers-title">
+                <h2 id="compare-providers-title">
+                  {businesses.length} {category.category.toLowerCase()} to compare
+                </h2>
+                <p className="compare-providers__basis">{COMPARE_RANKING_BASIS}</p>
+                <ol className="compare-provider-list">
+                  {businesses.map((business) => (
+                    <li key={business.slug ?? business.name} className="compare-provider">
+                      <div className="compare-provider__head">
+                        <span className="compare-provider__rank" aria-hidden>{business.rank}</span>
+                        <div>
+                          <h3>
+                            {business.slug ? (
+                              <Link href={`/business/${business.slug}`}>{business.name}</Link>
+                            ) : (
+                              business.name
+                            )}
+                          </h3>
+                          <p className="compare-provider__meta">
+                            {business.area}
+                            {business.address ? ` — ${business.address}` : ""}
+                          </p>
+                        </div>
+                      </div>
+                      {business.summary ? <p>{business.summary}</p> : null}
+                      {business.strengths.length ? (
+                        <ul className="compare-provider__strengths">
+                          {business.strengths.map((strength) => (
+                            <li key={strength}><CheckCircle2 size={14} aria-hidden /> {strength}</li>
+                          ))}
+                        </ul>
+                      ) : null}
+                      <p className="compare-provider__verdict">{business.verdict}</p>
+                      <div className="compare-provider__actions">
+                        {business.phone ? <a href={`tel:${business.phone}`}>{business.phone}</a> : null}
+                        {business.website ? (
+                          <a href={business.website} rel="nofollow noopener" target="_blank">Website</a>
+                        ) : null}
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            ) : (
+              <section className="answer-summary">
+                <h2>Qualified provider comparison pending</h2>
+                <p>
+                  This guide does not publish placeholder businesses, invented ratings or sample
+                  prices. Named providers will appear only after production listing data passes the
+                  location, category, provenance and content-review checks.
+                </p>
+              </section>
+            )}
             {category.guideSections.map((section) => (
               <section key={section.heading}><h2>{section.heading}</h2><p>{section.body}</p></section>
             ))}

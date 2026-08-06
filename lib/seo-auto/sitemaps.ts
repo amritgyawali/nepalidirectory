@@ -4,6 +4,7 @@ import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { isIndexableBlogCategory } from "@/lib/blog-quality";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
+import { getPopulatedCompareSlugs } from "@/lib/compare-listings";
 import { directoryCategories, listingMatchesDirectoryCategory } from "@/lib/directory-categories";
 import { MIN_INDEXABLE_DIRECTORY_RESULTS } from "@/lib/directory-pagination";
 import { getBusinessHref, getCityCategoryHref, routes } from "@/lib/routes";
@@ -62,6 +63,7 @@ export function getBlogSitemapEntries(additionalPosts: BlogPost[] = []): Sitemap
 
 export async function getCategorySitemapEntries(): Promise<SitemapEntry[]> {
   const listings = await getIndexableListings();
+  const populatedCompareSlugs = await getPopulatedCompareSlugs();
   const cityCategoryEntries = cityDirectoryPages.flatMap((city) =>
     directoryCategories.flatMap((category) => {
       const count = listings.filter(
@@ -82,7 +84,7 @@ export async function getCategorySitemapEntries(): Promise<SitemapEntry[]> {
           MIN_INDEXABLE_DIRECTORY_RESULTS,
       )
       .map((category) => ({ url: `${siteUrl}${category.href}` })),
-    ...compareCategories.filter((category) => category.businesses.length > 0).map((category) => ({
+    ...compareCategories.filter((category) => populatedCompareSlugs.has(category.slug)).map((category) => ({
       url: `${siteUrl}${category.href}`,
       lastModified: category.updatedAt,
     })),
