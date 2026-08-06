@@ -15,9 +15,17 @@ import {
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { siteUrl } from "@/lib/blog";
+import {
+  getDirectionsUrl,
+  getListingSourceLabel,
+  getListingSourceUrl,
+} from "@/lib/business-links";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { getDirectoryCategory, listingMatchesDirectoryCategory } from "@/lib/directory-categories";
 import { MIN_INDEXABLE_DIRECTORY_RESULTS } from "@/lib/directory-pagination";
+import { formatDirectoryDate } from "@/lib/format-date";
+import { evaluateListingFreshness } from "@/lib/freshness";
+import { displayAddress, displayLocality, localityTrail } from "@/lib/locality";
 import {
   canPreviewListing,
   getDirectoryListing,
@@ -30,6 +38,7 @@ import {
   listingVerificationLabel,
   publicListingImage,
 } from "@/lib/public-listings";
+import { listingPublicationTier } from "@/lib/trust-vocabulary";
 import { getBusinessHref, getCityCategoryHref, getSearchHref, routes } from "@/lib/routes";
 import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 import { buildBreadcrumbJsonLd, buildListingLocalBusinessJsonLd } from "@/lib/seo-auto";
@@ -118,11 +127,12 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
   const primaryCategory = getDirectoryCategory(listing.categories[0] ?? "");
   const cityPage = cityDirectoryPages.find((city) => listingMatchesCity(listing, city.slug));
   const locationHref = cityPage?.href ?? routes.city;
+  const indexableListings = await loadIndexableListings();
   const hasExactDirectoryParent = Boolean(
     indexable &&
     primaryCategory &&
     cityPage &&
-    (await loadIndexableListings()).filter(
+    indexableListings.filter(
       (candidate) =>
         listingMatchesCity(candidate, cityPage.slug) &&
         listingMatchesDirectoryCategory(candidate, primaryCategory),
@@ -151,6 +161,50 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
   const safePhone = indexable ? listing.phone : undefined;
   const verifiedImage = publicListingImage(listing);
   const verificationLabel = listingVerificationLabel(listing);
+  const locality = displayLocality(listing);
+  const postalSafeAddress = displayAddress(listing.address);
+  const localityParts = localityTrail(listing);
+  const freshness = evaluateListingFreshness(listing);
+  const checkedOnLabel = formatDirectoryDate(factsCheckedAt);
+  const publicationTier = listingPublicationTier(listing);
+  const sourceUrl = indexable ? getListingSourceUrl(listing) : undefined;
+  const sourceLabel = getListingSourceLabel(listing);
+  const directionsUrl = indexable ? getDirectionsUrl(listing) : undefined;
+  // Nearby qualified profiles give the visitor a real alternative and give the hub an internal
+  // link back, instead of the profile being a dead end (audit sec. 14).
+  const relatedListings = indexable
+    ? indexableListings
+        .filter(
+          (candidate) =>
+            candidate.slug !== listing.slug &&
+            (cityPage
+              ? listingMatchesCity(candidate, cityPage.slug)
+              : candidate.area.toLowerCase() === listing.area.toLowerCase()),
+        )
+        .sort((a, b) => {
+          const sameCategory = (candidate: typeof a) =>
+            primaryCategory && listingMatchesDirectoryCategory(candidate, primaryCategory) ? 0 : 1;
+          return sameCategory(a) - sameCategory(b) || a.name.localeCompare(b.name, "en");
+        })
+        .slice(0, 6)
+    : [];
+  const profileFacts: Array<{ term: string; value: string; href?: string; external?: boolean }> = indexable
+    ? [
+        { term: "Category", value: primaryCategory?.name ?? categories[0] ?? "Business", href: primaryCategoryHref },
+        ...(localityParts.length ? [{ term: "Locality", value: localityParts.join(", ") }] : []),
+        ...(postalSafeAddress ? [{ term: "Address", value: postalSafeAddress }] : []),
+        ...(safePhone ? [{ term: "Phone", value: safePhone }] : []),
+        ...(safeWebsite ? [{ term: "Official website", value: safeWebsite, href: safeWebsite, external: true }] : []),
+        ...(listing.services?.length ? [{ term: "Published services", value: String(listing.services.length) }] : []),
+        {
+          term: "Source",
+          value: sourceLabel,
+          ...(sourceUrl ? { href: sourceUrl, external: true } : {}),
+        },
+        ...(checkedOnLabel ? [{ term: "Facts last checked", value: checkedOnLabel }] : []),
+        { term: "Publication tier", value: publicationTier.name },
+      ]
+    : [];
 
   return (
     <main>
@@ -192,6 +246,9 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
             />
           </div>
           <div className="business-hero__info">
+            <p className="eyebrow">
+              <MapPin size={13} aria-hidden /> {locality || listing.area}
+            </p>
             <div className="badge-row">
               {indexable ? (
                 <span className="badge badge--success">
@@ -230,9 +287,16 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
                 <Globe2 size={16} aria-hidden /> Visit website <ExternalLink size={13} aria-hidden />
               </a>
             ) : null}
-            <Link className="button button--outline" href={routes.map}>
-              <MapPin size={16} aria-hidden /> Directions
-            </Link>
+            {directionsUrl ? (
+              <a
+                className="button button--outline"
+                href={directionsUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <MapPin size={16} aria-hidden /> Directions to {listing.name}
+              </a>
+            ) : null}
             <Link className="button button--outline" href={`${routes.requestCallback}?business=${encodeURIComponent(listing.name)}`}>
               Request details
             </Link>
@@ -243,7 +307,7 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
       <section className="section">
         <div className="container two-col">
           <div className="detail-main">
-            <section>
+            <section id="about">
               <h2>About {listing.name}</h2>
               <p>{description}</p>
               <p>
@@ -253,8 +317,41 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
               </p>
             </section>
 
+            {profileFacts.length ? (
+              // Structured facts rather than templated prose: the part of the profile that is
+              // specific to this business, in a shape a reader or an AI system can cite
+              // (audit sec. 7 and sec. 18.3).
+              <section id="profile-facts">
+                <h2>Published facts</h2>
+                <dl className="listing-fact-list">
+                  {profileFacts.map((fact) => (
+                    <div key={fact.term}>
+                      <dt>{fact.term}</dt>
+                      <dd>
+                        {fact.href ? (
+                          fact.external ? (
+                            <a href={fact.href} rel="noopener noreferrer" target="_blank">
+                              {fact.value}
+                            </a>
+                          ) : (
+                            <Link href={fact.href}>{fact.value}</Link>
+                          )
+                        ) : (
+                          fact.value
+                        )}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="compact-copy">
+                  Facts not listed here have not been reviewed for this business and are
+                  deliberately left blank rather than filled with a category assumption.
+                </p>
+              </section>
+            ) : null}
+
             {indexable && listing.services?.length ? (
-              <section>
+              <section id="services">
                 <h2>Services</h2>
                 <ul className="listing-detail-list">
                   {listing.services.map((service) => <li key={service}>{service}</li>)}
@@ -292,24 +389,73 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
           </div>
 
           <aside className="sidebar">
-            <section className="filter-card">
+            <section className="filter-card" id="contact">
               <h2>Contact and location</h2>
-              <p><MapPin size={15} aria-hidden /> {indexable ? listing.address : listing.area}</p>
+              <p><MapPin size={15} aria-hidden /> {indexable ? postalSafeAddress || listing.area : locality || listing.area}</p>
               {safePhone ? <p><Phone size={15} aria-hidden /> {safePhone}</p> : null}
               {safeEmail ? <p>{safeEmail}</p> : null}
               {indexable && listing.hoursToday ? <p><Clock3 size={15} aria-hidden /> {listing.hoursToday}</p> : null}
+              {directionsUrl ? (
+                <p>
+                  <a href={directionsUrl} rel="noopener noreferrer" target="_blank">
+                    Open directions to this address
+                  </a>
+                </p>
+              ) : null}
             </section>
-            <section className="filter-card">
+            <section className="filter-card" id="data-status">
               <h2>Data status</h2>
               <p>{indexable ? verificationLabel : "Not eligible for search indexing"}</p>
-              {factsCheckedAt ? (
-                <p>Facts last checked: <time dateTime={factsCheckedAt}>{new Date(factsCheckedAt).toLocaleDateString("en-NP")}</time></p>
+              {indexable ? <p>{publicationTier.summary}</p> : null}
+              {factsCheckedAt && checkedOnLabel ? (
+                <p>
+                  Facts last checked:{" "}
+                  <time dateTime={factsCheckedAt}>{checkedOnLabel}</time>
+                </p>
               ) : null}
+              {indexable && freshness.stale ? (
+                <p>
+                  This record is due for a re-check, so treat hours, prices and availability as
+                  unconfirmed until you contact the business.
+                </p>
+              ) : null}
+              {sourceUrl ? (
+                <p>
+                  Source:{" "}
+                  <a href={sourceUrl} rel="noopener noreferrer nofollow" target="_blank">
+                    {sourceLabel}
+                  </a>
+                </p>
+              ) : indexable ? (
+                <p>Source: {sourceLabel}</p>
+              ) : null}
+              <Link href={routes.directoryMethodology}>What these checks cover</Link>
               <Link href={routes.claimListing}>Claim or correct this listing</Link>
             </section>
           </aside>
         </div>
       </section>
+
+      {relatedListings.length ? (
+        <section className="section section--soft" id="nearby">
+          <div className="container">
+            <h2 className="compact-title">
+              Other qualified profiles in {cityPage?.name ?? listing.area}
+            </h2>
+            <p className="compact-copy">
+              Listed alphabetically within the same city, closest categories first. This is not a
+              ranking.
+            </p>
+            <div className="seo-link-strip" aria-label="Nearby qualified business profiles">
+              {relatedListings.map((candidate) => (
+                <Link key={candidate.slug} href={getBusinessHref(candidate.slug)}>
+                  {candidate.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }

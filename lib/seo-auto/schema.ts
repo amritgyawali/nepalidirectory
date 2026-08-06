@@ -1,5 +1,6 @@
 import type { Listing } from "@/lib/enrich";
 import { siteUrl } from "@/lib/blog";
+import { displayAddress, displayLocality } from "@/lib/locality";
 import { publicListingImage } from "@/lib/public-listings";
 import { getBusinessHref } from "@/lib/routes";
 import { publisher } from "@/lib/seo";
@@ -68,8 +69,10 @@ export function buildListingLocalBusinessJsonLd(listing: Listing, url: string) {
     email: listing.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: listing.address,
-      addressLocality: listing.municipality ?? listing.area,
+      // Normalized so `addressLocality` carries a place name rather than a P.O. box or postal
+      // code, and so the markup matches the address rendered on the profile.
+      streetAddress: displayAddress(listing.address) || undefined,
+      addressLocality: displayLocality(listing) || undefined,
       addressRegion: listing.province,
       addressCountry: "NP",
     },

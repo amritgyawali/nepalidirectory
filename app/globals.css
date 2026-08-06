@@ -4,7 +4,13 @@
   --color-bg: #ffffff;
   --color-page: #f6f7f2;
   --color-text: #181713;
-  --color-muted: #737066;
+  /*
+   * Darkened from #737066: that value cleared 4.5:1 against the page background by 0.01, so any
+   * rounding, overlay or slightly lighter surface pushed secondary text under the AA threshold —
+   * the contrast failures the 2026-08-06 accessibility audit reported. #63605a holds ~5.7:1 on the
+   * page background and ~6.2:1 on white.
+   */
+  --color-muted: #63605a;
   --color-secondary: #4d4a42;
   --color-border: #e7e2d6;
   --color-border-strong: #d6d0c1;
@@ -956,11 +962,36 @@ p {
   grid-template-columns: repeat(2, 1fr);
 }
 
+/*
+ * The hero image is an <img> (next/image) rather than a CSS background: a background URL is only
+ * discoverable after the stylesheet parses, which delays the largest-contentful paint on every
+ * city page. The element below sits behind the text and carries the same darkening gradient the
+ * background rule used to apply.
+ */
 .city-directory-hero {
-  background-position: center;
-  background-size: cover;
   color: #fff;
+  isolation: isolate;
   padding-block: 86px 72px;
+  position: relative;
+}
+
+.city-directory-hero__media {
+  inset: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.city-directory-hero__media img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.city-directory-hero__media::after {
+  background: linear-gradient(180deg, rgba(26, 26, 26, 0.42), rgba(26, 26, 26, 0.78));
+  content: "";
+  inset: 0;
+  position: absolute;
 }
 
 .city-directory-hero h1 {
@@ -6606,4 +6637,181 @@ body.superadmin-mode > .footer {
   .superadmin-user-form {
     grid-template-columns: 1fr;
   }
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * 2026-08-06 SEO/accessibility audit fixes
+ * ---------------------------------------------------------------------------
+ */
+
+/*
+ * Touch targets. Directory navigation is mostly pill links, which were ~30px tall and 8px apart —
+ * below the ~44px minimum and close enough together to mis-tap. Scoped to coarse pointers so
+ * mouse-driven layouts keep their density.
+ */
+@media (pointer: coarse) {
+  .seo-link-strip {
+    gap: 10px;
+  }
+
+  .seo-link-strip a,
+  .chip,
+  .city-link-grid a,
+  .article-tags a {
+    align-items: center;
+    display: inline-flex;
+    min-height: 44px;
+    padding-block: 10px;
+  }
+}
+
+/* Focus must be perceivable on dark hero surfaces too, where a yellow ring alone can wash out. */
+details > summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid rgba(255, 212, 0, 0.72);
+  outline-offset: 2px;
+}
+
+.city-directory-hero a:focus-visible,
+.business-hero a:focus-visible,
+.home-hero a:focus-visible,
+.home-hero button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.city-directory-hero__refresh {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  margin-top: 18px;
+}
+
+.city-directory-hero__refresh a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Structured, citable facts on a business profile (audit sec. 7). */
+.listing-fact-list {
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  gap: 0;
+  margin-top: 6px;
+}
+
+.listing-fact-list > div {
+  border-bottom: 1px solid var(--color-border);
+  display: grid;
+  gap: 4px 18px;
+  grid-template-columns: minmax(150px, 30%) 1fr;
+  padding-block: 10px;
+}
+
+.listing-fact-list dt {
+  color: var(--color-muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.listing-fact-list dd {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .listing-fact-list > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Operational indexability dashboard (/admin/indexability). */
+.indexability-page {
+  display: grid;
+  gap: 22px;
+  padding: 26px 0 60px;
+}
+
+.indexability-page__head h1 {
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.indexability-page__head p {
+  color: var(--color-muted);
+  margin-top: 8px;
+  max-width: 780px;
+}
+
+.indexability-panel {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+}
+
+.indexability-panel h2 {
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.indexability-panel p {
+  color: var(--color-muted);
+  font-size: 14px;
+  max-width: 860px;
+}
+
+.indexability-stat-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.indexability-stat-grid div {
+  background: var(--color-page);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+}
+
+.indexability-stat-grid strong {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.indexability-stat-grid span {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+/* Wide report tables scroll inside their own container; the page itself never scrolls sideways. */
+.indexability-scroll {
+  overflow-x: auto;
+}
+
+.indexability-table {
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 720px;
+  width: 100%;
+}
+
+.indexability-table th,
+.indexability-table td {
+  border-bottom: 1px solid var(--color-border);
+  padding: 9px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.indexability-table th {
+  background: var(--color-page);
+  font-weight: 800;
+  white-space: nowrap;
 }

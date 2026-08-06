@@ -4,7 +4,8 @@ import { cache } from "react";
 import { CityLandingPageView } from "@/components/directory/CityLandingPage";
 import { cityDirectoryPages, getCityDirectoryPage, getCityEditorialDetail } from "@/lib/city-pages";
 import { siteUrl } from "@/lib/blog";
-import { directoryCategories, listingMatchesDirectoryCategory } from "@/lib/directory-categories";
+import { directoryCategories } from "@/lib/directory-categories";
+import { countQualifiedInCategory, meetsPublicationThreshold } from "@/lib/directory-counts";
 import { getIndexableListings, listingMatchesCity } from "@/lib/public-listings";
 import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 import { buildListingItemListJsonLd } from "@/lib/seo-auto";
@@ -96,13 +97,16 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
   if (!pagination.valid) notFound();
   const cityCategoryLinks = Object.fromEntries(
     directoryCategories
-      .filter(
-        (category) =>
-          listings.filter((listing) => listingMatchesDirectoryCategory(listing, category)).length >=
-          MIN_INDEXABLE_DIRECTORY_RESULTS,
-      )
+      .filter((category) => meetsPublicationThreshold(countQualifiedInCategory(listings, category)))
       .map((category) => [category.slug, getCityCategoryHref(city.slug, category.slug)]),
   );
+  // Newest source check across the city's qualified profiles: the honest answer to "how current is
+  // this page?", rendered in an unambiguous date format (audit sec. 6 and sec. 10).
+  const lastCheckedAt = listings
+    .map((listing) => listing.sourceCheckedAt)
+    .filter((date): date is Date => date instanceof Date && !Number.isNaN(date.getTime()))
+    .sort((a, b) => b.getTime() - a.getTime())[0]
+    ?.toISOString();
   const canonicalPath = paginatedDirectoryHref(city.href, requestedPage);
   const canonicalUrl = `${siteUrl}${canonicalPath}`;
   const detail = getCityEditorialDetail(city.slug);
@@ -153,6 +157,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
         currentPage={pagination.currentPage}
         totalPages={pagination.totalPages}
         cityCategoryLinks={cityCategoryLinks}
+        lastCheckedAt={lastCheckedAt}
       />
     </>
   );

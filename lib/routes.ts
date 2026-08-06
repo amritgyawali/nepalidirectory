@@ -43,6 +43,7 @@ export const routes = {
   superAdminSettings: "/super-admin/settings",
   superAdminAiActivity: "/super-admin/ai-activity",
   adminAi: "/admin/ai",
+  adminIndexability: "/admin/indexability",
   deals: "/deals",
   events: "/events",
   pricing: "/pricing",

@@ -1,10 +1,9 @@
 import { getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
 import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
-import { cityDirectoryPages } from "@/lib/city-pages";
 import { getSortedCompareCategories } from "@/lib/compare";
 import { getPopulatedCompareSlugs } from "@/lib/compare-listings";
-import { directoryCategories } from "@/lib/directory-categories";
+import { selectQualifiedCategories, selectQualifiedCities } from "@/lib/directory-counts";
 import { getBusinessHref, routes } from "@/lib/routes";
 import { getIndexableListings } from "@/lib/public-listings";
 import { getEvergreenPages } from "@/lib/seo-auto";
@@ -46,6 +45,11 @@ export async function GET() {
     .slice(0, 60);
 
   const populatedCompareSlugs = await getPopulatedCompareSlugs();
+  // Only hubs that actually pass the publication threshold are offered as resources. Listing an
+  // empty, noindex category here would advertise a page the site itself refuses to index, and no
+  // AI system should be pointed at a hub with nothing behind it (audit sec. 18.2).
+  const qualifiedCategories = selectQualifiedCategories(publicListings);
+  const qualifiedCities = selectQualifiedCities(publicListings);
 
   const lines = [
     "# NepaliDirectory",
@@ -60,9 +64,13 @@ export async function GET() {
     "",
     resource("Home", routes.home, "Browse local businesses, services, cities, and guides across Nepal."),
     resource("Categories", routes.categories, "Explore the directory by business and service category."),
-    ...directoryCategories.map((category) =>
-      resource(category.priorityKeyword, category.href, category.metaDescription),
-    ),
+    ...(qualifiedCategories.length > 0
+      ? qualifiedCategories.map((category) =>
+          resource(category.priorityKeyword, category.href, category.metaDescription),
+        )
+      : [
+          "Category hubs are gated until enough profiles pass publication review -- see the Directory Methodology. This is an intentional content-integrity control, not a missing file.",
+        ]),
     resource("Best Businesses", routes.bestBusinesses, "See the review-gated ranking method and available category and city paths."),
     resource("Near Me", routes.nearMe, "Discover nearby business categories and local services."),
     resource("Business Comparisons", routes.compareBusiness, "Use consistent decision criteria; named providers appear only after publication review."),
@@ -73,7 +81,11 @@ export async function GET() {
     "",
     "## City directories",
     "",
-    ...cityDirectoryPages.map((city) => resource(city.title, city.href, city.description)),
+    ...(qualifiedCities.length > 0
+      ? qualifiedCities.map((city) => resource(city.title, city.href, city.description))
+      : [
+          "City hubs are gated until enough profiles pass publication review -- see the Directory Methodology. This is an intentional content-integrity control, not a missing file.",
+        ]),
     "",
     "## Business comparison guides",
     "",

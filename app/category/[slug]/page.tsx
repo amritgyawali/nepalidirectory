@@ -11,6 +11,11 @@ import { siteUrl } from "@/lib/blog";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { getGuidesForCategory } from "@/lib/content-clusters";
 import {
+  countQualifiedInCityCategory,
+  meetsPublicationThreshold,
+} from "@/lib/directory-counts";
+import { displayLocality } from "@/lib/locality";
+import {
   directoryCategories,
   getDirectoryCategory,
   listingMatchesDirectoryCategory,
@@ -18,7 +23,6 @@ import {
 import {
   getIndexableListings,
   listingDescription,
-  listingMatchesCity,
   listingVerificationLabel,
 } from "@/lib/public-listings";
 import {
@@ -143,10 +147,10 @@ export default async function DirectoryCategoryPage({
   if (!pagination.valid) notFound();
   const pageListings = pagination.items;
   const relatedGuides = getGuidesForCategory(category.slug);
-  const qualifyingCities = cityDirectoryPages.filter(
-    (city) =>
-      listings.filter((listing) => listingMatchesCity(listing, city.slug)).length >=
-      MIN_INDEXABLE_DIRECTORY_RESULTS,
+  const qualifiedCount = listings.length;
+  const published = meetsPublicationThreshold(qualifiedCount);
+  const qualifyingCities = cityDirectoryPages.filter((city) =>
+    meetsPublicationThreshold(countQualifiedInCityCategory(listings, city.slug, category)),
   );
   const otherCategories = directoryCategories.filter(
     (candidate) => candidate.slug !== category.slug,
@@ -228,6 +232,27 @@ export default async function DirectoryCategoryPage({
           <span className="eyebrow">Nepal local directory</span>
           <h1 className="page-title">{category.h1}</h1>
           <p className="page-copy">{category.metaDescription}</p>
+          {/*
+            State the population this page publishes, in the directory's own vocabulary, before any
+            navigation. A hub below the publication threshold says so rather than presenting itself
+            as a finished national category (audit sec. 6 and sec. 10).
+          */}
+          <p className="page-copy">
+            {published ? (
+              <>
+                <strong>{qualifiedCount}</strong> qualified public profiles currently pass the
+                publication checks in this category.
+              </>
+            ) : (
+              <>
+                <strong>Category under review.</strong> {qualifiedCount} of the{" "}
+                {MIN_INDEXABLE_DIRECTORY_RESULTS} qualified public profiles needed to publish this
+                hub have passed review, so it stays out of search indexing and the sitemap until
+                the remainder qualify.
+              </>
+            )}{" "}
+            <Link href={routes.directoryMethodology}>See what a qualified profile means</Link>.
+          </p>
           <div className="seo-hero__actions">
             <Link
               className="button button--primary"
@@ -260,15 +285,23 @@ export default async function DirectoryCategoryPage({
 
           <h2 className="compact-title nearby-title">Browse qualified city pages</h2>
           <p className="compact-copy">
-            A city-category page appears only when at least ten reviewed public profiles qualify.
+            A city-category page appears only when at least {MIN_INDEXABLE_DIRECTORY_RESULTS}{" "}
+            reviewed public profiles qualify.
           </p>
-          <div className="seo-link-strip" aria-label="Nepal city directories">
-            {qualifyingCities.map((city) => (
-              <Link key={city.slug} href={getCityCategoryHref(city.slug, category.slug)}>
-                {category.name} in {city.name}
-              </Link>
-            ))}
-          </div>
+          {qualifyingCities.length ? (
+            <div className="seo-link-strip" aria-label="Nepal city directories">
+              {qualifyingCities.map((city) => (
+                <Link key={city.slug} href={getCityCategoryHref(city.slug, category.slug)}>
+                  {category.name} in {city.name}
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <p className="compact-copy">
+              No city currently reaches that threshold for {category.name.toLowerCase()}. City
+              pages appear here as clusters complete review, rather than being published empty.
+            </p>
+          )}
         </div>
       </section>
 
@@ -305,7 +338,7 @@ export default async function DirectoryCategoryPage({
               {pageListings.map((listing) => (
                 <article className="answer-summary" key={listing.slug}>
                   <span className="eyebrow">
-                    <MapPin size={13} aria-hidden /> {listing.neighborhood ?? listing.area}
+                    <MapPin size={13} aria-hidden /> {displayLocality(listing)}
                   </span>
                   <h2>
                     <Link href={getBusinessHref(listing.slug)}>{listing.name}</Link>
@@ -337,8 +370,12 @@ export default async function DirectoryCategoryPage({
               <h2>No qualified {category.name.toLowerCase()} profiles yet</h2>
               <p>
                 We do not fill this category with preview businesses or unreviewed
-                records. Search the wider directory, or submit a real business for
-                publication review.
+                records. Records for this category exist in the directory, but none has yet
+                cleared the source, category and completeness checks that publication requires.
+              </p>
+              <p>
+                Search the wider directory, or submit a real business for publication review.{" "}
+                <Link href={routes.directoryMethodology}>Read the publication checks</Link>.
               </p>
               <div className="business-card__actions">
                 <Link

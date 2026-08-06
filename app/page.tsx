@@ -9,11 +9,14 @@ import { CategoryTile } from "@/components/directory/CategoryTile";
 import { CityCard } from "@/components/directory/CityCard";
 import { FillImage } from "@/components/ui/FillImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { cityDirectoryPages, getCityHref } from "@/lib/city-pages";
+import { getCityHref } from "@/lib/city-pages";
 import { categories, cities, cityLinks, directoryFeatureChecklist, popularSearches, questions, stats } from "@/lib/data";
-import { directoryCategories, listingMatchesDirectoryCategory } from "@/lib/directory-categories";
-import { MIN_INDEXABLE_DIRECTORY_RESULTS } from "@/lib/directory-pagination";
-import { getIndexableListings, listingMatchesCity, listingToBusiness } from "@/lib/public-listings";
+import {
+  selectQualifiedCategories,
+  selectQualifiedCities,
+  summarizeDirectoryCounts,
+} from "@/lib/directory-counts";
+import { getAllDirectoryListings, isIndexableListing, listingToBusiness } from "@/lib/public-listings";
 import { getSortedBlogPosts, siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
 import { buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
@@ -45,26 +48,14 @@ export const metadata: Metadata = {
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const indexableListings = await getIndexableListings();
+  const allListings = await getAllDirectoryListings();
+  const indexableListings = allListings.filter(isIndexableListing);
+  const directoryCounts = summarizeDirectoryCounts(allListings, indexableListings);
   const featuredListings = indexableListings.slice(0, 3).map(listingToBusiness);
-  const qualifiedCategoryHrefs = new Set(
-    directoryCategories
-      .filter(
-        (category) =>
-          indexableListings.filter((listing) => listingMatchesDirectoryCategory(listing, category)).length >=
-          MIN_INDEXABLE_DIRECTORY_RESULTS,
-      )
-      .map((category) => category.href),
-  );
-  const qualifiedCategories = directoryCategories.filter((category) => qualifiedCategoryHrefs.has(category.href));
+  const qualifiedCategories = selectQualifiedCategories(indexableListings);
+  const qualifiedCategoryHrefs = new Set(qualifiedCategories.map((category) => category.href));
   const qualifiedCityHrefs = new Set(
-    cityDirectoryPages
-      .filter(
-        (city) =>
-          indexableListings.filter((listing) => listingMatchesCity(listing, city.slug)).length >=
-          MIN_INDEXABLE_DIRECTORY_RESULTS,
-      )
-      .map((city) => city.href),
+    selectQualifiedCities(indexableListings).map((city) => city.href),
   );
   const qualifiedCityCards = cities.filter((city) => qualifiedCityHrefs.has(city.href));
   const latestBlogPosts = getSortedBlogPosts().slice(0, 3);
@@ -320,6 +311,36 @@ export default async function HomePage() {
             identify a real business, match a relevant category, provide usable location data and
             carry documented provenance before it can enter sitemaps, city results or business
             structured data.
+          </p>
+          {/*
+            The only numbers the homepage states, taken from the single count service so they are
+            provably the same population the sitemaps publish, and each labelled with the exact
+            term defined on the methodology page (audit sec. 6).
+          */}
+          <div className="stats-grid" aria-label="Directory publication counts">
+            <div>
+              <strong>{directoryCounts.qualified}</strong>
+              <span>qualified public profiles</span>
+            </div>
+            <div>
+              <strong>{directoryCounts.sourceChecked}</strong>
+              <span>source-checked records</span>
+            </div>
+            <div>
+              <strong>{directoryCounts.qualifiedCities}</strong>
+              <span>published city hubs</span>
+            </div>
+            <div>
+              <strong>{directoryCounts.qualifiedCategories}</strong>
+              <span>published category hubs</span>
+            </div>
+          </div>
+          <p className="compact-copy">
+            Discovered records that have not passed review are never counted here.{" "}
+            <Link href={`${routes.directoryMethodology}#label-definitions`}>
+              See what each label counts
+            </Link>
+            .
           </p>
           <div className="seo-answer-grid">
             <article className="answer-summary">

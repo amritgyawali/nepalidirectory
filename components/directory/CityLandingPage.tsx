@@ -4,12 +4,15 @@ import { RelatedGuideLinks } from "@/components/content/RelatedGuideLinks";
 import { CategoryTile } from "@/components/directory/CategoryTile";
 import { DirectoryPagination } from "@/components/directory/DirectoryPagination";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { FillImage } from "@/components/ui/FillImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getCityEditorialDetail, type CityDirectoryPage } from "@/lib/city-pages";
 import { categories } from "@/lib/data";
 import { getDirectoryCategory } from "@/lib/directory-categories";
 import { getGuidesForCity } from "@/lib/content-clusters";
 import type { Listing } from "@/lib/enrich";
+import { formatDirectoryDate } from "@/lib/format-date";
+import { displayLocality } from "@/lib/locality";
 import { listingDescription, listingVerificationLabel } from "@/lib/public-listings";
 import { getBusinessHref, getSearchHref, routes } from "@/lib/routes";
 
@@ -21,6 +24,8 @@ type CityLandingPageProps = {
   currentPage: number;
   totalPages: number;
   cityCategoryLinks: Record<string, string>;
+  /** Most recent source check across this city's qualified profiles, ISO format. */
+  lastCheckedAt?: string;
 };
 
 function getCategoryDestination(
@@ -41,18 +46,18 @@ export function CityLandingPageView({
   currentPage,
   totalPages,
   cityCategoryLinks,
+  lastCheckedAt,
 }: CityLandingPageProps) {
   const detail = getCityEditorialDetail(city.slug);
   const relatedGuides = getGuidesForCity(city.slug);
+  const lastCheckedLabel = formatDirectoryDate(lastCheckedAt);
   return (
     <main>
       <Breadcrumbs items={[{ label: city.province, href: routes.province }, { label: city.name }]} />
-      <section
-        className="city-directory-hero"
-        style={{
-          backgroundImage: `linear-gradient(180deg, rgba(26, 26, 26, 0.42), rgba(26, 26, 26, 0.78)), url("${city.image}")`
-        }}
-      >
+      <section className="city-directory-hero">
+        <div className="city-directory-hero__media">
+          <FillImage src={city.image} alt="" sizes="100vw" priority quality={60} />
+        </div>
         <div className="container">
           <h1>{city.title}</h1>
           <p>{city.description}</p>
@@ -74,6 +79,12 @@ export function CityLandingPageView({
               <span>publication gate</span>
             </div>
           </div>
+          {lastCheckedLabel ? (
+            <p className="city-directory-hero__refresh">
+              Most recent source check in this city: <time dateTime={lastCheckedAt}>{lastCheckedLabel}</time>.{" "}
+              <Link href={routes.directoryMethodology}>How profiles qualify</Link>
+            </p>
+          ) : null}
         </div>
       </section>
 
@@ -142,7 +153,7 @@ export function CityLandingPageView({
             <div className="city-profile-grid">
               {listings.map((listing) => (
                 <article className="answer-summary" key={listing.slug}>
-                  <span className="eyebrow"><MapPin size={13} aria-hidden /> {listing.neighborhood ?? listing.area}</span>
+                  <span className="eyebrow"><MapPin size={13} aria-hidden /> {displayLocality(listing)}</span>
                   <h2><Link href={getBusinessHref(listing.slug)}>{listing.name}</Link></h2>
                   <p>{listingDescription(listing)}</p>
                   <div className="business-card__amenities">
@@ -159,7 +170,7 @@ export function CityLandingPageView({
                 Nepali Directory does not substitute demo businesses from another city. Use the
                 service guides above while local records complete publication review.
               </p>
-              <Link className="button button--primary" href={routes.claimListing}>Add a verified business</Link>
+              <Link className="button button--primary" href={routes.claimListing}>Submit a business for review</Link>
             </div>
           )}
 

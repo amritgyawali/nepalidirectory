@@ -4,7 +4,9 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/directory/PageHero";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
+import { freshnessRules } from "@/lib/freshness";
 import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
+import { publicationTiers, trustVocabulary } from "@/lib/trust-vocabulary";
 
 const title = "How Nepali Directory Reviews and Publishes Business Listings";
 const description =
@@ -94,7 +96,7 @@ export default function DirectoryMethodologyPage() {
       description,
       url: canonicalUrl,
       keywords,
-      dateModified: "2026-07-15",
+      dateModified: "2026-08-06",
     }),
     "@type": "AboutPage",
   };
@@ -142,6 +144,66 @@ export default function DirectoryMethodologyPage() {
               a public profile, relevant category and city pages, the listing sitemap and truthful
               structured data. Qualification is a data-publication decision, not an endorsement.
             </p>
+          </section>
+
+          {/*
+            The public half of `lib/trust-vocabulary.ts`. Rendering the definitions from the same
+            module the counts are computed from means a label on a city or category page can always
+            be resolved here to an exact population (audit sec. 6).
+          */}
+          <section id="label-definitions">
+            <h2>What each status label counts</h2>
+            <p>
+              Every trust number on this site resolves to one of the definitions below. A count is
+              never described with a stronger word than the checks behind it support.
+            </p>
+            <dl className="listing-fact-list">
+              {Object.values(trustVocabulary).map((entry) => (
+                <div key={entry.key}>
+                  <dt>{entry.label}</dt>
+                  <dd>{entry.definition}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+
+          <section id="publication-tiers">
+            <h2>Publication tiers</h2>
+            <p>
+              A record moves up these tiers on evidence, not on age. Tier 0 records exist in the
+              database but are excluded from search indexing, sitemaps and business structured
+              data.
+            </p>
+            <div className="seo-answer-grid">
+              {publicationTiers.map((tier) => (
+                <article className="answer-summary" key={tier.tier}>
+                  <h3>
+                    Tier {tier.tier}: {tier.name}
+                  </h3>
+                  <p>{tier.summary}</p>
+                  <p>{tier.indexable ? "Eligible for publication." : "Not published."}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section id="review-intervals">
+            <h2>How often each fact is re-checked</h2>
+            <p>
+              A single &ldquo;last checked&rdquo; date would treat a phone number and a founding
+              year as equally perishable. Facts carry their own review intervals, and a profile
+              past its interval says so rather than presenting stale detail as current.
+            </p>
+            <dl className="listing-fact-list">
+              {freshnessRules.map((rule) => (
+                <div key={rule.factType}>
+                  <dt>
+                    {rule.label} — {rule.reviewIntervalDays} days
+                  </dt>
+                  <dd>{rule.note}</dd>
+                </div>
+              ))}
+            </dl>
           </section>
 
           <section>
