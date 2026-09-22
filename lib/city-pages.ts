@@ -54,8 +54,8 @@ export const cityDirectoryPages: CityDirectoryPage[] = [
     seoTitle: "Pokhara Business Directory: Hotels, Travel Agencies, Restaurants and Services",
     description:
       "Find Pokhara hotels, travel agencies, restaurants, cafes, adventure desks and local services around Lakeside and nearby areas.",
-    image: image("photo-1626621341517-bbf3d9990a23"),
-    imageAlt: "Phewa Lake and mountain views in Pokhara",
+    image: image("photo-1659808909524-5fcad5cd48bf"),
+    imageAlt: "Rowing boats moored on Phewa Lake in Pokhara",
     listings: "Live",
     neighborhoods: "5",
     rating: "Reviewed",
@@ -72,8 +72,8 @@ export const cityDirectoryPages: CityDirectoryPage[] = [
     seoTitle: "Lalitpur Business Directory: Clinics, Schools, Restaurants and Services",
     description:
       "Browse Lalitpur businesses including Patan restaurants, clinics, schools, salons, repair services and professional providers.",
-    image: image("photo-1561361513-2d000a50f0dc"),
-    imageAlt: "Patan Durbar Square in Lalitpur",
+    image: image("photo-1585597800810-07a63ea8e983"),
+    imageAlt: "Krishna Mandir in Patan Durbar Square, Lalitpur",
     listings: "Live",
     neighborhoods: "5",
     rating: "Reviewed",
@@ -90,8 +90,8 @@ export const cityDirectoryPages: CityDirectoryPage[] = [
     seoTitle: "Bhaktapur Business Directory: Newari Restaurants, Hotels and Local Services",
     description:
       "Find Bhaktapur restaurants, hotels, heritage dining rooms, shops, repair providers and local services.",
-    image: image("photo-1614107707379-283a65774553"),
-    imageAlt: "Historic square in Bhaktapur",
+    image: image("photo-1755011309944-1b6288be22ba"),
+    imageAlt: "Stone lions guarding a temple in Bhaktapur Durbar Square",
     listings: "Live",
     neighborhoods: "5",
     rating: "Reviewed",
@@ -108,8 +108,8 @@ export const cityDirectoryPages: CityDirectoryPage[] = [
     seoTitle: "Chitwan Business Directory: Hotels, Safari Tours, Restaurants and Services",
     description:
       "Explore Chitwan hotels, safari operators, restaurants, transport providers, clinics and local services.",
-    image: image("photo-1571401835393-8c5f35328320"),
-    imageAlt: "River and forest landscape in Chitwan",
+    image: image("photo-1498712067384-01239c6b377c"),
+    imageAlt: "Elephant crossing the grasslands of Chitwan",
     listings: "Live",
     neighborhoods: "4",
     rating: "Reviewed",

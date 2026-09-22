@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BadgeCheck, Building2, Grid3X3, MapPin, Search, Tag } from "lucide-react";
+import { BadgeCheck, Building2, Check, Grid3X3, LayoutGrid, LocateFixed, MapPin, Search, Tag } from "lucide-react";
 import Link from "next/link";
 import { LazyAiConcierge } from "@/components/ai/LazyAiConcierge";
 import { GuideCard } from "@/components/content/GuideCard";
@@ -197,17 +197,17 @@ export default async function HomePage() {
           <form className="hero-search" action={routes.search}>
             <label>
               <span>What are you looking for?</span>
-              <Search size={20} aria-hidden />
+              <Search size={18} aria-hidden />
               <input name="q" placeholder="Find a business (e.g. restaurants, plumbers)" />
             </label>
             <label>
               <span>Where?</span>
-              <MapPin size={20} aria-hidden />
+              <MapPin size={18} aria-hidden />
               <input name="location" defaultValue="Kathmandu, Bagmati" />
             </label>
             <label>
               <span>Category</span>
-              <Grid3X3 size={20} aria-hidden />
+              <Grid3X3 size={18} aria-hidden />
               <select name="category" defaultValue="">
                 <option value="">All categories</option>
                 {categories.slice(0, 8).map((category) => (
@@ -217,65 +217,156 @@ export default async function HomePage() {
                 ))}
               </select>
             </label>
-            <button type="submit">Find</button>
+            <button type="submit">
+              <Search size={17} aria-hidden />
+              Find
+            </button>
           </form>
-          <div className="home-hero__actions" aria-label="Quick directory actions">
-            <Link href={routes.deals}>
-              <Tag size={19} aria-hidden />
-              <span>
-                <strong>Explore deals</strong>
-                Save with local offers
-              </span>
-            </Link>
-            <Link href={routes.claimListing}>
-              <Building2 size={19} aria-hidden />
-              <span>
-                <strong>Add your business</strong>
-                Grow your local reach
-              </span>
-            </Link>
-            <Link href={routes.directoryMethodology}>
-              <BadgeCheck size={19} aria-hidden />
-              <span>
-                <strong>Publication checks</strong>
-                See how profiles qualify
-              </span>
-            </Link>
-          </div>
           <div className="home-hero__links">
-            <Link href={routes.search}>Use my location</Link>
             <span>Popular:</span>
             {popularSearches.slice(0, 4).map((item) => (
               <Link key={item} href={`${routes.search}?q=${encodeURIComponent(item)}&location=Kathmandu%2C+Bagmati`}>
                 {item}
               </Link>
             ))}
+            <Link className="home-hero__locate" href={routes.search}>
+              <LocateFixed size={14} aria-hidden />
+              Use my location
+            </Link>
+          </div>
+          <div className="home-hero__actions" aria-label="Quick directory actions">
+            <Link href={routes.deals}>
+              <Tag size={18} aria-hidden />
+              <span>
+                <strong>Explore deals</strong>
+                Save with local offers
+              </span>
+            </Link>
+            <Link href={routes.claimListing}>
+              <Building2 size={18} aria-hidden />
+              <span>
+                <strong>Add your business</strong>
+                Grow your local reach
+              </span>
+            </Link>
+            <Link href={routes.directoryMethodology}>
+              <BadgeCheck size={18} aria-hidden />
+              <span>
+                <strong>Publication checks</strong>
+                See how profiles qualify
+              </span>
+            </Link>
           </div>
           <div className="home-hero__trust">
-            <BadgeCheck size={17} aria-hidden />
+            <BadgeCheck size={16} aria-hidden />
             City guides, category research, owner submissions and publication checks in one directory.
           </div>
         </div>
       </section>
 
-      <section className="section section--soft" aria-labelledby="national-directory-title">
+      <section className="section home-categories" aria-labelledby="home-categories-title">
         <div className="container">
-          <p className="eyebrow">Nepal online business directory</p>
-          <h2 className="compact-title" id="national-directory-title">
-            A Nepal business directory for useful local decisions
-          </h2>
-          <p className="compact-copy">
-            NepaliDirectory brings crawlable category pages, practical city guides and
-            review-gated business profiles into one Nepal local directory. It is a modern online
-            alternative to a paper Nepal Yellow Pages: browse local businesses and services, then
-            confirm current hours, prices, availability and credentials directly.
-          </p>
+          <SectionHeader
+            id="home-categories-title"
+            eyebrow="Start with what you need"
+            title="Browse by category"
+            action={{ label: "View all categories", href: routes.categories }}
+          />
+          {qualifiedCategories.length ? (
+            <div className="home-category-grid">
+              {categories.filter((category) => qualifiedCategoryHrefs.has(category.href)).map((category) => (
+                <CategoryTile key={category.name} {...category} />
+              ))}
+              <Link className="category-tile category-tile--all" href={routes.categories}>
+                <span className="category-tile__icon">
+                  <LayoutGrid size={22} aria-hidden />
+                </span>
+                <span className="category-tile__name">All categories</span>
+              </Link>
+            </div>
+          ) : (
+            <div className="answer-summary"><h3>Category profiles are completing review</h3><p>Use the category research hub while business records complete publication checks.</p><Link href={routes.categories}>Open category guides</Link></div>
+          )}
+        </div>
+      </section>
+
+      <section className="section section--soft home-cities" aria-labelledby="home-cities-title">
+        <div className="container">
+          <SectionHeader
+            id="home-cities-title"
+            eyebrow="City directories"
+            title="Qualified city directories"
+            description="City result pages appear here only when enough reviewed public profiles are available."
+            action={{ label: "View all cities", href: routes.city }}
+          />
+          {qualifiedCityCards.length ? <><div className="home-city-grid">
+            {qualifiedCityCards.map((city) => (
+              <CityCard key={city.name} {...city} />
+            ))}
+          </div>
+          <div className="city-link-grid" aria-label="More Nepal city directories">
+            <span className="city-link-grid__label">More cities</span>
+            {cityLinks.filter((city) => qualifiedCityHrefs.has(getCityHref(city))).map((city) => (
+              <Link key={city} href={getCityHref(city)}>
+                {city}
+              </Link>
+            ))}
+          </div></> : <div className="answer-summary"><h3>City profiles are completing review</h3><p>City research guides remain available without publishing sample business results.</p><Link href={routes.city}>Open city guides</Link></div>}
+        </div>
+      </section>
+
+      <section className="section ai-home-band">
+        <div className="container ai-home-band__grid">
+          <div>
+            <p className="eyebrow">AI Autopilot</p>
+            <h2>Let AI handle local discovery, matching and follow-up.</h2>
+            <p>
+              The assistant searches directory data and explains its matches. Calls, websites and
+              named recommendations appear only when a qualified public profile is available.
+            </p>
+          </div>
+          <LazyAiConcierge />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <SectionHeader
+            eyebrow="Reviewed profiles"
+            title="Recently reviewed directory profiles"
+            description="Only profiles with auditable sources and completed content review can appear in this public section."
+            action={{ label: "Search all businesses", href: routes.search }}
+          />
+          {featuredListings.length ? <div className="home-featured">
+            {featuredListings.map((business) => (
+              <BusinessCard key={business.slug} business={business} />
+            ))}
+          </div> : <div className="answer-summary"><h3>Profiles are completing publication review</h3><p>Imported and preview records are withheld until their source, contact details and public content have been reviewed.</p><Link className="button button--primary" href={routes.claimListing}>Add or claim a business</Link></div>}
+        </div>
+      </section>
+
+      <section className="section section--soft home-national" aria-labelledby="national-directory-title">
+        <div className="container">
+          <div className="home-intro">
+            <div>
+              <p className="eyebrow">Nepal online business directory</p>
+              <h2 className="compact-title" id="national-directory-title">
+                A Nepal business directory for useful local decisions
+              </h2>
+            </div>
+            <p className="compact-copy">
+              NepaliDirectory brings crawlable category pages, practical city guides and
+              review-gated business profiles into one Nepal local directory. It is a modern online
+              alternative to a paper Nepal Yellow Pages: browse local businesses and services, then
+              confirm current hours, prices, availability and credentials directly.
+            </p>
+          </div>
           <div className="seo-link-strip" aria-label="Popular Nepal directory categories">
             {qualifiedCategories.map((category) => (
               <Link key={category.slug} href={category.href}>{category.priorityKeyword}</Link>
             ))}
           </div>
-          <div className="seo-answer-grid">
+          <div className="seo-answer-grid seo-answer-grid--three">
             <article className="answer-summary">
               <h2>Find businesses in Nepal</h2>
               <p>
@@ -309,42 +400,49 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="directory-method-title">
+      <section className="section home-method" aria-labelledby="directory-method-title">
         <div className="container">
-          <p className="eyebrow">Transparent directory method</p>
-          <h2 className="compact-title" id="directory-method-title">
-            How a business profile qualifies for publication
-          </h2>
-          <p className="compact-copy">
-            Nepali Directory separates product previews from public evidence. A named profile must
-            identify a real business, match a relevant category, provide usable location data and
-            carry documented provenance before it can enter sitemaps, city results or business
-            structured data.
-          </p>
-          <div className="seo-answer-grid">
-            <article className="answer-summary">
+          <div className="home-intro">
+            <div>
+              <p className="eyebrow">Transparent directory method</p>
+              <h2 className="compact-title" id="directory-method-title">
+                How a business profile qualifies for publication
+              </h2>
+            </div>
+            <p className="compact-copy">
+              Nepali Directory separates product previews from public evidence. A named profile must
+              identify a real business, match a relevant category, provide usable location data and
+              carry documented provenance before it can enter sitemaps, city results or business
+              structured data.
+            </p>
+          </div>
+          <ol className="method-steps">
+            <li className="answer-summary">
+              <span className="method-steps__label">Step 1</span>
               <h3>Source before scale</h3>
               <p>
                 Owner submissions, appropriately licensed OpenStreetMap records and reviewed
                 imports keep their source context. Placeholder contacts never count as publication
                 evidence.
               </p>
-            </article>
-            <article className="answer-summary">
+            </li>
+            <li className="answer-summary">
+              <span className="method-steps__label">Step 2</span>
               <h3>Quality gate before indexing</h3>
               <p>
                 Demo, inactive, incomplete and unresolved records remain outside XML sitemaps,
                 public rankings, aggregate ratings and LocalBusiness schema.
               </p>
-            </article>
-            <article className="answer-summary">
+            </li>
+            <li className="answer-summary">
+              <span className="method-steps__label">Step 3</span>
               <h3>Confirmation before decisions</h3>
               <p>
                 Hours, prices, availability, staff and service areas change. Directory pages help
                 build a shortlist; users should confirm important current details directly.
               </p>
-            </article>
-          </div>
+            </li>
+          </ol>
           <div className="directory-package__actions">
             <Link className="button button--primary" href={routes.directoryMethodology}>
               Read the full methodology
@@ -356,78 +454,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section ai-home-band">
-        <div className="container ai-home-band__grid">
-          <div>
-            <p className="eyebrow">AI Autopilot</p>
-            <h2>Let AI handle local discovery, matching and follow-up.</h2>
-            <p>
-              The assistant searches directory data and explains its matches. Calls, websites and
-              named recommendations appear only when a qualified public profile is available.
-            </p>
-          </div>
-          <LazyAiConcierge />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <SectionHeader
-            title="Browse by category"
-            action={{ label: "View all categories", href: routes.categories }}
-          />
-          <div className="home-category-grid">
-            {categories.filter((category) => qualifiedCategoryHrefs.has(category.href)).map((category) => (
-              <CategoryTile key={category.name} {...category} />
-            ))}
-          </div>
-          {qualifiedCategories.length === 0 ? (
-            <div className="answer-summary"><h3>Category profiles are completing review</h3><p>Use the category research hub while business records complete publication checks.</p><Link href={routes.categories}>Open category guides</Link></div>
-          ) : null}
-        </div>
-      </section>
-
-      <section className="section section--soft">
-        <div className="container">
-          <SectionHeader
-            title="Qualified city directories"
-            description="City result pages appear here only when enough reviewed public profiles are available."
-            action={{ label: "View all cities", href: routes.city }}
-          />
-          {qualifiedCityCards.length ? <><div className="home-city-grid">
-            {qualifiedCityCards.map((city) => (
-              <CityCard key={city.name} {...city} />
-            ))}
-          </div>
-          <div className="city-link-grid">
-            {cityLinks.filter((city) => qualifiedCityHrefs.has(getCityHref(city))).map((city) => (
-              <Link key={city} href={getCityHref(city)}>
-                {city}
-              </Link>
-            ))}
-          </div></> : <div className="answer-summary"><h3>City profiles are completing review</h3><p>City research guides remain available without publishing sample business results.</p><Link href={routes.city}>Open city guides</Link></div>}
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <SectionHeader
-            title="Recently reviewed directory profiles"
-            description="Only profiles with auditable sources and completed content review can appear in this public section."
-            action={{ label: "Search all businesses", href: routes.search }}
-          />
-          {featuredListings.length ? <div className="home-featured">
-            {featuredListings.map((business) => (
-              <BusinessCard key={business.slug} business={business} />
-            ))}
-          </div> : <div className="answer-summary"><h3>Profiles are completing publication review</h3><p>Imported and preview records are withheld until their source, contact details and public content have been reviewed.</p><Link className="button button--primary" href={routes.claimListing}>Add or claim a business</Link></div>}
-        </div>
-      </section>
-
-      <section className="section directory-package">
+      <section className="section section--soft directory-package">
         <div className="container directory-package__grid">
           <div>
             <SectionHeader
+              eyebrow="Everything in one place"
               title="Complete local directory toolkit"
               description="Search, compare, contact, claim, advertise and manage local business profiles from one directory system."
               action={{ label: "Explore search", href: routes.search }}
@@ -444,11 +475,14 @@ export default async function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="directory-feature-list">
+          <ul className="directory-feature-list">
             {directoryFeatureChecklist.map((feature) => (
-              <span key={feature}>{feature}</span>
+              <li key={feature}>
+                <Check size={15} aria-hidden />
+                {feature}
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -488,7 +522,7 @@ export default async function HomePage() {
       <section className="section">
         <div className="container home-bottom-grid">
           <div>
-            <SectionHeader title="Local guides" action={{ label: "Read the blog", href: routes.blog }} />
+            <SectionHeader eyebrow="Read before you choose" title="Local guides" action={{ label: "Read the blog", href: routes.blog }} />
             <div className="article-grid">
               {latestBlogPosts.map((post) => (
                 <GuideCard
@@ -517,9 +551,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section section--soft">
+      <section className="section section--soft home-faq">
         <div className="container">
-          <SectionHeader title="Frequently asked questions" />
+          <SectionHeader eyebrow="Good to know" title="Frequently asked questions" />
           <div className="article-faq" aria-labelledby="home-faq-title">
             <h2 id="home-faq-title" className="sr-only">
               NepaliDirectory frequently asked questions

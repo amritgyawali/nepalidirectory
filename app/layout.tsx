@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
+import { Anek_Latin, Manrope } from "next/font/google";
 import { LazyAiAssistant } from "@/components/ai/LazyAiAssistant";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -10,12 +10,20 @@ import "@/components/layout/layout.css";
 import "@/components/ui/ui.css";
 import "@/components/directory/directory.css";
 import "./globals.css";
+import "./theme.css";
 import "./mobile.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-manrope"
+});
+
+const anekLatin = Anek_Latin({
+  subsets: ["latin"],
+  display: "swap",
+  axes: ["wdth"],
+  variable: "--font-anek"
 });
 
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
@@ -25,7 +33,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#ffd400"
+  themeColor: "#0f1c2e"
 };
 
 export const metadata: Metadata = {
@@ -110,7 +118,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const siteJsonLd = [buildOrganizationJsonLd(), buildWebSiteJsonLd()];
 
   return (
-    <html lang="en" className={manrope.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" className={`${manrope.variable} ${anekLatin.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteJsonLd) }} />
         <Header />

@@ -1,7 +1,7 @@
 .map-page {
   background:
-    radial-gradient(circle at 92% 4%, rgba(255, 212, 0, 0.19), transparent 23rem),
-    linear-gradient(180deg, #fbfaf5 0%, #f4f5ef 100%);
+    radial-gradient(circle at 92% 4%, rgba(247, 181, 0, 0.12), transparent 23rem),
+    linear-gradient(180deg, #ffffff 0%, var(--snow, #f4f6f9) 100%);
   padding: 32px 0 52px;
 }
 
@@ -42,7 +42,7 @@
 
 .directory-map__hero-stat {
   align-items: flex-end;
-  background: #181713;
+  background: var(--ink, #0f1c2e);
   border-radius: 14px;
   box-shadow: 0 12px 30px rgba(24, 23, 19, 0.18);
   color: #fff;
@@ -133,14 +133,14 @@
 
 .directory-map__filters select:focus-visible,
 .directory-map__search:focus-within {
-  border-color: #181713;
+  border-color: var(--ink, #0f1c2e);
   box-shadow: 0 0 0 3px rgba(255, 212, 0, 0.45);
   outline: none;
 }
 
 .directory-map__reset {
   align-items: center;
-  background: #181713;
+  background: var(--ink, #0f1c2e);
   border: 0;
   border-radius: 7px;
   color: #fff;
@@ -229,7 +229,7 @@
   align-items: center;
   background:
     linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.88)),
-    repeating-linear-gradient(45deg, #dde4d5, #dde4d5 12px, #edf0e8 12px, #edf0e8 24px);
+    repeating-linear-gradient(45deg, #e3e7ed, #e3e7ed 12px, #f4f6f9 12px, #f4f6f9 24px);
   color: var(--color-secondary);
   display: flex;
   flex-direction: column;
@@ -245,7 +245,7 @@
 .directory-map__loading span {
   animation: directory-map-pulse 1s ease-in-out infinite alternate;
   background: var(--color-accent);
-  border: 3px solid #181713;
+  border: 3px solid var(--ink, #0f1c2e);
   border-radius: 50%;
   height: 24px;
   width: 24px;
@@ -440,15 +440,15 @@
 
 .directory-map__listing--active {
   background: #fff7cc;
-  box-shadow: inset 4px 0 #181713;
+  box-shadow: inset 4px 0 var(--ink, #0f1c2e);
 }
 
 .directory-map__listing-pin {
   align-items: center;
   background: var(--color-accent);
-  border: 2px solid #181713;
+  border: 2px solid var(--ink, #0f1c2e);
   border-radius: 50% 50% 50% 4px;
-  color: #181713;
+  color: var(--ink, #0f1c2e);
   display: inline-flex;
   flex: 0 0 auto;
   height: 30px;

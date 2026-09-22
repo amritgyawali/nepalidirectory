@@ -174,25 +174,25 @@ export const cities = [
   {
     name: "Pokhara",
     listings: "City directory guide",
-    image: image("photo-1626621341517-bbf3d9990a23", "700"),
+    image: image("photo-1659808909524-5fcad5cd48bf", "700"),
     href: "/city/pokhara"
   },
   {
     name: "Lalitpur",
     listings: "City directory guide",
-    image: image("photo-1561361513-2d000a50f0dc", "700"),
+    image: image("photo-1585597800810-07a63ea8e983", "700"),
     href: "/city/lalitpur"
   },
   {
     name: "Bhaktapur",
     listings: "City directory guide",
-    image: image("photo-1614107707379-283a65774553", "700"),
+    image: image("photo-1755011309944-1b6288be22ba", "700"),
     href: "/city/bhaktapur"
   },
   {
     name: "Chitwan",
     listings: "City directory guide",
-    image: image("photo-1571401835393-8c5f35328320", "700"),
+    image: image("photo-1498712067384-01239c6b377c", "700"),
     href: "/city/chitwan"
   }
 ];
