@@ -16,3 +16,7 @@ tsconfig.tsbuildinfo
 # Bulk OSM extract consumed by scripts/import-osm.mjs — 28MB, regenerable from the
 # Geofabrik nepal-latest.osm.pbf extract, so it doesn't belong in git.
 db/imports/osm-nepal.ndjson
+
+# Local browser profiles and screenshots left by Codex browser automation
+.codex*/
+.codex-*.png
