@@ -15,6 +15,7 @@ import {
   getDirectoryCategory,
   listingMatchesDirectoryCategory,
 } from "@/lib/directory-categories";
+import { getIndexableHubSlugs } from "@/lib/indexable-hubs";
 import {
   getIndexableListings,
   listingDescription,
@@ -139,6 +140,9 @@ export default async function DirectoryCategoryPage({
   const requestedPage = parseDirectoryPage((await searchParams)?.page);
   if (!requestedPage) notFound();
   const listings = await loadCategoryListings(category.slug);
+  // Below the publication threshold the hub 404s instead of serving a noindex page, so Search
+  // Console never files it under "Excluded by 'noindex' tag".
+  if (listings.length < MIN_INDEXABLE_DIRECTORY_RESULTS) notFound();
   const pagination = paginateDirectoryItems(listings, requestedPage);
   if (!pagination.valid) notFound();
   const pageListings = pagination.items;
@@ -148,8 +152,9 @@ export default async function DirectoryCategoryPage({
       listings.filter((listing) => listingMatchesCity(listing, city.slug)).length >=
       MIN_INDEXABLE_DIRECTORY_RESULTS,
   );
+  const { categories: liveCategorySlugs } = await getIndexableHubSlugs();
   const otherCategories = directoryCategories.filter(
-    (candidate) => candidate.slug !== category.slug,
+    (candidate) => candidate.slug !== category.slug && liveCategorySlugs.includes(candidate.slug),
   );
   const canonicalPath = paginatedDirectoryHref(category.href, requestedPage);
   const canonicalUrl = `${siteUrl}${canonicalPath}`;

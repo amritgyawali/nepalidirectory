@@ -1015,7 +1015,7 @@ export const nationalDirectoryGuidePosts: BlogPost[] = [
       },
     ],
     contextLinks: [
-      { href: "/best-businesses", label: "Read the listing publication method" },
+      { href: "/directory-methodology", label: "Read the listing publication method" },
       { href: "/categories", label: "Compare businesses by category" },
       { href: "/blog/verify-companies-in-nepal-before-hiring", label: "Use the company verification checklist" },
     ],

@@ -6,6 +6,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getCityDirectoryPage, getCityHref } from "@/lib/city-pages";
 import { categories, cityLinks } from "@/lib/data";
 import { getDirectoryCategory } from "@/lib/directory-categories";
+import { getIndexableHubSlugsOrNone, isLiveHubHref, type IndexableHubSlugs } from "@/lib/indexable-hubs";
 import type { SeoLandingPage } from "@/lib/landing";
 import { getIndexableListings, listingDescription } from "@/lib/public-listings";
 import { getBusinessHref, getSearchHref, routes } from "@/lib/routes";
@@ -16,13 +17,16 @@ type SeoLandingPageProps = {
   page: SeoLandingPage;
 };
 
-function getQuickLinkDestination(label: string): string {
+/** Unpublished hubs 404, so they fall back to a search for the same label. */
+function getQuickLinkDestination(label: string, hubs: IndexableHubSlugs): string {
   const slug = label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-  return getDirectoryCategory(slug)?.href ?? getCityDirectoryPage(slug)?.href ?? getSearchHref(label);
+  const hubHref = getDirectoryCategory(slug)?.href ?? getCityDirectoryPage(slug)?.href;
+  return hubHref && isLiveHubHref(hubHref, hubs) ? hubHref : getSearchHref(label);
 }
 
 export async function SeoLandingPageView({ page }: SeoLandingPageProps) {
   const publicListings = (await getIndexableListings()).slice(0, 8);
+  const hubs = await getIndexableHubSlugsOrNone();
   const keywords = uniqueKeywords([...page.keywords, ...page.quickLinks, ...page.sections.map((section) => section.title)]);
   const webPageJsonLd = buildWebPageJsonLd({
     name: page.seoTitle,
@@ -86,7 +90,7 @@ export async function SeoLandingPageView({ page }: SeoLandingPageProps) {
           </div>
           <div className="seo-link-strip" aria-label="Popular shortcuts">
             {page.quickLinks.map((link) => (
-              <Link key={link} href={getQuickLinkDestination(link)}>
+              <Link key={link} href={getQuickLinkDestination(link, hubs)}>
                 {link}
               </Link>
             ))}
@@ -140,7 +144,7 @@ export async function SeoLandingPageView({ page }: SeoLandingPageProps) {
           <aside className="sidebar">
             <section className="filter-card">
               <h2>Popular cities</h2>
-              {cityLinks.slice(0, 10).map((city) => (
+              {cityLinks.filter((city) => isLiveHubHref(getCityHref(city), hubs)).slice(0, 10).map((city) => (
                 <Link key={city} href={getCityHref(city)}>
                   {city}
                 </Link>

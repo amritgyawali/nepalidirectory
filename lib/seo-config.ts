@@ -2,8 +2,6 @@ import { routes } from "@/lib/routes";
 
 export const noIndexRoutes = new Set<string>([
   routes.search,
-  routes.bestBusinesses,
-  routes.topRated,
   routes.profile,
   routes.account,
   routes.login,
@@ -17,8 +15,6 @@ export const noIndexRoutes = new Set<string>([
   routes.map,
   routes.getApp,
   routes.deals,
-  routes.events,
-  routes.requestCallback,
   routes.province,
   routes.writeReview,
   routes.dashboard,

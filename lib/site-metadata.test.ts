@@ -4,9 +4,9 @@ import { buildPublicPageMetadata } from "@/lib/site-metadata";
 describe("public page index controls", () => {
   it("noindexes empty utility surfaces but preserves crawlable links", () => {
     const metadata = buildPublicPageMetadata({
-      title: "Events",
-      description: "Events pending publication.",
-      path: "/events",
+      title: "Deals",
+      description: "Deals pending publication.",
+      path: "/deals",
     });
 
     expect(metadata.robots).toMatchObject({ index: false, follow: true });

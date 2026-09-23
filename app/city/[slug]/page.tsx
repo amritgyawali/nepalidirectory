@@ -4,7 +4,8 @@ import { cache } from "react";
 import { CityLandingPageView } from "@/components/directory/CityLandingPage";
 import { cityDirectoryPages, getCityDirectoryPage, getCityEditorialDetail } from "@/lib/city-pages";
 import { siteUrl } from "@/lib/blog";
-import { directoryCategories, listingMatchesDirectoryCategory } from "@/lib/directory-categories";
+import { directoryCategories } from "@/lib/directory-categories";
+import { getIndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getIndexableListings, listingMatchesCity } from "@/lib/public-listings";
 import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 import { buildListingItemListJsonLd } from "@/lib/seo-auto";
@@ -90,18 +91,25 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
 
   const requestedPage = parseDirectoryPage((await searchParams)?.page);
   if (!requestedPage) notFound();
-  const nearbyCities = cityDirectoryPages.filter((candidate) => candidate.slug !== city.slug).slice(0, 7);
   const listings = await loadCityListings(city.slug);
+  // A hub below the publication threshold does not exist yet: a 404 (not a noindex page) keeps it
+  // out of Search Console's "Excluded by 'noindex' tag" report until it has enough listings.
+  if (listings.length < MIN_INDEXABLE_DIRECTORY_RESULTS) notFound();
   const pagination = paginateDirectoryItems(listings, requestedPage);
   if (!pagination.valid) notFound();
+  const hubs = await getIndexableHubSlugs();
+  const nearbyCities = cityDirectoryPages
+    .filter((candidate) => candidate.slug !== city.slug && hubs.cities.includes(candidate.slug))
+    .slice(0, 7);
+  // Prefer the city+category hub, then the national category hub; unpublished hubs get no link.
   const cityCategoryLinks = Object.fromEntries(
-    directoryCategories
-      .filter(
-        (category) =>
-          listings.filter((listing) => listingMatchesDirectoryCategory(listing, category)).length >=
-          MIN_INDEXABLE_DIRECTORY_RESULTS,
-      )
-      .map((category) => [category.slug, getCityCategoryHref(city.slug, category.slug)]),
+    directoryCategories.flatMap((category) =>
+      hubs.cityCategories.includes(`${city.slug}/${category.slug}`)
+        ? [[category.slug, getCityCategoryHref(city.slug, category.slug)]]
+        : hubs.categories.includes(category.slug)
+          ? [[category.slug, category.href]]
+          : [],
+    ),
   );
   const canonicalPath = paginatedDirectoryHref(city.href, requestedPage);
   const canonicalUrl = `${siteUrl}${canonicalPath}`;

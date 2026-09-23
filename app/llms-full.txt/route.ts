@@ -4,6 +4,7 @@ import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { getSortedCompareCategories } from "@/lib/compare";
 import { directoryCategories, getDirectoryCategory } from "@/lib/directory-categories";
+import { computeIndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getBusinessHref, routes } from "@/lib/routes";
 import { getIndexableListings } from "@/lib/public-listings";
 import { getEvergreenPages } from "@/lib/seo-auto";
@@ -39,6 +40,8 @@ export async function GET() {
   } catch (error) {
     console.error("Unable to load qualified listings for llms-full.txt", error);
   }
+  // Unpublished hubs 404, so only list the ones that currently qualify.
+  const hubs = computeIndexableHubSlugs(publicListings);
 
   const guides = uniquePosts([...getSortedBlogPosts(), ...generatedPosts])
     .sort((a, b) => b.modifiedAt.localeCompare(a.modifiedAt));
@@ -83,13 +86,13 @@ export async function GET() {
     "",
     "### Business categories",
     "",
-    ...directoryCategories.map((category) =>
+    ...directoryCategories.filter((category) => hubs.categories.includes(category.slug)).map((category) =>
       resource(category.priorityKeyword, category.href, category.metaDescription),
     ),
     "",
     "### City directories",
     "",
-    ...cityDirectoryPages.map((city) => resource(city.title, city.href, city.description)),
+    ...cityDirectoryPages.filter((city) => hubs.cities.includes(city.slug)).map((city) => resource(city.title, city.href, city.description)),
     "",
     "### Business comparison guides",
     "",

@@ -1,10 +1,12 @@
 import { siteUrl } from "@/lib/blog";
-import { cityDirectoryPages } from "@/lib/city-pages";
+import { getIndexableCityPages } from "@/lib/indexable-hubs";
 
 export const revalidate = 300;
 
 export async function GET() {
-  const cityEntries = cityDirectoryPages.map((city) => ({
+  // Only published city hubs: a city below the listing threshold returns 404, and a sitemap URL
+  // that is not indexable is reported in Search Console as an excluded page.
+  const cityEntries = (await getIndexableCityPages()).map((city) => ({
     url: `${siteUrl}${city.href}`,
     lastModified: "2026-07-12",
   }));

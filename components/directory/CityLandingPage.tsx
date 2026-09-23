@@ -7,7 +7,6 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getCityEditorialDetail, type CityDirectoryPage } from "@/lib/city-pages";
 import { categories } from "@/lib/data";
-import { getDirectoryCategory } from "@/lib/directory-categories";
 import { getGuidesForCity } from "@/lib/content-clusters";
 import type { Listing } from "@/lib/enrich";
 import { listingDescription, listingVerificationLabel } from "@/lib/public-listings";
@@ -29,8 +28,8 @@ function getCategoryDestination(
   cityCategoryLinks: Record<string, string>,
 ): string {
   const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-  if (cityCategoryLinks[slug]) return cityCategoryLinks[slug];
-  return getDirectoryCategory(slug)?.href ?? getSearchHref(name, city);
+  // Only published hubs are in cityCategoryLinks; anything else falls back to a search.
+  return cityCategoryLinks[slug] ?? getSearchHref(name, city);
 }
 
 export function CityLandingPageView({

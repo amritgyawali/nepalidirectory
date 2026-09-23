@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
-import { cityDirectoryPages } from "@/lib/city-pages";
 import { siteUrl } from "@/lib/blog";
+import { getIndexableCityPages } from "@/lib/indexable-hubs";
 import { routes } from "@/lib/routes";
 import { buildWebPageJsonLd, serializeJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Nepal Business Directory by City",
-  description: "Browse reviewed city guides for Kathmandu, Pokhara, Lalitpur, Bhaktapur, Chitwan, Biratnagar, Butwal and Dharan.",
+  description: "Browse reviewed city guides for Kathmandu, Pokhara, Lalitpur, Bhaktapur, Chitwan, Biratnagar, Butwal and more Nepal cities.",
   alternates: { canonical: "/city" },
   openGraph: {
     title: "Nepal Business Directory by City",
@@ -22,7 +22,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CityIndexPage() {
+export const revalidate = 300;
+
+export default async function CityIndexPage() {
+  // Cities below the listing threshold 404 until they qualify, so they are not linked here.
+  const cityDirectoryPages = await getIndexableCityPages();
   const provinces = [...new Set(cityDirectoryPages.map((city) => city.province))];
   const itemList = {
     "@context": "https://schema.org",
@@ -43,7 +47,7 @@ export default function CityIndexPage() {
   const collectionPage = {
     ...buildWebPageJsonLd({
       name: "Nepal Business Directory by City",
-      description: "Browse reviewed city guides and qualified public business profiles across eight Nepal city hubs.",
+      description: "Browse reviewed city guides and qualified public business profiles across Nepal city hubs.",
       url: `${siteUrl}/city`,
       keywords: ["Nepal business directory by city", "Kathmandu businesses", "Pokhara businesses", "Nepal city guides"],
       dateModified: "2026-07-11",
@@ -58,7 +62,7 @@ export default function CityIndexPage() {
       <Breadcrumbs items={[{ label: "Cities" }]} />
       <section className="page-head">
         <div className="container">
-          <span className="eyebrow">Eight reviewed city hubs</span>
+          <span className="eyebrow">Reviewed city hubs</span>
           <h1 className="page-title">Find local businesses by city in Nepal</h1>
           <p className="page-copy">
             Choose a city to see locally specific search guidance, named areas, category paths and

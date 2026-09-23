@@ -65,7 +65,7 @@ export async function fetchOsmElements({
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      "User-Agent": "NepaliDirectoryBot/1.0 (+https://nepalidirectory.com/bot)",
+      "User-Agent": "NepaliDirectoryBot/1.0 (+https://www.nepalidirectory.com/about)",
       Accept: "application/json",
     },
     body: new URLSearchParams({ data: query }).toString(),

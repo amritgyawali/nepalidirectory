@@ -32,44 +32,6 @@ const image = (id: string, width = "1200", height = "760") =>
 
 export const landingPages: SeoLandingPage[] = [
   {
-    slug: "best-businesses",
-    href: "/best-businesses",
-    title: "How NepaliDirectory publishes business profiles",
-    seoTitle: "Business Profile Publication Method | NepaliDirectory",
-    description:
-      "See the evidence and human-review checks NepaliDirectory requires before a local business profile can appear in public directory results.",
-    image: image("photo-1556742049-0cfed4f6a45d"),
-    imageAlt: "Local business owners serving customers",
-    keywords: [
-      "best businesses Nepal",
-      "top businesses in Nepal",
-      "best local businesses Kathmandu",
-      "verified businesses Nepal"
-    ],
-    primaryCta: "Browse reviewed profiles",
-    stats: [
-      { value: "Source-checked", label: "publication requirement" },
-      { value: String(cityDirectoryPages.length), label: "city guides" },
-      { value: String(categories.length), label: "category paths" },
-      { value: "Human", label: "content review" }
-    ],
-    sections: [
-      {
-        title: "How a business qualifies",
-        body:
-          "A named business can enter public category and city results only after its source, location, category and profile completeness pass the directory's publication checks.",
-        bullets: ["Meaningful source provenance", "Reviewed category and location", "Complete public details"]
-      },
-      {
-        title: "No rankings without evidence",
-        body:
-          "NepaliDirectory withholds rating and winner claims until genuine, moderated reviewer-level records can be shown visibly on the same profile.",
-        bullets: ["No fixture ratings", "No unsupported top picks", "Direct fact confirmation"]
-      }
-    ],
-    quickLinks: ["Restaurants", "Hotels", "Doctors", "Schools", "Contractors", "Beauty Salons"]
-  },
-  {
     slug: "near-me",
     href: "/near-me",
     title: "Find businesses near me in Nepal",

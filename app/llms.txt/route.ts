@@ -5,6 +5,7 @@ import { cityDirectoryPages } from "@/lib/city-pages";
 import { getSortedCompareCategories } from "@/lib/compare";
 import { getPopulatedCompareSlugs } from "@/lib/compare-listings";
 import { directoryCategories } from "@/lib/directory-categories";
+import { computeIndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getBusinessHref, routes } from "@/lib/routes";
 import { getIndexableListings } from "@/lib/public-listings";
 import { getEvergreenPages } from "@/lib/seo-auto";
@@ -40,6 +41,8 @@ export async function GET() {
   } catch (error) {
     console.error("Unable to load qualified listings for llms.txt", error);
   }
+  // Unpublished hubs 404, so only list the ones that currently qualify.
+  const hubs = computeIndexableHubSlugs(publicListings);
 
   const guides = uniquePosts([...getSortedBlogPosts(), ...generatedPosts])
     .sort((a, b) => b.modifiedAt.localeCompare(a.modifiedAt))
@@ -63,10 +66,9 @@ export async function GET() {
     resource("Home", routes.home, "Browse local businesses, services, cities, and guides across Nepal."),
     resource("Best Directory in Nepal", routes.bestDirectoryNepal, "How to judge a Nepal business directory, with live coverage counts and how Nepali Directory meets each criterion."),
     resource("Categories", routes.categories, "Explore the directory by business and service category."),
-    ...directoryCategories.map((category) =>
+    ...directoryCategories.filter((category) => hubs.categories.includes(category.slug)).map((category) =>
       resource(category.priorityKeyword, category.href, category.metaDescription),
     ),
-    resource("Best Businesses", routes.bestBusinesses, "See the review-gated ranking method and available category and city paths."),
     resource("Near Me", routes.nearMe, "Discover nearby business categories and local services."),
     resource("Business Comparisons", routes.compareBusiness, "Use consistent decision criteria; named providers appear only after publication review."),
     resource("Blog", routes.blog, "Practical Nepal travel, food, services, healthcare, and business guides."),
@@ -76,7 +78,7 @@ export async function GET() {
     "",
     "## City directories",
     "",
-    ...cityDirectoryPages.map((city) => resource(city.title, city.href, city.description)),
+    ...cityDirectoryPages.filter((city) => hubs.cities.includes(city.slug)).map((city) => resource(city.title, city.href, city.description)),
     "",
     "## Business comparison guides",
     "",

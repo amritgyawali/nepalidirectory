@@ -2,7 +2,11 @@ import type { NextConfig } from "next";
 import { duplicateBlogRedirects } from "./lib/blog-dedup";
 
 const legacyRedirects: Record<string, string> = {
-  "/top-rated": "/best-businesses",
+  // Retired noindex pages (Search Console "Excluded by 'noindex' tag"): each now permanently
+  // redirects to the indexable page that does the same job, so Google stops recrawling a noindex URL.
+  "/best-businesses": "/directory-methodology",
+  "/top-rated": "/directory-methodology",
+  "/request-callback": "/contact",
   "/Home.dc.html": "/",
   "/Search%20Results.dc.html": "/search",
   "/Business%20Detail.dc.html": "/business/newa-lahana",
@@ -34,12 +38,11 @@ const legacyRedirects: Record<string, string> = {
   "/Claim%20Listing.dc.html": "/claim-listing",
   "/Dashboard.dc.html": "/dashboard",
   "/Deals%20Offers.dc.html": "/deals",
-  "/Local%20Events.dc.html": "/events",
   "/Pricing%20Plans.dc.html": "/pricing",
   "/Help.dc.html": "/help",
   "/Sitemap.dc.html": "/sitemap",
   "/Write%20Review.dc.html": "/write-review",
-  "/Request%20Callback.dc.html": "/request-callback",
+  "/Request%20Callback.dc.html": "/contact",
   "/Province.dc.html": "/province"
 };
 

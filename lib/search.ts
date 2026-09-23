@@ -43,15 +43,6 @@ const corePages: SearchRecord[] = [
     tags: ["deals", "offers", "discounts"]
   },
   {
-    id: "page-events",
-    kind: "page",
-    title: "Local Events",
-    description: "Community events, food festivals, business openings and local happenings.",
-    href: routes.events,
-    location: "Nepal",
-    tags: ["events", "community", "local"]
-  },
-  {
     id: "page-dashboard",
     kind: "page",
     title: "Business Dashboard",

@@ -3,8 +3,9 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/directory/PageHero";
 import { blogPosts, siteUrl } from "@/lib/blog";
-import { cityDirectoryPages } from "@/lib/city-pages";
-import { directoryCategories } from "@/lib/directory-categories";
+import { cityDirectoryPages as allCityDirectoryPages } from "@/lib/city-pages";
+import { directoryCategories as allDirectoryCategories } from "@/lib/directory-categories";
+import { computeIndexableHubSlugs, noIndexableHubs, type IndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getIndexableListings } from "@/lib/public-listings";
 import { routes } from "@/lib/routes";
 import { buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
@@ -161,18 +162,22 @@ const faqs = [
   },
 ];
 
-async function loadPublishedListingCount(): Promise<number | null> {
+async function loadPublishedDirectory(): Promise<{ listingCount: number | null; hubs: IndexableHubSlugs }> {
   try {
-    return (await getIndexableListings()).length;
+    const listings = await getIndexableListings();
+    return { listingCount: listings.length, hubs: computeIndexableHubSlugs(listings) };
   } catch (error) {
     console.error("Unable to count published listings for the directory answer page", error);
-    return null;
+    return { listingCount: null, hubs: noIndexableHubs };
   }
 }
 
 export default async function BestDirectoryInNepalPage() {
   const canonicalUrl = `${siteUrl}${routes.bestDirectoryNepal}`;
-  const publishedListings = await loadPublishedListingCount();
+  const { listingCount: publishedListings, hubs } = await loadPublishedDirectory();
+  // Unpublished hubs 404, so the counts, links and ItemList only cover hubs that qualify today.
+  const directoryCategories = allDirectoryCategories.filter((category) => hubs.categories.includes(category.slug));
+  const cityDirectoryPages = allCityDirectoryPages.filter((city) => hubs.cities.includes(city.slug));
   const facts = [
     { label: "Category hubs", value: String(directoryCategories.length) },
     { label: "City directories", value: String(cityDirectoryPages.length) },

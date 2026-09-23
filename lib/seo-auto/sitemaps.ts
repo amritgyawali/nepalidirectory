@@ -5,10 +5,10 @@ import { isIndexableBlogCategory } from "@/lib/blog-quality";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
 import { getPopulatedCompareSlugs } from "@/lib/compare-listings";
-import { directoryCategories, listingMatchesDirectoryCategory } from "@/lib/directory-categories";
-import { MIN_INDEXABLE_DIRECTORY_RESULTS } from "@/lib/directory-pagination";
+import { directoryCategories } from "@/lib/directory-categories";
+import { computeIndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getBusinessHref, getCityCategoryHref, routes } from "@/lib/routes";
-import { getIndexableListings, listingMatchesCity, publicListingImage } from "@/lib/public-listings";
+import { getIndexableListings, publicListingImage } from "@/lib/public-listings";
 import { isIndexableRoute } from "@/lib/seo-config";
 import { getEvergreenPages } from "./evergreen";
 
@@ -24,11 +24,7 @@ export type SitemapIndexEntry = {
   lastModified?: Date | string;
 };
 
-const separatelyMappedRoutes = new Set<string>([
-  routes.blogPost,
-  routes.bestBusinesses,
-  routes.topRated,
-]);
+const separatelyMappedRoutes = new Set<string>([routes.blogPost]);
 
 export function getStaticSitemapEntries(): SitemapEntry[] {
   const staticRoutes = Array.from(new Set<string>(Object.values(routes))).filter(
@@ -62,40 +58,23 @@ export function getBlogSitemapEntries(additionalPosts: BlogPost[] = []): Sitemap
 }
 
 export async function getCategorySitemapEntries(): Promise<SitemapEntry[]> {
-  const listings = await getIndexableListings();
+  const hubs = computeIndexableHubSlugs(await getIndexableListings());
   const populatedCompareSlugs = await getPopulatedCompareSlugs();
-  const cityCategoryEntries = cityDirectoryPages.flatMap((city) =>
-    directoryCategories.flatMap((category) => {
-      const count = listings.filter(
-        (listing) =>
-          listingMatchesCity(listing, city.slug) &&
-          listingMatchesDirectoryCategory(listing, category),
-      ).length;
-      return count >= MIN_INDEXABLE_DIRECTORY_RESULTS
-        ? [{ url: `${siteUrl}${getCityCategoryHref(city.slug, category.slug)}` }]
-        : [];
-    }),
-  );
   return [
     ...directoryCategories
-      .filter(
-        (category) =>
-          listings.filter((listing) => listingMatchesDirectoryCategory(listing, category)).length >=
-          MIN_INDEXABLE_DIRECTORY_RESULTS,
-      )
+      .filter((category) => hubs.categories.includes(category.slug))
       .map((category) => ({ url: `${siteUrl}${category.href}` })),
     ...compareCategories.filter((category) => populatedCompareSlugs.has(category.slug)).map((category) => ({
       url: `${siteUrl}${category.href}`,
       lastModified: category.updatedAt,
     })),
     ...cityDirectoryPages
-      .filter(
-        (city) =>
-          listings.filter((listing) => listingMatchesCity(listing, city.slug)).length >=
-          MIN_INDEXABLE_DIRECTORY_RESULTS,
-      )
+      .filter((city) => hubs.cities.includes(city.slug))
       .map((city) => ({ url: `${siteUrl}${city.href}` })),
-    ...cityCategoryEntries,
+    ...hubs.cityCategories.map((pair) => {
+      const [citySlug, categorySlug] = pair.split("/");
+      return { url: `${siteUrl}${getCityCategoryHref(citySlug, categorySlug)}` };
+    }),
     ...getEvergreenPages().map((page) => ({
       url: `${siteUrl}${page.href}`,
     })),

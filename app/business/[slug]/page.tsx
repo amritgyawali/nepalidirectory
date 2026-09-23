@@ -16,8 +16,8 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { siteUrl } from "@/lib/blog";
 import { cityDirectoryPages } from "@/lib/city-pages";
-import { getDirectoryCategory, listingMatchesDirectoryCategory } from "@/lib/directory-categories";
-import { MIN_INDEXABLE_DIRECTORY_RESULTS } from "@/lib/directory-pagination";
+import { getDirectoryCategory } from "@/lib/directory-categories";
+import { getIndexableHubSlugs } from "@/lib/indexable-hubs";
 import {
   canPreviewListing,
   getDirectoryListing,
@@ -42,7 +42,6 @@ export const revalidate = 300;
 export const dynamicParams = true;
 
 const loadListing = cache(getDirectoryListing);
-const loadIndexableListings = cache(getIndexableListings);
 
 function titleCase(value: string): string {
   return value
@@ -116,21 +115,23 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
   const factsCheckedAt = listingFactsCheckedAt(listing);
   const categories = listing.categories.map(titleCase);
   const primaryCategory = getDirectoryCategory(listing.categories[0] ?? "");
+  // Breadcrumbs and category links only point at published hubs; an unpublished hub 404s.
+  const hubs = await getIndexableHubSlugs();
+  const categoryHubHref = (slug: string) => {
+    const category = getDirectoryCategory(slug);
+    return category && hubs.categories.includes(category.slug) ? category.href : undefined;
+  };
   const cityPage = cityDirectoryPages.find((city) => listingMatchesCity(listing, city.slug));
-  const locationHref = cityPage?.href ?? routes.city;
+  const locationHref = cityPage && hubs.cities.includes(cityPage.slug) ? cityPage.href : routes.city;
   const hasExactDirectoryParent = Boolean(
     indexable &&
     primaryCategory &&
     cityPage &&
-    (await loadIndexableListings()).filter(
-      (candidate) =>
-        listingMatchesCity(candidate, cityPage.slug) &&
-        listingMatchesDirectoryCategory(candidate, primaryCategory),
-    ).length >= MIN_INDEXABLE_DIRECTORY_RESULTS,
+    hubs.cityCategories.includes(`${cityPage.slug}/${primaryCategory.slug}`),
   );
   const primaryCategoryHref = hasExactDirectoryParent && primaryCategory && cityPage
     ? getCityCategoryHref(cityPage.slug, primaryCategory.slug)
-    : primaryCategory?.href ?? routes.categories;
+    : (primaryCategory && categoryHubHref(primaryCategory.slug)) ?? routes.categories;
   const keywords = uniqueKeywords([listing.name, listing.area, listing.neighborhood ?? "", ...categories]);
   const webPageJsonLd = buildWebPageJsonLd({
     name: `${listing.name} in ${listing.area}`,
@@ -209,7 +210,7 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
               {categories.map((category, index) => (
                 <span key={category}>
                   {index ? " / " : ""}
-                  <Link href={index === 0 ? primaryCategoryHref : getDirectoryCategory(listing.categories[index])?.href ?? getSearchHref(category, listing.area)}>{category}</Link>
+                  <Link href={index === 0 ? primaryCategoryHref : categoryHubHref(listing.categories[index]) ?? getSearchHref(category, listing.area)}>{category}</Link>
                 </span>
               ))}
             </p>
@@ -233,8 +234,8 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
             <Link className="button button--outline" href={routes.map}>
               <MapPin size={16} aria-hidden /> Directions
             </Link>
-            <Link className="button button--outline" href={`${routes.requestCallback}?business=${encodeURIComponent(listing.name)}`}>
-              Request details
+            <Link className="button button--outline" href={routes.contact}>
+              Suggest a correction
             </Link>
           </aside>
         </div>

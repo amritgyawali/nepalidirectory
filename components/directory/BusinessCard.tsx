@@ -1,4 +1,4 @@
-import { BadgeCheck, Clock, Globe2, MapPin, MessageSquareQuote, Phone, Tag } from "lucide-react";
+import { BadgeCheck, Clock, Globe2, MapPin, Phone, Tag } from "lucide-react";
 import Link from "next/link";
 import { FillImage } from "@/components/ui/FillImage";
 import { isDemoBusiness, type Business } from "@/lib/data";
@@ -88,11 +88,6 @@ export function BusinessCard({ business, sponsored = false }: BusinessCardProps)
             {demo ? "View preview" : business.categories.includes("Restaurants") ? "View Menu" : "Services"}
           </Link>
           {!demo ? <Link className="button button--outline" href={routes.map}>Directions</Link> : null}
-          {!demo ? (
-            <Link className="button button--outline" href={`${routes.requestCallback}?business=${encodeURIComponent(business.name)}`}>
-              <MessageSquareQuote size={14} aria-hidden /> Request Quote
-            </Link>
-          ) : null}
           {business.delivery && !demo ? (
             <Link className="button button--primary" href={href}>
               Order Online

@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import {
   BookOpenText,
   Building2,
-  CalendarDays,
   ChevronRight,
   LayoutGrid,
   LifeBuoy,
@@ -33,7 +32,6 @@ const menuQuick = [
   { label: "Search", href: routes.search, icon: Search },
   { label: "Deals & offers", href: routes.deals, icon: Tag },
   { label: "Publication method", href: routes.directoryMethodology, icon: ShieldCheck },
-  { label: "Events", href: routes.events, icon: CalendarDays },
   { label: "Map", href: routes.map, icon: Map },
   { label: "Help center", href: routes.help, icon: LifeBuoy }
 ];

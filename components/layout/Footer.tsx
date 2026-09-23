@@ -1,10 +1,20 @@
 import Link from "next/link";
 import { Logo } from "@/components/layout/Logo";
-import { cityDirectoryPages } from "@/lib/city-pages";
-import { directoryCategories } from "@/lib/directory-categories";
+import {
+  filterIndexableCityPages,
+  filterIndexableDirectoryCategories,
+  getIndexableHubSlugsOrNone,
+} from "@/lib/indexable-hubs";
 import { footerGroups, routes } from "@/lib/routes";
 
-export function Footer() {
+/**
+ * On every page, so it only links hubs that are currently published: linking unpublished hubs
+ * site-wide is how Google kept discovering them and reporting "Excluded by 'noindex' tag".
+ */
+export async function Footer() {
+  const hubs = await getIndexableHubSlugsOrNone();
+  const directoryCategories = filterIndexableDirectoryCategories(hubs);
+  const cityDirectoryPages = filterIndexableCityPages(hubs);
   return (
     <footer className="footer">
       <div className="container footer__inner">
@@ -29,26 +39,30 @@ export function Footer() {
               </ul>
             </div>
           ))}
-          <div>
-            <h2 className="footer__title">Popular Categories</h2>
-            <div className="footer__cities">
-              {directoryCategories.map((category) => (
-                <Link key={category.slug} href={category.href}>
-                  {category.name}
-                </Link>
-              ))}
+          {directoryCategories.length ? (
+            <div>
+              <h2 className="footer__title">Popular Categories</h2>
+              <div className="footer__cities">
+                {directoryCategories.map((category) => (
+                  <Link key={category.slug} href={category.href}>
+                    {category.name}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
-            <h2 className="footer__title">City Guides</h2>
-            <div className="footer__cities">
-              {cityDirectoryPages.map((city) => (
-                <Link key={city.slug} href={city.href}>
-                  {city.name}
-                </Link>
-              ))}
+          ) : null}
+          {cityDirectoryPages.length ? (
+            <div>
+              <h2 className="footer__title">City Guides</h2>
+              <div className="footer__cities">
+                {cityDirectoryPages.map((city) => (
+                  <Link key={city.slug} href={city.href}>
+                    {city.name}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
         <div className="footer__bottom">
           <div className="footer__legal">
