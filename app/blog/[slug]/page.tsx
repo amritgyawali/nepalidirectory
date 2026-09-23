@@ -11,6 +11,7 @@ import { blogPosts, getBlogPost, getBlogPostUrl, getSortedBlogPosts, siteUrl, ty
 import { ENGINE_AUTHOR, getPublishedEnginePost, getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
+import { getIndexableHubSlugsOrNone, isLiveHubHref } from "@/lib/indexable-hubs";
 import { getDirectoryCategory } from "@/lib/directory-categories";
 import { routes } from "@/lib/routes";
 import { relatedCompareHubsForPost } from "@/lib/seo-auto";
@@ -128,6 +129,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     .filter((candidate) => candidate.slug !== post.slug)
     .filter((candidate) => candidate.category === post.category || candidate.tags.some((tag) => post.tags.includes(tag)))
     .slice(0, 3);
+  // Guide content links to hubs by URL; drop any hub that is not published (it would 404).
+  const hubs = await getIndexableHubSlugsOrNone();
   const relatedResearchLinks = [...new Map([
     ...(post.contextLinks ?? []),
     ...(post.categorySlugs ?? []).flatMap((categorySlug) => {
@@ -141,7 +144,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       return city ? [{ href: city.href, label: `Browse businesses in ${city.name}` }] : [];
     }),
     ...relatedCompareHubsForPost(post, 2).map((hub) => ({ href: hub.href, label: hub.title })),
-  ].map((link) => [link.href, link] as const)).values()];
+  ].filter((link) => isLiveHubHref(link.href, hubs))
+    .map((link) => [link.href, link] as const)).values()];
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -369,11 +373,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <Link href={routes.editorialPolicy}>Editorial policy</Link>
             </div>
           </section>
+          {/* Tags are plain labels, not links: /blog has no tag filter, so /blog?tag=X URLs were
+              duplicates of /blog that Search Console reported as "Alternative page with proper
+              canonical tag". Middleware 301s any legacy ?tag= URL back to the clean path. */}
           <footer className="article-tags" aria-label="Article tags">
             {post.tags.map((tag) => (
-              <Link key={tag} href={`${routes.blog}?tag=${encodeURIComponent(tag)}`}>
-                {tag}
-              </Link>
+              <span key={tag}>{tag}</span>
             ))}
           </footer>
         </div>
