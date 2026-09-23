@@ -54,8 +54,8 @@ export const cityDirectoryPages: CityDirectoryPage[] = [
     seoTitle: "Pokhara Business Directory: Hotels, Travel Agencies, Restaurants and Services",
     description:
       "Find Pokhara hotels, travel agencies, restaurants, cafes, adventure desks and local services around Lakeside and nearby areas.",
-    image: image("photo-1626621341517-bbf3d9990a23"),
-    imageAlt: "Phewa Lake and mountain views in Pokhara",
+    image: image("photo-1659808909524-5fcad5cd48bf"),
+    imageAlt: "Rowing boats moored on Phewa Lake in Pokhara",
     listings: "Live",
     neighborhoods: "5",
     rating: "Reviewed",
@@ -72,8 +72,8 @@ export const cityDirectoryPages: CityDirectoryPage[] = [
     seoTitle: "Lalitpur Business Directory: Clinics, Schools, Restaurants and Services",
     description:
       "Browse Lalitpur businesses including Patan restaurants, clinics, schools, salons, repair services and professional providers.",
-    image: image("photo-1561361513-2d000a50f0dc"),
-    imageAlt: "Patan Durbar Square in Lalitpur",
+    image: image("photo-1585597800810-07a63ea8e983"),
+    imageAlt: "Krishna Mandir in Patan Durbar Square, Lalitpur",
     listings: "Live",
     neighborhoods: "5",
     rating: "Reviewed",
@@ -90,8 +90,8 @@ export const cityDirectoryPages: CityDirectoryPage[] = [
     seoTitle: "Bhaktapur Business Directory: Newari Restaurants, Hotels and Local Services",
     description:
       "Find Bhaktapur restaurants, hotels, heritage dining rooms, shops, repair providers and local services.",
-    image: image("photo-1614107707379-283a65774553"),
-    imageAlt: "Historic square in Bhaktapur",
+    image: image("photo-1755011309944-1b6288be22ba"),
+    imageAlt: "Stone lions guarding a temple in Bhaktapur Durbar Square",
     listings: "Live",
     neighborhoods: "5",
     rating: "Reviewed",
@@ -108,8 +108,8 @@ export const cityDirectoryPages: CityDirectoryPage[] = [
     seoTitle: "Chitwan Business Directory: Hotels, Safari Tours, Restaurants and Services",
     description:
       "Explore Chitwan hotels, safari operators, restaurants, transport providers, clinics and local services.",
-    image: image("photo-1571401835393-8c5f35328320"),
-    imageAlt: "River and forest landscape in Chitwan",
+    image: image("photo-1498712067384-01239c6b377c"),
+    imageAlt: "Elephant crossing the grasslands of Chitwan",
     listings: "Live",
     neighborhoods: "4",
     rating: "Reviewed",
@@ -170,6 +170,60 @@ export const cityDirectoryPages: CityDirectoryPage[] = [
     highlight: "Best for eastern hill-city dining, clinics, hotels and neighborhood services.",
     keywords: ["Dharan business directory", "Dharan restaurants", "Dharan clinics", "Dharan hotels"],
     popularSearches: ["Restaurants", "Clinics", "Hotels", "Schools", "Beauty Salons", "Repair Services"]
+  },
+  {
+    name: "Bharatpur",
+    slug: "bharatpur",
+    href: "/city/bharatpur",
+    province: "Bagmati Province",
+    title: "Bharatpur local business directory",
+    seoTitle: "Bharatpur Business Directory: Clinics, IT Services, Shops and Services",
+    description:
+      "Find Bharatpur clinics, dental care, IT services, hardware stores, clothing shops, contractors and local business services across Chitwan.",
+    image: image("photo-1571401835393-8c5f35328320"),
+    imageAlt: "Chitwan city street and business area near Bharatpur",
+    listings: "Live",
+    neighborhoods: "5",
+    rating: "Reviewed",
+    highlight: "Best for central Nepal clinics, IT services, retail and construction providers.",
+    keywords: ["Bharatpur business directory", "Bharatpur clinics", "Bharatpur IT services", "Bharatpur shops"],
+    popularSearches: ["Dentists", "IT Services", "Hardware Stores", "Clothing", "Contractors", "Tailors"]
+  },
+  {
+    name: "Birgunj",
+    slug: "birgunj",
+    href: "/city/birgunj",
+    province: "Madhesh Province",
+    title: "Birgunj local business directory",
+    seoTitle: "Birgunj Business Directory: Shops, IT Services, Clinics and Services",
+    description:
+      "Browse Birgunj clothing shops, hardware stores, IT services, dental clinics, tailors and local trade and service providers near the border.",
+    image: image("photo-1518002054494-3a6f94352e9d"),
+    imageAlt: "Nepal border-city street and commercial area in Birgunj",
+    listings: "Live",
+    neighborhoods: "4",
+    rating: "Reviewed",
+    highlight: "Best for border-corridor retail, trade supplies, IT services and clinics.",
+    keywords: ["Birgunj business directory", "Birgunj shops", "Birgunj IT services", "Birgunj clinics"],
+    popularSearches: ["Clothing", "Hardware Stores", "IT Services", "Dentists", "Tailors", "Footwear"]
+  },
+  {
+    name: "Nepalgunj",
+    slug: "nepalgunj",
+    href: "/city/nepalgunj",
+    province: "Lumbini Province",
+    title: "Nepalgunj local business directory",
+    seoTitle: "Nepalgunj Business Directory: IT Services, Shops, Clinics and Services",
+    description:
+      "Find Nepalgunj IT services, clothing and hardware shops, dental clinics, tailors and local business services across the mid-western region.",
+    image: image("photo-1500534314209-a25ddb2bd429"),
+    imageAlt: "Mid-western Nepal city road and commercial scene in Nepalgunj",
+    listings: "Live",
+    neighborhoods: "4",
+    rating: "Reviewed",
+    highlight: "Best for mid-western regional IT services, retail, clinics and trade supplies.",
+    keywords: ["Nepalgunj business directory", "Nepalgunj IT services", "Nepalgunj shops", "Nepalgunj clinics"],
+    popularSearches: ["IT Services", "Clothing", "Hardware Stores", "Dentists", "Tailors", "Contractors"]
   }
 ];
 
@@ -300,6 +354,54 @@ export const cityEditorialDetails: Record<string, CityEditorialDetail> = {
     faqs: [
       { question: "How specific should a Dharan search be?", answer: "Add the category and a neighborhood or landmark, then verify the full address and availability by phone." },
       { question: "How does Nepali Directory handle incomplete profiles?", answer: "Incomplete or unreviewed profiles can remain in a private review workflow but do not enter public city rankings." }
+    ]
+  },
+  bharatpur: {
+    overview: [
+      "Bharatpur is the commercial hub of Chitwan, mixing healthcare, education and everyday retail along Narayangarh and the Pulchowk and Lions Chowk areas. Dental clinics, IT services, hardware and clothing shops all serve a growing central-Nepal population.",
+      "Start with the category and a specific chowk or landmark, then confirm current phone details, opening hours and whether a provider covers your part of the city. For clinics and contractors, verify registration and get a written estimate before committing."
+    ],
+    localAreas: ["Narayangarh", "Pulchowk", "Lions Chowk", "Shivnagar", "Bharatpur Hospital area"],
+    searchTips: [
+      { title: "For clinics and dental care", body: "Match the treatment first, then confirm appointment availability, registration and full cost by phone." },
+      { title: "For shops and hardware", body: "Confirm stock, brand and quantity with the branch, and ask about delivery for bulk orders." },
+      { title: "For IT and contractors", body: "Share the scope, then compare relevant work, written quotations and timelines before you sign." }
+    ],
+    faqs: [
+      { question: "How should I search for a business in Bharatpur?", answer: "Use the category plus a specific chowk or landmark, then confirm current contact details and availability before travelling." },
+      { question: "Are all Bharatpur profiles ranked?", answer: "No. Preview, incomplete and unreviewed records stay outside city rankings and structured listing results." }
+    ]
+  },
+  birgunj: {
+    overview: [
+      "Birgunj is a busy border and trade city in Madhesh Province, strong in retail, trade supplies, IT services and clinics around Adarsha Nagar, Ghantaghar and the main bazaar. Cross-border commerce shapes much of its shopping and service demand.",
+      "Begin with the category and a landmark, then confirm phone details, hours and delivery or service coverage. For trade and hardware purchases, ask about bulk pricing and invoices; for clinics, verify registration and treatment scope directly."
+    ],
+    localAreas: ["Ghantaghar", "Adarsha Nagar", "Powerhouse", "Main Road bazaar", "Birta"],
+    searchTips: [
+      { title: "For retail and trade", body: "Confirm stock, brand and bulk pricing with the branch, and keep an invoice for warranty items." },
+      { title: "For IT services", body: "Describe the project scope and compare relevant delivery experience, ownership and support terms." },
+      { title: "For clinics and tailors", body: "Confirm appointment or delivery timing, and get costs and dates agreed before you commit." }
+    ],
+    faqs: [
+      { question: "How should I search for a business in Birgunj?", answer: "Use the category plus a landmark or bazaar area, then confirm current contact details and availability before visiting." },
+      { question: "Does a Birgunj listing guarantee stock or pricing?", answer: "No. Stock, prices and hours change; confirm the exact item, price and terms directly with the business." }
+    ]
+  },
+  nepalgunj: {
+    overview: [
+      "Nepalgunj is the commercial gateway of the mid-western region in Lumbini Province, with IT services, retail, dental clinics and trade supplies concentrated around Dhambojhi, BP Chowk and the main bazaar. It serves a wide surrounding catchment.",
+      "Start with the category and a specific area, then confirm current phone details, hours and whether the provider serves your location. For services and contractors, agree scope, cost and timeline in writing before work begins."
+    ],
+    localAreas: ["Dhambojhi", "BP Chowk", "Surkhet Road", "Main bazaar", "Tribhuvan Chowk"],
+    searchTips: [
+      { title: "For IT and services", body: "Share the requirement, then compare relevant work, ownership, security and support before choosing." },
+      { title: "For shops and hardware", body: "Confirm stock, brand and delivery with the branch, and ask about bulk pricing for larger orders." },
+      { title: "For clinics and tailors", body: "Confirm availability, registration where relevant, and agree costs and dates before committing." }
+    ],
+    faqs: [
+      { question: "How should I search for a business in Nepalgunj?", answer: "Use the category plus a specific area or chowk, then confirm current contact details and availability before travelling." },
+      { question: "Are Nepalgunj profiles automatically ranked?", answer: "No. Incomplete or unreviewed records stay outside public city rankings and structured listing results." }
     ]
   }
 };

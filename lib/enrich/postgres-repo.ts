@@ -14,7 +14,7 @@ import type {
   NewListing,
 } from "./types";
 
-type ListingRow = {
+export type ListingRow = {
   id: number | string;
   slug: string;
   name: string;
@@ -83,7 +83,7 @@ function verificationStatus(value: string | null): Listing["verificationStatus"]
   return "unverified";
 }
 
-function mapRow(r: ListingRow, faqs: ListingFaq[]): Listing {
+export function mapListingRow(r: ListingRow, faqs: ListingFaq[]): Listing {
   return {
     id: Number(r.id),
     slug: r.slug,
@@ -180,7 +180,7 @@ export class PostgresListingRepository implements ListingRepository {
     const rows = await this.sql<ListingRow>(`SELECT * FROM listings WHERE id=$1`, [id]);
     if (!rows.length) return null;
     const faqs = (await this.faqsFor([id])).get(id) ?? [];
-    return mapRow(rows[0], faqs);
+    return mapListingRow(rows[0], faqs);
   }
 
   async getBySlug(slug: string): Promise<Listing | null> {
@@ -188,7 +188,7 @@ export class PostgresListingRepository implements ListingRepository {
     if (!rows.length) return null;
     const id = Number(rows[0].id);
     const faqs = (await this.faqsFor([id])).get(id) ?? [];
-    return mapRow(rows[0], faqs);
+    return mapListingRow(rows[0], faqs);
   }
 
   async update(listing: Listing): Promise<void> {
@@ -233,7 +233,7 @@ export class PostgresListingRepository implements ListingRepository {
   async all(): Promise<Listing[]> {
     const rows = await this.sql<ListingRow>(`SELECT * FROM listings ORDER BY id`);
     const faqsById = await this.faqsFor(rows.map((r) => Number(r.id)));
-    return rows.map((r) => mapRow(r, faqsById.get(Number(r.id)) ?? []));
+    return rows.map((r) => mapListingRow(r, faqsById.get(Number(r.id)) ?? []));
   }
 
   async insert(listing: NewListing): Promise<Listing> {
@@ -273,7 +273,7 @@ export class PostgresListingRepository implements ListingRepository {
         listing.active, listing.email ?? null, listing.status ?? null, listing.image ?? null,
       ],
     );
-    const created = mapRow(rows[0], []);
+    const created = mapListingRow(rows[0], []);
     await this.replaceFaqs(created.id, listing.faqs);
     return { ...created, faqs: listing.faqs };
   }
@@ -307,7 +307,7 @@ export class PostgresListingRepository implements ListingRepository {
       [limit],
     );
     const faqsById = await this.faqsFor(rows.map((r) => Number(r.id)));
-    return rows.map((r) => mapRow(r, faqsById.get(Number(r.id)) ?? []));
+    return rows.map((r) => mapListingRow(r, faqsById.get(Number(r.id)) ?? []));
   }
 }
 

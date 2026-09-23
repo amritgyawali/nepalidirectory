@@ -180,7 +180,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       "@type": "Thing",
       name: section.heading
     })),
-    citation: post.sources?.map((source) => source.url)
+    citation: post.sources?.map((source) => source.url),
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["#quick-answer-title", ".answer-summary p", ".article-faq summary"],
+    },
   };
 
   const webPageJsonLd = buildWebPageJsonLd({
