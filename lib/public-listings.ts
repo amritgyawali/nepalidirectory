@@ -96,8 +96,36 @@ export async function getDirectoryListing(slug: string): Promise<Listing | null>
   return createListingRepository().getBySlug(slug);
 }
 
+/**
+ * Every public page (business profiles, hubs, sitemaps, footer hub gating) reads the whole
+ * listings table. Loading it once per server instance for a few minutes, instead of once per
+ * render, keeps uncached renders fast for crawlers (slow first responses were throttling
+ * Googlebot's crawl rate, leaving listings "Discovered – currently not indexed") and cuts
+ * database egress. Public pages already revalidate on the same five-minute cycle.
+ */
+const DIRECTORY_LISTINGS_TTL_MS = 5 * 60 * 1000;
+let directoryListingsCache: { expiresAt: number; listings: Promise<Listing[]> } | undefined;
+
 export async function getAllDirectoryListings(): Promise<Listing[]> {
-  return (await createListingRepository().all()).filter(canPreviewListing);
+  const now = Date.now();
+  if (!directoryListingsCache || directoryListingsCache.expiresAt <= now) {
+    const listings = createListingRepository()
+      .all()
+      .then((rows) => rows.filter(canPreviewListing));
+    directoryListingsCache = { expiresAt: now + DIRECTORY_LISTINGS_TTL_MS, listings };
+    // A failed load must not be served for the rest of the window.
+    listings.catch(() => {
+      if (directoryListingsCache?.listings === listings) directoryListingsCache = undefined;
+    });
+  }
+  // Callers filter and sort freely, so each gets its own array.
+  return [...(await directoryListingsCache.listings)];
+}
+
+/** Public profile lookup served from the shared listings load, falling back to the database. */
+export async function getPublicDirectoryListing(slug: string): Promise<Listing | null> {
+  const listing = (await getAllDirectoryListings()).find((candidate) => candidate.slug === slug);
+  return listing ?? getDirectoryListing(slug);
 }
 
 export async function getIndexableListings(): Promise<Listing[]> {

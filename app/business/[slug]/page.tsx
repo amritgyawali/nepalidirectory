@@ -20,8 +20,8 @@ import { getDirectoryCategory } from "@/lib/directory-categories";
 import { getIndexableHubSlugs } from "@/lib/indexable-hubs";
 import {
   canPreviewListing,
-  getDirectoryListing,
   getIndexableListings,
+  getPublicDirectoryListing,
   isDemoListing,
   isIndexableListing,
   listingDescription,
@@ -30,6 +30,7 @@ import {
   listingVerificationLabel,
   publicListingImage,
 } from "@/lib/public-listings";
+import { selectRelatedListings } from "@/lib/related-listings";
 import { getBusinessHref, getCityCategoryHref, getSearchHref, routes } from "@/lib/routes";
 import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 import { buildBreadcrumbJsonLd, buildListingLocalBusinessJsonLd } from "@/lib/seo-auto";
@@ -41,7 +42,7 @@ type BusinessPageProps = {
 export const revalidate = 300;
 export const dynamicParams = true;
 
-const loadListing = cache(getDirectoryListing);
+const loadListing = cache(getPublicDirectoryListing);
 
 function titleCase(value: string): string {
   return value
@@ -129,6 +130,15 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
     cityPage &&
     hubs.cityCategories.includes(`${cityPage.slug}/${primaryCategory.slug}`),
   );
+  const relatedListings = indexable
+    ? selectRelatedListings(listing, await getIndexableListings(), {
+        category: primaryCategory,
+        city: cityPage,
+      })
+    : [];
+  const relatedHeading = primaryCategory
+    ? `More ${primaryCategory.name.toLowerCase()} ${cityPage ? `in ${cityPage.name}` : "in Nepal"}`
+    : `More businesses ${cityPage ? `in ${cityPage.name}` : "in Nepal"}`;
   const primaryCategoryHref = hasExactDirectoryParent && primaryCategory && cityPage
     ? getCityCategoryHref(cityPage.slug, primaryCategory.slug)
     : (primaryCategory && categoryHubHref(primaryCategory.slug)) ?? routes.categories;
@@ -311,6 +321,21 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
           </aside>
         </div>
       </section>
+
+      {relatedListings.length ? (
+        <section className="section section--soft">
+          <div className="container">
+            <h2 className="compact-title">{relatedHeading}</h2>
+            <div className="seo-link-strip" aria-label={relatedHeading}>
+              {relatedListings.map((related) => (
+                <Link key={related.slug} href={getBusinessHref(related.slug)}>
+                  {related.name}, {related.neighborhood ?? related.area}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }
