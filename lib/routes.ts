@@ -54,6 +54,7 @@ export const routes = {
   authors: "/authors",
   editorialPolicy: "/editorial-policy",
   directoryMethodology: "/directory-methodology",
+  bestDirectoryNepal: "/best-directory-in-nepal",
   attribution: "/attribution"
 } as const;
 
@@ -61,11 +62,15 @@ export const primaryNav = [
   { label: "Categories", href: routes.categories },
   { label: "Cities", href: routes.city },
   { label: "Guides", href: routes.blog },
-  { label: "Compare", href: routes.compareBusiness },
-  { label: "Add Business", href: routes.claimListing },
-  { label: "Log In", href: routes.login },
-  { label: "Sign Up", href: routes.register, featured: true }
+  { label: "Compare", href: routes.compareBusiness }
 ];
+
+/** Header actions shown to the right of the main navigation. */
+export const accountNav = [
+  { label: "Add business", href: routes.claimListing, variant: "outline" },
+  { label: "Log in", href: routes.login, variant: "text" },
+  { label: "Sign up", href: routes.register, variant: "solid" }
+] as const;
 
 /** Canonical public profile URL for a listing slug. */
 export function getBusinessHref(slug: string): string {
@@ -109,6 +114,7 @@ export const footerGroups = [
     title: "Directory",
     links: [
       { label: "Find a Business", href: routes.search },
+      { label: "Best Directory in Nepal", href: routes.bestDirectoryNepal },
       { label: "Publication Method", href: routes.bestBusinesses },
       { label: "Near Me", href: routes.nearMe },
       { label: "Categories", href: routes.categories },

@@ -36,6 +36,7 @@ export function buildOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
     ...publisher,
+    "@type": "Organization",
     description:
       "NepaliDirectory helps people find, compare and contact reviewed local business profiles, restaurants, hotels, doctors and services across Nepal.",
     sameAs: sameAs.length ? sameAs : undefined,
@@ -45,7 +46,17 @@ export function buildOrganizationJsonLd() {
       url: `${publisher.url}/contact`,
       areaServed: "NP",
       availableLanguage: ["en", "ne"]
-    }
+    },
+    slogan: "Find trusted local businesses across Nepal",
+    numberOfEmployees: {
+      "@type": "QuantitativeValue",
+      minValue: 1,
+      maxValue: 10,
+    },
+    actionableFeedbackPolicy: `${publisher.url}/editorial-policy`,
+    correctionsPolicy: `${publisher.url}/editorial-policy`,
+    ethicsPolicy: `${publisher.url}/editorial-policy`,
+    publishingPrinciples: `${publisher.url}/editorial-policy`,
   };
 }
 

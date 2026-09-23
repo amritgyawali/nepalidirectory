@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
+import { Anek_Latin, Manrope } from "next/font/google";
 import { LazyAiAssistant } from "@/components/ai/LazyAiAssistant";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -10,12 +10,20 @@ import "@/components/layout/layout.css";
 import "@/components/ui/ui.css";
 import "@/components/directory/directory.css";
 import "./globals.css";
+import "./theme.css";
 import "./mobile.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-manrope"
+});
+
+const anekLatin = Anek_Latin({
+  subsets: ["latin"],
+  display: "swap",
+  axes: ["wdth"],
+  variable: "--font-anek"
 });
 
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
@@ -25,7 +33,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#ffd400"
+  themeColor: "#0f1c2e"
 };
 
 export const metadata: Metadata = {
@@ -110,7 +118,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const siteJsonLd = [buildOrganizationJsonLd(), buildWebSiteJsonLd()];
 
   return (
-    <html lang="en" className={manrope.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" className={`${manrope.variable} ${anekLatin.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        {/* Preconnect to critical third-party origins for faster LCP / font loads */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        {/* DNS-prefetch for Supabase (non-blocking, benefits API calls) */}
+        <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
+        {/* Machine-readable pointers for AI platforms */}
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM context guide" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM full context" />
+      </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteJsonLd) }} />
         <Header />

@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { HeadToHeadCompare } from "@/components/compare/HeadToHeadCompare";
 import { RelatedGuideLinks } from "@/components/content/RelatedGuideLinks";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { compareCategories, getCompareCategory, getSortedCompareCategories } from "@/lib/compare";
 import { COMPARE_RANKING_BASIS, getComparedBusinesses } from "@/lib/compare-listings";
+import { MATCHUP_REVIEWED_AT, averageScore, getCategoryMatchup } from "@/lib/compare-matchups";
 import { getGuidesForCategory } from "@/lib/content-clusters";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
@@ -67,6 +69,10 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
   const quickAnswer = getCompareQuickAnswer(category);
   const otherCategories = getSortedCompareCategories().filter((candidate) => candidate.slug !== category.slug);
   const relatedGuides = getGuidesForCategory(category.slug);
+  const matchup = getCategoryMatchup(category.slug);
+  const matchupContenders = matchup
+    ? [...matchup.contenders].sort((a, b) => averageScore(b) - averageScore(a))
+    : [];
   const comparisonFaqs = [
     {
       question: `How should I compare ${category.category.toLowerCase()} options?`,
@@ -140,6 +146,15 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
           </div>
         </div>
       </section>
+
+      {matchup && matchupContenders.length > 1 ? (
+        <HeadToHeadCompare
+          category={category.category}
+          conditions={matchup.conditions}
+          contenders={matchupContenders}
+          reviewedAt={MATCHUP_REVIEWED_AT}
+        />
+      ) : null}
 
       <section className="section">
         <div className="container compare-layout">

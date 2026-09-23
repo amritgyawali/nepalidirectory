@@ -268,7 +268,8 @@ export default async function HomePage() {
             NepaliDirectory brings crawlable category pages, practical city guides and
             review-gated business profiles into one Nepal local directory. It is a modern online
             alternative to a paper Nepal Yellow Pages: browse local businesses and services, then
-            confirm current hours, prices, availability and credentials directly.
+            confirm current hours, prices, availability and credentials directly.{" "}
+            <Link href={routes.bestDirectoryNepal}>How to choose the best directory in Nepal</Link>.
           </p>
           <div className="seo-link-strip" aria-label="Popular Nepal directory categories">
             {qualifiedCategories.map((category) => (

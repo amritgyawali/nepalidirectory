@@ -58,10 +58,17 @@ export async function fetchOsmElements({
   endpoint = "https://lz4.overpass-api.de/api/interpreter",
 }: FetchOsmElementsOptions): Promise<OsmElement[]> {
   const query = buildQuery(bbox, timeoutSeconds);
+  // Overpass rejects requests with 406 unless the query arrives form-encoded under `data` AND the
+  // request carries a real User-Agent (verified live 2026-07-22 — a raw text/plain body with the
+  // default Node fetch UA gets 406 from every mirror). Identify as our bot, per HARD RULE 7.
   const response = await fetchFn(endpoint, {
     method: "POST",
-    headers: { "Content-Type": "text/plain" },
-    body: query,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "User-Agent": "NepaliDirectoryBot/1.0 (+https://nepalidirectory.com/bot)",
+      Accept: "application/json",
+    },
+    body: new URLSearchParams({ data: query }).toString(),
   });
 
   if (!response.ok) {
