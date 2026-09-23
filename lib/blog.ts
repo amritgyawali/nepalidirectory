@@ -1,3 +1,4 @@
+import { authorityGuidePosts } from "@/lib/authority-guides";
 import { expansionGuidePosts } from "@/lib/expansion-guides";
 import { nationalDirectoryGuidePosts } from "@/lib/national-directory-guides";
 import { ownerSeoGuidePosts } from "@/lib/owner-seo-guides";
@@ -834,6 +835,7 @@ export const blogPosts: BlogPost[] = [
   ...nationalDirectoryGuidePosts,
   ...ownerSeoGuidePosts,
   ...photographyGuidePosts,
+  ...authorityGuidePosts,
 ];
 
 export function getBlogPost(slug: string) {
