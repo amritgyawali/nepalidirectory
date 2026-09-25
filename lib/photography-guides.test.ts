@@ -143,7 +143,8 @@ describe("photography guide cluster", () => {
         expect(new Set(sourceUrls).size, `${slug} has duplicate source URLs`).toBe(sourceUrls.length);
         for (const listed of cityShortlists[slug].studios as Array<{ name: string; phone?: string; sourceUrl?: string }>) {
           expect(listed.phone ?? listed.sourceUrl, `${listed.name} has no contact`).toBeDefined();
-          if (listed.phone) expect(listed.phone).toMatch(/^\+977-9\d{9}$/);
+          // A mobile (+977-98XXXXXXXX) or, for studios that publish only one, a landline (+977-81-530746).
+          if (listed.phone) expect(listed.phone).toMatch(/^\+977-(?:9\d{9}|[1-9]\d?-\d{6,7})$/);
           if (listed.sourceUrl) {
             expect(listed.sourceUrl).toMatch(/^https:\/\//);
             expect(sourceUrls, `${listed.name} lacks a source`).toContain(listed.sourceUrl);

@@ -143,8 +143,8 @@ export const topPhotographersPanel: BlogClosingPanel = {
     { name: "Wedding Diary Nepal", base: "Kathmandu" },
     { name: "Photo Choice Nepal", base: "Kathmandu" },
     { name: "Studio Thapas", base: "Kathmandu" },
-    { name: "Poudel Digital", base: "Butwal" },
     { name: "Fotopasal", base: "Lalitpur" },
+    { name: "Poudel Digital", base: "Butwal" },
   ],
   footnote: "Last reviewed September 2026. The list is the Events Desk's editorial judgement; confirm each studio's current packages directly.",
 };
