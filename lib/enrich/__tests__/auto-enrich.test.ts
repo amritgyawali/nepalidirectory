@@ -52,9 +52,13 @@ describe("runAutoEnrichCycle (enabled)", () => {
 
   it("is idempotent — a second cycle finds nothing left to enrich", async () => {
     useMockEnv({ AI_ENABLED: "true", ENRICH_ENABLED: "true" });
-    // The previous test already enriched ids 1..3 on the shared singleton; enrich the rest, then
-    // a follow-up cycle should enqueue 0 because every listing now has aiEnrichedAt set.
-    await runAutoEnrichCycle();
+    // The seeded dataset is the full public import, so drain it in capped cycles until nothing is
+    // left un-enriched; a follow-up cycle must then be a no-op because every listing has
+    // aiEnrichedAt set (needingEnrichment only returns rows with aiEnrichedAt == null).
+    for (let guard = 0; guard < 200; guard++) {
+      const cycle = await runAutoEnrichCycle({ cap: 500, maxJobs: 4000 });
+      if (cycle.enqueued === 0) break;
+    }
     const again = await runAutoEnrichCycle();
     expect(again.ran).toBe(true);
     expect(again.enqueued).toBe(0);

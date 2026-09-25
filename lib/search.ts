@@ -11,8 +11,6 @@ export type SearchRecord = {
   href: string;
   location?: string;
   tags: string[];
-  rating?: number;
-  reviews?: number;
   status?: "open" | "closed" | "24h";
 };
 
@@ -43,15 +41,6 @@ const corePages: SearchRecord[] = [
     href: routes.deals,
     location: "Nepal",
     tags: ["deals", "offers", "discounts"]
-  },
-  {
-    id: "page-events",
-    kind: "page",
-    title: "Local Events",
-    description: "Community events, food festivals, business openings and local happenings.",
-    href: routes.events,
-    location: "Nepal",
-    tags: ["events", "community", "local"]
   },
   {
     id: "page-dashboard",
@@ -100,8 +89,6 @@ function businessRecords(catalog: readonly Business[]): SearchRecord[] {
       business.claimed ? "claimed owner verified" : "",
       business.delivery ? "delivery order online" : ""
     ].filter(Boolean),
-    rating: business.rating,
-    reviews: business.reviews,
     status: business.status
   }));
 }
@@ -213,7 +200,6 @@ export function searchRecords(
         score += 25;
       }
       if (record.kind === "business") score += 12;
-      if (record.rating) score += record.rating * 4;
       if (record.status === "open" || record.status === "24h") score += 5;
 
       return { record, score, matches: kindMatch && queryMatch && locationMatch };

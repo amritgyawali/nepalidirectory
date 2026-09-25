@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/directory/PageHero";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
-import { buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
+import { buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Editorial Policy and Content Review Standards",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description:
       "Content review standards for Nepali Directory local guides, comparisons and directory pages.",
     url: `${siteUrl}${routes.editorialPolicy}`,
-    siteName: "Nepali Directory",
+    siteName: "NepaliDirectory",
     type: "website"
   }
 };
@@ -30,7 +30,7 @@ const standards = [
   },
   {
     title: "Clear review signals",
-    body: "Business comparisons use visible directory signals such as category fit, location, rating, review count, price notes, strengths and user intent."
+    body: "Business comparisons use visible, source-backed directory signals such as category fit, location, published services and user intent."
   },
   {
     title: "Freshness and corrections",
@@ -79,7 +79,7 @@ export default function EditorialPolicyPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([webPageJsonLd, aboutJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([webPageJsonLd, aboutJsonLd]) }}
       />
       <Breadcrumbs items={[{ label: "Editorial Policy" }]} />
       <PageHero
@@ -98,8 +98,8 @@ export default function EditorialPolicyPage() {
           <section className="answer-summary">
             <h2>Business data notes</h2>
             <p>
-              Directory pages may include representative business information, category signals,
-              review counts, prices and service notes. Users should confirm hours, prices,
+              Directory pages may include reviewed business information, category signals and
+              source-backed service notes. Users should confirm hours, prices,
               availability and health or safety details directly with the provider before making a decision.
             </p>
             <Link className="button button--primary" href={routes.contact}>

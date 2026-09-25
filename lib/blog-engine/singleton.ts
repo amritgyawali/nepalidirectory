@@ -8,6 +8,7 @@
 import type { BlogPost as DisplayBlogPost } from "../blog";
 import { createBlogEngineRuntime, type BlogEngineRuntime } from "./runtime";
 import { toDisplayPost } from "./adapter";
+import { meetsPublicEnginePostQuality } from "./editorial";
 
 const globalForBlogEngine = globalThis as typeof globalThis & {
   __nepaliDirectoryBlogEngine?: BlogEngineRuntime;
@@ -23,7 +24,9 @@ export function getDefaultBlogEngineRuntime(): BlogEngineRuntime {
 /** All PUBLISHED engine posts, in the same display shape as the curated `lib/blog.ts` posts. */
 export async function getPublishedEnginePosts(): Promise<DisplayBlogPost[]> {
   const posts = await getDefaultBlogEngineRuntime().blogPosts.list({ status: "PUBLISHED" });
-  return posts.map(toDisplayPost);
+  return posts
+    .filter((post) => Boolean(post.reviewedBy) && meetsPublicEnginePostQuality(post))
+    .map(toDisplayPost);
 }
 
 export async function getPublishedEnginePost(slug: string): Promise<DisplayBlogPost | null> {

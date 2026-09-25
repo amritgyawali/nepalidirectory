@@ -4,9 +4,11 @@ import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { isIndexableBlogCategory } from "@/lib/blog-quality";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
+import { getPopulatedCompareSlugs } from "@/lib/compare-listings";
 import { directoryCategories } from "@/lib/directory-categories";
-import { getBusinessHref, routes } from "@/lib/routes";
-import { getIndexableListings } from "@/lib/public-listings";
+import { computeIndexableHubSlugs } from "@/lib/indexable-hubs";
+import { getBusinessHref, getCityCategoryHref, routes } from "@/lib/routes";
+import { getIndexableListings, publicListingImage } from "@/lib/public-listings";
 import { isIndexableRoute } from "@/lib/seo-config";
 import { getEvergreenPages } from "./evergreen";
 
@@ -22,11 +24,7 @@ export type SitemapIndexEntry = {
   lastModified?: Date | string;
 };
 
-const separatelyMappedRoutes = new Set<string>([
-  routes.blogPost,
-  // Consolidated into /best-businesses to avoid two thin, competing rating landers.
-  routes.topRated,
-]);
+const separatelyMappedRoutes = new Set<string>([routes.blogPost]);
 
 export function getStaticSitemapEntries(): SitemapEntry[] {
   const staticRoutes = Array.from(new Set<string>(Object.values(routes))).filter(
@@ -59,19 +57,24 @@ export function getBlogSitemapEntries(additionalPosts: BlogPost[] = []): Sitemap
   return [...posts, ...categories];
 }
 
-export function getCategorySitemapEntries(): SitemapEntry[] {
+export async function getCategorySitemapEntries(): Promise<SitemapEntry[]> {
+  const hubs = computeIndexableHubSlugs(await getIndexableListings());
+  const populatedCompareSlugs = await getPopulatedCompareSlugs();
   return [
-    ...directoryCategories.map((category) => ({
-      url: `${siteUrl}${category.href}`,
-      lastModified: "2026-07-12",
-    })),
-    ...compareCategories.filter((category) => category.businesses.length > 0).map((category) => ({
+    ...directoryCategories
+      .filter((category) => hubs.categories.includes(category.slug))
+      .map((category) => ({ url: `${siteUrl}${category.href}` })),
+    ...compareCategories.filter((category) => populatedCompareSlugs.has(category.slug)).map((category) => ({
       url: `${siteUrl}${category.href}`,
       lastModified: category.updatedAt,
     })),
-    ...cityDirectoryPages.map((city) => ({
-      url: `${siteUrl}${city.href}`,
-    })),
+    ...cityDirectoryPages
+      .filter((city) => hubs.cities.includes(city.slug))
+      .map((city) => ({ url: `${siteUrl}${city.href}` })),
+    ...hubs.cityCategories.map((pair) => {
+      const [citySlug, categorySlug] = pair.split("/");
+      return { url: `${siteUrl}${getCityCategoryHref(citySlug, categorySlug)}` };
+    }),
     ...getEvergreenPages().map((page) => ({
       url: `${siteUrl}${page.href}`,
     })),
@@ -81,8 +84,8 @@ export function getCategorySitemapEntries(): SitemapEntry[] {
 export async function getListingSitemapEntries(): Promise<SitemapEntry[]> {
   return (await getIndexableListings()).map((listing) => ({
     url: `${siteUrl}${getBusinessHref(listing.slug)}`,
-    lastModified: listing.updatedAt ?? listing.aiEnrichedAt ?? listing.createdAt ?? undefined,
-    images: listing.image ? [listing.image] : undefined,
+    lastModified: listing.lastMeaningfulUpdateAt ?? undefined,
+    images: publicListingImage(listing) ? [publicListingImage(listing)!] : undefined,
   }));
 }
 
@@ -96,7 +99,7 @@ export const LISTING_SITEMAP_CHUNK_SIZE = 40_000;
 
 export async function getListingSitemapChunkCount(): Promise<number> {
   const entries = await getListingSitemapEntries();
-  return Math.max(1, Math.ceil(entries.length / LISTING_SITEMAP_CHUNK_SIZE));
+  return Math.ceil(entries.length / LISTING_SITEMAP_CHUNK_SIZE);
 }
 
 /** 1-indexed to match the existing `sitemap-listings-1.xml` URL convention. */
@@ -123,7 +126,7 @@ export async function allSitemapEntries(additionalBlogPosts: BlogPost[] = []): P
   return uniqueSitemapEntries([
     ...getPageSitemapEntries(),
     ...getBlogSitemapEntries(additionalBlogPosts),
-    ...getCategorySitemapEntries(),
+    ...(await getCategorySitemapEntries()),
     ...(await getListingSitemapEntries()),
   ]);
 }

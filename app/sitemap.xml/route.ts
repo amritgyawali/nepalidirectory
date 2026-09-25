@@ -9,6 +9,8 @@ export async function GET() {
   const sitemapUrls = [
     `${siteUrl}/sitemap-pages.xml`,
     `${siteUrl}/sitemap-categories.xml`,
+    `${siteUrl}/sitemap-authors.xml`,
+    `${siteUrl}/sitemap-city.xml`,
     `${siteUrl}/sitemap-blog.xml`,
     ...Array.from({ length: chunkCount }, (_, index) => `${siteUrl}/sitemap-listings-${index + 1}.xml`),
   ];

@@ -17,20 +17,23 @@ import { FillImage } from "@/components/ui/FillImage";
 import { siteUrl } from "@/lib/blog";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { getDirectoryCategory } from "@/lib/directory-categories";
+import { getIndexableHubSlugs } from "@/lib/indexable-hubs";
 import {
   canPreviewListing,
-  getAllDirectoryListings,
-  getDirectoryListing,
-  getSeedBusiness,
+  getIndexableListings,
+  getPublicDirectoryListing,
   isDemoListing,
   isIndexableListing,
   listingDescription,
   listingFactsCheckedAt,
   listingMatchesCity,
+  listingVerificationLabel,
+  publicListingImage,
 } from "@/lib/public-listings";
-import { getBusinessHref, getSearchHref, routes } from "@/lib/routes";
-import { buildWebPageJsonLd, uniqueKeywords } from "@/lib/seo";
-import { buildBreadcrumbJsonLd, buildListingLocalBusinessJsonLd, priceTierLabel } from "@/lib/seo-auto";
+import { selectRelatedListings } from "@/lib/related-listings";
+import { getBusinessHref, getCityCategoryHref, getSearchHref, routes } from "@/lib/routes";
+import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
+import { buildBreadcrumbJsonLd, buildListingLocalBusinessJsonLd } from "@/lib/seo-auto";
 
 type BusinessPageProps = {
   params: Promise<{ slug: string }>;
@@ -39,7 +42,7 @@ type BusinessPageProps = {
 export const revalidate = 300;
 export const dynamicParams = true;
 
-const loadListing = cache(getDirectoryListing);
+const loadListing = cache(getPublicDirectoryListing);
 
 function titleCase(value: string): string {
   return value
@@ -50,7 +53,7 @@ function titleCase(value: string): string {
 }
 
 export async function generateStaticParams() {
-  return (await getAllDirectoryListings()).map((listing) => ({ slug: listing.slug }));
+  return (await getIndexableListings()).map((listing) => ({ slug: listing.slug }));
 }
 
 export async function generateMetadata({ params }: BusinessPageProps): Promise<Metadata> {
@@ -61,9 +64,12 @@ export async function generateMetadata({ params }: BusinessPageProps): Promise<M
   }
 
   const href = getBusinessHref(listing.slug);
-  const description = listing.metaDescription ?? listingDescription(listing);
-  const title = listing.metaTitle ?? `${listing.name} in ${listing.area}`;
   const indexable = isIndexableListing(listing);
+  const description = indexable
+    ? listing.metaDescription ?? listingDescription(listing)
+    : `${listing.name} is awaiting source and content review before public publication.`;
+  const title = indexable ? listing.metaTitle ?? `${listing.name} in ${listing.area}` : listing.name;
+  const verifiedImage = publicListingImage(listing);
 
   return {
     title,
@@ -71,26 +77,26 @@ export async function generateMetadata({ params }: BusinessPageProps): Promise<M
     alternates: { canonical: href },
     robots: {
       index: indexable,
-      follow: indexable,
+      follow: true,
       googleBot: indexable
         ? { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 }
-        : { index: false, follow: false },
+        : { index: false, follow: true },
     },
     openGraph: {
       title,
       description,
       url: `${siteUrl}${href}`,
-      siteName: "Nepali Directory",
+      siteName: "NepaliDirectory",
       type: "website",
-      images: listing.image
-        ? [{ url: listing.image, width: 1200, height: 1200, alt: `${listing.name} profile` }]
+      images: verifiedImage
+        ? [{ url: verifiedImage, width: 1200, height: 1200, alt: `${listing.name} profile` }]
         : [{ url: "/nepali-directory-og.png", width: 1729, height: 909, alt: "Nepali Directory" }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [listing.image ?? "/nepali-directory-og.png"],
+      images: [verifiedImage ?? "/nepali-directory-og.png"],
     },
   };
 }
@@ -104,14 +110,38 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
   const url = `${siteUrl}${href}`;
   const indexable = isIndexableListing(listing);
   const demo = isDemoListing(listing);
-  const seed = demo ? getSeedBusiness(listing.slug) : undefined;
-  const description = listingDescription(listing);
+  const description = indexable
+    ? listingDescription(listing)
+    : "This profile is awaiting source and content review. Business details are withheld until the record passes publication checks.";
   const factsCheckedAt = listingFactsCheckedAt(listing);
   const categories = listing.categories.map(titleCase);
   const primaryCategory = getDirectoryCategory(listing.categories[0] ?? "");
-  const primaryCategoryHref = primaryCategory?.href ?? routes.categories;
+  // Breadcrumbs and category links only point at published hubs; an unpublished hub 404s.
+  const hubs = await getIndexableHubSlugs();
+  const categoryHubHref = (slug: string) => {
+    const category = getDirectoryCategory(slug);
+    return category && hubs.categories.includes(category.slug) ? category.href : undefined;
+  };
   const cityPage = cityDirectoryPages.find((city) => listingMatchesCity(listing, city.slug));
-  const locationHref = cityPage?.href ?? routes.city;
+  const locationHref = cityPage && hubs.cities.includes(cityPage.slug) ? cityPage.href : routes.city;
+  const hasExactDirectoryParent = Boolean(
+    indexable &&
+    primaryCategory &&
+    cityPage &&
+    hubs.cityCategories.includes(`${cityPage.slug}/${primaryCategory.slug}`),
+  );
+  const relatedListings = indexable
+    ? selectRelatedListings(listing, await getIndexableListings(), {
+        category: primaryCategory,
+        city: cityPage,
+      })
+    : [];
+  const relatedHeading = primaryCategory
+    ? `More ${primaryCategory.name.toLowerCase()} ${cityPage ? `in ${cityPage.name}` : "in Nepal"}`
+    : `More businesses ${cityPage ? `in ${cityPage.name}` : "in Nepal"}`;
+  const primaryCategoryHref = hasExactDirectoryParent && primaryCategory && cityPage
+    ? getCityCategoryHref(cityPage.slug, primaryCategory.slug)
+    : (primaryCategory && categoryHubHref(primaryCategory.slug)) ?? routes.categories;
   const keywords = uniqueKeywords([listing.name, listing.area, listing.neighborhood ?? "", ...categories]);
   const webPageJsonLd = buildWebPageJsonLd({
     name: `${listing.name} in ${listing.area}`,
@@ -122,28 +152,29 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
   });
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
     { name: "Home", url: siteUrl },
-    { name: primaryCategory?.name ?? categories[0] ?? "Businesses", url: `${siteUrl}${primaryCategoryHref}` },
     { name: cityPage?.name ?? listing.area, url: `${siteUrl}${locationHref}` },
+    { name: primaryCategory?.name ?? categories[0] ?? "Businesses", url: `${siteUrl}${primaryCategoryHref}` },
     { name: listing.name, url },
   ]);
   const localBusinessJsonLd = indexable ? buildListingLocalBusinessJsonLd(listing, url) : null;
-  const weeklyHours = seed?.weeklyHours;
-  const safeWebsite = !demo ? listing.website : undefined;
-  const safeEmail = !demo ? listing.email : undefined;
-  const safePhone = !demo ? listing.phone : undefined;
+  const safeWebsite = indexable ? listing.website : undefined;
+  const safeEmail = indexable ? listing.email : undefined;
+  const safePhone = indexable ? listing.phone : undefined;
+  const verifiedImage = publicListingImage(listing);
+  const verificationLabel = listingVerificationLabel(listing);
 
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([webPageJsonLd, breadcrumbJsonLd, localBusinessJsonLd].filter(Boolean)),
+          __html: serializeJsonLd([webPageJsonLd, breadcrumbJsonLd, localBusinessJsonLd].filter(Boolean)),
         }}
       />
       <Breadcrumbs
         items={[
-          { label: primaryCategory?.name ?? categories[0] ?? "Businesses", href: primaryCategoryHref },
           { label: cityPage?.name ?? listing.area, href: locationHref },
+          { label: primaryCategory?.name ?? categories[0] ?? "Businesses", href: primaryCategoryHref },
           { label: listing.name },
         ]}
       />
@@ -165,7 +196,7 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
         <div className="container business-hero__grid">
           <div className="business-hero__photo">
             <FillImage
-              src={listing.image ?? "/icon.svg"}
+              src={verifiedImage ?? "/icon.svg"}
               alt={`${listing.name} in ${listing.area}`}
               sizes="(max-width: 980px) 100vw, 300px"
               priority
@@ -173,9 +204,9 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
           </div>
           <div className="business-hero__info">
             <div className="badge-row">
-              {listing.verified && indexable ? (
+              {indexable ? (
                 <span className="badge badge--success">
-                  <ShieldCheck size={13} aria-hidden /> Verified public record
+                  <ShieldCheck size={13} aria-hidden /> {verificationLabel}
                 </span>
               ) : null}
               {listing.claimed && indexable ? (
@@ -189,18 +220,12 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
               {categories.map((category, index) => (
                 <span key={category}>
                   {index ? " / " : ""}
-                  <Link href={getDirectoryCategory(listing.categories[index])?.href ?? getSearchHref(category, listing.area)}>{category}</Link>
+                  <Link href={index === 0 ? primaryCategoryHref : categoryHubHref(listing.categories[index]) ?? getSearchHref(category, listing.area)}>{category}</Link>
                 </span>
               ))}
             </p>
             <div className="business-hero__rating">
-              {indexable && listing.rating != null && listing.reviews ? (
-                <>
-                  <strong>{listing.rating.toFixed(1)}</strong>
-                  <span>{listing.reviews} published reviews</span>
-                </>
-              ) : null}
-              {indexable && priceTierLabel(listing.price) ? <span>{priceTierLabel(listing.price)}</span> : null}
+              {indexable ? <span>No approved first-party reviews yet</span> : null}
               {indexable && listing.status ? <em>{listing.status === "24h" ? "Open 24 hours" : `${titleCase(listing.status)} now`}</em> : null}
             </div>
             <p>{description}</p>
@@ -219,8 +244,8 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
             <Link className="button button--outline" href={routes.map}>
               <MapPin size={16} aria-hidden /> Directions
             </Link>
-            <Link className="button button--outline" href={`${routes.requestCallback}?business=${encodeURIComponent(listing.name)}`}>
-              Request details
+            <Link className="button button--outline" href={routes.contact}>
+              Suggest a correction
             </Link>
           </aside>
         </div>
@@ -239,7 +264,7 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
               </p>
             </section>
 
-            {listing.services?.length ? (
+            {indexable && listing.services?.length ? (
               <section>
                 <h2>Services</h2>
                 <ul className="listing-detail-list">
@@ -248,7 +273,7 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
               </section>
             ) : null}
 
-            {listing.amenities.length ? (
+            {indexable && listing.amenities.length ? (
               <section>
                 <h2>Published amenities</h2>
                 <div className="business-card__amenities">
@@ -257,26 +282,14 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
               </section>
             ) : null}
 
-            {weeklyHours?.length ? (
-              <section>
-                <h2>Weekly hours</h2>
-                <div className="hours-table">
-                  {weeklyHours.map((hours) => (
-                    <div key={hours.dayOfWeek}>
-                      <span>{hours.dayOfWeek}</span>
-                      <strong>{hours.closed ? "Closed" : `${hours.opens}–${hours.closes}`}</strong>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            ) : listing.hoursToday ? (
+            {indexable && listing.hoursToday ? (
               <section>
                 <h2>Current hours note</h2>
                 <p>{listing.hoursToday}</p>
               </section>
             ) : null}
 
-            {listing.faqs.length ? (
+            {indexable && listing.faqs.length ? (
               <section className="article-faq">
                 <h2>Frequently asked questions</h2>
                 {listing.faqs.map((faq) => (
@@ -292,14 +305,14 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
           <aside className="sidebar">
             <section className="filter-card">
               <h2>Contact and location</h2>
-              <p><MapPin size={15} aria-hidden /> {listing.address}</p>
+              <p><MapPin size={15} aria-hidden /> {indexable ? listing.address : listing.area}</p>
               {safePhone ? <p><Phone size={15} aria-hidden /> {safePhone}</p> : null}
               {safeEmail ? <p>{safeEmail}</p> : null}
-              {listing.hoursToday ? <p><Clock3 size={15} aria-hidden /> {listing.hoursToday}</p> : null}
+              {indexable && listing.hoursToday ? <p><Clock3 size={15} aria-hidden /> {listing.hoursToday}</p> : null}
             </section>
             <section className="filter-card">
               <h2>Data status</h2>
-              <p>{indexable ? "Qualified public listing" : "Not eligible for search indexing"}</p>
+              <p>{indexable ? verificationLabel : "Not eligible for search indexing"}</p>
               {factsCheckedAt ? (
                 <p>Facts last checked: <time dateTime={factsCheckedAt}>{new Date(factsCheckedAt).toLocaleDateString("en-NP")}</time></p>
               ) : null}
@@ -308,6 +321,21 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
           </aside>
         </div>
       </section>
+
+      {relatedListings.length ? (
+        <section className="section section--soft">
+          <div className="container">
+            <h2 className="compact-title">{relatedHeading}</h2>
+            <div className="seo-link-strip" aria-label={relatedHeading}>
+              {relatedListings.map((related) => (
+                <Link key={related.slug} href={getBusinessHref(related.slug)}>
+                  {related.name}, {related.neighborhood ?? related.area}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }

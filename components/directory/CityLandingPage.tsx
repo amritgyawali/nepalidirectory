@@ -2,28 +2,45 @@ import Link from "next/link";
 import { BadgeCheck, MapPin } from "lucide-react";
 import { RelatedGuideLinks } from "@/components/content/RelatedGuideLinks";
 import { CategoryTile } from "@/components/directory/CategoryTile";
+import { DirectoryPagination } from "@/components/directory/DirectoryPagination";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getCityEditorialDetail, type CityDirectoryPage } from "@/lib/city-pages";
 import { categories } from "@/lib/data";
-import { getDirectoryCategory } from "@/lib/directory-categories";
 import { getGuidesForCity } from "@/lib/content-clusters";
 import type { Listing } from "@/lib/enrich";
-import { listingDescription } from "@/lib/public-listings";
+import { listingDescription, listingVerificationLabel } from "@/lib/public-listings";
 import { getBusinessHref, getSearchHref, routes } from "@/lib/routes";
 
 type CityLandingPageProps = {
   city: CityDirectoryPage;
   nearbyCities: CityDirectoryPage[];
   listings: Listing[];
+  totalListings: number;
+  currentPage: number;
+  totalPages: number;
+  cityCategoryLinks: Record<string, string>;
 };
 
-function getCategoryDestination(name: string, city: string): string {
+function getCategoryDestination(
+  name: string,
+  city: string,
+  cityCategoryLinks: Record<string, string>,
+): string {
   const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-  return getDirectoryCategory(slug)?.href ?? getSearchHref(name, city);
+  // Only published hubs are in cityCategoryLinks; anything else falls back to a search.
+  return cityCategoryLinks[slug] ?? getSearchHref(name, city);
 }
 
-export function CityLandingPageView({ city, nearbyCities, listings }: CityLandingPageProps) {
+export function CityLandingPageView({
+  city,
+  nearbyCities,
+  listings,
+  totalListings,
+  currentPage,
+  totalPages,
+  cityCategoryLinks,
+}: CityLandingPageProps) {
   const detail = getCityEditorialDetail(city.slug);
   const relatedGuides = getGuidesForCity(city.slug);
   return (
@@ -40,7 +57,7 @@ export function CityLandingPageView({ city, nearbyCities, listings }: CityLandin
           <p>{city.description}</p>
           <div className="stats-grid">
             <div>
-              <strong>{listings.length}</strong>
+              <strong>{totalListings}</strong>
               <span>qualified public profiles</span>
             </div>
             <div>
@@ -106,7 +123,7 @@ export function CityLandingPageView({ city, nearbyCities, listings }: CityLandin
                 key={category.name}
                 {...category}
                 count={undefined}
-                href={getCategoryDestination(category.name, city.name)}
+                href={getCategoryDestination(category.name, city.name, cityCategoryLinks)}
               />
             ))}
           </div>
@@ -128,7 +145,7 @@ export function CityLandingPageView({ city, nearbyCities, listings }: CityLandin
                   <h2><Link href={getBusinessHref(listing.slug)}>{listing.name}</Link></h2>
                   <p>{listingDescription(listing)}</p>
                   <div className="business-card__amenities">
-                    {listing.verified ? <span><BadgeCheck size={12} aria-hidden /> Reviewed record</span> : null}
+                    {listing.verified ? <span><BadgeCheck size={12} aria-hidden /> {listingVerificationLabel(listing)}</span> : null}
                     {listing.services?.slice(0, 3).map((service) => <span key={service}>{service}</span>)}
                   </div>
                 </article>
@@ -144,6 +161,12 @@ export function CityLandingPageView({ city, nearbyCities, listings }: CityLandin
               <Link className="button button--primary" href={routes.claimListing}>Add a verified business</Link>
             </div>
           )}
+
+          <DirectoryPagination
+            baseHref={city.href}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
 
           <h2 className="compact-title nearby-title">Nearby city pages</h2>
           <div className="city-link-grid">

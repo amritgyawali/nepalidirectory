@@ -22,7 +22,7 @@ export function makeEvergreenPageHandler(options: {
       city: page.cityName,
       n: String(page.listingCount),
       localities: page.notableLocalities.join(", "),
-      avg: page.averageRating.toFixed(1),
+      avg_quality: page.qualityAverage.toFixed(1),
     });
     const result = await options.providers.chain().completeJson(
       {

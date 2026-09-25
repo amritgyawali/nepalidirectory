@@ -6,7 +6,7 @@ import { PageHero } from "@/components/directory/PageHero";
 import { getBlogCategories, getBlogCategory, getBlogPostUrl, siteUrl } from "@/lib/blog";
 import { isIndexableBlogCategory } from "@/lib/blog-quality";
 import { routes } from "@/lib/routes";
-import { buildBlogKeywords, buildWebPageJsonLd, uniqueKeywords } from "@/lib/seo";
+import { buildBlogKeywords, buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 type BlogCategoryPageProps = {
   params: Promise<{ slug: string }>;
@@ -24,12 +24,6 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
     return { title: "Blog category not found", robots: { index: false, follow: false } };
   }
 
-  const keywords = uniqueKeywords([
-    `${category.name} Nepal`,
-    `${category.name} guide Nepal`,
-    `Nepal ${category.name.toLowerCase()} blog`,
-    ...category.posts.flatMap((post) => buildBlogKeywords(post))
-  ]);
   const title = `${category.name} Guides in Nepal`;
   const description = `Read ${category.name.toLowerCase()} guides from Nepali Directory, including practical answers, FAQs and local decision help for Nepal.`;
   const indexable = isIndexableBlogCategory(category.posts);
@@ -37,7 +31,6 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
   return {
     title,
     description,
-    keywords,
     alternates: { canonical: category.href },
     robots: {
       index: indexable,
@@ -48,7 +41,7 @@ export async function generateMetadata({ params }: BlogCategoryPageProps): Promi
       title,
       description,
       url: `${siteUrl}${category.href}`,
-      siteName: "Nepali Directory",
+      siteName: "NepaliDirectory",
       type: "website",
       images: [{ url: category.posts[0].image, width: 1200, height: 675, alt: category.posts[0].imageAlt }]
     },
@@ -99,7 +92,7 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([collectionJsonLd, itemListJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([collectionJsonLd, itemListJsonLd]) }}
       />
       <Breadcrumbs items={[{ label: "Blog", href: routes.blog }, { label: category.name }]} />
       <PageHero title={title} subtitle={description} cta={{ label: "All guides", href: routes.blog }} />

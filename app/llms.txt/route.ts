@@ -1,9 +1,12 @@
+import { llmsListSection } from "@/lib/llms-lists";
 import { getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
 import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { getSortedCompareCategories } from "@/lib/compare";
+import { getPopulatedCompareSlugs } from "@/lib/compare-listings";
 import { directoryCategories } from "@/lib/directory-categories";
+import { computeIndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getBusinessHref, routes } from "@/lib/routes";
 import { getIndexableListings } from "@/lib/public-listings";
 import { getEvergreenPages } from "@/lib/seo-auto";
@@ -39,28 +42,40 @@ export async function GET() {
   } catch (error) {
     console.error("Unable to load qualified listings for llms.txt", error);
   }
+  // Unpublished hubs 404, so only list the ones that currently qualify.
+  const hubs = computeIndexableHubSlugs(publicListings);
 
   const guides = uniquePosts([...getSortedBlogPosts(), ...generatedPosts])
     .sort((a, b) => b.modifiedAt.localeCompare(a.modifiedAt))
     .slice(0, 60);
 
+  // Degrade like the loaders above: an unavailable listings backend must not take down llms.txt.
+  let populatedCompareSlugs = new Set<string>();
+  try {
+    populatedCompareSlugs = await getPopulatedCompareSlugs();
+  } catch (error) {
+    console.error("Unable to load populated comparison slugs for llms.txt", error);
+  }
+
   const lines = [
-    "# Nepali Directory",
+    "# NepaliDirectory",
     "",
-    "> A Nepal-focused local business directory with city guides, category discovery, business comparisons, reviews, and practical editorial guidance.",
+    "> A Nepal-focused local business directory with city guides, category discovery, evidence-based comparison guidance, and practical editorial content.",
     "",
-    "Nepali Directory publishes public directory and guide pages as crawlable server-rendered HTML. Use the XML sitemap for complete canonical URL discovery; this file is a curated context guide for language models and other AI agents.",
+    "NepaliDirectory publishes qualified directory and guide pages as crawlable server-rendered HTML. Use the XML sitemap for complete canonical URL discovery; this file is a curated context guide for language models and other AI agents.",
+    "",
+    "For expanded context including all business profiles and full guide listings, see /llms-full.txt.",
     "",
     "When citing this site, link to the exact canonical page. Confirm time-sensitive details such as opening hours, prices, availability, contact details, and regulations directly with the relevant provider or primary authority.",
     "",
     "## Main directories",
     "",
     resource("Home", routes.home, "Browse local businesses, services, cities, and guides across Nepal."),
+    resource("Best Directory in Nepal", routes.bestDirectoryNepal, "How to judge a Nepal business directory, with live coverage counts and how Nepali Directory meets each criterion."),
     resource("Categories", routes.categories, "Explore the directory by business and service category."),
-    ...directoryCategories.map((category) =>
+    ...directoryCategories.filter((category) => hubs.categories.includes(category.slug)).map((category) =>
       resource(category.priorityKeyword, category.href, category.metaDescription),
     ),
-    resource("Best Businesses", routes.bestBusinesses, "See the review-gated ranking method and available category and city paths."),
     resource("Near Me", routes.nearMe, "Discover nearby business categories and local services."),
     resource("Business Comparisons", routes.compareBusiness, "Use consistent decision criteria; named providers appear only after publication review."),
     resource("Blog", routes.blog, "Practical Nepal travel, food, services, healthcare, and business guides."),
@@ -70,13 +85,14 @@ export async function GET() {
     "",
     "## City directories",
     "",
-    ...cityDirectoryPages.map((city) => resource(city.title, city.href, city.description)),
+    ...cityDirectoryPages.filter((city) => hubs.cities.includes(city.slug)).map((city) => resource(city.title, city.href, city.description)),
     "",
+    ...llmsListSection({ withEntries: false }),
     "## Business comparison guides",
     "",
-    ...(getSortedCompareCategories().filter((category) => category.businesses.length > 0).length > 0
+    ...(getSortedCompareCategories().filter((category) => populatedCompareSlugs.has(category.slug)).length > 0
       ? getSortedCompareCategories()
-          .filter((category) => category.businesses.length > 0)
+          .filter((category) => populatedCompareSlugs.has(category.slug))
           .map((category) => resource(category.title, category.href, category.description))
       : [
           "Comparison pages are gated pending business data review -- see the Editorial Policy. This is an intentional content-integrity control, not a missing file.",

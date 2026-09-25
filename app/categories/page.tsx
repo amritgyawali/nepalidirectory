@@ -3,14 +3,20 @@ import { CategoryTile } from "@/components/directory/CategoryTile";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { categories, categoryGroups } from "@/lib/data";
 import { getDirectoryCategory } from "@/lib/directory-categories";
+import { getIndexableHubSlugs, isLiveHubHref, type IndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getSearchHref } from "@/lib/routes";
 
-function getCategoryDestination(label: string): string {
+export const revalidate = 300;
+
+/** Unpublished category hubs 404, so they fall back to a search for the same label. */
+function getCategoryDestination(label: string, hubs: IndexableHubSlugs, href?: string): string {
   const slug = label.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-  return getDirectoryCategory(slug)?.href ?? getSearchHref(label);
+  const destination = href ?? getDirectoryCategory(slug)?.href;
+  return destination && isLiveHubHref(destination, hubs) ? destination : getSearchHref(label);
 }
 
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  const hubs = await getIndexableHubSlugs();
   return (
     <main>
       <Breadcrumbs items={[{ label: "Categories" }]} />
@@ -24,7 +30,7 @@ export default function CategoriesPage() {
           <div className="filter-row filter-row--top">
             <strong>Most searched:</strong>
             {categories.slice(0, 8).map((category, index) => (
-              <Link className={index === 0 ? "chip chip--active" : "chip"} key={category.name} href={category.href}>
+              <Link className={index === 0 ? "chip chip--active" : "chip"} key={category.name} href={getCategoryDestination(category.name, hubs, category.href)}>
                 {category.name}
               </Link>
             ))}
@@ -35,7 +41,11 @@ export default function CategoriesPage() {
         <div className="container">
           <div className="home-category-grid">
             {categories.map((category) => (
-              <CategoryTile key={category.name} {...category} />
+              <CategoryTile
+                key={category.name}
+                {...category}
+                href={getCategoryDestination(category.name, hubs, category.href)}
+              />
             ))}
           </div>
           <div className="category-groups">
@@ -54,7 +64,7 @@ export default function CategoriesPage() {
                   </div>
                   <div className="category-group__links">
                     {group.items.map((item) => (
-                      <Link href={getCategoryDestination(item)} key={item}>
+                      <Link href={getCategoryDestination(item, hubs)} key={item}>
                         {item}
                       </Link>
                     ))}

@@ -4,8 +4,8 @@ import type { CompareCategory } from "@/lib/compare";
 export const publisher = {
   "@type": "Organization",
   "@id": "https://www.nepalidirectory.com/#organization",
-  name: "Nepali Directory",
-  alternateName: ["NepaliDirectory", "Nepal Directory"],
+  name: "NepaliDirectory",
+  alternateName: ["Nepali Directory", "Nepal Directory"],
   url: "https://www.nepalidirectory.com",
   logo: {
     "@type": "ImageObject",
@@ -36,9 +36,9 @@ export function buildOrganizationJsonLd() {
   return {
     "@context": "https://schema.org",
     ...publisher,
+    "@type": "Organization",
     description:
-      "Nepali Directory helps people find, compare and contact reviewed local business profiles, restaurants, hotels, doctors and services across Nepal.",
-    foundingDate: "2026",
+      "NepaliDirectory helps people find, compare and contact reviewed local business profiles, restaurants, hotels, doctors and services across Nepal.",
     sameAs: sameAs.length ? sameAs : undefined,
     contactPoint: {
       "@type": "ContactPoint",
@@ -46,7 +46,17 @@ export function buildOrganizationJsonLd() {
       url: `${publisher.url}/contact`,
       areaServed: "NP",
       availableLanguage: ["en", "ne"]
-    }
+    },
+    slogan: "Find trusted local businesses across Nepal",
+    numberOfEmployees: {
+      "@type": "QuantitativeValue",
+      minValue: 1,
+      maxValue: 10,
+    },
+    actionableFeedbackPolicy: `${publisher.url}/editorial-policy`,
+    correctionsPolicy: `${publisher.url}/editorial-policy`,
+    ethicsPolicy: `${publisher.url}/editorial-policy`,
+    publishingPrinciples: `${publisher.url}/editorial-policy`,
   };
 }
 
@@ -55,8 +65,8 @@ export function buildWebSiteJsonLd() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${publisher.url}/#website`,
-    name: "Nepali Directory",
-    alternateName: ["NepaliDirectory", "Nepal Directory"],
+    name: "NepaliDirectory",
+    alternateName: ["Nepali Directory", "Nepal Directory"],
     url: publisher.url,
     inLanguage: "en",
     publisher: {
@@ -82,6 +92,16 @@ export function uniqueKeywords(values: string[]) {
         .map((value) => value.replace(/\s+/g, " "))
     )
   );
+}
+
+/** Serialize JSON-LD without allowing data-backed text to terminate its HTML script element. */
+export function serializeJsonLd(value: unknown): string {
+  return JSON.stringify(value)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
 }
 
 export function buildBlogKeywords(post: BlogPost) {
@@ -137,7 +157,44 @@ export function estimateWordCount(post: BlogPost) {
 }
 
 export function getBlogQuickAnswer(post: BlogPost) {
-  return post.faqs[0]?.answer ?? post.excerpt;
+  return post.quickAnswer ?? post.faqs[0]?.answer ?? post.excerpt;
+}
+
+/**
+ * ItemList for list posts. Entries are plain LocalBusiness facts (name, place, contact) with no
+ * rating, review or award properties: the site does not assert reputation in structured data for
+ * businesses it has not audited, and that includes the featured partner's own award claims.
+ */
+export function buildBlogItemListJsonLd(post: BlogPost, pageUrl: string) {
+  if (!post.itemList) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${pageUrl}#list`,
+    name: post.itemList.name,
+    url: pageUrl,
+    numberOfItems: post.itemList.items.length,
+    itemListOrder: "https://schema.org/ItemListUnordered",
+    itemListElement: post.itemList.items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "LocalBusiness",
+        name: item.name,
+        description: item.description,
+        address: {
+          "@type": "PostalAddress",
+          ...(item.streetAddress ? { streetAddress: item.streetAddress } : {}),
+          addressLocality: item.city,
+          addressCountry: "NP",
+        },
+        areaServed: { "@type": "City", name: item.city },
+        ...(item.url ? { url: item.url, sameAs: [item.url] } : {}),
+        ...(item.telephone ? { telephone: item.telephone } : {}),
+        ...(item.email ? { email: item.email } : {}),
+      },
+    })),
+  };
 }
 
 export function getCompareQuickAnswer(category: CompareCategory) {
@@ -145,7 +202,7 @@ export function getCompareQuickAnswer(category: CompareCategory) {
   if (!best) {
     return `Compare ${category.category.toLowerCase()} using ${category.criteria.join(", ").toLowerCase()}. Named providers appear only after their public listing data passes the directory's publication checks.`;
   }
-  return `${best.name} ranks first for ${category.category.toLowerCase()} because it is best for ${best.bestFor.toLowerCase()}, has a ${best.rating}/5 rating from ${best.reviews} reviews, and ${best.verdict.charAt(0).toLowerCase()}${best.verdict.slice(1)}`;
+  return `Compare ${category.businesses.length} reviewed ${category.category.toLowerCase()} profiles using ${category.criteria.join(", ").toLowerCase()}. Treat each profile as a shortlist entry and confirm current details directly.`;
 }
 
 export function buildWebPageJsonLd({
@@ -170,7 +227,7 @@ export function buildWebPageJsonLd({
     inLanguage: "en",
     isPartOf: {
       "@type": "WebSite",
-      name: "Nepali Directory",
+      name: "NepaliDirectory",
       url: publisher.url
     },
     publisher,

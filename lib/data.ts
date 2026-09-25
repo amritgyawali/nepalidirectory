@@ -3,14 +3,18 @@ import {
   Building2,
   Car,
   GraduationCap,
+  Hammer,
   HeartPulse,
   Hospital,
   Hotel,
   Home,
   Laptop,
   Scale,
+  Scissors,
+  Shirt,
   ShoppingBag,
   Sparkles,
+  Stethoscope,
   Utensils,
   Wrench,
   Zap
@@ -59,13 +63,11 @@ export type Business = {
 };
 
 export function isDemoBusiness(business: Business): boolean {
-  if (business.email?.toLowerCase().endsWith(".example")) return true;
-  if (!business.website) return false;
-  try {
-    return new URL(business.website).hostname.toLowerCase().endsWith("example.com");
-  } catch {
-    return true;
-  }
+  // Every row in this bundled catalog is UI/demo seed data. Production publication is driven by
+  // Listing records that pass the central evidence gate; a plausible-looking fixture URL must
+  // never turn a seed record into a public recommendation.
+  void business;
+  return true;
 }
 
 const image = (id: string, size = "600") =>
@@ -81,10 +83,14 @@ export const categories = [
   { name: "Schools", count: undefined, icon: GraduationCap, color: "#e0f4f4", href: getDirectoryCategoryHref("schools") },
   { name: "IT Companies", count: undefined, icon: Laptop, color: "#ecf0fb", href: getDirectoryCategoryHref("it-companies") },
   { name: "Shops", count: undefined, icon: ShoppingBag, color: "#fff1e0", href: getDirectoryCategoryHref("shops") },
+  { name: "Clothing", count: undefined, icon: Shirt, color: "#fce8ec", href: getDirectoryCategoryHref("clothing-stores") },
+  { name: "Tailors", count: undefined, icon: Scissors, color: "#f3e8fd", href: getDirectoryCategoryHref("tailors") },
+  { name: "Hardware", count: undefined, icon: Hammer, color: "#f0f0f0", href: getDirectoryCategoryHref("hardware-stores") },
+  { name: "Dentists", count: undefined, icon: Stethoscope, color: "#e8f4fd", href: getDirectoryCategoryHref("dentists") },
   { name: "Lawyers", count: undefined, icon: Scale, color: "#ecf0fb", href: getSearchHref("Lawyers") },
   { name: "Auto Repair", count: undefined, icon: Car, color: "#f0f0f0", href: getSearchHref("Auto Repair") },
   { name: "Beauty Salons", count: undefined, icon: Sparkles, color: "#f3e8fd", href: getCompareHref("beauty-salons") },
-  { name: "Contractors", count: undefined, icon: Building2, color: "#fff1e0", href: getCompareHref("contractors") }
+  { name: "Contractors", count: undefined, icon: Building2, color: "#fff1e0", href: getDirectoryCategoryHref("construction") }
 ];
 
 export const categoryGroups = [
@@ -176,25 +182,25 @@ export const cities = [
   {
     name: "Pokhara",
     listings: "City directory guide",
-    image: image("photo-1626621341517-bbf3d9990a23", "700"),
+    image: image("photo-1659808909524-5fcad5cd48bf", "700"),
     href: "/city/pokhara"
   },
   {
     name: "Lalitpur",
     listings: "City directory guide",
-    image: image("photo-1561361513-2d000a50f0dc", "700"),
+    image: image("photo-1585597800810-07a63ea8e983", "700"),
     href: "/city/lalitpur"
   },
   {
     name: "Bhaktapur",
     listings: "City directory guide",
-    image: image("photo-1614107707379-283a65774553", "700"),
+    image: image("photo-1755011309944-1b6288be22ba", "700"),
     href: "/city/bhaktapur"
   },
   {
     name: "Chitwan",
     listings: "City directory guide",
-    image: image("photo-1571401835393-8c5f35328320", "700"),
+    image: image("photo-1498712067384-01239c6b377c", "700"),
     href: "/city/chitwan"
   }
 ];
@@ -681,35 +687,35 @@ export const plans = [
     name: "Starter",
     price: "Free",
     description: "Basic listing for local visibility.",
-    features: ["Business profile", "Map pin", "Customer reviews", "Basic analytics"]
+    features: ["Submission review", "Qualified business profile", "Map pin", "Basic analytics"]
   },
   {
     name: "Featured",
     price: "Rs 2,500/mo",
-    description: "Higher placement in city and category searches.",
-    features: ["Priority placement", "Photo gallery", "Lead notifications", "Review response tools"],
+    description: "Clearly labelled promotion alongside an independently qualified profile.",
+    features: ["Sponsored placement label", "Photo gallery", "Lead notifications", "Campaign reporting"],
     highlighted: true
   },
   {
     name: "Premium",
     price: "Rs 7,500/mo",
     description: "Growth tools for multi-location businesses.",
-    features: ["Sponsored placements", "Deals and offers", "Dedicated support", "Campaign reporting"]
+    features: ["Sponsored placement labels", "Deals and offers", "Dedicated support", "Campaign reporting"]
   }
 ];
 
 export const stats = [
-  [String(businesses.length), "preview business profiles"],
   [String(cities.length), "featured city directories"],
   [String(categories.length), "search categories"],
-  ["Daily", "content quality checks"]
+  ["Evidence-gated", "public business profiles"],
+  ["Source-backed", "published profile facts"]
 ];
 
 export const directoryFeatureChecklist = [
   "Category and location search",
   "Open now and 24-hour filters",
-  "Sponsored and verified listings",
-  "Ratings, reviews and review writing",
+  "Source and ownership status labels",
+  "Evidence-gated public profiles",
   "Call, website, directions and quote actions",
   "Coupons and local offers",
   "Photo galleries and menu/service details",

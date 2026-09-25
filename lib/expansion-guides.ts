@@ -1518,8 +1518,8 @@ export const expansionGuidePosts: BlogPost[] = [
       "Choose a Bhaktapur hotel by checking the exact heritage-area route, room, stairs, noise, transport and complete reservation terms.",
     description:
       "Compare Bhaktapur heritage-area hotels using a checklist for map location, vehicle access, room details, accessibility, sound, breakfast, payment and cancellation.",
-    image: image("photo-1561361513-2d000a50f0dc"),
-    imageAlt: "Historic architecture viewed from accommodation in Bhaktapur",
+    image: image("photo-1755011309944-1b6288be22ba"),
+    imageAlt: "Historic temple architecture in Bhaktapur Durbar Square",
     date: "11 Jul 2026",
     publishedAt: "2026-07-11",
     modifiedAt: "2026-07-11",
@@ -4440,8 +4440,8 @@ export const expansionGuidePosts: BlogPost[] = [
       "Compare Dharan hotels on location, amenities, hill-view access and booking terms before you reserve a room.",
     description:
       "Book a Dharan hotel confidently with a checklist covering location, amenities, hill-view access, reviews and booking terms for visitors and business travellers.",
-    image: image("photo-1561361513-2d000a50f0dc"),
-    imageAlt: "Hotel room with a view of the eastern hills near Dharan",
+    image: image("photo-1500534314209-a25ddb2bd429"),
+    imageAlt: "Green hills of eastern Nepal near Dharan",
     date: "12 Jul 2026",
     publishedAt: "2026-07-12",
     modifiedAt: "2026-07-12",
@@ -4549,8 +4549,8 @@ export const expansionGuidePosts: BlogPost[] = [
       "Compare Chitwan hotels and jungle lodges on location, activity packages, family suitability and booking terms before you reserve.",
     description:
       "Book a Chitwan hotel or jungle lodge with confidence using a checklist covering location, safari package inclusions, family amenities and booking terms.",
-    image: image("photo-1571401835393-8c5f35328320"),
-    imageAlt: "Lodge rooms surrounded by forest near Chitwan National Park",
+    image: image("photo-1498712067384-01239c6b377c"),
+    imageAlt: "Elephant crossing the grasslands near Chitwan National Park",
     date: "12 Jul 2026",
     publishedAt: "2026-07-12",
     modifiedAt: "2026-07-12",

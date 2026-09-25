@@ -9,7 +9,6 @@ import {
   type SeoPageIntroRepository,
 } from "@/lib/seo-auto";
 import { ReviewIntelligenceService } from "./service";
-import { makeReviewSummaryHandler } from "./handlers";
 import type { ModerationQueueRepository, OwnerReplyDraftRepository, ReviewSummaryRepository } from "./types";
 import {
   createModerationQueueRepository,
@@ -51,7 +50,6 @@ export function createReviewsAiRuntime(overrides: ReviewsAiRuntimeOverrides = {}
     siteName: discover.config.siteName,
   });
 
-  discover.worker.register("REVIEW_SUMMARY", makeReviewSummaryHandler(reviewIntelligence));
   discover.worker
     .register(
       "EVERGREEN_PAGE",

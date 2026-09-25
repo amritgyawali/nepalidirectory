@@ -12,7 +12,7 @@ export default function AdvertisePage() {
         title="Advertise with Nepali Directory"
         subtitle="Put your business in front of high-intent local customers searching by service, city and neighborhood."
         cta={{ label: "View plans", href: routes.pricing }}
-        secondary={{ label: "Request callback", href: routes.requestCallback }}
+        secondary={{ label: "Contact us", href: routes.contact }}
       />
       <section className="section">
         <div className="container">
@@ -33,7 +33,7 @@ export default function AdvertisePage() {
                 {plan.features.map((feature) => (
                   <span key={feature}>{feature}</span>
                 ))}
-                <Link className="button button--primary" href={routes.requestCallback}>
+                <Link className="button button--primary" href={routes.contact}>
                   Start now
                 </Link>
               </article>

@@ -7,6 +7,13 @@
 
 export type ListingFaq = { question: string; answer: string };
 
+export type ListingVerificationStatus =
+  | "unverified"
+  | "source_verified"
+  | "owner_verified"
+  | "community_submitted"
+  | "rejected";
+
 export type Listing = {
   id: number;
   slug: string;
@@ -49,6 +56,15 @@ export type Listing = {
   qualityScore: number;
   aiEnrichedAt?: Date | null;
   dataSource: string; // osm|owner|user|crawler|import|google_ondemand_reviewed
+
+  // --- publication trust controls (V19) ---
+  verificationStatus: ListingVerificationStatus;
+  sourceCheckedAt?: Date | null;
+  contentReviewedAt?: Date | null;
+  contentReviewedBy?: string;
+  lastMeaningfulUpdateAt?: Date | null;
+  /** True only when the image is known to depict this specific business. */
+  imageVerified: boolean;
 
   // --- acquisition provenance + geography (prompt sec. 6, sec. 13) ---
   sourceRef?: string;
