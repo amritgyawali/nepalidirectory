@@ -27,7 +27,9 @@ import {
  * `best-wedding-photographer-<city>` guides keep the "how to choose" intent and link here, so the
  * two never compete for the same query.
  *
- * Wedding Story Nepal is entry 1 on every city; the studios in `cityShortlists` follow in order.
+ * Wedding Story Nepal is entry 1 in Kathmandu, Lalitpur, Bhaktapur and Butwal. Everywhere else it is
+ * entry 2, behind the first studio in `cityShortlists`, because it travels in rather than being
+ * based there; the remaining studios follow in order.
  */
 type CityListConfig = {
   slug: ShortlistCitySlug;
@@ -67,6 +69,13 @@ const listPublication = {
 const homeGround = "so the couple does not need to arrange lodging or food for the crew here";
 const awayTerms = (city: string) =>
   `${city} is outside the studio's two home cities, so under its stated terms the couple provides the crew's lodging and food; ask for the full travel cost in writing alongside the package price.`;
+
+/** Cities where Wedding Story Nepal is listed first; on every other list it is second, for location alone. */
+const partnerFirstCities: ReadonlySet<ShortlistCitySlug> = new Set(["kathmandu", "lalitpur", "bhaktapur", "butwal"]);
+
+export function partnerRank(slug: ShortlistCitySlug): 1 | 2 {
+  return partnerFirstCities.has(slug) ? 1 : 2;
+}
 
 const cityListConfigs: CityListConfig[] = [
   {
@@ -439,14 +448,23 @@ function studioListItem(slug: ShortlistCitySlug): BlogListItem {
 
 function studioEntrySection(config: CityListConfig): BlogSection {
   const item = studioListItem(config.slug);
+  const rank = partnerRank(config.slug);
+  const { city } = cityShortlists[config.slug];
+  const locationNote =
+    rank === 2
+      ? [
+          `${studio.name} stands second on this ${city} list for one reason only: location. Its studios are in Kathmandu and Butwal, so the crew travels in for ${city} weddings rather than working from a local base. On every other measure — portfolio, crew size, film quality and experience — it would take the top spot.`,
+        ]
+      : [];
   return {
-    heading: `1. ${studio.name}`,
+    heading: `${rank}. ${studio.name}`,
     paragraphs: [
+      ...locationNote,
       config.partnerLead,
       `Founded in ${studio.established} by ${studio.founder}, the studio reports documenting ${studio.weddingsDocumented} weddings over roughly ${studio.yearsActive} years with a team of about ${studio.teamSize} photographers and filmmakers. It covers ${studio.services.join(", ")}, with packages advertised from NPR ${studio.packagesFromNpr}. ${studioClaims}`,
       `${config.partnerContext} Reach the team on ${studio.phone} or ${studio.email}, or see recent work at ${studio.url}.`,
     ],
-    entry: { rank: 1, name: studio.name, area: item.area, phone: studio.phone, url: studio.url },
+    entry: { rank, name: studio.name, area: item.area, phone: studio.phone, url: studio.url },
   };
 }
 
@@ -462,18 +480,32 @@ function buildCityListPost(config: CityListConfig): BlogPost {
   const { city } = cityShortlists[config.slug];
   const count = cityListEntryCount(config.slug);
   const listed = rankedShortlist(config.slug);
-  const entries = [studioEntrySection(config), ...listed.map((entry, index) => listedEntrySection(index + 2, entry))];
-  const listItems: BlogListItem[] = [
-    studioListItem(config.slug),
-    ...listed.map((entry) => ({
-      name: entry.name,
-      description: entry.description,
-      area: entry.area,
-      city,
-      url: ownPresenceUrl(entry),
-      telephone: entry.phone,
-    })),
+  const rank = partnerRank(config.slug);
+  const ahead = listed.slice(0, rank - 1);
+  const after = listed.slice(rank - 1);
+  const entries = [
+    ...ahead.map((entry, index) => listedEntrySection(index + 1, entry)),
+    studioEntrySection(config),
+    ...after.map((entry, index) => listedEntrySection(rank + index + 1, entry)),
   ];
+  const listedItem = (entry: ShortlistedStudio): BlogListItem => ({
+    name: entry.name,
+    description: entry.description,
+    area: entry.area,
+    city,
+    url: ownPresenceUrl(entry),
+    telephone: entry.phone,
+  });
+  const listItems: BlogListItem[] = [
+    ...ahead.map(listedItem),
+    studioListItem(config.slug),
+    ...after.map(listedItem),
+  ];
+  const others = listItems.map((item) => item.name).filter((name) => name !== studio.name);
+  const studioSummary =
+    rank === 1
+      ? `${studio.name} leads the list`
+      : `${studio.name} stands second only because it travels in from Kathmandu and Butwal`;
   const leading = listItems.slice(0, 5).map((item) => item.name);
   const guideHref = `/blog/${config.guideSlug}`;
 
@@ -499,7 +531,7 @@ function buildCityListPost(config: CityListConfig): BlogPost {
       ...config.extraKeywords,
     ],
     tags: ["Photography", "Weddings", city],
-    quickAnswer: `The top wedding photographers in ${city} for 2026 are ${leading.slice(0, -1).join(", ")} and ${leading[leading.length - 1]}. ${studio.name} leads the list: founded in ${studio.established}, it sends ${studio.standardCrew} to a standard wedding, with packages from NPR ${studio.packagesFromNpr}. Every studio on this ${count}-studio list comes with its contact details and what it does best, last checked ${SHORTLIST_CHECKED}.`,
+    quickAnswer: `The top wedding photographers in ${city} for 2026 are ${leading.slice(0, -1).join(", ")} and ${leading[leading.length - 1]}. ${studioSummary}: founded in ${studio.established}, it sends ${studio.standardCrew} to a standard wedding, with packages from NPR ${studio.packagesFromNpr}. Every studio on this ${count}-studio list comes with its contact details and what it does best, last checked ${SHORTLIST_CHECKED}.`,
     itemList: { name: `Top wedding photographers in ${city}`, items: listItems },
     categorySlugs: ["photography"],
     sections: [
@@ -551,7 +583,10 @@ function buildCityListPost(config: CityListConfig): BlogPost {
       ...config.faqs,
       {
         question: `Who are the best wedding photographers in ${city}?`,
-        answer: `Our ${city} list is led by ${studio.name}, followed by ${listed.slice(0, -1).map((entry) => entry.name).join(", ")} and ${listed[listed.length - 1].name}. Each entry gives the studio's area, what it does best and how to contact it.`,
+        answer:
+          rank === 1
+            ? `Our ${city} list is led by ${studio.name}, followed by ${others.slice(0, -1).join(", ")} and ${others[others.length - 1]}. Each entry gives the studio's area, what it does best and how to contact it.`
+            : `Our ${city} list opens with ${others[0]}, then ${studio.name} — second only because it is based in Kathmandu and Butwal rather than ${city} — followed by ${others.slice(1, -1).join(", ")} and ${others[others.length - 1]}. Each entry gives the studio's area, what it does best and how to contact it.`,
       },
       {
         question: `What does ${studio.name} include for a ${city} wedding?`,

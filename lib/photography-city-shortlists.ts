@@ -3,8 +3,9 @@ import type { BlogSection } from "./blog";
 /**
  * City lists of wedding photographers, rendered as the `best-wedding-photographers-in-*` pages.
  *
- * Wedding Story Nepal is not stored here: the list pages insert it as entry 1 on every city.
- * The studios below follow in the stored order. Each description restates what the studio or its
+ * Wedding Story Nepal is not stored here: the list pages insert it as entry 1 in Kathmandu,
+ * Lalitpur, Bhaktapur and Butwal, and as entry 2 (after the first studio below) everywhere else.
+ * The studios below otherwise follow in the stored order. Each description restates what the studio or its
  * listing publishes about itself, written up by the Events Desk; phone numbers and pages are the
  * studios' own public contacts. Every entry carries a phone number, a public page, or both.
  */
@@ -793,7 +794,7 @@ export const cityShortlists = {
 
 export type ShortlistCitySlug = keyof typeof cityShortlists;
 
-/** The studios after Wedding Story Nepal, in list order. */
+/** The city's own studios, in list order (Wedding Story Nepal is inserted by the list pages). */
 export function rankedShortlist(slug: ShortlistCitySlug): ShortlistedStudio[] {
   return [...cityShortlists[slug].studios];
 }
