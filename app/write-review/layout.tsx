@@ -1,9 +1,9 @@
 import { buildPublicPageMetadata } from "@/lib/site-metadata";
 
 export const metadata = buildPublicPageMetadata({
-  title: "Write a Business Review in Nepal",
+  title: "Business Reviews Are Not Open Yet",
   description:
-    "Share a fair, detailed review of a Nepal business or service to help local customers make informed choices.",
+    "NepaliDirectory is not accepting public business reviews until identity, moderation and visible-review safeguards are complete.",
   path: "/write-review"
 });
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BadgeCheck, Building2, Grid3X3, MapPin, Search, Star, Tag } from "lucide-react";
+import { BadgeCheck, Building2, Grid3X3, MapPin, Search, Tag } from "lucide-react";
 import Link from "next/link";
 import { LazyAiConcierge } from "@/components/ai/LazyAiConcierge";
 import { GuideCard } from "@/components/content/GuideCard";
@@ -9,12 +9,14 @@ import { CategoryTile } from "@/components/directory/CategoryTile";
 import { CityCard } from "@/components/directory/CityCard";
 import { FillImage } from "@/components/ui/FillImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { getCityHref } from "@/lib/city-pages";
-import { businesses, categories, cities, cityLinks, directoryFeatureChecklist, popularSearches, questions, stats } from "@/lib/data";
-import { directoryCategories } from "@/lib/directory-categories";
+import { cityDirectoryPages, getCityHref } from "@/lib/city-pages";
+import { categories, cities, cityLinks, directoryFeatureChecklist, popularSearches, questions, stats } from "@/lib/data";
+import { directoryCategories, listingMatchesDirectoryCategory } from "@/lib/directory-categories";
+import { MIN_INDEXABLE_DIRECTORY_RESULTS } from "@/lib/directory-pagination";
+import { getIndexableListings, listingMatchesCity, listingToBusiness } from "@/lib/public-listings";
 import { getSortedBlogPosts, siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
-import { buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
+import { buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 const nationalDirectoryKeywords = [
   "NepaliDirectory",
@@ -35,13 +37,36 @@ const nationalDirectoryKeywords = [
 ];
 
 export const metadata: Metadata = {
-  keywords: nationalDirectoryKeywords,
   alternates: {
     canonical: "/",
   },
 };
 
-export default function HomePage() {
+export const revalidate = 300;
+
+export default async function HomePage() {
+  const indexableListings = await getIndexableListings();
+  const featuredListings = indexableListings.slice(0, 3).map(listingToBusiness);
+  const qualifiedCategoryHrefs = new Set(
+    directoryCategories
+      .filter(
+        (category) =>
+          indexableListings.filter((listing) => listingMatchesDirectoryCategory(listing, category)).length >=
+          MIN_INDEXABLE_DIRECTORY_RESULTS,
+      )
+      .map((category) => category.href),
+  );
+  const qualifiedCategories = directoryCategories.filter((category) => qualifiedCategoryHrefs.has(category.href));
+  const qualifiedCityHrefs = new Set(
+    cityDirectoryPages
+      .filter(
+        (city) =>
+          indexableListings.filter((listing) => listingMatchesCity(listing, city.slug)).length >=
+          MIN_INDEXABLE_DIRECTORY_RESULTS,
+      )
+      .map((city) => city.href),
+  );
+  const qualifiedCityCards = cities.filter((city) => qualifiedCityHrefs.has(city.href));
   const latestBlogPosts = getSortedBlogPosts().slice(0, 3);
   const keywords = uniqueKeywords([
     ...nationalDirectoryKeywords,
@@ -54,14 +79,60 @@ export default function HomePage() {
     ...categories.map((category) => category.name),
     ...cities.map((city) => city.name)
   ]);
+  const homeFaqs = [
+    {
+      question: "What is NepaliDirectory?",
+      answer:
+        "NepaliDirectory is Nepal's online business directory. It groups local businesses, restaurants, hotels, hospitals, schools, shops and IT companies by city and category so people can research and compare options before contacting one directly.",
+    },
+    {
+      question: "Is NepaliDirectory free to use?",
+      answer:
+        "Yes. Searching, browsing categories and cities, reading local guides, and contacting listed businesses is free for everyone. Businesses can also submit or claim a free profile; paid advertising placements are optional.",
+    },
+    {
+      question: "How are businesses verified before they appear in results?",
+      answer:
+        "Every profile must identify a real business, match a relevant category, provide usable location data and carry documented provenance (an owner claim or a licensed data source) before it enters public search results, city pages or structured data. See the directory methodology page for the full publication checklist.",
+    },
+    {
+      question: "Which cities and categories does NepaliDirectory cover?",
+      answer:
+        "NepaliDirectory organizes listings by city — including Kathmandu, Pokhara, Lalitpur, Bhaktapur, Chitwan, Biratnagar, Butwal and Dharan — and by category, covering restaurants, hotels, doctors, dentists, hospitals, schools, IT companies, shops and home-service providers such as plumbers and electricians.",
+    },
+    {
+      question: "How do I add or claim my business on NepaliDirectory?",
+      answer:
+        "Open the claim-listing page and submit your business name, category, location and contact details. New submissions and claims go through the same publication review as every other profile before they appear publicly.",
+    },
+    {
+      question: "How is NepaliDirectory different from a printed Nepal Yellow Pages?",
+      answer:
+        "NepaliDirectory is a searchable, continuously updatable online alternative to a paper Yellow Pages: listings can be corrected, claimed and kept current, and every city or category page is reachable directly instead of requiring a printed index.",
+    },
+  ];
+
+  const homeFaqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${siteUrl}/#faq`,
+    mainEntity: homeFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
   const homeJsonLd = {
     ...buildWebPageJsonLd({
-      name: "Nepali Directory: Nepal Business Directory & Local Listings",
+      name: "NepaliDirectory: Nepal Business Directory & Local Listings",
       description:
         "Find businesses and local services across Nepal with category pages, city guides and review-gated public profiles.",
       url: siteUrl,
       keywords,
-      dateModified: "2026-07-12"
     }),
     "@type": "CollectionPage",
     publisher,
@@ -69,7 +140,7 @@ export default function HomePage() {
       {
         "@type": "ItemList",
         name: "Popular business categories",
-        itemListElement: directoryCategories.map((category, index) => ({
+        itemListElement: qualifiedCategories.map((category, index) => ({
           "@type": "ListItem",
           position: index + 1,
           name: category.name,
@@ -79,7 +150,7 @@ export default function HomePage() {
       {
         "@type": "ItemList",
         name: "Popular Nepal city directories",
-        itemListElement: cities.map((city, index) => ({
+        itemListElement: qualifiedCityCards.map((city, index) => ({
           "@type": "ListItem",
           position: index + 1,
           name: city.name,
@@ -101,7 +172,10 @@ export default function HomePage() {
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([homeJsonLd, homeFaqJsonLd]) }}
+      />
       <section className="home-hero">
         <div className="home-hero__media" aria-hidden>
           <FillImage
@@ -114,7 +188,7 @@ export default function HomePage() {
         </div>
         <div className="container home-hero__content">
           <h1>
-            Nepali Directory: find <mark>trusted</mark> local businesses across Nepal.
+            NepaliDirectory: research and find <mark>local businesses</mark> across Nepal.
           </h1>
           <span>
             Search Nepal&apos;s business directory by category and city, then compare current profiles,
@@ -160,11 +234,11 @@ export default function HomePage() {
                 Grow your local reach
               </span>
             </Link>
-            <Link href={routes.writeReview}>
-              <Star size={19} aria-hidden />
+            <Link href={routes.directoryMethodology}>
+              <BadgeCheck size={19} aria-hidden />
               <span>
-                <strong>Write a review</strong>
-                Share your experience
+                <strong>Publication checks</strong>
+                See how profiles qualify
               </span>
             </Link>
           </div>
@@ -191,13 +265,14 @@ export default function HomePage() {
             A Nepal business directory for useful local decisions
           </h2>
           <p className="compact-copy">
-            Nepali Directory brings crawlable category pages, practical city guides and
+            NepaliDirectory brings crawlable category pages, practical city guides and
             review-gated business profiles into one Nepal local directory. It is a modern online
             alternative to a paper Nepal Yellow Pages: browse local businesses and services, then
-            confirm current hours, prices, availability and credentials directly.
+            confirm current hours, prices, availability and credentials directly.{" "}
+            <Link href={routes.bestDirectoryNepal}>How to choose the best directory in Nepal</Link>.
           </p>
           <div className="seo-link-strip" aria-label="Popular Nepal directory categories">
-            {directoryCategories.map((category) => (
+            {qualifiedCategories.map((category) => (
               <Link key={category.slug} href={category.href}>{category.priorityKeyword}</Link>
             ))}
           </div>
@@ -303,47 +378,50 @@ export default function HomePage() {
             action={{ label: "View all categories", href: routes.categories }}
           />
           <div className="home-category-grid">
-            {categories.map((category) => (
+            {categories.filter((category) => qualifiedCategoryHrefs.has(category.href)).map((category) => (
               <CategoryTile key={category.name} {...category} />
             ))}
           </div>
+          {qualifiedCategories.length === 0 ? (
+            <div className="answer-summary"><h3>Category profiles are completing review</h3><p>Use the category research hub while business records complete publication checks.</p><Link href={routes.categories}>Open category guides</Link></div>
+          ) : null}
         </div>
       </section>
 
       <section className="section section--soft">
         <div className="container">
           <SectionHeader
-            title="Popular cities"
-            description="Browse listings in Nepal's largest cities and tourist destinations."
+            title="Qualified city directories"
+            description="City result pages appear here only when enough reviewed public profiles are available."
             action={{ label: "View all cities", href: routes.city }}
           />
-          <div className="home-city-grid">
-            {cities.map((city) => (
+          {qualifiedCityCards.length ? <><div className="home-city-grid">
+            {qualifiedCityCards.map((city) => (
               <CityCard key={city.name} {...city} />
             ))}
           </div>
           <div className="city-link-grid">
-            {cityLinks.map((city) => (
+            {cityLinks.filter((city) => qualifiedCityHrefs.has(getCityHref(city))).map((city) => (
               <Link key={city} href={getCityHref(city)}>
                 {city}
               </Link>
             ))}
-          </div>
+          </div></> : <div className="answer-summary"><h3>City profiles are completing review</h3><p>City research guides remain available without publishing sample business results.</p><Link href={routes.city}>Open city guides</Link></div>}
         </div>
       </section>
 
       <section className="section">
         <div className="container">
           <SectionHeader
-            title="Directory profile previews"
-            description="Preview records demonstrate the profile experience but remain outside rankings and public business schema until reviewed."
+            title="Recently reviewed directory profiles"
+            description="Only profiles with auditable sources and completed content review can appear in this public section."
             action={{ label: "Search all businesses", href: routes.search }}
           />
-          <div className="home-featured">
-            {businesses.slice(0, 3).map((business) => (
+          {featuredListings.length ? <div className="home-featured">
+            {featuredListings.map((business) => (
               <BusinessCard key={business.slug} business={business} />
             ))}
-          </div>
+          </div> : <div className="answer-summary"><h3>Profiles are completing publication review</h3><p>Imported and preview records are withheld until their source, contact details and public content have been reviewed.</p><Link className="button button--primary" href={routes.claimListing}>Add or claim a business</Link></div>}
         </div>
       </section>
 
@@ -381,8 +459,8 @@ export default function HomePage() {
             <p className="eyebrow">For local businesses</p>
             <h2>Reach people who are already searching for what you do.</h2>
             <p>
-              Claim your profile, publish photos, answer reviews and promote your services in the
-              categories and cities that matter most.
+              Submit or claim your profile, provide source evidence and keep your business details
+              accurate for the categories and cities that matter most.
             </p>
             <div className="stats-grid">
               {stats.map(([value, label]) => (
@@ -437,6 +515,23 @@ export default function HomePage() {
               </Link>
             ))}
           </aside>
+        </div>
+      </section>
+
+      <section className="section section--soft">
+        <div className="container">
+          <SectionHeader title="Frequently asked questions" />
+          <div className="article-faq" aria-labelledby="home-faq-title">
+            <h2 id="home-faq-title" className="sr-only">
+              NepaliDirectory frequently asked questions
+            </h2>
+            {homeFaqs.map((faq) => (
+              <details key={faq.question}>
+                <summary>{faq.question}</summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
     </main>

@@ -1,21 +1,29 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
+import { Anek_Latin, Manrope } from "next/font/google";
 import { LazyAiAssistant } from "@/components/ai/LazyAiAssistant";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MobileTabBar } from "@/components/layout/MobileTabBar";
 import { siteUrl } from "@/lib/blog";
-import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "@/lib/seo";
+import { buildOrganizationJsonLd, buildWebSiteJsonLd, serializeJsonLd } from "@/lib/seo";
 import "@/components/layout/layout.css";
 import "@/components/ui/ui.css";
 import "@/components/directory/directory.css";
 import "./globals.css";
+import "./theme.css";
 import "./mobile.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-manrope"
+});
+
+const anekLatin = Anek_Latin({
+  subsets: ["latin"],
+  display: "swap",
+  axes: ["wdth"],
+  variable: "--font-anek"
 });
 
 const googleSiteVerification = process.env.GOOGLE_SITE_VERIFICATION?.trim();
@@ -25,31 +33,21 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#ffd400"
+  themeColor: "#0f1c2e"
 };
 
 export const metadata: Metadata = {
-  applicationName: "Nepali Directory",
+  applicationName: "NepaliDirectory",
   title: {
     default: "Nepali Directory: Nepal Business Directory & Local Listings",
     template: "%s | Nepali Directory"
   },
   description:
-    "Use Nepali Directory, Nepal's online business directory, to find local services, restaurants, hotels, hospitals, schools, shops and IT companies by city.",
+    "Use NepaliDirectory, Nepal's online business directory, to find local services, restaurants, hotels, hospitals, schools, shops and IT companies by city.",
   metadataBase: new URL(siteUrl),
-  keywords: [
-    "Nepali Directory",
-    "Nepal business directory",
-    "local businesses Nepal",
-    "restaurants Nepal",
-    "doctors Nepal",
-    "hotels Nepal",
-    "home services Nepal",
-    "compare businesses Nepal"
-  ],
-  authors: [{ name: "Nepali Directory Editorial Team", url: "/authors" }],
-  creator: "Nepali Directory",
-  publisher: "Nepali Directory",
+  authors: [{ name: "NepaliDirectory Editorial Team", url: "/authors" }],
+  creator: "NepaliDirectory",
+  publisher: "NepaliDirectory",
   category: "Local business directory",
   classification: "Local search, business directory, Nepal city guides",
   icons: {
@@ -62,7 +60,7 @@ export const metadata: Metadata = {
     description:
       "Find businesses and local services across Nepal by category and city.",
     url: siteUrl,
-    siteName: "Nepali Directory",
+    siteName: "NepaliDirectory",
     type: "website",
     locale: "en_US",
     images: [
@@ -70,13 +68,13 @@ export const metadata: Metadata = {
         url: "/nepali-directory-og.png",
         width: 1729,
         height: 909,
-        alt: "Nepali Directory — find trusted local businesses across Nepal"
+        alt: "NepaliDirectory — find local businesses across Nepal"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nepali Directory: Nepal Business Directory & Local Listings",
+    title: "NepaliDirectory: Nepal Business Directory & Local Listings",
     description:
       "Find businesses and local services across Nepal by category and city.",
     images: ["/nepali-directory-og.png"]
@@ -99,7 +97,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    title: "Nepali Directory",
+    title: "NepaliDirectory",
     statusBarStyle: "default"
   },
   verification: {
@@ -120,9 +118,20 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const siteJsonLd = [buildOrganizationJsonLd(), buildWebSiteJsonLd()];
 
   return (
-    <html lang="en" className={manrope.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" className={`${manrope.variable} ${anekLatin.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        {/* Preconnect to critical third-party origins for faster LCP / font loads */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        {/* DNS-prefetch for Supabase (non-blocking, benefits API calls) */}
+        <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
+        {/* Machine-readable pointers for AI platforms */}
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM context guide" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM full context" />
+      </head>
       <body>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteJsonLd) }} />
         <Header />
         {children}
         <Footer />

@@ -12,7 +12,6 @@ import {
   Phone,
   RotateCcw,
   Search,
-  Star,
   X,
 } from "lucide-react";
 import Link from "next/link";
@@ -37,8 +36,6 @@ export type MapBusiness = {
   neighborhood?: string;
   address: string;
   phone: string;
-  rating: number;
-  reviews: number;
   status: "open" | "closed" | "24h";
   verified: boolean;
   lat: number;
@@ -58,6 +55,8 @@ const CLUSTER_LAYER = "business-clusters";
 const CLUSTER_COUNT_LAYER = "business-cluster-count";
 const POINT_LAYER = "business-points";
 const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
+const MAP_WORKER =
+  "https://cdn.jsdelivr.net/npm/maplibre-gl@6.0.0/dist/maplibre-gl-worker.mjs";
 const LIST_LIMIT = 80;
 
 function toFeatureCollection(
@@ -245,12 +244,16 @@ export function BusinessMap({ businesses }: BusinessMapProps) {
 
     let disposed = false;
     let map: MapLibreMap | null = null;
+    let loadTimeout: number | undefined;
 
     async function initialiseMap() {
       try {
         const maplibregl = await import("maplibre-gl");
         if (disposed || !mapContainerRef.current) return;
 
+        // Next bundles MapLibre's import.meta.url as a build-machine file URL. An explicit
+        // browser-safe worker URL prevents production from resolving the worker to /map HTML.
+        maplibregl.setWorkerUrl(MAP_WORKER);
         map = new maplibregl.Map({
           container: mapContainerRef.current,
           style: MAP_STYLE,
@@ -279,8 +282,18 @@ export function BusinessMap({ businesses }: BusinessMapProps) {
           "bottom-left",
         );
 
+        loadTimeout = window.setTimeout(() => {
+          if (!disposed) {
+            setMapError(
+              "The map is taking longer than expected to load. You can still browse every mapped business in the list.",
+            );
+          }
+        }, 15000);
+
         map.once("load", () => {
           if (!map || disposed) return;
+          window.clearTimeout(loadTimeout);
+          setMapError("");
 
           map.addSource(MAP_SOURCE, {
             type: "geojson",
@@ -407,6 +420,7 @@ export function BusinessMap({ businesses }: BusinessMapProps) {
     void initialiseMap();
     return () => {
       disposed = true;
+      window.clearTimeout(loadTimeout);
       setMapReady(false);
       mapRef.current = null;
       map?.remove();
@@ -572,15 +586,6 @@ export function BusinessMap({ businesses }: BusinessMapProps) {
                       Verified
                     </span>
                   ) : null}
-                  {selectedBusiness.rating > 0 ? (
-                    <span>
-                      <Star size={14} fill="currentColor" aria-hidden />
-                      {selectedBusiness.rating.toFixed(1)}
-                      {selectedBusiness.reviews > 0
-                        ? ` (${selectedBusiness.reviews})`
-                        : ""}
-                    </span>
-                  ) : null}
                 </div>
                 <div className="directory-map__selection-actions">
                   <Link
@@ -647,12 +652,6 @@ export function BusinessMap({ businesses }: BusinessMapProps) {
                     <small>{business.categories[0] ?? "Local business"}</small>
                     <span>{business.address}</span>
                     <span className="directory-map__listing-meta">
-                      {business.rating > 0 ? (
-                        <span>
-                          <Star size={12} fill="currentColor" aria-hidden />
-                          {business.rating.toFixed(1)}
-                        </span>
-                      ) : null}
                       <span className={`directory-map__status directory-map__status--${business.status}`}>
                         {business.status === "24h"
                           ? "Open 24 hours"

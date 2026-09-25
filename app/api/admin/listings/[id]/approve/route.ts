@@ -3,14 +3,17 @@
  * in `utils/supabase/middleware.ts` (every `/api/admin/*` route requires an authenticated
  * super-admin/admin session).
  *
- * Clears the review gate so `isIndexableListing()` (`lib/public-listings.ts`) can return true for
- * this listing — it still also requires `qualityScore >= 55`, a real (non-"uncategorized")
- * category and a non-empty name/address, so approving an incomplete submission alone does not
- * force it into the public sitemap/schema output; the admin should fix categorization first if
- * `categories` is still `["uncategorized"]`.
+ * Applies review metadata and then runs the same publication gate used by public pages and
+ * sitemaps. Incomplete or unsupported records remain unchanged and return a concrete checklist.
  */
 import { NextResponse, type NextRequest } from "next/server";
-import { createListingRepository } from "@/lib/enrich";
+import { cookies } from "next/headers";
+import { siteUrl } from "@/lib/blog";
+import { computeQualityScore, createListingRepository } from "@/lib/enrich";
+import { submitIndexNow } from "@/lib/indexnow";
+import { evaluateListingIndexEligibility } from "@/lib/public-listings";
+import { getBusinessHref } from "@/lib/routes";
+import { createClient } from "@/utils/supabase/server";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -30,11 +33,41 @@ export async function POST(_request: NextRequest, { params }: RouteContext) {
     return NextResponse.json({ error: "Listing not found." }, { status: 404 });
   }
 
+  const supabase = createClient(await cookies());
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return NextResponse.json({ error: "Authentication required." }, { status: 401 });
+  }
+
   listing.needsCategoryReview = false;
+  listing.active = true;
   listing.verified = true;
-  listing.claimed = true;
-  listing.claimStatus = "claimed";
+  listing.verificationStatus = listing.claimed && listing.claimStatus === "claimed"
+    ? "owner_verified"
+    : "source_verified";
+  const reviewedAt = new Date();
+  listing.sourceCheckedAt = reviewedAt;
+  listing.contentReviewedAt = reviewedAt;
+  listing.contentReviewedBy = user.id;
+  listing.lastMeaningfulUpdateAt = reviewedAt;
+  listing.qualityScore = computeQualityScore(listing);
+
+  const eligibility = evaluateListingIndexEligibility(listing);
+  if (!eligibility.eligible) {
+    return NextResponse.json(
+      {
+        error: "Listing cannot be approved until every index-eligibility requirement is met.",
+        reasons: eligibility.reasons,
+      },
+      { status: 422 },
+    );
+  }
+
   await repository.update(listing);
+
+  // Newly indexable listing: nudge IndexNow-consuming engines (Bing, Yandex) to crawl it before
+  // their next scheduled pass instead of waiting on discovery through the sitemap alone.
+  void submitIndexNow([`${siteUrl}${getBusinessHref(listing.slug)}`]);
 
   return NextResponse.json({ id: listing.id, slug: listing.slug, status: "approved" });
 }

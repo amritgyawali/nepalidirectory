@@ -15,8 +15,6 @@ export const noIndexRoutes = new Set<string>([
   routes.map,
   routes.getApp,
   routes.deals,
-  routes.events,
-  routes.requestCallback,
   routes.province,
   routes.writeReview,
   routes.dashboard,

@@ -6,6 +6,7 @@ export type {
   Listing,
   ListingFaq,
   ListingRepository,
+  ListingVerificationStatus,
   NewListing,
 } from "./types";
 export type { EnrichmentOutput } from "./facts";
@@ -23,6 +24,7 @@ export {
   slugify,
 } from "./listing-repo";
 export { PostgresEmbeddingRepository, PostgresListingRepository } from "./postgres-repo";
+export { SupabaseListingRepository } from "./supabase-repo";
 export { createEmbeddingRepository, createListingRepository } from "./factory";
 export { buildFactsJson, buildTaxonomyJson, validateEnrichment } from "./facts";
 export { buildTaxonomy } from "./taxonomy";

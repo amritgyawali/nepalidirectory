@@ -11,15 +11,18 @@ import { blogPosts, getBlogPost, getBlogPostUrl, getSortedBlogPosts, siteUrl, ty
 import { ENGINE_AUTHOR, getPublishedEnginePost, getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
+import { getIndexableHubSlugsOrNone, isLiveHubHref } from "@/lib/indexable-hubs";
 import { getDirectoryCategory } from "@/lib/directory-categories";
 import { routes } from "@/lib/routes";
 import { relatedCompareHubsForPost } from "@/lib/seo-auto";
 import {
+  buildBlogItemListJsonLd,
   buildBlogKeywords,
   buildWebPageJsonLd,
   estimateWordCount,
   getBlogQuickAnswer,
-  publisher
+  publisher,
+  serializeJsonLd
 } from "@/lib/seo";
 
 type BlogPostPageProps = {
@@ -57,7 +60,6 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   return {
     title: post.seoTitle,
     description: post.description,
-    keywords,
     authors: [{ name: post.author }],
     category: post.category,
     alternates: {
@@ -78,7 +80,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title: post.seoTitle,
       description: post.description,
       url: getBlogPostUrl(post),
-      siteName: "Nepali Directory",
+      siteName: "NepaliDirectory",
       locale: "en_US",
       type: "article",
       publishedTime: post.publishedAt,
@@ -128,6 +130,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     .filter((candidate) => candidate.slug !== post.slug)
     .filter((candidate) => candidate.category === post.category || candidate.tags.some((tag) => post.tags.includes(tag)))
     .slice(0, 3);
+  // Guide content links to hubs by URL; drop any hub that is not published (it would 404).
+  const hubs = await getIndexableHubSlugsOrNone();
   const relatedResearchLinks = [...new Map([
     ...(post.contextLinks ?? []),
     ...(post.categorySlugs ?? []).flatMap((categorySlug) => {
@@ -141,7 +145,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       return city ? [{ href: city.href, label: `Browse businesses in ${city.name}` }] : [];
     }),
     ...relatedCompareHubsForPost(post, 2).map((hub) => ({ href: hub.href, label: hub.title })),
-  ].map((link) => [link.href, link] as const)).values()];
+  ].filter((link) => isLiveHubHref(link.href, hubs))
+    .map((link) => [link.href, link] as const)).values()];
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -164,7 +169,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       parentOrganization: publisher
     },
     publisher,
-    reviewedBy: publisher,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": getBlogPostUrl(post)
@@ -181,16 +185,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       "@type": "Thing",
       name: section.heading
     })),
-    citation: post.sources?.map((source) => source.url)
+    citation: post.sources?.map((source) => source.url),
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["#quick-answer-title", ".answer-summary p", ".article-faq summary"],
+    },
   };
 
-  const webPageJsonLd = buildWebPageJsonLd({
-    name: post.seoTitle,
-    description: post.description,
-    url: getBlogPostUrl(post),
-    keywords,
-    dateModified: post.modifiedAt
-  });
+  const itemListJsonLd = buildBlogItemListJsonLd(post, getBlogPostUrl(post));
+  const webPageJsonLd = {
+    ...buildWebPageJsonLd({
+      name: post.seoTitle,
+      description: post.description,
+      url: getBlogPostUrl(post),
+      keywords,
+      dateModified: post.modifiedAt
+    }),
+    // List posts are "about" their list, which lets answer engines lift the entries directly.
+    ...(itemListJsonLd ? { mainEntity: { "@id": itemListJsonLd["@id"] } } : {})
+  };
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -235,7 +248,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([webPageJsonLd, articleJsonLd, breadcrumbJsonLd, faqJsonLd])
+          __html: serializeJsonLd([
+            webPageJsonLd,
+            articleJsonLd,
+            breadcrumbJsonLd,
+            faqJsonLd,
+            ...(itemListJsonLd ? [itemListJsonLd] : [])
+          ])
         }}
       />
       <Breadcrumbs items={[{ label: "Blog", href: routes.blog }, { label: post.title }]} />
@@ -251,6 +270,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="article-meta">
             <Link href={isEngineAuthored ? routes.editorialPolicy : `/authors/${author.slug}`}>{post.author}</Link>
             <time dateTime={post.publishedAt}>{post.date}</time>
+            {post.modifiedAt !== post.publishedAt ? (
+              <span>
+                Updated <time dateTime={post.modifiedAt}>{post.modifiedAt}</time>
+              </span>
+            ) : null}
             <span>
               <Clock size={14} aria-hidden />
               {post.readTime}
@@ -268,6 +292,40 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               ))}
             </ul>
           </section>
+          {post.itemList ? (
+            <section className="answer-summary" aria-labelledby="at-a-glance-title">
+              <h2 id="at-a-glance-title">{post.itemList.name} at a glance</h2>
+              <div className="responsive-table compare-table-wrap">
+                <table className="compare-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Studio</th>
+                      <th scope="col">Based in</th>
+                      <th scope="col">Contact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {post.itemList.items.map((item, index) => (
+                      <tr key={item.name}>
+                        <td>{index + 1}</td>
+                        <td>
+                          <strong>{item.name}</strong>
+                          {item.isFeaturedPartner ? " (featured partner, paid placement)" : ""}
+                        </td>
+                        <td>{item.area}</td>
+                        <td>
+                          {item.telephone ?? (item.url ? (
+                            <a href={item.url} rel="noopener noreferrer nofollow" target="_blank">Public page</a>
+                          ) : "See sources below")}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          ) : null}
           {relatedResearchLinks.length ? (
             <section className="answer-summary" aria-labelledby="local-research-links-title">
               <h2 id="local-research-links-title">Related city and category research</h2>
@@ -366,11 +424,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <Link href={routes.editorialPolicy}>Editorial policy</Link>
             </div>
           </section>
+          {/* Tags are plain labels, not links: /blog has no tag filter, so /blog?tag=X URLs were
+              duplicates of /blog that Search Console reported as "Alternative page with proper
+              canonical tag". Middleware 301s any legacy ?tag= URL back to the clean path. */}
           <footer className="article-tags" aria-label="Article tags">
             {post.tags.map((tag) => (
-              <Link key={tag} href={`${routes.blog}?tag=${encodeURIComponent(tag)}`}>
-                {tag}
-              </Link>
+              <span key={tag}>{tag}</span>
             ))}
           </footer>
         </div>

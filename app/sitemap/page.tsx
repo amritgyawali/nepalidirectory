@@ -9,6 +9,7 @@ import { isIndexableBlogCategory } from "@/lib/blog-quality";
 import { cityDirectoryPages } from "@/lib/city-pages";
 import { compareCategories } from "@/lib/compare";
 import { directoryCategories } from "@/lib/directory-categories";
+import { computeIndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getIndexableListings } from "@/lib/public-listings";
 import { getBusinessHref, routes } from "@/lib/routes";
 import { isIndexableRoute } from "@/lib/seo-config";
@@ -19,7 +20,6 @@ const pages = Object.entries(routes).filter(
     key !== "home" &&
     key !== "blogPost" &&
     key !== "city" &&
-    key !== "topRated" &&
     isIndexableRoute(href),
 );
 const blogCategories = getBlogCategories().filter((category) =>
@@ -41,6 +41,8 @@ export default async function SitemapPage() {
     console.error("Unable to load dynamic records for the human sitemap", error);
   }
   const publicPosts = removeRetiredDuplicatePosts([...blogPosts, ...generatedPosts]);
+  // Unpublished hubs 404, so only link those that currently qualify.
+  const hubs = computeIndexableHubSlugs(listings);
 
   return (
     <main>
@@ -73,7 +75,7 @@ export default async function SitemapPage() {
               Compare: {category.category}
             </Link>
           ))}
-          {directoryCategories.map((category) => (
+          {directoryCategories.filter((category) => hubs.categories.includes(category.slug)).map((category) => (
             <Link key={`directory-${category.slug}`} href={category.href}>
               Category: {category.priorityKeyword}
             </Link>
@@ -83,7 +85,7 @@ export default async function SitemapPage() {
               Author: {author.name}
             </Link>
           ))}
-          {cityDirectoryPages.map((city) => (
+          {cityDirectoryPages.filter((city) => hubs.cities.includes(city.slug)).map((city) => (
             <Link key={city.slug} href={city.href}>
               City: {city.name}
             </Link>

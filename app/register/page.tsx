@@ -5,7 +5,7 @@ export default function RegisterPage() {
   return (
     <FormCard
       title="Create account"
-      description="Join Nepali Directory to save places, write reviews and manage business listings."
+      description="Create an account to save places and manage business listing submissions."
       fields={[
         { label: "Full name", placeholder: "Your name" },
         { label: "Email", type: "email", placeholder: "you@example.com" },

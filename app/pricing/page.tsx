@@ -34,7 +34,7 @@ export default function PricingPage() {
           </p>
           <div className="seo-hero__actions">
             <Link className="button button--primary" href={routes.claimListing}>Add your business</Link>
-            <Link className="button button--outline" href={routes.requestCallback}>Confirm current terms</Link>
+            <Link className="button button--outline" href={routes.contact}>Confirm current terms</Link>
           </div>
         </div>
       </section>
@@ -49,7 +49,7 @@ export default function PricingPage() {
               {plan.features.map((feature) => (
                 <span key={feature}><CheckCircle2 size={14} aria-hidden /> {feature}</span>
               ))}
-              <Link className="button button--primary" href={`${routes.requestCallback}?plan=${encodeURIComponent(plan.name)}`}>
+              <Link className="button button--primary" href={routes.contact}>
                 Ask about {plan.name}
               </Link>
             </article>

@@ -5,6 +5,12 @@
  */
 import type { BlogPost, BlogPostRepository } from "./types";
 
+const ABSOLUTE_MIN_PUBLIC_WORDS = 700;
+const MIN_PUBLIC_SOURCES = 2;
+const MIN_PUBLIC_HEADINGS = 4;
+const MIN_PUBLIC_FAQS = 2;
+const MIN_PUBLIC_INTERNAL_LINKS = 3;
+
 function autopublishMinConfidence(): number {
   const n = Number(process.env.BLOG_AUTOPUBLISH_MIN_CONFIDENCE);
   // Environment configuration may make the gate stricter, never weaker than the editorial floor.
@@ -17,6 +23,45 @@ function autopublishMinListings(): number {
   return Number.isFinite(configured) && configured >= 0
     ? Math.max(25, Math.floor(configured))
     : 50;
+}
+
+function publicMinWords(): number {
+  const configured = Number(process.env.BLOG_PUBLIC_MIN_WORDS);
+  // An environment flag may demand more depth, but it cannot reopen the thin fallback drafts.
+  return Number.isFinite(configured) && configured >= 0
+    ? Math.max(ABSOLUTE_MIN_PUBLIC_WORDS, Math.floor(configured))
+    : ABSOLUTE_MIN_PUBLIC_WORDS;
+}
+
+function markdownWordCount(markdown: string): number {
+  return markdown
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[#*_>`~|{}\[\]()]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+/**
+ * Public quality floor for AI-assisted engine posts. Curated articles use a separate reviewed
+ * dataset; this gate prevents short fallback drafts from reaching archives, feeds and sitemaps.
+ */
+export function meetsPublicEnginePostQuality(post: BlogPost): boolean {
+  const uniqueSources = new Set(post.sources.filter((source) => /^https?:\/\//i.test(source)));
+  const headingCount = post.bodyMd.match(/^##\s+\S/gm)?.length ?? 0;
+  const factcheckPassed =
+    post.factcheck?.verdict === "pass" && post.factcheck.unsupportedClaims.length === 0;
+
+  return Boolean(
+    factcheckPassed &&
+      markdownWordCount(post.bodyMd) >= publicMinWords() &&
+      headingCount >= MIN_PUBLIC_HEADINGS &&
+      uniqueSources.size >= MIN_PUBLIC_SOURCES &&
+      post.faq.length >= MIN_PUBLIC_FAQS &&
+      post.linksInjected >= MIN_PUBLIC_INTERNAL_LINKS &&
+      post.seo.metaTitle.trim() &&
+      post.seo.metaDescription.trim(),
+  );
 }
 
 export function canAutoPublishForListingCount(qualifiedListingCount: number): boolean {
@@ -48,7 +93,11 @@ export class EditorialService {
   }
 }
 
-/** BLOG_AUTOPUBLISH gate (prompt §8.5): fact-check `pass` AND selector confidence >= 0.8. */
+/** BLOG_AUTOPUBLISH gate: editorial evidence, substantive depth and confidence >= 0.8. */
 export function canAutoPublish(post: BlogPost, autopublishEnabled: boolean): boolean {
-  return autopublishEnabled && post.factcheck?.verdict === "pass" && post.confidence >= autopublishMinConfidence();
+  return (
+    autopublishEnabled &&
+    post.confidence >= autopublishMinConfidence() &&
+    meetsPublicEnginePostQuality(post)
+  );
 }

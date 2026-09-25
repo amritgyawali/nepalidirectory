@@ -7,7 +7,9 @@
  * stays available for audit/appeal instead of disappearing outright.
  */
 import { NextResponse, type NextRequest } from "next/server";
+import { cookies } from "next/headers";
 import { createListingRepository } from "@/lib/enrich";
+import { createClient } from "@/utils/supabase/server";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -27,8 +29,22 @@ export async function POST(_request: NextRequest, { params }: RouteContext) {
     return NextResponse.json({ error: "Listing not found." }, { status: 404 });
   }
 
+  const supabase = createClient(await cookies());
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return NextResponse.json({ error: "Authentication required." }, { status: 401 });
+  }
+
+  const reviewedAt = new Date();
   listing.active = false;
+  listing.claimed = false;
+  listing.verified = false;
   listing.claimStatus = "unclaimed";
+  listing.verificationStatus = "rejected";
+  listing.needsCategoryReview = false;
+  listing.contentReviewedAt = reviewedAt;
+  listing.contentReviewedBy = user.id;
+  listing.lastMeaningfulUpdateAt = reviewedAt;
   await repository.update(listing);
 
   return NextResponse.json({ id: listing.id, slug: listing.slug, status: "rejected" });

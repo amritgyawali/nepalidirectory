@@ -15,6 +15,29 @@ import { SEED_CATEGORY_SYNONYMS } from "../synonyms/seed";
 const TAXONOMY = ["restaurants", "cafes-bistros", "plumbers", "electricians"];
 const KNOWN_PLACES = ["Lazimpat", "Thamel", "Boudha"];
 
+function publicListing(input: { name: string; area: string; address: string; categories: string[] }) {
+  return {
+    ...makeNewListing({
+      ...input,
+      phone: "+977-1-5550100",
+      description:
+        `${input.name} is a source-reviewed local business record in ${input.area}. ` +
+        "Its category, location and contact details were checked before this test record was published.",
+      descriptionSource: "owner",
+      claimed: true,
+      verified: true,
+      verificationStatus: "owner_verified",
+      dataSource: "owner",
+      sourceRef: `claim:test:${input.name}`,
+      sourceCheckedAt: new Date("2026-08-01T00:00:00.000Z"),
+      contentReviewedAt: new Date("2026-08-01T00:00:00.000Z"),
+      contentReviewedBy: "test-reviewer",
+      lastMeaningfulUpdateAt: new Date("2026-08-01T00:00:00.000Z"),
+    }),
+    qualityScore: 80,
+  };
+}
+
 describe("NL query parser fast path (prompt §9.2)", () => {
   it("resolves category + location without calling the AI, incl. romanized Nepali", () => {
     const result = parseQueryFastPath("chiya pasal thamel", {
@@ -58,13 +81,13 @@ describe("hybridSearch (prompt §9.1)", () => {
   it("filters by category and ranks the closer embedding match first", async () => {
     const listings = new InMemoryListingRepository([]);
     const a = await listings.insert(
-      makeNewListing({ name: "Momo House", area: "Thamel", address: "A", categories: ["restaurants"] }),
+      publicListing({ name: "Momo House", area: "Thamel", address: "A", categories: ["restaurants"] }),
     );
     const b = await listings.insert(
-      makeNewListing({ name: "Pipe Fix Co", area: "Thamel", address: "B", categories: ["plumbers"] }),
+      publicListing({ name: "Pipe Fix Co", area: "Thamel", address: "B", categories: ["plumbers"] }),
     );
     const c = await listings.insert(
-      makeNewListing({ name: "Momo Corner", area: "Thamel", address: "C", categories: ["restaurants"] }),
+      publicListing({ name: "Momo Corner", area: "Thamel", address: "C", categories: ["restaurants"] }),
     );
 
     const embeddings = new Map<number, number[]>([
@@ -102,7 +125,7 @@ describe("AI concierge grounding (prompt §9.3)", () => {
   it("recommends only listings the search tool actually returned", async () => {
     const rt = createDiscoverRuntime({ listings: new InMemoryListingRepository([]) });
     const listing = await rt.listings.insert(
-      makeNewListing({ name: "Thamel Momo House", area: "Thamel", address: "JP Marg", categories: ["restaurants"] }),
+      publicListing({ name: "Thamel Momo House", area: "Thamel", address: "JP Marg", categories: ["restaurants"] }),
     );
 
     const reply = await rt.concierge("session-1", "restaurants in thamel");
@@ -115,7 +138,7 @@ describe("AI concierge grounding (prompt §9.3)", () => {
   it("never invents a business for a query with no supply — logs a demand signal instead", async () => {
     const rt = createDiscoverRuntime({ listings: new InMemoryListingRepository([]) });
     await rt.listings.insert(
-      makeNewListing({ name: "Thamel Momo House", area: "Thamel", address: "JP Marg", categories: ["restaurants"] }),
+      publicListing({ name: "Thamel Momo House", area: "Thamel", address: "JP Marg", categories: ["restaurants"] }),
     );
 
     const reply = await rt.concierge("session-2", "helicopter repair in a place that does not exist");

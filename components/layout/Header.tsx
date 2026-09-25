@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import {
   BookOpenText,
   Building2,
-  CalendarDays,
   ChevronRight,
   LayoutGrid,
   LifeBuoy,
@@ -15,12 +14,12 @@ import {
   Menu,
   Scale,
   Search,
-  Star,
+  ShieldCheck,
   Tag,
   X
 } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
-import { primaryNav, routes } from "@/lib/routes";
+import { accountNav, primaryNav, routes } from "@/lib/routes";
 
 const menuPrimary = [
   { label: "Categories", href: routes.categories, icon: LayoutGrid },
@@ -32,8 +31,7 @@ const menuPrimary = [
 const menuQuick = [
   { label: "Search", href: routes.search, icon: Search },
   { label: "Deals & offers", href: routes.deals, icon: Tag },
-  { label: "Write a review", href: routes.writeReview, icon: Star },
-  { label: "Events", href: routes.events, icon: CalendarDays },
+  { label: "Publication method", href: routes.directoryMethodology, icon: ShieldCheck },
   { label: "Map", href: routes.map, icon: Map },
   { label: "Help center", href: routes.help, icon: LifeBuoy }
 ];
@@ -51,14 +49,7 @@ export function Header() {
     return () => document.body.classList.remove("menu-open");
   }, [menuOpen]);
 
-  const iconFor = (label: string) => {
-    if (label === "Categories") return <LayoutGrid size={15} aria-hidden />;
-    if (label === "Cities") return <MapPinned size={15} aria-hidden />;
-    if (label === "Guides") return <BookOpenText size={15} aria-hidden />;
-    if (label === "Compare") return <Scale size={15} aria-hidden />;
-    if (label === "Add Business") return <Building2 size={15} aria-hidden />;
-    return null;
-  };
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <>
@@ -69,14 +60,22 @@ export function Header() {
             {primaryNav.map((item) => (
               <Link
                 key={item.href}
-                className={item.featured ? "site-nav__link site-nav__link--featured" : "site-nav__link"}
+                className="site-nav__link"
                 href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
               >
-                {iconFor(item.label)}
                 {item.label}
               </Link>
             ))}
           </nav>
+          <div className="site-header__actions">
+            {accountNav.map((item) => (
+              <Link key={item.href} className={`site-header__action site-header__action--${item.variant}`} href={item.href}>
+                {item.variant === "outline" ? <Building2 size={15} aria-hidden /> : null}
+                {item.label}
+              </Link>
+            ))}
+          </div>
           <div className="site-header__mobile">
             <Link href={routes.search} aria-label="Search businesses">
               <Search size={19} aria-hidden />

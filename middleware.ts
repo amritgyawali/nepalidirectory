@@ -10,6 +10,14 @@ export async function middleware(request: NextRequest) {
     canonical.port = "";
     return NextResponse.redirect(canonical, 308);
   }
+  // /blog has no tag filter, so legacy /blog?tag=X URLs were exact duplicates of /blog that
+  // Search Console kept listing as "Alternative page with proper canonical tag". Permanently
+  // redirect them to the clean path so Google drops the parameter URLs instead of recrawling them.
+  if (request.nextUrl.pathname.startsWith("/blog") && request.nextUrl.searchParams.has("tag")) {
+    const clean = request.nextUrl.clone();
+    clean.searchParams.delete("tag");
+    return NextResponse.redirect(clean, 301);
+  }
   return updateSession(request);
 }
 

@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/directory/PageHero";
 import { contentAuthors, getAuthorBySlug, getAuthorUrl, getPostsByAuthor } from "@/lib/authors";
 import { routes } from "@/lib/routes";
-import { buildBlogKeywords, buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
+import { buildBlogKeywords, buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 type AuthorPageProps = {
   params: Promise<{ slug: string }>;
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
       title,
       description: author.description,
       url: getAuthorUrl(author),
-      siteName: "Nepali Directory",
+      siteName: "NepaliDirectory",
       type: "profile"
     }
   };
@@ -56,7 +56,6 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
     name: author.name,
     url: getAuthorUrl(author),
     description: author.description,
-    dateModified: "2026-06-28",
     publisher,
     mainEntity: {
       "@type": "Organization",
@@ -71,15 +70,14 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
     name: `${author.name}: ${author.role}`,
     description: author.description,
     url: getAuthorUrl(author),
-    keywords,
-    dateModified: "2026-06-28"
+    keywords
   });
 
   return (
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([webPageJsonLd, profileJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([webPageJsonLd, profileJsonLd]) }}
       />
       <Breadcrumbs items={[{ label: "Authors", href: "/authors" }, { label: author.name }]} />
       <PageHero title={author.name} subtitle={author.description} cta={{ label: "Editorial policy", href: routes.editorialPolicy }} />

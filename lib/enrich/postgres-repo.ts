@@ -1,10 +1,9 @@
 /**
  * Postgres-backed ListingRepository + EmbeddingRepository (prompt §13 `listings` / `V2__embeddings`).
  * Runs against an injected `SqlExecutor` (see `lib/ai-core/queue/pg-repo.ts`), so it never imports
- * `pg` directly — only `lib/ai-core/queue/pg-client.ts` does. UI-only columns (rating, reviews,
- * price, status, image, email, active) belong to the marketing site's `Business` shape, not the
- * `Listing` model, so this repo never touches them; updates only ever SET the enrichment/
- * acquisition columns it owns.
+ * `pg` directly — only `lib/ai-core/queue/pg-client.ts` does. Legacy rating/review/price aggregates
+ * are not changed by enrichment. Normalized contact, status, image and `active` fields are
+ * persisted because submission, review and rejection rely on them.
  */
 import type { SqlExecutor } from "../ai-core/queue/pg-repo";
 import type {
@@ -15,7 +14,7 @@ import type {
   NewListing,
 } from "./types";
 
-type ListingRow = {
+export type ListingRow = {
   id: number | string;
   slug: string;
   name: string;
@@ -51,6 +50,12 @@ type ListingRow = {
   quality_score: number | null;
   ai_enriched_at: string | Date | null;
   data_source: string | null;
+  verification_status: string | null;
+  source_checked_at: string | Date | null;
+  content_reviewed_at: string | Date | null;
+  content_reviewed_by: string | null;
+  last_meaningful_update_at: string | Date | null;
+  image_verified: boolean | null;
   source_ref: string | null;
   license_note: string | null;
   osm_type: string | null;
@@ -66,7 +71,19 @@ type ListingRow = {
   updated_at: string | Date | null;
 };
 
-function mapRow(r: ListingRow, faqs: ListingFaq[]): Listing {
+function verificationStatus(value: string | null): Listing["verificationStatus"] {
+  if (
+    value === "source_verified" ||
+    value === "owner_verified" ||
+    value === "community_submitted" ||
+    value === "rejected"
+  ) {
+    return value;
+  }
+  return "unverified";
+}
+
+export function mapListingRow(r: ListingRow, faqs: ListingFaq[]): Listing {
   return {
     id: Number(r.id),
     slug: r.slug,
@@ -103,6 +120,14 @@ function mapRow(r: ListingRow, faqs: ListingFaq[]): Listing {
     qualityScore: r.quality_score ?? 0,
     aiEnrichedAt: r.ai_enriched_at ? new Date(r.ai_enriched_at) : null,
     dataSource: r.data_source ?? "user",
+    verificationStatus: verificationStatus(r.verification_status),
+    sourceCheckedAt: r.source_checked_at ? new Date(r.source_checked_at) : null,
+    contentReviewedAt: r.content_reviewed_at ? new Date(r.content_reviewed_at) : null,
+    contentReviewedBy: r.content_reviewed_by ?? undefined,
+    lastMeaningfulUpdateAt: r.last_meaningful_update_at
+      ? new Date(r.last_meaningful_update_at)
+      : null,
+    imageVerified: Boolean(r.image_verified),
     sourceRef: r.source_ref ?? undefined,
     licenseNote: r.license_note ?? undefined,
     osmType: r.osm_type ?? undefined,
@@ -155,15 +180,15 @@ export class PostgresListingRepository implements ListingRepository {
     const rows = await this.sql<ListingRow>(`SELECT * FROM listings WHERE id=$1`, [id]);
     if (!rows.length) return null;
     const faqs = (await this.faqsFor([id])).get(id) ?? [];
-    return mapRow(rows[0], faqs);
+    return mapListingRow(rows[0], faqs);
   }
 
   async getBySlug(slug: string): Promise<Listing | null> {
-    const rows = await this.sql<ListingRow>(`SELECT * FROM listings WHERE slug=$1 AND active=true`, [slug]);
+    const rows = await this.sql<ListingRow>(`SELECT * FROM listings WHERE slug=$1`, [slug]);
     if (!rows.length) return null;
     const id = Number(rows[0].id);
     const faqs = (await this.faqsFor([id])).get(id) ?? [];
-    return mapRow(rows[0], faqs);
+    return mapListingRow(rows[0], faqs);
   }
 
   async update(listing: Listing): Promise<void> {
@@ -176,7 +201,10 @@ export class PostgresListingRepository implements ListingRepository {
          category_confidence=$24, needs_category_review=$25, quality_score=$26,
          ai_enriched_at=$27, data_source=$28, source_ref=$29, license_note=$30, osm_type=$31,
          osm_id=$32, google_place_id=$33, claim_status=$34, province=$35, district=$36,
-         municipality=$37, ward=$38, merged_from=$39::jsonb, updated_at=now()
+         municipality=$37, ward=$38, merged_from=$39::jsonb, verification_status=$40,
+         source_checked_at=$41, content_reviewed_at=$42, content_reviewed_by=$43,
+         last_meaningful_update_at=$44, image_verified=$45, active=$46, email=$47, status=$48,
+         image=$49, updated_at=now()
        WHERE id=$1`,
       [
         listing.id, listing.slug, listing.name, listing.categories, listing.area,
@@ -193,6 +221,10 @@ export class PostgresListingRepository implements ListingRepository {
         listing.osmId ?? null, listing.googlePlaceId ?? null, listing.claimStatus ?? null,
         listing.province ?? null, listing.district ?? null, listing.municipality ?? null,
         listing.ward ?? null, JSON.stringify(listing.mergedFrom ?? null),
+        listing.verificationStatus, listing.sourceCheckedAt?.toISOString() ?? null,
+        listing.contentReviewedAt?.toISOString() ?? null, listing.contentReviewedBy ?? null,
+        listing.lastMeaningfulUpdateAt?.toISOString() ?? null, listing.imageVerified,
+        listing.active, listing.email ?? null, listing.status ?? null, listing.image ?? null,
       ],
     );
     await this.replaceFaqs(listing.id, listing.faqs);
@@ -201,7 +233,7 @@ export class PostgresListingRepository implements ListingRepository {
   async all(): Promise<Listing[]> {
     const rows = await this.sql<ListingRow>(`SELECT * FROM listings ORDER BY id`);
     const faqsById = await this.faqsFor(rows.map((r) => Number(r.id)));
-    return rows.map((r) => mapRow(r, faqsById.get(Number(r.id)) ?? []));
+    return rows.map((r) => mapListingRow(r, faqsById.get(Number(r.id)) ?? []));
   }
 
   async insert(listing: NewListing): Promise<Listing> {
@@ -212,10 +244,13 @@ export class PostgresListingRepository implements ListingRepository {
           description_source, meta_title, meta_description, tags, attributes,
           category_confidence, needs_category_review, quality_score, ai_enriched_at, data_source,
           source_ref, license_note, osm_type, osm_id, google_place_id, claim_status, province,
-          district, municipality, ward, merged_from)
+          district, municipality, ward, merged_from, verification_status, source_checked_at,
+          content_reviewed_at, content_reviewed_by, last_meaningful_update_at, image_verified,
+          active, email, status, image)
        VALUES
          ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21::jsonb,
-          $22::jsonb,$23,$24,$25,$26,$27,$28,$29,$30,$31,$32,$33,$34,$35,$36,$37,$38::jsonb)
+          $22::jsonb,$23,$24,$25,$26,$27,$28,$29,$30,$31,$32,$33,$34,$35,$36,$37,$38::jsonb,
+          $39,$40,$41,$42,$43,$44,$45,$46,$47,$48)
        RETURNING *`,
       [
         listing.slug, listing.name, listing.categories, listing.area,
@@ -232,9 +267,13 @@ export class PostgresListingRepository implements ListingRepository {
         listing.osmId ?? null, listing.googlePlaceId ?? null, listing.claimStatus ?? null,
         listing.province ?? null, listing.district ?? null, listing.municipality ?? null,
         listing.ward ?? null, JSON.stringify(listing.mergedFrom ?? null),
+        listing.verificationStatus, listing.sourceCheckedAt?.toISOString() ?? null,
+        listing.contentReviewedAt?.toISOString() ?? null, listing.contentReviewedBy ?? null,
+        listing.lastMeaningfulUpdateAt?.toISOString() ?? null, listing.imageVerified,
+        listing.active, listing.email ?? null, listing.status ?? null, listing.image ?? null,
       ],
     );
-    const created = mapRow(rows[0], []);
+    const created = mapListingRow(rows[0], []);
     await this.replaceFaqs(created.id, listing.faqs);
     return { ...created, faqs: listing.faqs };
   }
@@ -268,7 +307,7 @@ export class PostgresListingRepository implements ListingRepository {
       [limit],
     );
     const faqsById = await this.faqsFor(rows.map((r) => Number(r.id)));
-    return rows.map((r) => mapRow(r, faqsById.get(Number(r.id)) ?? []));
+    return rows.map((r) => mapListingRow(r, faqsById.get(Number(r.id)) ?? []));
   }
 }
 

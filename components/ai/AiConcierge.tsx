@@ -1,6 +1,6 @@
 "use client";
 
-import { Bot, ExternalLink, Loader2, MapPin, Navigation, Phone, Send, Sparkles, Star, Tag } from "lucide-react";
+import { Bot, ExternalLink, Loader2, MapPin, Navigation, Phone, Send, Sparkles, Tag } from "lucide-react";
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 import type { PublicAiListing } from "@/lib/public-ai";
@@ -133,12 +133,6 @@ export function AiConcierge({ initialPrompt = "", compact = false }: AiConcierge
                 {listing.why ? <small className="ai-concierge__why">{listing.why}</small> : null}
               </div>
               <div className="ai-concierge__meta">
-                {typeof listing.rating === "number" ? (
-                  <span>
-                    <Star size={13} aria-hidden fill="currentColor" />
-                    {listing.rating.toFixed(1)} ({(listing.reviews ?? 0).toLocaleString()})
-                  </span>
-                ) : null}
                 <span>{statusLabel(listing.status)}</span>
               </div>
               <div className="ai-concierge__actions">

@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { getSortedCompareCategories } from "@/lib/compare";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
-import { buildCompareKeywords, buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
+import { buildCompareKeywords, buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 const sortedCompareCategories = getSortedCompareCategories();
 const compareKeywords = uniqueKeywords([
@@ -24,8 +24,7 @@ const compareKeywords = uniqueKeywords([
 export const metadata: Metadata = {
   title: "Business Comparison Guides for Nepal: Hotels, Services and More",
   description:
-    "Use consistent checklists to compare Nepal business categories. Named providers, ratings and prices appear only after their listing data passes publication review.",
-  keywords: compareKeywords,
+    "Use consistent checklists to compare Nepal business categories. Named providers appear only after their profiles pass publication review.",
   alternates: {
     canonical: routes.compareBusiness
   },
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
     description:
       "Practical category checklists with review-gated provider comparisons.",
     url: `${siteUrl}${routes.compareBusiness}`,
-    siteName: "Nepali Directory",
+    siteName: "NepaliDirectory",
     locale: "en_US",
     type: "website",
     images: [
@@ -94,14 +93,13 @@ export default function CompareBusinessPage() {
     }),
     "@type": "CollectionPage",
     mainEntity: itemListJsonLd,
-    reviewedBy: publisher
   };
 
   return (
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([collectionJsonLd, itemListJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([collectionJsonLd, itemListJsonLd]) }}
       />
       <Breadcrumbs items={[{ label: "Compare Business" }]} />
       <PageHero

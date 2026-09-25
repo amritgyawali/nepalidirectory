@@ -8,11 +8,17 @@ import { createPgSqlExecutor } from "../ai-core/queue/pg-client";
 import type { EmbeddingRepository, ListingRepository } from "./types";
 import { InMemoryEmbeddingRepository, InMemoryListingRepository } from "./listing-repo";
 import { PostgresEmbeddingRepository, PostgresListingRepository } from "./postgres-repo";
+import { SupabaseListingRepository } from "./supabase-repo";
 
 export function createListingRepository(): ListingRepository {
   const { databaseUrl } = loadAiConfig();
   if (databaseUrl) {
     return new PostgresListingRepository(createPgSqlExecutor(databaseUrl));
+  }
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const secretKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY;
+  if (supabaseUrl && secretKey) {
+    return new SupabaseListingRepository({ url: supabaseUrl, secretKey });
   }
   return new InMemoryListingRepository();
 }

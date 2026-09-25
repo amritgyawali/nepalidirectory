@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import { BadgeCheck, MapPin } from "lucide-react";
 import { RelatedGuideLinks } from "@/components/content/RelatedGuideLinks";
+import { DirectoryPagination } from "@/components/directory/DirectoryPagination";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { siteUrl } from "@/lib/blog";
@@ -13,30 +15,52 @@ import {
   getDirectoryCategory,
   listingMatchesDirectoryCategory,
 } from "@/lib/directory-categories";
+import { getIndexableHubSlugs } from "@/lib/indexable-hubs";
 import {
   getIndexableListings,
   listingDescription,
+  listingMatchesCity,
+  listingVerificationLabel,
 } from "@/lib/public-listings";
-import { getBusinessHref, getSearchHref, routes } from "@/lib/routes";
+import {
+  DIRECTORY_PAGE_SIZE,
+  MIN_INDEXABLE_DIRECTORY_RESULTS,
+  paginateDirectoryItems,
+  paginatedDirectoryHref,
+  parseDirectoryPage,
+} from "@/lib/directory-pagination";
+import { getBusinessHref, getCityCategoryHref, getSearchHref, routes } from "@/lib/routes";
+import { serializeJsonLd } from "@/lib/seo";
 import {
   buildBreadcrumbJsonLd,
-  buildListingLocalBusinessJsonLd,
+  buildListingItemListJsonLd,
 } from "@/lib/seo-auto";
 
 type DirectoryCategoryPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ page?: string }>;
 };
 
 const socialImage = `${siteUrl}/nepali-directory-og.png`;
 
 export const dynamicParams = false;
+export const revalidate = 300;
 
 export function generateStaticParams() {
   return directoryCategories.map((category) => ({ slug: category.slug }));
 }
 
+const loadCategoryListings = cache(async (slug: string) => {
+  const category = getDirectoryCategory(slug);
+  if (!category) return [];
+  return (await getIndexableListings())
+    .filter((listing) => listingMatchesDirectoryCategory(listing, category))
+    .sort((a, b) => a.name.localeCompare(b.name, "en"));
+});
+
 export async function generateMetadata({
   params,
+  searchParams,
 }: DirectoryCategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
   const category = getDirectoryCategory(slug);
@@ -48,21 +72,29 @@ export async function generateMetadata({
     };
   }
 
+  const requestedPage = parseDirectoryPage((await searchParams)?.page);
+  const listings = await loadCategoryListings(category.slug);
+  const pagination = requestedPage ? paginateDirectoryItems(listings, requestedPage) : null;
+  const indexable = Boolean(
+    pagination?.valid && listings.length >= MIN_INDEXABLE_DIRECTORY_RESULTS,
+  );
+  const canonical = requestedPage
+    ? paginatedDirectoryHref(category.href, requestedPage)
+    : category.href;
+  const title = requestedPage && requestedPage > 1
+    ? `${category.title} - Page ${requestedPage}`
+    : category.title;
+
   return {
-    title: category.title,
+    title,
     description: category.metaDescription,
-    keywords: [
-      category.priorityKeyword,
-      `${category.name} directory Nepal`,
-      `find ${category.name.toLowerCase()} in Nepal`,
-    ],
     category: category.name,
-    alternates: { canonical: category.href },
+    alternates: { canonical },
     robots: {
-      index: true,
+      index: indexable,
       follow: true,
       googleBot: {
-        index: true,
+        index: indexable,
         follow: true,
         "max-image-preview": "large",
         "max-snippet": -1,
@@ -70,10 +102,10 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: category.title,
+      title,
       description: category.metaDescription,
-      url: `${siteUrl}${category.href}`,
-      siteName: "Nepali Directory",
+      url: `${siteUrl}${canonical}`,
+      siteName: "NepaliDirectory",
       locale: "en_US",
       type: "website",
       images: [
@@ -96,6 +128,7 @@ export async function generateMetadata({
 
 export default async function DirectoryCategoryPage({
   params,
+  searchParams,
 }: DirectoryCategoryPageProps) {
   const { slug } = await params;
   const category = getDirectoryCategory(slug);
@@ -104,14 +137,27 @@ export default async function DirectoryCategoryPage({
     notFound();
   }
 
-  const listings = (await getIndexableListings())
-    .filter((listing) => listingMatchesDirectoryCategory(listing, category))
-    .sort((a, b) => a.name.localeCompare(b.name, "en"));
+  const requestedPage = parseDirectoryPage((await searchParams)?.page);
+  if (!requestedPage) notFound();
+  const listings = await loadCategoryListings(category.slug);
+  // Below the publication threshold the hub 404s instead of serving a noindex page, so Search
+  // Console never files it under "Excluded by 'noindex' tag".
+  if (listings.length < MIN_INDEXABLE_DIRECTORY_RESULTS) notFound();
+  const pagination = paginateDirectoryItems(listings, requestedPage);
+  if (!pagination.valid) notFound();
+  const pageListings = pagination.items;
   const relatedGuides = getGuidesForCategory(category.slug);
-  const otherCategories = directoryCategories.filter(
-    (candidate) => candidate.slug !== category.slug,
+  const qualifyingCities = cityDirectoryPages.filter(
+    (city) =>
+      listings.filter((listing) => listingMatchesCity(listing, city.slug)).length >=
+      MIN_INDEXABLE_DIRECTORY_RESULTS,
   );
-  const canonicalUrl = `${siteUrl}${category.href}`;
+  const { categories: liveCategorySlugs } = await getIndexableHubSlugs();
+  const otherCategories = directoryCategories.filter(
+    (candidate) => candidate.slug !== category.slug && liveCategorySlugs.includes(candidate.slug),
+  );
+  const canonicalPath = paginatedDirectoryHref(category.href, requestedPage);
+  const canonicalUrl = `${siteUrl}${canonicalPath}`;
 
   const collectionPageJsonLd = {
     "@context": "https://schema.org",
@@ -125,27 +171,21 @@ export default async function DirectoryCategoryPage({
     isPartOf: {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
-      name: "Nepali Directory",
+      name: "NepaliDirectory",
       url: siteUrl,
     },
     about: {
       "@type": "Thing",
       name: category.priorityKeyword,
     },
-    mainEntity: listings.length ? {
-      "@type": "ItemList",
-      name: `Qualified ${category.name.toLowerCase()} profiles`,
-      numberOfItems: listings.length,
-      itemListElement: listings.map((listing, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        url: `${siteUrl}${getBusinessHref(listing.slug)}`,
-        item: buildListingLocalBusinessJsonLd(
-          listing,
-          `${siteUrl}${getBusinessHref(listing.slug)}`,
-        ),
-      })),
-    } : undefined,
+    mainEntity: pageListings.length
+      ? buildListingItemListJsonLd(
+          `Qualified ${category.name.toLowerCase()} profiles`,
+          canonicalUrl,
+          pageListings,
+          (requestedPage - 1) * DIRECTORY_PAGE_SIZE,
+        )
+      : undefined,
   };
 
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
@@ -173,7 +213,7 @@ export default async function DirectoryCategoryPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
+          __html: serializeJsonLd([
             collectionPageJsonLd,
             breadcrumbJsonLd,
             faqJsonLd,
@@ -223,15 +263,14 @@ export default async function DirectoryCategoryPage({
             </section>
           </div>
 
-          <h2 className="compact-title nearby-title">Browse directory cities</h2>
+          <h2 className="compact-title nearby-title">Browse qualified city pages</h2>
           <p className="compact-copy">
-            Open a city guide to understand its neighborhoods and available qualified
-            profiles, then narrow your search to this category.
+            A city-category page appears only when at least ten reviewed public profiles qualify.
           </p>
           <div className="seo-link-strip" aria-label="Nepal city directories">
-            {cityDirectoryPages.map((city) => (
-              <Link key={city.slug} href={city.href}>
-                {city.name} directory
+            {qualifyingCities.map((city) => (
+              <Link key={city.slug} href={getCityCategoryHref(city.slug, category.slug)}>
+                {category.name} in {city.name}
               </Link>
             ))}
           </div>
@@ -266,9 +305,9 @@ export default async function DirectoryCategoryPage({
             }}
           />
 
-          {listings.length ? (
+          {pageListings.length ? (
             <div className="city-profile-grid">
-              {listings.map((listing) => (
+              {pageListings.map((listing) => (
                 <article className="answer-summary" key={listing.slug}>
                   <span className="eyebrow">
                     <MapPin size={13} aria-hidden /> {listing.neighborhood ?? listing.area}
@@ -280,7 +319,7 @@ export default async function DirectoryCategoryPage({
                   <div className="business-card__amenities">
                     {listing.verified ? (
                       <span>
-                        <BadgeCheck size={12} aria-hidden /> Verified record
+                        <BadgeCheck size={12} aria-hidden /> {listingVerificationLabel(listing)}
                       </span>
                     ) : null}
                     {listing.services?.slice(0, 3).map((service) => (
@@ -319,6 +358,11 @@ export default async function DirectoryCategoryPage({
               </div>
             </div>
           )}
+          <DirectoryPagination
+            baseHref={category.href}
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPages}
+          />
         </div>
       </section>
 

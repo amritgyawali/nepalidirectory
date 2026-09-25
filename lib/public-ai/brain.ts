@@ -26,7 +26,7 @@ export type AiModifiers = {
   openNow: boolean;
   is24h: boolean;
   emergency: boolean;
-  topRated: boolean;
+  recommended: boolean;
   budget: boolean;
   verified: boolean;
   delivery: boolean;
@@ -104,7 +104,7 @@ function detectModifiers(haystack: string): AiModifiers {
     openNow: has("open now", "open right now", "still open", "currently open"),
     is24h: has("24 hour", "24hour", "24h", "24/7", "all night", "round the clock", "midnight", "late night"),
     emergency: has("emergency", "urgent", "asap", "right now", "immediately"),
-    topRated: has("best", "top rated", "top-rated", "highest rated", "recommend", "good", "great", "reliable", "trusted"),
+    recommended: has("best", "top rated", "top-rated", "highest rated", "recommend", "good", "great", "reliable", "trusted"),
     budget: has("cheap", "budget", "affordable", "low cost", "inexpensive", "economical"),
     verified: has("verified", "trusted", "genuine", "authentic"),
     delivery: has("delivery", "deliver", "home delivery", "order online", "takeaway"),
@@ -122,7 +122,7 @@ function detectIntent(haystack: string, mods: AiModifiers): AiIntent {
   if (mods.emergency) return "emergency";
   if (has("trip", "visit", "weekend", "itinerary", "plan a", "things to do", "tour", "explore", "day out")) return "plan";
   if (mods.openNow || mods.is24h) return "open_now";
-  if (mods.topRated || has("suggest", "recommendation")) return "recommend";
+  if (mods.recommended || has("suggest", "recommendation")) return "recommend";
   return "find";
 }
 
@@ -185,7 +185,6 @@ export function explainMatch(business: Business, interp: QueryInterpretation): s
   const bits: string[] = [];
   const statusText = business.status === "24h" ? "Open 24h" : business.status === "open" ? "Open now" : "Currently closed";
   bits.push(statusText);
-  bits.push(`${business.rating.toFixed(1)}★ (${business.reviews.toLocaleString()})`);
 
   const catHit = interp.categories.find((c) =>
     business.categories.some((bc) => norm(bc).includes(norm(c)) || norm(c).includes(norm(bc))),
@@ -195,7 +194,6 @@ export function explainMatch(business: Business, interp: QueryInterpretation): s
 
   if (business.verified) bits.push("verified");
   if (interp.modifiers.delivery && business.delivery) bits.push("offers delivery");
-  if (interp.modifiers.budget && business.price <= 2) bits.push("budget friendly");
   if ((interp.intent === "deals") && business.coupons?.length) bits.push(`${business.coupons.length} live offer${business.coupons.length === 1 ? "" : "s"}`);
   bits.push(business.area);
   return bits.join(" · ");
@@ -210,26 +208,26 @@ export function buildFollowups(interp: QueryInterpretation, topName?: string): s
   switch (interp.intent) {
     case "greeting":
     case "help":
-      return ["Emergency plumber in Kathmandu", "Best Newari food in Bhaktapur", "Dentist open now", "Hotels in Pokhara with pickup"];
+      return ["Emergency plumber in Kathmandu", "Newari food in Bhaktapur", "Dentist open now", "Hotels in Pokhara with pickup"];
     case "deals":
-      followups.push(cat ? `Best ${cat.toLowerCase()} deals in ${loc}` : `Top offers in ${loc}`, "Restaurants with coupons", "Verified businesses only");
+      followups.push(cat ? `${cat} offers in ${loc}` : `Available offers in ${loc}`, "Restaurants with coupons", "Source-checked profiles only");
       break;
     case "compare":
-      if (topName) followups.push(`Directions to ${topName}`, `${topName} reviews`);
-      followups.push(cat ? `Cheapest ${cat.toLowerCase()} in ${loc}` : `Top rated in ${loc}`);
+      if (topName) followups.push(`Directions to ${topName}`, `${topName} published details`);
+      followups.push(cat ? `${cat} comparison checklist in ${loc}` : `Comparison checklist for ${loc}`);
       break;
     case "emergency":
     case "open_now":
       followups.push(cat ? `24-hour ${cat.toLowerCase()} in ${loc}` : `Open 24 hours in ${loc}`, "Nearest verified option", topName ? `Call ${topName}` : "Emergency services");
       break;
     case "plan":
-      followups.push(`Best restaurants in ${loc}`, `Hotels in ${loc}`, `Things to do in ${loc}`);
+      followups.push(`Restaurants in ${loc}`, `Hotels in ${loc}`, `Things to do in ${loc}`);
       break;
     default:
       followups.push(
-        cat ? `Best ${cat.toLowerCase()} in ${loc}` : `Top rated in ${loc}`,
+        cat ? `${cat} in ${loc}` : `Businesses in ${loc}`,
         cat ? `${cat} open now` : "Open now near me",
-        cat ? `Cheapest ${cat.toLowerCase()}` : `Deals in ${loc}`,
+        cat ? `${cat} comparison checklist` : `Deals in ${loc}`,
       );
   }
   return [...new Set(followups.filter(Boolean))].slice(0, 4);

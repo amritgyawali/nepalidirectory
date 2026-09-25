@@ -21,8 +21,6 @@ export type PublicAiListing = {
   categories: string[];
   phone: string;
   website?: string;
-  rating: number;
-  reviews: number;
   status: Business["status"];
   hoursToday: string;
   verified: boolean;
@@ -121,16 +119,12 @@ function scoreBusiness(business: Business, interp: QueryInterpretation): number 
   if (modifiers.openNow || intent === "open_now") score += isOpen ? 16 : -22;
   if (modifiers.is24h) score += business.status === "24h" ? 20 : -8;
   if (intent === "emergency" || modifiers.emergency) score += business.status === "24h" ? 18 : isOpen ? 9 : -12;
-  if (modifiers.topRated || intent === "recommend") score += business.rating * 6;
-  if (modifiers.budget) score += (4 - business.price) * 5;
   if (modifiers.verified) score += business.verified ? 10 : -6;
   if (modifiers.delivery) score += business.delivery ? 12 : -4;
   if (intent === "deals") score += (business.coupons?.length ?? 0) * 22;
 
   // Baseline quality so results are never arbitrary.
   score +=
-    business.rating * 5 +
-    Math.log10(business.reviews + 1) * 3 +
     (business.verified ? 5 : 0) +
     (business.claimed ? 3 : 0) +
     (business.status === "24h" ? 4 : business.status === "open" ? 2 : 0);
@@ -139,7 +133,7 @@ function scoreBusiness(business: Business, interp: QueryInterpretation): number 
 }
 
 function qualityScore(business: Business): number {
-  return Math.min(100, Math.round(72 + business.rating * 4 + (business.verified ? 6 : 0) + (business.claimed ? 4 : 0)));
+  return Math.min(100, 60 + (business.verified ? 20 : 0) + (business.claimed ? 10 : 0));
 }
 
 function toListing(business: Business, score: number, interp: QueryInterpretation): PublicAiListing {
@@ -153,8 +147,6 @@ function toListing(business: Business, score: number, interp: QueryInterpretatio
     categories: business.categories,
     phone: business.phone,
     website: business.website,
-    rating: business.rating,
-    reviews: business.reviews,
     status: business.status,
     hoursToday: business.hoursToday,
     verified: Boolean(business.verified),
@@ -192,30 +184,30 @@ function composeMessage(interp: QueryInterpretation, listings: PublicAiListing[]
 
   switch (interp.intent) {
     case "greeting":
-      return `Namaste! I'm the Nepali Directory AI assistant. I search verified local businesses across Nepal and hand you straight to calls, directions and offers. For example, ${top.name} in ${top.area} is a strong pick right now (${top.rating.toFixed(1)}★). What are you looking for?`;
+      return `Namaste! I'm the NepaliDirectory assistant. I search reviewed public profiles and can help you contact a matching business. For example, ${top.name} has a source-checked profile in ${top.area}. What are you looking for?`;
     case "help":
-      return `I can find businesses, compare options, surface deals, flag what's open now and route you to directions — all grounded in real directory data. Try "emergency plumber in Kathmandu" or "best Newari food in Bhaktapur". Right now ${top.name} is a solid example (${top.rating.toFixed(1)}★, ${statusPhrase(top)}).`;
+      return `I can find reviewed profiles, compare available facts and route you to contact details. Try "emergency plumber in Kathmandu" or "Newari food in Bhaktapur". ${top.name} is one matching profile and is marked ${statusPhrase(top)}.`;
     case "deals": {
       const withOffer = listings.find((l) => l.slug === top.slug);
-      return `Here are ${count} for deals on "${interp.raw}". ${withOffer?.name ?? top.name} in ${top.area} is worth a look — ${top.rating.toFixed(1)}★, ${statusPhrase(top)}, phone ${top.phone}. Tap "Browse all deals" to see every live offer.${backupLine}`;
+      return `Here are ${count} for "${interp.raw}". ${withOffer?.name ?? top.name} has a reviewed profile in ${top.area}; confirm any offer and its terms directly with the business.${backupLine}`;
     }
     case "compare": {
       const second = listings[1];
       if (second) {
-        return `Comparing your top options: ${top.name} (${top.rating.toFixed(1)}★, ${top.reviews.toLocaleString()} reviews, ${statusPhrase(top)}) vs ${second.name} (${second.rating.toFixed(1)}★, ${second.reviews.toLocaleString()} reviews, ${statusPhrase(second)}). ${top.name} edges ahead on overall match; ${second.name} is the strongest alternative.`;
+        return `Your query matches ${top.name} and ${second.name}. Compare their published services, areas and contact details, then confirm current availability directly; this directory does not rank them by unsupported ratings.`;
       }
-      return `${top.name} in ${top.area} is the clear pick for "${interp.raw}" — ${top.rating.toFixed(1)}★, ${statusPhrase(top)}.`;
+      return `${top.name} in ${top.area} is the only reviewed profile matching "${interp.raw}" right now. Confirm fit and availability directly.`;
     }
     case "emergency":
-      return `For an urgent need I've found ${count}. Call ${top.name} first — ${statusPhrase(top)}, phone ${top.phone}, in ${top.area}, ${top.rating.toFixed(1)}★.${backupLine}`;
+      return `For this urgent need I found ${count}. ${top.name} is listed as ${statusPhrase(top)} in ${top.area}; call to confirm availability before relying on that status.${backupLine}`;
     case "open_now":
-      return `${count} for "${interp.raw}". ${top.name} is ${statusPhrase(top)} in ${top.area} — ${top.rating.toFixed(1)}★, phone ${top.phone}.${backupLine}`;
+      return `${count} for "${interp.raw}". ${top.name} is listed as ${statusPhrase(top)} in ${top.area}; call to confirm current hours.${backupLine}`;
     case "directions":
-      return `${top.name} in ${top.area} is your best match. ${top.rating.toFixed(1)}★, ${statusPhrase(top)}. Tap "Directions" for turn-by-turn, or call ${top.phone}.${backupLine}`;
+      return `${top.name} in ${top.area} matches your query. Tap "Directions" or call to confirm the location before travelling.${backupLine}`;
     case "plan":
-      return `Here's a grounded starting point for "${interp.raw}" around ${interp.location}. Begin with ${top.name} in ${top.area} (${top.rating.toFixed(1)}★).${backupLine} Ask me for hotels, food or things to do and I'll build it out.`;
+      return `Here's a grounded starting point for "${interp.raw}" around ${interp.location}: ${top.name} has a reviewed public profile in ${top.area}.${backupLine}`;
     default:
-      return `I found ${count} for "${interp.raw}" in ${interp.location}. Start with ${top.name} in ${top.area}: ${top.rating.toFixed(1)}★ from ${top.reviews.toLocaleString()} reviews, ${statusPhrase(top)}, phone ${top.phone}.${backupLine}`;
+      return `I found ${count} for "${interp.raw}" in ${interp.location}. ${top.name} has a reviewed profile in ${top.area}; use its public profile to confirm current details.${backupLine}`;
   }
 }
 
@@ -243,10 +235,9 @@ export function localAutopilotSearch(
   const interp = interpretQuery(query, location);
   const ranked = rankBusinesses(interp, catalog);
 
-  // Keep only meaningfully-scored results, but never return empty when the directory has data:
-  // fall back to the best overall picks so the visitor always gets a grounded starting point.
+  // Do not turn unrelated catalog rows into recommendations merely to avoid an empty result.
   const positive = ranked.filter((r) => r.score > 8);
-  const chosen = (positive.length ? positive : ranked).slice(0, limit);
+  const chosen = positive.slice(0, limit);
   const listings = chosen.map(({ business, score }) => toListing(business, score, interp));
 
   const noRealMatch = positive.length === 0;

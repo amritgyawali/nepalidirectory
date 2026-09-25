@@ -1,9 +1,7 @@
 export const routes = {
   home: "/",
   search: "/search",
-  bestBusinesses: "/best-businesses",
   nearMe: "/near-me",
-  topRated: "/top-rated",
   categories: "/categories",
   city: "/city",
   about: "/about",
@@ -44,16 +42,15 @@ export const routes = {
   superAdminAiActivity: "/super-admin/ai-activity",
   adminAi: "/admin/ai",
   deals: "/deals",
-  events: "/events",
   pricing: "/pricing",
   help: "/help",
   sitemap: "/sitemap",
   writeReview: "/write-review",
-  requestCallback: "/request-callback",
   province: "/province",
   authors: "/authors",
   editorialPolicy: "/editorial-policy",
   directoryMethodology: "/directory-methodology",
+  bestDirectoryNepal: "/best-directory-in-nepal",
   attribution: "/attribution"
 } as const;
 
@@ -61,15 +58,24 @@ export const primaryNav = [
   { label: "Categories", href: routes.categories },
   { label: "Cities", href: routes.city },
   { label: "Guides", href: routes.blog },
-  { label: "Compare", href: routes.compareBusiness },
-  { label: "Add Business", href: routes.claimListing },
-  { label: "Log In", href: routes.login },
-  { label: "Sign Up", href: routes.register, featured: true }
+  { label: "Compare", href: routes.compareBusiness }
 ];
+
+/** Header actions shown to the right of the main navigation. */
+export const accountNav = [
+  { label: "Add business", href: routes.claimListing, variant: "outline" },
+  { label: "Log in", href: routes.login, variant: "text" },
+  { label: "Sign up", href: routes.register, variant: "solid" }
+] as const;
 
 /** Canonical public profile URL for a listing slug. */
 export function getBusinessHref(slug: string): string {
   return `/business/${encodeURIComponent(slug)}`;
+}
+
+/** Canonical crawlable city + category landing page. */
+export function getCityCategoryHref(citySlug: string, categorySlug: string): string {
+  return `/city/${encodeURIComponent(citySlug)}/${encodeURIComponent(categorySlug)}`;
 }
 
 /** Canonical comparison-guide URL for an available category slug. */
@@ -104,7 +110,7 @@ export const footerGroups = [
     title: "Directory",
     links: [
       { label: "Find a Business", href: routes.search },
-      { label: "Best Businesses", href: routes.bestBusinesses },
+      { label: "Best Directory in Nepal", href: routes.bestDirectoryNepal },
       { label: "Near Me", href: routes.nearMe },
       { label: "Categories", href: routes.categories },
       { label: "Deals & Offers", href: routes.deals },
