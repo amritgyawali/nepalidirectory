@@ -11,13 +11,19 @@ describe("compare matchups", () => {
     }
   });
 
-  it("gives each category 10 unique contenders and 20 unique conditions", () => {
+  it("gives each category at least 10 unique contenders and 20 unique conditions", () => {
     for (const matchup of getAllMatchups()) {
       expect(matchup.conditions, matchup.slug).toHaveLength(20);
       expect(new Set(matchup.conditions).size, matchup.slug).toBe(20);
-      expect(matchup.contenders, matchup.slug).toHaveLength(10);
-      expect(new Set(matchup.contenders.map((contender) => contender.name)).size, matchup.slug).toBe(10);
+      expect(matchup.contenders.length, matchup.slug).toBeGreaterThanOrEqual(10);
+      expect(new Set(matchup.contenders.map((contender) => contender.name)).size, matchup.slug).toBe(
+        matchup.contenders.length,
+      );
     }
+  });
+
+  it("offers twenty photography studios to compare", () => {
+    expect(getCategoryMatchup("photography")?.contenders).toHaveLength(20);
   });
 
   it("scores every condition with an integer from 1 to 10", () => {

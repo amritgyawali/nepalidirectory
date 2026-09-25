@@ -92,13 +92,13 @@ export function HeadToHeadCompare({ category, conditions, contenders, reviewedAt
             Put two {lowerCategory} side by side
           </h2>
           <p className="compact-copy">
-            Choose one business for the left corner and one for the right from the top 10 below. Each of the{" "}
+            Choose one business for the left corner and one for the right from the top {contenders.length} below. Each of the{" "}
             {conditions.length} conditions awards a point to the higher score, and the business with more
             points wins.
           </p>
         </header>
 
-        <div className="h2h-roster" role="list" aria-label={`Top 10 ${lowerCategory}`}>
+        <div className="h2h-roster" role="list" aria-label={`Top ${contenders.length} ${lowerCategory}`}>
           {contenders.map((contender, index) => {
             const onLeft = picked.left === index;
             const onRight = picked.right === index;

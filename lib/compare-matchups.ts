@@ -1,7 +1,8 @@
 /**
  * Head-to-head comparison data for /compare-business/[slug].
  *
- * Every category carries exactly ten contenders and twenty category-specific conditions.
+ * Every category carries at least ten contenders (photography carries twenty) and twenty
+ * category-specific conditions.
  * Scores are 1-10 editorial estimates compiled from public information (official websites,
  * OpenStreetMap and directory listings, published service details). They are indicative, not
  * audits, and every page says so. Flip `reviewed` to true only after a person has checked a
@@ -263,16 +264,26 @@ const matchups: CategoryMatchup[] = [
       "Punctuality", "Creativity", "Backup & storage", "Value for money", "Client reputation"
     ],
     contenders: [
-      c("Durbar Studio", "Bhaktapur", "Photo studio with its own website and event coverage.", "8 8 8 9 8 7 6 8 7 8 8 7 9 7 8 8 8 8 7 8"),
-      c("Wedding Story Nepal", "Kathmandu", "Wedding photography and cinematography team.", "9 10 8 6 9 9 8 8 8 7 8 7 8 7 8 8 9 8 7 8"),
-      c("Dipikaj Audio Video Production", "Kathmandu", "Audio-video production house for events and shoots.", "8 8 9 6 8 9 8 9 8 7 7 7 7 7 7 8 8 8 7 7"),
-      c("Milan Wedding Photography", "Kathmandu", "Wedding-focused photography service.", "8 9 8 6 8 8 7 7 7 7 7 7 8 6 8 8 8 7 8 7"),
-      c("Digi House", "Lalitpur", "Digital photo and printing studio.", "7 7 8 7 8 7 7 8 7 8 7 7 8 7 7 8 7 8 7 7"),
-      c("Base Photo Studio", "Kathmandu", "Studio for portraits and document photos.", "7 6 7 9 7 5 4 7 6 9 8 8 8 7 8 8 7 7 8 7"),
-      c("Big Shot", "Kathmandu", "Photo studio for portraits and events.", "7 7 8 7 7 6 6 7 6 8 7 7 7 6 7 7 7 7 8 7"),
-      c("Smile Digital Color Lab", "Kathmandu", "Photo lab for prints, albums and studio portraits.", "6 5 6 8 7 4 3 7 6 9 8 8 10 7 7 8 6 8 8 7"),
-      c("Satyam Digital Photo Studio", "Lalitpur", "Neighbourhood digital photo studio.", "6 6 6 8 6 5 4 6 5 8 8 8 8 6 7 8 6 6 8 7"),
-      c("Prativa Digital Photo Studio", "Lalitpur", "Neighbourhood digital photo studio.", "6 6 6 8 6 4 3 6 5 9 7 8 7 6 7 7 6 6 9 7")
+      c("Photo Choice Nepal", "Koteshwor, Kathmandu", "Full-service studio since 2009 with in-house albums, framing and printing; pre-wedding from about NPR 15,000 and one-day photo + video from about NPR 35,000.", "9 10 10 9 8 8 7 8 8 8 9 9 10 7 9 9 8 8 9 10"),
+      c("Wedding City Nepal Pvt. Ltd.", "Kathmandu", "Large cinematic production company founded in 2016, now 30+ specialists covering photo, film, drone and editing.", "9 10 10 7 9 9 9 9 10 8 8 7 8 7 9 9 9 8 8 9"),
+      c("Wedding Kathmandu", "Dhapasi, Kathmandu", "Established studio with an unusually detailed online package catalogue, from one-day shoots to both-side and out-of-Valley coverage with live streaming.", "8 10 9 8 8 8 8 8 8 8 10 10 9 7 8 9 7 8 8 9"),
+      c("Wedding Story Nepal", "Butwal & Kathmandu", "Cinematic, story-driven wedding brand with drone and destination coverage; Kathmandu packages from about NPR 45,000 to 150,000.", "9 10 8 7 9 10 9 8 8 8 8 8 8 7 9 8 9 8 7 9"),
+      c("Dream Wedding Photography", "Kathmandu", "Photographer-led brand of Kiran Shrestha, combining weddings with specialist maternity and newborn portraiture.", "9 9 8 10 9 7 6 8 7 8 8 7 8 7 9 9 9 8 8 9"),
+      c("Wedding Thapas", "Kageshwori-Manohara, Kathmandu", "Affordable full-service photo, video and printing studio with contacts in Melbourne and Sydney.", "8 9 9 9 8 8 7 8 8 8 8 8 9 7 8 8 8 7 8 9"),
+      c("Rays Studio", "Kathmandu", "Production-house team with commercial and documentary work behind its wedding photography and cinematography.", "8 9 8 7 9 9 8 9 8 8 8 7 7 7 8 8 9 8 7 8"),
+      c("Kantipur Studio", "Old Baneshwor, Kathmandu", "Social-media-aware studio pairing photography with 4K films, vertical reels, drone and same-day highlights; listed tiers from about NPR 15,000 to 30,000.", "8 9 8 8 8 9 7 8 7 9 9 9 7 7 8 8 8 7 8 7"),
+      c("PhoPal Studios", "Bhaktapur", "Complete-documentation packages with large edited galleries, full film, short cinema, album and frame; drone priced separately.", "8 9 9 6 8 9 7 8 8 7 8 8 9 7 8 8 8 8 7 8"),
+      c("Aakriti Studio Nepal", "Kathmandu", "Candid, documentary-style studio with about 18 years' experience, a second photographer as standard and a 48-hour sneak peek.", "8 9 8 8 8 8 6 8 7 9 8 8 7 7 8 8 8 7 7 7"),
+      c("Wedding FotoSewa", "Koteshwor-Baneshwor, Kathmandu", "Value-focused wedding photo and video team listed since 2014, with coverage starting around NPR 45,000.", "8 9 8 7 8 8 7 7 7 8 7 7 7 7 8 8 7 7 9 8"),
+      c("Foto Fusion", "Kathmandu Valley", "Art-driven team of Sujan Shakya, Medhankar Shakya and Suraj Nhasiju focused on personalised storytelling; little public package detail.", "9 9 7 7 9 7 6 8 7 8 6 6 7 6 8 8 10 7 7 8"),
+      c("Jeo Foto", "Kathmandu & Lalitpur", "Founder-led, digital-first studio with clear tiers from about NPR 40,000 to 100,000, plus reels, drone and same-day teasers.", "8 8 7 7 8 8 7 7 6 8 9 9 6 7 8 8 8 7 7 6"),
+      c("Wedding Creation Pokhara", "Pokhara", "Pokhara destination and pre-wedding specialist working around Phewa Lake, Sarangkot and Himalayan viewpoints.", "8 9 8 7 8 8 8 6 6 7 6 6 7 6 8 8 8 7 8 9"),
+      c("Wedding Waves Nepal", "Pokhara", "Established Pokhara specialist in candid and cinematic coverage with a strong local reputation; portfolio mainly on Facebook.", "8 9 8 5 8 8 7 7 6 7 6 6 7 6 8 8 8 7 8 9"),
+      c("WhiteFOX Ent. Pvt. Ltd.", "Pokhara", "Multi-service studio since 2016 covering weddings, commercial and hotel photography, editing and prints; weddings from about NPR 25,000.", "7 8 8 8 7 7 6 7 8 7 7 7 9 6 7 7 7 7 8 6"),
+      c("Vivah Nepal Pokhara", "Pokhara", "Premium destination-wedding brand focused on cinematic films and pre-wedding sessions against Pokhara's lake and mountain backdrops.", "8 9 7 6 8 9 8 8 7 7 5 5 7 6 7 7 8 7 6 8"),
+      c("RKRAJ Photography", "Bharatpur, Chitwan", "Boutique, owner-led candid storytelling studio run by Raj Khanal since 2015.", "7 8 7 6 8 7 5 7 4 7 6 5 6 6 8 8 8 6 7 7"),
+      c("Nabin Photography", "Devinagar, Butwal", "Local Butwal studio combining wedding photography, videography and editing; check recent complete deliveries before booking.", "6 7 7 6 6 6 5 6 5 6 6 5 6 5 6 6 6 6 8 5"),
+      c("Ur Moment Photography Service", "Lagan Tole, Kathmandu", "Long-running Kathmandu wedding and love-story photographer listed since 2011; little current package detail published.", "6 7 7 6 6 5 4 6 5 6 5 4 6 5 6 7 6 6 7 5")
     ]
   },
   {
@@ -419,7 +430,7 @@ export function getAllMatchups(): CategoryMatchup[] {
   return matchups;
 }
 
-/** Average of a contender's twenty scores, used to order the top-10 list. */
+/** Average of a contender's twenty scores, used to order the contender list. */
 export function averageScore(contender: MatchupContender): number {
   return contender.scores.reduce((sum, score) => sum + score, 0) / contender.scores.length;
 }
