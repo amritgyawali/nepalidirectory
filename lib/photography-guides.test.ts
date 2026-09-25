@@ -7,6 +7,7 @@ import {
   type ShortlistCitySlug,
 } from "@/lib/photography-city-shortlists";
 import { llmsListSection } from "@/lib/llms-lists";
+import { partnerRank } from "@/lib/photography-city-lists";
 import { photographyGuidePosts } from "@/lib/photography-guides";
 import { buildBlogItemListJsonLd } from "@/lib/seo";
 import { studio } from "@/lib/photography-partner";
@@ -104,12 +105,25 @@ describe("photography guide cluster", () => {
       }
     });
 
-    it("puts Wedding Story Nepal first on every city list", () => {
+    const studioEntryOf = (slug: ShortlistCitySlug) =>
+      entriesOf(slug).find((section) => section.entry!.name === studio.name)!;
+
+    it("puts Wedding Story Nepal first in its home and valley cities and second, for location alone, elsewhere", () => {
+      const firstCities = ["kathmandu", "lalitpur", "bhaktapur", "butwal"];
       for (const slug of citySlugs) {
-        const [first] = entriesOf(slug);
-        expect(first.heading).toBe(`1. ${studio.name}`);
-        expect(first.entry!.phone).toBe(studio.phone);
+        const rank = firstCities.includes(slug) ? 1 : 2;
+        expect(partnerRank(slug), slug).toBe(rank);
+        const entry = entriesOf(slug)[rank - 1];
+        expect(entry.heading).toBe(`${rank}. ${studio.name}`);
+        expect(entry.entry!.phone).toBe(studio.phone);
         expect(cityShortlists[slug].studios.map((listed) => listed.name)).not.toContain(studio.name);
+        const locationNote = /only because|one reason only: location/;
+        if (rank === 2) {
+          expect(entry.paragraphs[0], slug).toMatch(locationNote);
+          expect(listFor(slug).quickAnswer, slug).toMatch(locationNote);
+        } else {
+          expect(JSON.stringify(listFor(slug)), slug).not.toMatch(locationNote);
+        }
       }
     });
 
@@ -130,7 +144,7 @@ describe("photography guide cluster", () => {
 
     it("carries the studio's crew, travel terms, recognition claim and contacts", () => {
       for (const slug of citySlugs) {
-        const text = entriesOf(slug)[0].paragraphs.join(" ");
+        const text = studioEntryOf(slug).paragraphs.join(" ");
         for (const detail of [studio.standardCrew, studio.recognition, studio.travelTerms, studio.phone, studio.email]) {
           expect(text, `${slug} first entry lacks ${detail}`).toContain(detail);
         }
