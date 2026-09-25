@@ -681,8 +681,10 @@ p {
   margin-bottom: 18px;
 }
 
-.article-page span {
-  color: var(--color-link);
+/* Scoped to the category label: a bare `.article-page span` also caught the text spans inside
+   every paragraph and turned article copy link-blue. */
+.article-kicker {
+  color: var(--marigold-text);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 1.2px;

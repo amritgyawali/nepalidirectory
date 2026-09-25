@@ -163,7 +163,7 @@ export function getBlogQuickAnswer(post: BlogPost) {
 /**
  * ItemList for list posts. Entries are plain LocalBusiness facts (name, place, contact) with no
  * rating, review or award properties: the site does not assert reputation in structured data for
- * businesses it has not audited, and that includes the featured partner's own award claims.
+ * businesses it has not audited, and that includes Wedding Story Nepal's own award claims.
  */
 export function buildBlogItemListJsonLd(post: BlogPost, pageUrl: string) {
   if (!post.itemList) return null;

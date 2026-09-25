@@ -1,8 +1,8 @@
 import type { BlogPost } from "./blog";
 import {
   commonContextLinks,
-  featuredDisclosure,
-  featuredStudioSection,
+  guideDisclosure,
+  recommendedStudioSection,
   photoImage as image,
   photoPublication as publication,
   studio,
@@ -65,7 +65,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
           "On delivery, agree the timeline in writing and expect film to take longer than photographs because editing is heavier. Confirm the resolution and format you receive, whether raw footage is available and at what cost, how long the studio retains the material, and whether music licensing is handled — an unlicensed commercial track can get a film removed from social platforms.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         "The studio lists cinematic wedding films alongside photography with an in-house team, which avoids the coordination problems that arise when two separate vendors work the same ceremony; ask to see one complete finished film rather than a social clip.",
       ),
     ],
@@ -95,7 +95,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "pokhara", "butwal"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -149,7 +149,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
           "Because the event is small, delivery expectations should be proportionate: a smaller edited set delivered quickly is generally more useful than a large one months later. Confirm the edited image count and turnaround in writing as you would for a wedding.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         "Engagement shoots are among the studio's listed services alongside pre-wedding work, so the same team can carry a consistent visual style from engagement through to the wedding if you book both.",
       ),
     ],
@@ -174,7 +174,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "lalitpur", "butwal"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -228,7 +228,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
           "Confirm the usual practicalities in writing: how many edited images you receive, turnaround, whether prints or an album are included, and how the images may be used — many families want these kept private, so ask explicitly whether the studio intends to publish them and say no if you prefer they do not.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         "Maternity and couple portraits are among the studio's listed services; for newborn work specifically, ask about training, spotting practice and hygiene as you would with any studio, since newborn posing is a distinct skill from maternity portraiture.",
       ),
     ],
@@ -258,7 +258,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "lalitpur", "butwal"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -312,7 +312,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
           "Then plan for failure: what happens if a crew member cannot travel, if flights are cancelled, or if weather closes a mountain route. A studio with genuine destination experience will already have answers, and their answers are a reasonable proxy for how much of it they have really done.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         "The studio lists destination coverage including work outside Nepal alongside its domestic locations; for any destination booking ask precisely how many crew travel, what travel and accommodation the quote includes, and what equipment redundancy they carry.",
       ),
     ],
@@ -337,7 +337,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "pokhara", "chitwan"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -391,7 +391,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
           "Then archiving, which almost nobody asks about and everybody eventually needs. Establish how long the studio retains your files and whether they guarantee availability for re-orders. Regardless of the answer, take your own backups on delivery: at least two copies in different physical locations, plus cloud storage. A studio's hard drive is not your archive.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         "The studio lists premium albums and private online galleries among its deliverables; ask to handle a sample album, confirm the edited image count and retouching level for your package, and confirm how long files are retained.",
       ),
     ],
@@ -421,7 +421,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "butwal"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -475,7 +475,7 @@ export const photographyServiceGuidePosts: BlogPost[] = [
           "After the wedding, check delivery against the contract: image count, resolution, album specification and date. Raise any shortfall promptly and in writing while it is fresh. Then take your own backups immediately — two physical copies in different locations plus cloud storage — rather than relying on the studio's retention.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         `Whichever studio you book, run this checklist on them. If you are considering the partner studio, its published contact points are ${studio.phone} and ${studio.email}, and the same contract and deliverable questions above should be asked and answered in writing.`,
       ),
     ],
@@ -505,6 +505,6 @@ export const photographyServiceGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "pokhara", "butwal", "chitwan"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
 ];

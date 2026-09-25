@@ -1,13 +1,25 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock } from "lucide-react";
+import { Fragment } from "react";
+import { ArrowLeft, ArrowRight, Check, Clock, Globe, MapPin, MessageCircle, Phone } from "lucide-react";
 import { GuideCard } from "@/components/content/GuideCard";
 import { SafeRichParagraph } from "@/components/content/SafeRichParagraph";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { getAuthorByName, getAuthorUrl } from "@/lib/authors";
-import { blogPosts, getBlogPost, getBlogPostUrl, getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
+import {
+  blogPosts,
+  getBlogPost,
+  getBlogPostUrl,
+  getSortedBlogPosts,
+  siteUrl,
+  type BlogCallout,
+  type BlogClosingPanel,
+  type BlogPost,
+  type BlogPricingGuide,
+  type BlogSection
+} from "@/lib/blog";
 import { ENGINE_AUTHOR, getPublishedEnginePost, getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
@@ -259,27 +271,32 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       />
       <Breadcrumbs items={[{ label: "Blog", href: routes.blog }, { label: post.title }]} />
       <article className="article-page">
-        <div className="container">
-          <Link className="article-back" href={routes.blog}>
-            <ArrowLeft size={16} aria-hidden />
-            Blog
-          </Link>
-          <span>{post.category}</span>
-          <h1>{post.title}</h1>
-          <p>{post.excerpt}</p>
-          <div className="article-meta">
-            <Link href={isEngineAuthored ? routes.editorialPolicy : `/authors/${author.slug}`}>{post.author}</Link>
-            <time dateTime={post.publishedAt}>{post.date}</time>
-            {post.modifiedAt !== post.publishedAt ? (
+        <header className="article-hero">
+          <div className="container">
+            <Link className="article-back" href={routes.blog}>
+              <ArrowLeft size={16} aria-hidden />
+              Blog
+            </Link>
+            <span className="article-kicker">{post.category}</span>
+            <h1>{post.title}</h1>
+            {post.subtitle ? <p className="article-subtitle">{post.subtitle}</p> : null}
+            <p className="article-standfirst">{post.excerpt}</p>
+            <div className="article-meta">
+              <Link href={isEngineAuthored ? routes.editorialPolicy : `/authors/${author.slug}`}>{post.author}</Link>
+              <time dateTime={post.publishedAt}>{post.date}</time>
+              {post.modifiedAt !== post.publishedAt ? (
+                <span>
+                  Updated <time dateTime={post.modifiedAt}>{post.modifiedAt}</time>
+                </span>
+              ) : null}
               <span>
-                Updated <time dateTime={post.modifiedAt}>{post.modifiedAt}</time>
+                <Clock size={14} aria-hidden />
+                {post.readTime}
               </span>
-            ) : null}
-            <span>
-              <Clock size={14} aria-hidden />
-              {post.readTime}
-            </span>
+            </div>
           </div>
+        </header>
+        <div className="container">
           <div className="article-page__image">
             <FillImage src={post.image} alt={post.imageAlt} sizes="(max-width: 900px) 100vw, 900px" priority />
           </div>
@@ -311,13 +328,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <td>{index + 1}</td>
                         <td>
                           <strong>{item.name}</strong>
-                          {item.isFeaturedPartner ? " (featured partner, paid placement)" : ""}
                         </td>
                         <td>{item.area}</td>
                         <td>
-                          {item.telephone ?? (item.url ? (
+                          {item.telephone ? (
+                            <a href={telHref(item.telephone)}>{item.telephone}</a>
+                          ) : item.url ? (
                             <a href={item.url} rel="noopener noreferrer nofollow" target="_blank">Public page</a>
-                          ) : "See sources below")}
+                          ) : "See sources below"}
                         </td>
                       </tr>
                     ))}
@@ -338,13 +356,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </section>
           ) : null}
           <div className="article-body">
-            {post.sections.map((section) => (
-              <section key={section.heading}>
-                <h2>{section.heading}</h2>
-                {section.paragraphs.map((paragraph) => (
-                  <SafeRichParagraph key={paragraph}>{paragraph}</SafeRichParagraph>
-                ))}
-              </section>
+            {post.sections.map((section, index) => (
+              <Fragment key={section.heading}>
+                {section.entry ? (
+                  <ListEntry section={section} />
+                ) : (
+                  <section>
+                    <h2>{section.heading}</h2>
+                    {section.paragraphs.map((paragraph) => (
+                      <SafeRichParagraph key={paragraph}>{paragraph}</SafeRichParagraph>
+                    ))}
+                  </section>
+                )}
+                {post.callout?.afterSection === index ? <ArticleCallout callout={post.callout} /> : null}
+                {post.pricingGuide?.afterSection === index ? <PricingGuide guide={post.pricingGuide} /> : null}
+              </Fragment>
             ))}
           </div>
           <section className="article-faq" aria-labelledby="article-faq-title">
@@ -356,6 +382,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </details>
             ))}
           </section>
+          {post.closingPanel ? <ClosingPanel panel={post.closingPanel} /> : null}
           <section className="fact-panel" aria-labelledby="fact-panel-title">
             <h2 id="fact-panel-title">Source and fact notes</h2>
             <p>
@@ -455,5 +482,126 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </section>
       ) : null}
     </main>
+  );
+}
+
+function telHref(phone: string) {
+  return `tel:${phone.replace(/[^\d+]/g, "")}`;
+}
+
+/** A numbered studio on a list post: rank badge, name, area, description and contact row. */
+function ListEntry({ section }: { section: BlogSection }) {
+  const entry = section.entry!;
+  const headingId = `list-entry-${entry.rank}`;
+  return (
+    <section className="list-entry" aria-labelledby={headingId}>
+      <div className="list-entry__head">
+        <span className="list-entry__rank" aria-hidden>
+          {entry.rank}
+        </span>
+        <div>
+          <h2 id={headingId}>
+            <span className="visually-hidden">{entry.rank}. </span>
+            {entry.name}
+          </h2>
+          <p className="list-entry__area">
+            <MapPin size={14} aria-hidden />
+            {entry.area}
+          </p>
+        </div>
+      </div>
+      {section.paragraphs.map((paragraph) => (
+        <SafeRichParagraph key={paragraph}>{paragraph}</SafeRichParagraph>
+      ))}
+      <div className="list-entry__contact">
+        {entry.phone ? (
+          <a href={telHref(entry.phone)}>
+            <Phone size={15} aria-hidden />
+            Contact Number: <strong>{entry.phone}</strong>
+          </a>
+        ) : null}
+        {entry.url ? (
+          <a href={entry.url} rel="noopener noreferrer nofollow" target="_blank">
+            <Globe size={15} aria-hidden />
+            {entry.phone ? "See their work" : "Contact via their official page"}
+          </a>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+function ArticleCallout({ callout }: { callout: BlogCallout }) {
+  return (
+    <aside className="article-callout" aria-label={callout.heading}>
+      <span className="article-callout__eyebrow">{callout.eyebrow}</span>
+      <h2>{callout.heading}</h2>
+      <p>{callout.text}</p>
+      <div className="article-callout__links">
+        {callout.links.map((link) => (
+          <Link href={link.href} key={link.href}>
+            {link.label}
+            <ArrowRight size={15} aria-hidden />
+          </Link>
+        ))}
+      </div>
+    </aside>
+  );
+}
+
+function PricingGuide({ guide }: { guide: BlogPricingGuide }) {
+  return (
+    <section className="price-guide" aria-labelledby="price-guide-title">
+      <h2 id="price-guide-title">{guide.heading}</h2>
+      <p>{guide.intro}</p>
+      <div className="price-guide__grid">
+        {guide.tiers.map((tier) => (
+          <div className={`price-tier${tier.highlight ? " price-tier--highlight" : ""}`} key={tier.name}>
+            {tier.highlight ? <span className="price-tier__badge">Best balance</span> : null}
+            <h3>{tier.name}</h3>
+            <p className="price-tier__price">
+              {tier.price}
+              <small>{tier.unit}</small>
+            </p>
+            <ul>
+              {tier.features.map((feature) => (
+                <li key={feature}>
+                  <Check size={15} aria-hidden />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <p className="price-tier__ideal">{tier.idealFor}</p>
+            <p className="price-tier__extra">{tier.extraDay}</p>
+          </div>
+        ))}
+      </div>
+      <p className="price-guide__note">{guide.note}</p>
+      {guide.cta ? (
+        <a className="price-guide__cta" href={guide.cta.href} rel="noopener noreferrer" target="_blank">
+          <MessageCircle size={17} aria-hidden />
+          {guide.cta.label}
+        </a>
+      ) : null}
+    </section>
+  );
+}
+
+function ClosingPanel({ panel }: { panel: BlogClosingPanel }) {
+  return (
+    <section className="closing-panel" aria-labelledby="closing-panel-title">
+      <span className="closing-panel__eyebrow">About this report</span>
+      <h2 id="closing-panel-title">{panel.heading}</h2>
+      <p>{panel.intro}</p>
+      <ol className="closing-panel__list">
+        {panel.members.map((member) => (
+          <li key={member.name}>
+            <strong>{member.name}</strong>
+            <span>{member.base}</span>
+          </li>
+        ))}
+      </ol>
+      <p className="closing-panel__footnote">{panel.footnote}</p>
+    </section>
   );
 }

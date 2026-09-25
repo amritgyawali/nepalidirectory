@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { blogPosts } from "@/lib/blog";
 import {
+  cityListEntryCount,
   cityListSlug,
   cityShortlists,
-  partnerPosition,
   type ShortlistCitySlug,
 } from "@/lib/photography-city-shortlists";
 import { llmsListSection } from "@/lib/llms-lists";
@@ -11,15 +11,10 @@ import { photographyGuidePosts } from "@/lib/photography-guides";
 import { buildBlogItemListJsonLd } from "@/lib/seo";
 import { studio } from "@/lib/photography-partner";
 
-/**
- * These guides carry a paid featured placement. The disclosure is what separates them from the
- * deceptive "best of" listicles Google treats as scaled content abuse, so it is enforced here
- * rather than left to reviewer diligence.
- */
 describe("photography guide cluster", () => {
   it("covers every sub-cluster, so the guards below cannot silently skip a new one", () => {
     // Core (Nepal + Butwal) + city guides + city lists + service guides. Update deliberately when
-    // adding a cluster — a mismatch means new posts are bypassing the disclosure checks in this file.
+    // adding a cluster — a mismatch means new posts are bypassing the checks in this file.
     expect(photographyGuidePosts).toHaveLength(36);
     for (const slug of [
       "best-wedding-photographer-nepal",
@@ -37,29 +32,26 @@ describe("photography guide cluster", () => {
     }
   });
 
-  it("discloses the paid featured placement on every post", () => {
+  it("never labels Wedding Story Nepal as featured or as a paid placement", () => {
+    const labels = /featured (?:partner|photography partner|placement)|paid placement|commercial arrangement/i;
     for (const post of photographyGuidePosts) {
-      expect(post.disclaimer, `${post.slug} must carry a disclosure`).toBeDefined();
-      expect(post.disclaimer).toContain("featured photography partner");
-      expect(post.disclaimer).toContain("paid placement");
-      expect(post.disclaimer).toContain("not an independent ranking");
+      expect(JSON.stringify(post), `${post.slug} must not carry featured-placement wording`).not.toMatch(labels);
     }
   });
 
-  it("repeats the disclosure in a visible section heading, not only the footer", () => {
+  it("ends every post with the top 10 photographers panel and a footer note", () => {
     for (const post of photographyGuidePosts) {
-      const featured = post.sections.find((section) =>
-        /^(?:\d+\. )?Featured partner:/.test(section.heading),
-      );
-      expect(featured, `${post.slug} must show the partner block as its own section`).toBeDefined();
-      expect(featured!.paragraphs[0]).toContain("commercial arrangement");
+      expect(post.disclaimer, `${post.slug} must carry a footer note`).toBeDefined();
+      expect(post.closingPanel, `${post.slug} must end with the panel`).toBeDefined();
+      expect(post.closingPanel!.members).toHaveLength(10);
+      expect(post.closingPanel!.members[0].name).toBe(studio.name);
+      // The panel is the Events Desk's judgement; it must never claim the named studios decided it.
+      expect(post.closingPanel!.intro).toContain("Events Desk");
     }
   });
 
-  it("never ranks or scores a named third-party studio", () => {
-    // The only placement decision is the disclosed partner's. Other real businesses, which
-    // NepaliDirectory has not audited, are never ranked, "number one" or "top N" in prose.
-    const rankingClaim = /\b(?:#\s*1|no\.\s*1|number one|rank(?:ed|ing)?\s*(?:#\s*)?\d|top\s+\d+\s+(?:studio|photographer))/i;
+  it("never calls a named studio number one or gives it a score", () => {
+    const rankingClaim = /\b(?:#\s*1|no\.\s*1|number one|rank(?:ed|ing)?\s*(?:#\s*)?\d|scored?\s+\d)/i;
     for (const post of photographyGuidePosts) {
       const prose = [
         post.title,
@@ -68,7 +60,7 @@ describe("photography guide cluster", () => {
         ...post.sections.flatMap((section) => [section.heading, ...section.paragraphs]),
         ...post.faqs.flatMap((faq) => [faq.question, faq.answer]),
       ].join(" ");
-      expect(prose, `${post.slug} must not assert a ranking`).not.toMatch(rankingClaim);
+      expect(prose, `${post.slug} must not assert a ranking score`).not.toMatch(rankingClaim);
     }
   });
 
@@ -86,7 +78,7 @@ describe("photography guide cluster", () => {
     }
   });
 
-  it("cites the source for the partner's published claims", () => {
+  it("cites the source for the studio's published claims", () => {
     for (const post of photographyGuidePosts) {
       expect(post.sources?.length, `${post.slug} must cite sources`).toBeGreaterThan(0);
       expect(post.sources!.some((source) => source.url.includes("weddingstory.com.np"))).toBe(true);
@@ -97,8 +89,7 @@ describe("photography guide cluster", () => {
     const citySlugs = Object.keys(cityShortlists) as ShortlistCitySlug[];
     const listFor = (slug: ShortlistCitySlug) =>
       photographyGuidePosts.find((post) => post.slug === cityListSlug(slug))!;
-    const entriesOf = (slug: ShortlistCitySlug) =>
-      listFor(slug).sections.filter((section) => /^\d+\. /.test(section.heading));
+    const entriesOf = (slug: ShortlistCitySlug) => listFor(slug).sections.filter((section) => section.entry);
 
     it("gives every city both a guide and a separate list page that link to each other", () => {
       for (const slug of citySlugs) {
@@ -113,73 +104,90 @@ describe("photography guide cluster", () => {
       }
     });
 
-    it("places the partner first in Kathmandu and Butwal and second elsewhere, disclosed", () => {
+    it("puts Wedding Story Nepal first on every city list", () => {
       for (const slug of citySlugs) {
-        const expected = slug === "kathmandu" || slug === "butwal" ? 1 : 2;
-        expect(partnerPosition(slug)).toBe(expected);
-        const entry = entriesOf(slug)[expected - 1];
-        expect(entry.heading).toBe(`${expected}. Featured partner: ${studio.name}`);
-        expect(entry.paragraphs[0]).toContain("commercial arrangement");
+        const [first] = entriesOf(slug);
+        expect(first.heading).toBe(`1. ${studio.name}`);
+        expect(first.entry!.phone).toBe(studio.phone);
+        expect(cityShortlists[slug].studios.map((listed) => listed.name)).not.toContain(studio.name);
       }
     });
 
-    it("lists every other studio alphabetically, numbered in sequence", () => {
+    it("titles each page as a top list sized to its entries, numbered in sequence", () => {
       for (const slug of citySlugs) {
         const entries = entriesOf(slug);
+        expect(entries).toHaveLength(cityListEntryCount(slug));
+        expect(entries.length, slug).toBeLessThanOrEqual(10);
+        expect(entries.map((section) => section.entry!.rank)).toEqual(entries.map((_, index) => index + 1));
         expect(entries.map((section) => Number.parseInt(section.heading, 10))).toEqual(
           entries.map((_, index) => index + 1),
         );
-        const names = entries
-          .filter((section) => !section.heading.includes("Featured partner:"))
-          .map((section) => section.heading.replace(/^\d+\. /, ""));
-        const sorted = [...names].sort((a, b) => a.localeCompare(b, "en", { sensitivity: "base" }));
-        expect(names, slug).toEqual(sorted);
-        expect(names).toHaveLength(cityShortlists[slug].studios.length);
-        expect(names).not.toContain(studio.name);
+        expect(listFor(slug).title).toBe(
+          `Top ${entries.length} Best Wedding Photographers in ${cityShortlists[slug].city}`,
+        );
       }
     });
 
-    it("carries the partner's crew, travel terms, recognition claim and contacts", () => {
+    it("carries the studio's crew, travel terms, recognition claim and contacts", () => {
       for (const slug of citySlugs) {
-        const entry = entriesOf(slug).find((section) => section.heading.includes("Featured partner:"))!;
-        const text = entry.paragraphs.join(" ");
+        const text = entriesOf(slug)[0].paragraphs.join(" ");
         for (const detail of [studio.standardCrew, studio.recognition, studio.travelTerms, studio.phone, studio.email]) {
-          expect(text, `${slug} partner entry lacks ${detail}`).toContain(detail);
+          expect(text, `${slug} first entry lacks ${detail}`).toContain(detail);
         }
       }
     });
 
-    it("links every listed studio to a public page readers can check", () => {
+    it("gives every listed studio a way to reach it and cites its public page", () => {
       for (const slug of citySlugs) {
         const sourceUrls = listFor(slug).sources!.map((source) => source.url);
         expect(new Set(sourceUrls).size, `${slug} has duplicate source URLs`).toBe(sourceUrls.length);
-        for (const listed of cityShortlists[slug].studios) {
-          expect(listed.sourceUrl).toMatch(/^https:\/\//);
-          expect(sourceUrls, `${listed.name} lacks a source`).toContain(listed.sourceUrl);
+        for (const listed of cityShortlists[slug].studios as Array<{ name: string; phone?: string; sourceUrl?: string }>) {
+          expect(listed.phone ?? listed.sourceUrl, `${listed.name} has no contact`).toBeDefined();
+          if (listed.phone) expect(listed.phone).toMatch(/^\+977-9\d{9}$/);
+          if (listed.sourceUrl) {
+            expect(listed.sourceUrl).toMatch(/^https:\/\//);
+            expect(sourceUrls, `${listed.name} lacks a source`).toContain(listed.sourceUrl);
+          }
         }
       }
     });
 
-    it("opens with an answer-first summary that names the list and the partner", () => {
+    it("writes a full description for every studio, without repeating one", () => {
+      const all = citySlugs.flatMap((slug) => cityShortlists[slug].studios);
+      for (const listed of all) {
+        expect(listed.description.split(/\s+/).length, listed.name).toBeGreaterThanOrEqual(25);
+      }
+      // Vivah Nepal appears in two cities with different write-ups.
+      const descriptions = all.map((listed) => listed.description);
+      expect(new Set(descriptions).size).toBe(descriptions.length);
+    });
+
+    it("includes the price guide, planning card and conclusion on every list", () => {
+      for (const slug of citySlugs) {
+        const post = listFor(slug);
+        expect(post.subtitle).toBeTruthy();
+        expect(post.pricingGuide?.tiers).toHaveLength(3);
+        expect(post.pricingGuide!.afterSection).toBeLessThan(post.sections.length);
+        expect(post.callout!.afterSection).toBeLessThan(post.sections.length);
+        expect(post.sections.at(-1)!.heading).toBe("Conclusion: making your final choice");
+      }
+    });
+
+    it("opens with an answer-first summary that names the leading studios", () => {
       for (const slug of citySlugs) {
         const post = listFor(slug);
         const words = post.quickAnswer!.split(/\s+/).length;
         expect(words, slug).toBeGreaterThanOrEqual(40);
         expect(words, slug).toBeLessThanOrEqual(90);
-        expect(post.quickAnswer).toContain(`${studio.name} (our featured partner)`);
+        expect(post.quickAnswer).toContain(studio.name);
       }
     });
 
     it("mirrors the numbered sections exactly in the ItemList structured data", () => {
       for (const slug of citySlugs) {
-        const post = listFor(slug);
-        const headings = entriesOf(slug).map((section) =>
-          section.heading.replace(/^\d+\. (?:Featured partner: )?/, ""),
+        expect(listFor(slug).itemList!.items.map((item) => item.name)).toEqual(
+          entriesOf(slug).map((section) => section.entry!.name),
         );
-        expect(post.itemList!.items.map((item) => item.name)).toEqual(headings);
-        const partner = post.itemList!.items[partnerPosition(slug) - 1];
-        expect(partner.isFeaturedPartner).toBe(true);
-        expect(post.itemList!.items.filter((item) => item.isFeaturedPartner)).toHaveLength(1);
       }
     });
 
@@ -198,7 +206,7 @@ describe("photography guide cluster", () => {
       for (const slug of citySlugs) {
         expect(lines).toContain(listFor(slug).href);
       }
-      expect(lines).toContain("featured partner, paid placement");
+      expect(lines).not.toMatch(/paid placement/i);
     });
 
     it("keeps list pages within search snippet limits", () => {
@@ -211,7 +219,7 @@ describe("photography guide cluster", () => {
     });
   });
 
-  it("repeats the partner's recognition claim wherever the partner appears", () => {
+  it("repeats the studio's recognition claim wherever the studio appears", () => {
     for (const post of photographyGuidePosts) {
       const prose = post.sections.flatMap((section) => section.paragraphs).join(" ");
       expect(prose, post.slug).toContain(studio.recognition);
