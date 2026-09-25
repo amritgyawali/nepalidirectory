@@ -1,3 +1,4 @@
+import { llmsListSection } from "@/lib/llms-lists";
 import { getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
 import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
@@ -48,7 +49,13 @@ export async function GET() {
     .sort((a, b) => b.modifiedAt.localeCompare(a.modifiedAt))
     .slice(0, 60);
 
-  const populatedCompareSlugs = await getPopulatedCompareSlugs();
+  // Degrade like the loaders above: an unavailable listings backend must not take down llms.txt.
+  let populatedCompareSlugs = new Set<string>();
+  try {
+    populatedCompareSlugs = await getPopulatedCompareSlugs();
+  } catch (error) {
+    console.error("Unable to load populated comparison slugs for llms.txt", error);
+  }
 
   const lines = [
     "# NepaliDirectory",
@@ -80,6 +87,7 @@ export async function GET() {
     "",
     ...cityDirectoryPages.filter((city) => hubs.cities.includes(city.slug)).map((city) => resource(city.title, city.href, city.description)),
     "",
+    ...llmsListSection({ withEntries: false }),
     "## Business comparison guides",
     "",
     ...(getSortedCompareCategories().filter((category) => populatedCompareSlugs.has(category.slug)).length > 0

@@ -1,3 +1,4 @@
+import { llmsListSection } from "@/lib/llms-lists";
 import { getSortedBlogPosts, siteUrl, type BlogPost } from "@/lib/blog";
 import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
@@ -114,6 +115,7 @@ export async function GET() {
       ),
     ),
     "",
+    ...llmsListSection({ withEntries: true }),
     "## Editorial content",
     "",
     `Total published guides: ${guides.length}`,

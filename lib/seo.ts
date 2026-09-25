@@ -157,7 +157,44 @@ export function estimateWordCount(post: BlogPost) {
 }
 
 export function getBlogQuickAnswer(post: BlogPost) {
-  return post.faqs[0]?.answer ?? post.excerpt;
+  return post.quickAnswer ?? post.faqs[0]?.answer ?? post.excerpt;
+}
+
+/**
+ * ItemList for list posts. Entries are plain LocalBusiness facts (name, place, contact) with no
+ * rating, review or award properties: the site does not assert reputation in structured data for
+ * businesses it has not audited, and that includes the featured partner's own award claims.
+ */
+export function buildBlogItemListJsonLd(post: BlogPost, pageUrl: string) {
+  if (!post.itemList) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${pageUrl}#list`,
+    name: post.itemList.name,
+    url: pageUrl,
+    numberOfItems: post.itemList.items.length,
+    itemListOrder: "https://schema.org/ItemListUnordered",
+    itemListElement: post.itemList.items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "LocalBusiness",
+        name: item.name,
+        description: item.description,
+        address: {
+          "@type": "PostalAddress",
+          ...(item.streetAddress ? { streetAddress: item.streetAddress } : {}),
+          addressLocality: item.city,
+          addressCountry: "NP",
+        },
+        areaServed: { "@type": "City", name: item.city },
+        ...(item.url ? { url: item.url, sameAs: [item.url] } : {}),
+        ...(item.telephone ? { telephone: item.telephone } : {}),
+        ...(item.email ? { email: item.email } : {}),
+      },
+    })),
+  };
 }
 
 export function getCompareQuickAnswer(category: CompareCategory) {

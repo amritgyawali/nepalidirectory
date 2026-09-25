@@ -10,6 +10,8 @@ import {
   universalFaqs,
 } from "./photography-partner";
 import { photographyCityGuidePosts } from "./photography-city-guides";
+import { cityListPointerSection } from "./photography-city-shortlists";
+import { photographyCityListPosts } from "./photography-city-lists";
 import { photographyServiceGuidePosts } from "./photography-service-guides";
 
 const corePhotographyGuidePosts: BlogPost[] = [
@@ -41,7 +43,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
       {
         heading: "There is no single best photographer, only the best fit for your wedding",
         paragraphs: [
-          "Anyone claiming one photographer is objectively the best in Nepal is selling something. Wedding photography is a service matched to a specific event: a three-day Hindu ceremony in Kathmandu with 800 guests needs a different team and a different plan from a 40-person Buddhist blessing in Pokhara or a Tharu ceremony in the Terai. The right question is not who is best overall, but who has repeatedly shot a wedding shaped like yours.",
+          "No single photographer is objectively the best for every wedding in Nepal. Wedding photography is a service matched to a specific event: a three-day Hindu ceremony in Kathmandu with 800 guests needs a different team and a different plan from a 40-person Buddhist blessing in Pokhara or a Tharu ceremony in the Terai. The right question is not who is best overall, but who has repeatedly shot a wedding shaped like yours.",
           "That reframing matters practically. It means portfolio breadth is less useful than portfolio depth in your specific ceremony type, and that a studio's showreel of highlights tells you far less than one complete wedding gallery start to finish. Ask for the latter every time.",
         ],
       },
@@ -492,8 +494,9 @@ const corePhotographyGuidePosts: BlogPost[] = [
   },
   {
     ...publication,
+    modifiedAt: "2026-09-25",
     title: "Booking a Wedding Photographer in Butwal: Venues, Timing and Terms",
-    seoTitle: "Best Wedding Photographer in Butwal: Booking Guide 2026",
+    seoTitle: "Butwal Wedding Photographer Booking Guide: Venues and Terms",
     slug: "best-wedding-photographer-butwal",
     href: "/blog/best-wedding-photographer-butwal",
     category: "Photography",
@@ -501,12 +504,12 @@ const corePhotographyGuidePosts: BlogPost[] = [
       "What wedding coverage in Butwal involves: local venue types, multi-event Terai schedules, crew sizing and the contract terms to settle before you pay a deposit.",
     description:
       "Book a wedding photographer in Butwal with confidence: venue and schedule realities in Rupandehi, how to size the crew, and the contract terms that matter most.",
-    image: image("photo-1591604466107-ec97de577aff"),
-    imageAlt: "Wedding ceremony photographed at an outdoor venue",
-    readTime: "10 min read",
+    image: image("photo-1511285560929-80b456fea0bc"),
+    imageAlt: "Couple celebrating with guests and balloons at an outdoor reception",
+    readTime: "12 min read",
     author: "Nepali Directory Events Desk",
     keywords: [
-      "best wedding photographer in Butwal",
+      "how to book a wedding photographer in Butwal",
       "wedding photographer Butwal",
       "Butwal wedding photography",
       "wedding photographer Rupandehi",
@@ -542,6 +545,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
           "Then the risk terms: overtime rate, what happens if events overrun, the position if the lead shooter is unavailable, backup and file retention, and the refund position if either side cancels. Also confirm travel and meals for multi-day coverage, which is a normal request but should not be a surprise on the invoice.",
         ],
       },
+      cityListPointerSection("butwal"),
       featuredStudioSection(
         `With a permanent Butwal studio at ${studio.butwalStudio} and a team of around ${studio.teamSize} photographers and filmmakers, the studio can in principle staff multi-event Rupandehi weddings without importing a crew; confirm crew allocation for your specific date in writing.`,
       ),
@@ -815,5 +819,6 @@ const corePhotographyGuidePosts: BlogPost[] = [
 export const photographyGuidePosts: BlogPost[] = [
   ...corePhotographyGuidePosts,
   ...photographyCityGuidePosts,
+  ...photographyCityListPosts,
   ...photographyServiceGuidePosts,
 ];

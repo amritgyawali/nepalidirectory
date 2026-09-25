@@ -16,6 +16,7 @@ import { getDirectoryCategory } from "@/lib/directory-categories";
 import { routes } from "@/lib/routes";
 import { relatedCompareHubsForPost } from "@/lib/seo-auto";
 import {
+  buildBlogItemListJsonLd,
   buildBlogKeywords,
   buildWebPageJsonLd,
   estimateWordCount,
@@ -191,13 +192,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
   };
 
-  const webPageJsonLd = buildWebPageJsonLd({
-    name: post.seoTitle,
-    description: post.description,
-    url: getBlogPostUrl(post),
-    keywords,
-    dateModified: post.modifiedAt
-  });
+  const itemListJsonLd = buildBlogItemListJsonLd(post, getBlogPostUrl(post));
+  const webPageJsonLd = {
+    ...buildWebPageJsonLd({
+      name: post.seoTitle,
+      description: post.description,
+      url: getBlogPostUrl(post),
+      keywords,
+      dateModified: post.modifiedAt
+    }),
+    // List posts are "about" their list, which lets answer engines lift the entries directly.
+    ...(itemListJsonLd ? { mainEntity: { "@id": itemListJsonLd["@id"] } } : {})
+  };
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -242,7 +248,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: serializeJsonLd([webPageJsonLd, articleJsonLd, breadcrumbJsonLd, faqJsonLd])
+          __html: serializeJsonLd([
+            webPageJsonLd,
+            articleJsonLd,
+            breadcrumbJsonLd,
+            faqJsonLd,
+            ...(itemListJsonLd ? [itemListJsonLd] : [])
+          ])
         }}
       />
       <Breadcrumbs items={[{ label: "Blog", href: routes.blog }, { label: post.title }]} />
@@ -258,6 +270,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="article-meta">
             <Link href={isEngineAuthored ? routes.editorialPolicy : `/authors/${author.slug}`}>{post.author}</Link>
             <time dateTime={post.publishedAt}>{post.date}</time>
+            {post.modifiedAt !== post.publishedAt ? (
+              <span>
+                Updated <time dateTime={post.modifiedAt}>{post.modifiedAt}</time>
+              </span>
+            ) : null}
             <span>
               <Clock size={14} aria-hidden />
               {post.readTime}
@@ -275,6 +292,40 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               ))}
             </ul>
           </section>
+          {post.itemList ? (
+            <section className="answer-summary" aria-labelledby="at-a-glance-title">
+              <h2 id="at-a-glance-title">{post.itemList.name} at a glance</h2>
+              <div className="responsive-table compare-table-wrap">
+                <table className="compare-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Studio</th>
+                      <th scope="col">Based in</th>
+                      <th scope="col">Contact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {post.itemList.items.map((item, index) => (
+                      <tr key={item.name}>
+                        <td>{index + 1}</td>
+                        <td>
+                          <strong>{item.name}</strong>
+                          {item.isFeaturedPartner ? " (featured partner, paid placement)" : ""}
+                        </td>
+                        <td>{item.area}</td>
+                        <td>
+                          {item.telephone ?? (item.url ? (
+                            <a href={item.url} rel="noopener noreferrer nofollow" target="_blank">Public page</a>
+                          ) : "See sources below")}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          ) : null}
           {relatedResearchLinks.length ? (
             <section className="answer-summary" aria-labelledby="local-research-links-title">
               <h2 id="local-research-links-title">Related city and category research</h2>

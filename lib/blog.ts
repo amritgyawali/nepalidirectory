@@ -14,6 +14,27 @@ export type BlogFaq = {
   answer: string;
 };
 
+/** One business on a list post, rendered as a table row and as an ItemList entry in JSON-LD. */
+export type BlogListItem = {
+  name: string;
+  description: string;
+  /** Neighbourhood or base as published. */
+  area: string;
+  city: string;
+  /** The business's own website or social profile; directory listings are not the business's URL. */
+  url?: string;
+  telephone?: string;
+  email?: string;
+  streetAddress?: string;
+  /** Marks the disclosed paid placement so it can be labelled wherever it renders. */
+  isFeaturedPartner?: boolean;
+};
+
+export type BlogItemList = {
+  name: string;
+  items: BlogListItem[];
+};
+
 export type BlogPost = {
   title: string;
   seoTitle: string;
@@ -38,6 +59,10 @@ export type BlogPost = {
   categorySlugs?: string[];
   sources?: Array<{ label: string; url: string }>;
   disclaimer?: string;
+  /** Answer-first summary for the quick-answer block and `abstract`; defaults to the first FAQ answer. */
+  quickAnswer?: string;
+  /** Present on list posts: drives the at-a-glance table and ItemList structured data. */
+  itemList?: BlogItemList;
 };
 
 export const siteUrl = "https://www.nepalidirectory.com";

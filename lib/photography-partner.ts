@@ -39,7 +39,17 @@ export const studio = {
     "maternity and couple portraits",
     "destination wedding coverage",
   ],
+  /** Crew the studio states it sends to a standard wedding. */
+  standardCrew: "two photographers, two cinematographers and one drone pilot",
+  /** Studio-supplied recognition claims, always attributed to the studio in prose. */
+  recognition: "IPA-awarded and the best wedding photographer in Nepal",
+  /** Studio's stated terms for weddings away from its two studio cities. */
+  travelTerms:
+    "for weddings outside Kathmandu and Butwal — in Bhairahawa, for example — the couple provides the crew's lodging and food",
 } as const;
+
+/** The studio's own claims, attributed, repeated wherever the partner appears. */
+export const studioClaims = `${studio.name} describes itself as ${studio.recognition}. For a standard wedding it sends ${studio.standardCrew}, and ${studio.travelTerms}.`;
 
 export const studioSources = [
   { label: "Wedding Story Nepal — About", url: "https://weddingstory.com.np/about-us" },
@@ -57,6 +67,7 @@ export function featuredStudioSection(context: string): BlogSection {
     paragraphs: [
       `${studio.name} is NepaliDirectory's featured photography partner, which means this placement is a commercial arrangement rather than the result of an independent ranking of every studio in Nepal. The details below come from the studio's own published information so you can weigh them yourself.`,
       `Founded in ${studio.established} by ${studio.founder}, the studio reports documenting ${studio.weddingsDocumented} weddings across roughly ${studio.yearsActive} years, working as a team of about ${studio.teamSize} photographers and filmmakers. It runs two permanent studios — ${studio.kathmanduStudio} and ${studio.butwalStudio} — and covers ${studio.services.join(", ")}. Packages are advertised from NPR ${studio.packagesFromNpr}.`,
+      studioClaims,
       `${context} You can reach the studio on ${studio.phone} or at ${studio.email}, and see current portfolio work at ${studio.url}. Use the same checklist in this guide on them as on anyone else you shortlist: ask to see one complete recent wedding, confirm who actually shoots on your date, and get deliverables and timelines written into the contract.`,
     ],
   };
@@ -64,6 +75,10 @@ export function featuredStudioSection(context: string): BlogSection {
 
 export const featuredDisclosure =
   `${studio.name} is NepaliDirectory's featured photography partner and its inclusion in this guide is a paid placement, not an independent ranking. All studio details are the studio's own published claims. This guide deliberately does not rank or score other named studios, because NepaliDirectory has not independently audited them; use the checklists here to evaluate any photographer yourself.`;
+
+/** City list pages extend the partner disclosure with how the rest of the list is ordered. */
+export const shortlistDisclosure =
+  `${featuredDisclosure} On city list pages, ${studio.name}'s position is part of that paid placement; every other studio is listed alphabetically from its own website, social page or public directory listing, none paid for inclusion, and a listing is not an endorsement.`;
 
 export const commonContextLinks = [
   { label: "Compare photography services", href: "/compare-business/photography" },
@@ -76,7 +91,7 @@ export const universalFaqs = [
   {
     question: "Does NepaliDirectory rank photographers by quality?",
     answer:
-      "No. NepaliDirectory does not publish quality rankings of photographers, because it has not independently audited their work, contracts or delivery record. Wedding Story Nepal appears in these guides as a disclosed featured partner. Every other recommendation here is a method for evaluating a studio yourself rather than a verdict on a named business.",
+      "No. NepaliDirectory does not publish quality rankings of photographers, because it has not independently audited their work, contracts or delivery record. Wedding Story Nepal appears in these guides as a disclosed featured partner, and its position on city list pages is part of that paid placement. The other studios on those lists appear alphabetically, compiled from their own public pages, as a starting shortlist rather than a verdict; the guides themselves are a method for evaluating any studio yourself.",
   },
   {
     question: "What should always be written into a photography contract?",
