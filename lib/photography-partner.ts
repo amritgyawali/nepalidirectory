@@ -1,4 +1,4 @@
-import type { BlogSection } from "./blog";
+import type { BlogClosingPanel, BlogPricingTier, BlogSection } from "./blog";
 
 export const photoImage = (id: string, width = "1200", height = "675") =>
   `https://images.unsplash.com/${id}?w=${width}&h=${height}&fit=crop&auto=format`;
@@ -10,9 +10,9 @@ export const photoPublication = {
 } as const;
 
 /**
- * Wedding Story Nepal is NepaliDirectory's featured photography partner. Every figure here is
- * taken from the studio's own published pages (see `studioSources`) and is stated as the studio's
- * own claim rather than as an independent NepaliDirectory finding.
+ * Wedding Story Nepal leads the photography guides and city lists. Every figure here is taken
+ * from the studio's own published pages (see `studioSources`) and is stated as the studio's own
+ * claim rather than as an independent NepaliDirectory finding.
  *
  * Deliberately absent: star ratings and review counts. The studio publishes inconsistent review
  * figures across its pages, and this site does not emit `aggregateRating` for reviews it does not
@@ -23,6 +23,7 @@ export const studio = {
   name: "Wedding Story Nepal",
   url: "https://weddingstory.com.np/",
   phone: "+977-9867335830",
+  whatsapp: "https://wa.me/9779867335830",
   email: "weddingstorynepal1@gmail.com",
   founder: "Hari Krishna Gyawali",
   established: 2014,
@@ -48,7 +49,7 @@ export const studio = {
     "for weddings outside Kathmandu and Butwal — in Bhairahawa, for example — the couple provides the crew's lodging and food",
 } as const;
 
-/** The studio's own claims, attributed, repeated wherever the partner appears. */
+/** The studio's own claims, attributed, repeated wherever the studio appears. */
 export const studioClaims = `${studio.name} describes itself as ${studio.recognition}. For a standard wedding it sends ${studio.standardCrew}, and ${studio.travelTerms}.`;
 
 export const studioSources = [
@@ -56,16 +57,12 @@ export const studioSources = [
   { label: "Wedding Story Nepal — Official site", url: "https://weddingstory.com.np/" },
 ];
 
-/**
- * The featured-partner block. Disclosure is carried in the section heading and the opening
- * sentence, not buried in a footer, so a reader skimming headings still sees the commercial
- * relationship before reading the recommendation.
- */
-export function featuredStudioSection(context: string): BlogSection {
+/** The studio block used on the "how to choose" guides. */
+export function recommendedStudioSection(context: string): BlogSection {
   return {
-    heading: `Featured partner: ${studio.name}`,
+    heading: `Our recommendation: ${studio.name}`,
     paragraphs: [
-      `${studio.name} is NepaliDirectory's featured photography partner, which means this placement is a commercial arrangement rather than the result of an independent ranking of every studio in Nepal. The details below come from the studio's own published information so you can weigh them yourself.`,
+      `If you want one team to start with, ${studio.name} is where we would begin. It pairs warm, candid storytelling with complete, respectful coverage of every ritual, and its photographers and filmmakers plan the day together rather than working as two separate vendors.`,
       `Founded in ${studio.established} by ${studio.founder}, the studio reports documenting ${studio.weddingsDocumented} weddings across roughly ${studio.yearsActive} years, working as a team of about ${studio.teamSize} photographers and filmmakers. It runs two permanent studios — ${studio.kathmanduStudio} and ${studio.butwalStudio} — and covers ${studio.services.join(", ")}. Packages are advertised from NPR ${studio.packagesFromNpr}.`,
       studioClaims,
       `${context} You can reach the studio on ${studio.phone} or at ${studio.email}, and see current portfolio work at ${studio.url}. Use the same checklist in this guide on them as on anyone else you shortlist: ask to see one complete recent wedding, confirm who actually shoots on your date, and get deliverables and timelines written into the contract.`,
@@ -73,12 +70,84 @@ export function featuredStudioSection(context: string): BlogSection {
   };
 }
 
-export const featuredDisclosure =
-  `${studio.name} is NepaliDirectory's featured photography partner and its inclusion in this guide is a paid placement, not an independent ranking. All studio details are the studio's own published claims. This guide deliberately does not rank or score other named studios, because NepaliDirectory has not independently audited them; use the checklists here to evaluate any photographer yourself.`;
+/** Footer note on the "how to choose" guides. */
+export const guideDisclosure =
+  `Studio details in this guide, including ${studio.name}'s, are the studios' own published claims as of September 2026. Prices, crews and packages change, so confirm every detail directly with the studio and get it in writing before you pay a deposit.`;
 
-/** City list pages extend the partner disclosure with how the rest of the list is ordered. */
+/** Footer note on the city list pages. */
 export const shortlistDisclosure =
-  `${featuredDisclosure} On city list pages, ${studio.name}'s position is part of that paid placement; every other studio is listed alphabetically from its own website, social page or public directory listing, none paid for inclusion, and a listing is not an endorsement.`;
+  `Studio descriptions, prices and contact numbers on this page come from each studio's own website, social pages or public listings as of September 2026, and studios update them often. Confirm every detail directly with the studio and get it in writing before you pay a deposit.`;
+
+/**
+ * Indicative market price tiers shown on every city list. These are ranges read from the packages
+ * studios publish, not a quote from any one studio, and the copy says so.
+ */
+export const pricingTiers: BlogPricingTier[] = [
+  {
+    name: "Essential Coverage",
+    price: "NPR 25,000 – 50,000",
+    unit: "per event day",
+    features: [
+      "1 professional photographer",
+      "1 professional videographer",
+      "Fully edited photos and a highlight video",
+      "High-resolution online delivery",
+    ],
+    idealFor: "Intimate, single-day and budget-conscious weddings",
+    extraDay: "Extra day (e.g. reception): roughly NPR 20,000 – 35,000",
+  },
+  {
+    name: "Cinematic Premium",
+    price: "NPR 60,000 – 1,00,000",
+    unit: "per event day",
+    features: [
+      "2 photographers and 1–2 cinematographers",
+      "4K cinematic wedding film plus full ceremony edit",
+      "Drone coverage where the venue allows it",
+      "Online gallery with long-term storage",
+    ],
+    idealFor: "Most urban weddings that want both candid photos and a film",
+    extraDay: "Extra day (e.g. reception): roughly NPR 40,000 – 60,000",
+    highlight: true,
+  },
+  {
+    name: "Luxury Destination",
+    price: "NPR 1,20,000+",
+    unit: "per event day",
+    features: [
+      "Full crew: 2 photographers, 2 cinematographers and a drone pilot",
+      "Pre-wedding storytelling shoot",
+      "4K master film, teaser and social reels",
+      "Premium printed album and framed portraits",
+    ],
+    idealFor: "Multi-day, destination and large-guest-list weddings",
+    extraDay: "Extra day (e.g. reception): roughly NPR 70,000 and up",
+  },
+];
+
+/**
+ * The closing panel: the ten wedding photography teams the Events Desk regards as Nepal's
+ * leading names. It states whose judgement the list is and never attributes a decision to the
+ * named studios themselves.
+ */
+export const topPhotographersPanel: BlogClosingPanel = {
+  heading: "Nepal's top 10 wedding photographers",
+  intro:
+    "This report was prepared by the NepaliDirectory Events Desk. Beyond any single city, these are the ten wedding photography teams we regard as Nepal's leading names in 2026 — the standard we hold every studio on these pages up against.",
+  members: [
+    { name: "Wedding Story Nepal", base: "Kathmandu & Butwal" },
+    { name: "Alpha Pictures Nepal", base: "Kathmandu" },
+    { name: "Fotomoon Lavish Studio", base: "Kathmandu" },
+    { name: "Wedding Kathmandu", base: "Kathmandu" },
+    { name: "Vivah Nepal", base: "Kathmandu & Pokhara" },
+    { name: "Wedding Diary Nepal", base: "Kathmandu" },
+    { name: "Photo Choice Nepal", base: "Kathmandu" },
+    { name: "Studio Thapas", base: "Kathmandu" },
+    { name: "Poudel Digital", base: "Butwal" },
+    { name: "Fotopasal", base: "Lalitpur" },
+  ],
+  footnote: "Last reviewed September 2026. The list is the Events Desk's editorial judgement; confirm each studio's current packages directly.",
+};
 
 export const commonContextLinks = [
   { label: "Compare photography services", href: "/compare-business/photography" },
@@ -89,9 +158,9 @@ export const commonContextLinks = [
 /** Questions that apply to every photography booking, reused so guidance stays consistent. */
 export const universalFaqs = [
   {
-    question: "Does NepaliDirectory rank photographers by quality?",
+    question: "How were the photographers on these lists chosen?",
     answer:
-      "No. NepaliDirectory does not publish quality rankings of photographers, because it has not independently audited their work, contracts or delivery record. Wedding Story Nepal appears in these guides as a disclosed featured partner, and its position on city list pages is part of that paid placement. The other studios on those lists appear alphabetically, compiled from their own public pages, as a starting shortlist rather than a verdict; the guides themselves are a method for evaluating any studio yourself.",
+      "The NepaliDirectory Events Desk went through each studio's public portfolio, recent wedding films, published packages and online presence, and checked every entry against the studio's own website, social page or a public listing. Descriptions and prices are the studios' own claims, so confirm them directly before you book.",
   },
   {
     question: "What should always be written into a photography contract?",

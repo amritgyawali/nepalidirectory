@@ -1,12 +1,13 @@
 import type { BlogPost } from "./blog";
 import {
   commonContextLinks,
-  featuredDisclosure,
-  featuredStudioSection,
+  guideDisclosure,
+  recommendedStudioSection,
   photoImage as image,
   photoPublication as publication,
   studio,
   studioSources,
+  topPhotographersPanel,
   universalFaqs,
 } from "./photography-partner";
 import { photographyCityGuidePosts } from "./photography-city-guides";
@@ -68,7 +69,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
           "Then ask about failure modes, because these are what ruin weddings: what happens if the lead shooter is ill, whether they shoot to dual memory cards, how footage is backed up before leaving the venue, how long files are retained, and what the postponement terms are. A studio that answers these crisply has been doing this long enough to have been tested.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         "For a wedding anywhere in Nepal, the studio's two permanent bases mean travel to most major venues is straightforward, and the in-house film team means photography and cinematography are coordinated rather than subcontracted to a second vendor.",
       ),
     ],
@@ -93,7 +94,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "pokhara", "lalitpur", "chitwan"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -147,7 +148,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
           "Then plan the unglamorous logistics: travel time in the dark to reach sunrise light, where outfits will be changed, who carries them, whether a hair and makeup artist travels with you, and what happens if the road or weather fails. These details, not the camera, are what make a session run smoothly.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         "For pre-wedding work specifically, the studio lists shoots across Nagarkot, Pokhara, Lumbini and Kathmandu heritage sites, so it is worth asking them directly which locations they have shot most recently and what the current access and fee position is at each.",
       ),
     ],
@@ -172,7 +173,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "pokhara", "bhaktapur"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -226,7 +227,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
           "Ask for a receipt or invoice for every payment, and keep the written brief attached to the contract so that what was promised and what was delivered can be compared objectively if there is ever a dispute.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         `The studio advertises packages from NPR ${studio.packagesFromNpr}, which as with any studio describes an entry-level tier rather than full multi-day coverage; ask for a written quote against your actual event brief.`,
       ),
     ],
@@ -251,7 +252,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "pokhara"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -305,7 +306,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
           "Then settle the practical terms: how many final edited images, in what resolution and format, by when, and who may use them where. Usage rights matter especially for commercial work, where the difference between personal use and unlimited advertising use is a real commercial distinction that should be priced and written down.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         `Alongside weddings, the studio lists ${studio.services.join(", ")}, so it is a reasonable first call for couple, engagement and maternity work as well as wedding coverage; for specialist product or catalogue photography, ask specifically to see commercial work.`,
       ),
     ],
@@ -330,7 +331,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "pokhara", "lalitpur"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -384,7 +385,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
           "Mountain and remote weddings add travel, altitude, power and equipment-redundancy problems that a studio must have solved before, not on the day. Wherever your venue is, ask what the team's plan is for charging, backing up and protecting equipment there.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         "The studio lists traditional Hindu and Newar ceremonies among its specialisms and covers Kathmandu, Pokhara, Butwal, Chitwan and Lumbini among other locations, alongside destination work; ask which specific tradition and region they have shot most recently.",
       ),
     ],
@@ -409,7 +410,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["kathmandu", "pokhara", "chitwan", "butwal"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
 
   // ------------------------------------------------------------------- Butwal
@@ -465,7 +466,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
           "Consider a larger regional studio when your requirement is genuinely bigger: multi-day coverage with simultaneous events needing several shooters, a properly produced cinematic film, or a destination element. The relevant question is not local versus outside, but whether the team can staff and equip your specific event.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         `The studio runs a permanent Butwal base at ${studio.butwalStudio}, which means local availability without the travel and accommodation costs that a Kathmandu-only studio would add to a Butwal booking.`,
       ),
     ],
@@ -490,7 +491,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["butwal"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -546,7 +547,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
         ],
       },
       cityListPointerSection("butwal"),
-      featuredStudioSection(
+      recommendedStudioSection(
         `With a permanent Butwal studio at ${studio.butwalStudio} and a team of around ${studio.teamSize} photographers and filmmakers, the studio can in principle staff multi-event Rupandehi weddings without importing a crew; confirm crew allocation for your specific date in writing.`,
       ),
     ],
@@ -571,7 +572,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["butwal"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -625,7 +626,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
           "Plan the logistics honestly. Where will you change, who carries outfits and water, is a hair and makeup artist travelling with you, and what is the plan if the weather turns. Sessions run smoothly or badly on these details, not on equipment.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         "With a Butwal base and Lumbini among its listed coverage areas, the studio is positioned for both close-in riverside and hill sessions and the longer Lumbini trip; ask what current access and fee arrangements apply at any site you are considering.",
       ),
     ],
@@ -650,7 +651,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["butwal"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -704,7 +705,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
           "For events, the practical questions are coverage hours, how many edited images you receive, and turnaround, since event photographs lose much of their value if they arrive weeks late. Agree the delivery date in writing along with everything else.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         `Alongside weddings the studio lists ${studio.services.join(", ")}, which covers the maternity, engagement and couple portrait end of everyday demand; for document photographs or product and catalogue work, a specialist local studio may be the more practical call.`,
       ),
     ],
@@ -729,7 +730,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["butwal"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -783,7 +784,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
           "Keep the written brief attached to the contract. If a dispute ever arises about what was promised, a written brief and a signed contract turn an argument about memory into a straightforward comparison.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         `The studio advertises packages from NPR ${studio.packagesFromNpr} and, because it maintains a Butwal studio, a Butwal wedding avoids the crew travel and accommodation a Kathmandu-only studio would add; ask for an itemised written quote against your event schedule.`,
       ),
     ],
@@ -808,7 +809,7 @@ const corePhotographyGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["butwal"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
 ];
 
@@ -821,4 +822,4 @@ export const photographyGuidePosts: BlogPost[] = [
   ...photographyCityGuidePosts,
   ...photographyCityListPosts,
   ...photographyServiceGuidePosts,
-];
+].map((post) => ({ ...post, closingPanel: post.closingPanel ?? topPhotographersPanel }));

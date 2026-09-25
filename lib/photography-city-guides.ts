@@ -2,8 +2,8 @@ import type { BlogPost } from "./blog";
 import { cityListPointerSection } from "./photography-city-shortlists";
 import {
   commonContextLinks,
-  featuredDisclosure,
-  featuredStudioSection,
+  guideDisclosure,
+  recommendedStudioSection,
   photoImage as image,
   photoPublication as publication,
   studio,
@@ -82,7 +82,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
         "kathmandu",
         "Separate lists cover studios based in [Lalitpur](/blog/best-wedding-photographers-in-lalitpur) and [Bhaktapur](/blog/best-wedding-photographers-in-bhaktapur), since many valley weddings draw on all three.",
       ),
-      featuredStudioSection(
+      recommendedStudioSection(
         `The studio's Kathmandu base at ${studio.kathmanduStudio} puts it inside the valley for setup and transfers, and it lists heritage venues and Newar ceremonies among its stated specialisms; ask which valley venues it has covered most recently.`,
       ),
     ],
@@ -111,7 +111,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
     ],
     citySlugs: ["kathmandu", "lalitpur", "bhaktapur"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -171,7 +171,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
         "pokhara",
         "Booking a studio already based in Pokhara removes the travel and accommodation line from the quote entirely, which is worth weighing against any studio you would bring in.",
       ),
-      featuredStudioSection(
+      recommendedStudioSection(
         "Pokhara is among the studio's listed coverage areas and it offers destination packages; if you book from outside Pokhara, confirm in writing how many crew travel, whether accommodation is included and whether they arrive the day before to scout.",
       ),
     ],
@@ -199,7 +199,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
     ],
     citySlugs: ["pokhara"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -253,7 +253,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
           "Tell the photographer which single location matters most to you. If the morning is lost to cloud or the day runs short, that ranking lets them protect your priority instead of guessing. Bring reference images for each set rather than describing a mood in adjectives.",
         ],
       },
-      featuredStudioSection(
+      recommendedStudioSection(
         "Pokhara is among the studio's listed pre-wedding locations; ask which of Sarangkot, Phewa lakeside, Begnas and the Peace Pagoda it has shot most recently, and what itinerary it recommends for the season you are planning.",
       ),
     ],
@@ -278,7 +278,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["pokhara"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...publication,
@@ -338,7 +338,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
         "chitwan",
         "Most are based in Bharatpur or Narayangarh, so for a Sauraha resort wedding ask each how it prices the drive and whether the crew stays overnight.",
       ),
-      featuredStudioSection(
+      recommendedStudioSection(
         "Chitwan is among the studio's listed coverage areas, and its Butwal base is considerably closer to Bharatpur than Kathmandu is, which reduces crew travel cost; confirm travel terms and whether the team has shot the specific venue type you are planning.",
       ),
     ],
@@ -363,7 +363,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["chitwan", "bharatpur"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...newCityGuidePublication,
@@ -418,7 +418,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
         ],
       },
       cityListPointerSection("lalitpur"),
-      featuredStudioSection(
+      recommendedStudioSection(
         `The studio's Kathmandu base at ${studio.kathmanduStudio} is a short drive from Patan, so Lalitpur coverage does not normally add overnight travel; ask for one complete gallery from a Lalitpur courtyard or banquet wedding before you compare it with the studios on our [Lalitpur list](/blog/best-wedding-photographers-in-lalitpur).`,
       ),
     ],
@@ -441,7 +441,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
     ],
     citySlugs: ["lalitpur"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...newCityGuidePublication,
@@ -496,7 +496,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
         ],
       },
       cityListPointerSection("bhaktapur"),
-      featuredStudioSection(
+      recommendedStudioSection(
         `The studio's Kathmandu base at ${studio.kathmanduStudio} is inside the valley, so Bhaktapur coverage does not normally involve overnight travel; ask for a complete gallery from a Bhaktapur heritage or Thimi banquet wedding before comparing it with the studios on our [Bhaktapur list](/blog/best-wedding-photographers-in-bhaktapur).`,
       ),
     ],
@@ -519,7 +519,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
     ],
     citySlugs: ["bhaktapur"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...newCityGuidePublication,
@@ -577,7 +577,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
         "biratnagar",
         "Several also cover Itahari, Dharan and Jhapa, which helps if your events span more than one town.",
       ),
-      featuredStudioSection(
+      recommendedStudioSection(
         "The studio is based in Kathmandu and Butwal, so a Biratnagar wedding is destination work for it: expect crew travel and accommodation to be quoted on top, and compare that total with the studios on our [Biratnagar list](/blog/best-wedding-photographers-in-biratnagar) before deciding.",
       ),
     ],
@@ -600,7 +600,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
     ],
     citySlugs: ["biratnagar"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...newCityGuidePublication,
@@ -655,7 +655,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
         ],
       },
       cityListPointerSection("dharan"),
-      featuredStudioSection(
+      recommendedStudioSection(
         "The studio is based in Kathmandu and Butwal, so Dharan is destination work for it: expect crew travel and accommodation to be quoted on top, and ask whether it has covered a Rai or Limbu wedding before you compare it with the studios on our [Dharan list](/blog/best-wedding-photographers-in-dharan).",
       ),
     ],
@@ -678,7 +678,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
     ],
     citySlugs: ["dharan"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...newCityGuidePublication,
@@ -733,7 +733,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
         ],
       },
       cityListPointerSection("birgunj"),
-      featuredStudioSection(
+      recommendedStudioSection(
         "Birgunj is outside both of the studio's home cities, so treat it as destination work: expect crew travel and accommodation to be quoted on top, and ask whether it has covered an overnight Madhesi wedding before you compare it with the studios on our [Birgunj list](/blog/best-wedding-photographers-in-birgunj).",
       ),
     ],
@@ -753,7 +753,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["birgunj"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
   {
     ...newCityGuidePublication,
@@ -811,7 +811,7 @@ export const photographyCityGuidePosts: BlogPost[] = [
         "nepalgunj",
         "Several also travel to Bardiya, Dang and Surkhet, which is worth asking about if your families are spread across the region.",
       ),
-      featuredStudioSection(
+      recommendedStudioSection(
         `Its Butwal studio at ${studio.butwalStudio} is the nearer of its two bases, but Nepalgunj is still destination work: expect crew travel and accommodation to be quoted on top, and compare that total with the studios on our [Nepalgunj list](/blog/best-wedding-photographers-in-nepalgunj).`,
       ),
     ],
@@ -831,6 +831,6 @@ export const photographyCityGuidePosts: BlogPost[] = [
     contextLinks: commonContextLinks,
     citySlugs: ["nepalgunj"],
     sources: studioSources,
-    disclaimer: featuredDisclosure,
+    disclaimer: guideDisclosure,
   },
 ];

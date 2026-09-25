@@ -839,7 +839,7 @@
   }
 
   .article-page {
-    padding-block: 28px;
+    padding-block: 0 28px;
   }
 
   .article-page > .container > p {

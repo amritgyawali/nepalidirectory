@@ -7,6 +7,56 @@ import { photographyGuidePosts } from "@/lib/photography-guides";
 export type BlogSection = {
   heading: string;
   paragraphs: string[];
+  /** Present on numbered list entries: rendered as a studio card with its contact row. */
+  entry?: BlogListEntry;
+};
+
+/** A numbered entry on a list post. The section heading keeps the "N. Name" form for search. */
+export type BlogListEntry = {
+  rank: number;
+  name: string;
+  area: string;
+  phone?: string;
+  /** The entry's public page, shown when no phone number is published. */
+  url?: string;
+};
+
+export type BlogPricingTier = {
+  name: string;
+  price: string;
+  unit: string;
+  features: string[];
+  idealFor: string;
+  extraDay: string;
+  highlight?: boolean;
+};
+
+/** A price-guide block rendered as tier cards inside the article body. */
+export type BlogPricingGuide = {
+  heading: string;
+  intro: string;
+  tiers: BlogPricingTier[];
+  note: string;
+  cta?: { label: string; href: string };
+  /** Index of the section the block follows. */
+  afterSection: number;
+};
+
+/** A highlighted planning card inside the article body. */
+export type BlogCallout = {
+  eyebrow: string;
+  heading: string;
+  text: string;
+  links: Array<{ label: string; href: string }>;
+  afterSection: number;
+};
+
+/** Closing panel naming the photographers the report is set against. */
+export type BlogClosingPanel = {
+  heading: string;
+  intro: string;
+  members: Array<{ name: string; base: string }>;
+  footnote: string;
 };
 
 export type BlogFaq = {
@@ -26,8 +76,6 @@ export type BlogListItem = {
   telephone?: string;
   email?: string;
   streetAddress?: string;
-  /** Marks the disclosed paid placement so it can be labelled wherever it renders. */
-  isFeaturedPartner?: boolean;
 };
 
 export type BlogItemList = {
@@ -63,6 +111,11 @@ export type BlogPost = {
   quickAnswer?: string;
   /** Present on list posts: drives the at-a-glance table and ItemList structured data. */
   itemList?: BlogItemList;
+  /** One-line standfirst shown under the title. */
+  subtitle?: string;
+  pricingGuide?: BlogPricingGuide;
+  callout?: BlogCallout;
+  closingPanel?: BlogClosingPanel;
 };
 
 export const siteUrl = "https://www.nepalidirectory.com";
