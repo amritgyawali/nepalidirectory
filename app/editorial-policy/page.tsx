@@ -1,27 +1,19 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/directory/PageHero";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
 import { buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
+import { buildPublicPageMetadata } from "@/lib/site-metadata";
 
-export const metadata: Metadata = {
+const description =
+  "How Nepali Directory creates, reviews and updates local guides, comparison pages, business information and user decision content.";
+
+export const metadata = buildPublicPageMetadata({
   title: "Editorial Policy and Content Review Standards",
-  description:
-    "How Nepali Directory creates, reviews and updates local guides, comparison pages, business information and user decision content.",
-  alternates: {
-    canonical: routes.editorialPolicy
-  },
-  openGraph: {
-    title: "Nepali Directory Editorial Policy",
-    description:
-      "Content review standards for Nepali Directory local guides, comparisons and directory pages.",
-    url: `${siteUrl}${routes.editorialPolicy}`,
-    siteName: "NepaliDirectory",
-    type: "website"
-  }
-};
+  description,
+  path: routes.editorialPolicy,
+});
 
 const standards = [
   {
@@ -53,35 +45,32 @@ export default function EditorialPolicyPage() {
     "local guide content policy",
     "business comparison methodology"
   ]);
-  const webPageJsonLd = buildWebPageJsonLd({
-    name: "Nepali Directory Editorial Policy",
-    description:
-      "How Nepali Directory creates, reviews and updates local guides, comparison pages, business information and user decision content.",
-    url: `${siteUrl}${routes.editorialPolicy}`,
-    keywords,
-      dateModified: "2026-07-15"
-  });
+  // One AboutPage node for the URL, linked to the site graph and its breadcrumb trail.
   const aboutJsonLd = {
-    "@context": "https://schema.org",
+    ...buildWebPageJsonLd({
+      name: "Editorial Policy and Content Review Standards",
+      description,
+      url: `${siteUrl}${routes.editorialPolicy}`,
+      breadcrumb: true,
+      keywords,
+      dateModified: "2026-07-15",
+    }),
     "@type": "AboutPage",
-    name: "Editorial Policy and Content Review Standards",
-    url: `${siteUrl}${routes.editorialPolicy}`,
-    description: metadata.description,
-    publisher,
+    about: { "@id": publisher["@id"] },
     mainEntity: standards.map((standard) => ({
       "@type": "Thing",
       name: standard.title,
-      description: standard.body
-    }))
+      description: standard.body,
+    })),
   };
 
   return (
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd([webPageJsonLd, aboutJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(aboutJsonLd) }}
       />
-      <Breadcrumbs items={[{ label: "Editorial Policy" }]} />
+      <Breadcrumbs items={[{ label: "Editorial Policy" }]} currentPath={routes.editorialPolicy} />
       <PageHero
         title="Editorial policy and review standards"
         subtitle="How Nepali Directory keeps local guides, comparison pages and business decision content useful, transparent and reviewable."

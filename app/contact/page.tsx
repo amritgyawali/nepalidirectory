@@ -23,8 +23,23 @@ export default function ContactPage() {
         "claim Nepal business profile",
       ]),
       dateModified: "2026-07-15",
+      breadcrumb: true,
     }),
     "@type": "ContactPage",
+    mainEntity: {
+      "@id": `${siteUrl}/#organization`,
+      ...(supportEmail
+        ? {
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "customer support",
+              email: supportEmail,
+              areaServed: "NP",
+              availableLanguage: ["en", "ne"],
+            },
+          }
+        : {}),
+    },
   };
 
   return (
@@ -33,7 +48,7 @@ export default function ContactPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
-      <Breadcrumbs items={[{ label: "Contact" }]} />
+      <Breadcrumbs items={[{ label: "Contact" }]} currentPath={routes.contact} />
       <PageHero
         title="Contact Nepali Directory"
         subtitle="Listing corrections, ownership claims, partnerships and directory support."

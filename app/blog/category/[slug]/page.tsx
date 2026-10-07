@@ -81,6 +81,7 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
       name: title,
       description,
       url: `${siteUrl}${category.href}`,
+      breadcrumb: true,
       keywords,
       dateModified: category.posts[0].modifiedAt
     }),
@@ -94,7 +95,7 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd([collectionJsonLd, itemListJsonLd]) }}
       />
-      <Breadcrumbs items={[{ label: "Blog", href: routes.blog }, { label: category.name }]} />
+      <Breadcrumbs items={[{ label: "Blog", href: routes.blog }, { label: category.name }]} currentPath={category.href} />
       <PageHero title={title} subtitle={description} cta={{ label: "All guides", href: routes.blog }} />
       <section className="section">
         <div className="container blog-grid">

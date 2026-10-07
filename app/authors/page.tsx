@@ -36,6 +36,7 @@ export default function AuthorsPage() {
       description:
         "Editorial desks and subject areas behind Nepali Directory guides and local comparison content.",
       url: `${siteUrl}/authors`,
+      breadcrumb: true,
       keywords,
     }),
     "@type": "CollectionPage",
@@ -53,7 +54,7 @@ export default function AuthorsPage() {
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(webPageJsonLd) }} />
-      <Breadcrumbs items={[{ label: "Authors" }]} />
+      <Breadcrumbs items={[{ label: "Authors" }]} currentPath="/authors" />
       <PageHero
         title="Editorial authors and review desks"
         subtitle="Subject-focused desks maintain Nepali Directory guides with practical local context, freshness checks and clear review notes."

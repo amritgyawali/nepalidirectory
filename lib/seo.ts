@@ -1,5 +1,6 @@
 import type { BlogPost } from "@/lib/blog";
 import type { CompareCategory } from "@/lib/compare";
+import { buildSpeakable, defaultSocialImage, defaultSpeakableSelectors, websiteId } from "@/lib/structured-data";
 
 export const publisher = {
   "@type": "Organization",
@@ -205,33 +206,59 @@ export function getCompareQuickAnswer(category: CompareCategory) {
   return `Compare ${category.businesses.length} reviewed ${category.category.toLowerCase()} profiles using ${category.criteria.join(", ").toLowerCase()}. Treat each profile as a shortlist entry and confirm current details directly.`;
 }
 
+/**
+ * WebPage node shared by every public template. It is `@id`-anchored (`<url>#webpage`) and points
+ * at the site-wide `#website`/`#organization` nodes from the root layout, so per-page JSON-LD joins
+ * one entity graph. Callers may spread the result and override `@type` (CollectionPage, AboutPage,
+ * ContactPage, ...).
+ */
 export function buildWebPageJsonLd({
   name,
   description,
   url,
   keywords,
-  dateModified
+  dateModified,
+  datePublished,
+  breadcrumb = false,
+  speakable = defaultSpeakableSelectors,
+  image = defaultSocialImage,
+  about,
 }: {
   name: string;
   description: string;
   url: string;
   keywords: string[];
   dateModified?: string;
+  datePublished?: string;
+  /** Set when the page renders a breadcrumb trail, so the WebPage references its BreadcrumbList. */
+  breadcrumb?: boolean;
+  /** Regions suited to voice/assistant answers; pass `null` to omit. */
+  speakable?: readonly string[] | null;
+  image?: string;
+  about?: Record<string, unknown> | Array<Record<string, unknown>>;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
+    "@id": `${url}#webpage`,
     name,
     description,
     url,
     inLanguage: "en",
     isPartOf: {
       "@type": "WebSite",
+      "@id": websiteId,
       name: "NepaliDirectory",
       url: publisher.url
     },
     publisher,
+    primaryImageOfPage: { "@type": "ImageObject", url: image },
+    ...(breadcrumb ? { breadcrumb: { "@id": `${url}#breadcrumb` } } : {}),
+    ...(speakable ? { speakable: buildSpeakable(speakable) } : {}),
+    ...(about ? { about } : {}),
     keywords: keywords.join(", "),
-    dateModified
+    ...(datePublished ? { datePublished } : {}),
+    dateModified,
+    potentialAction: { "@type": "ReadAction", target: [url] }
   };
 }

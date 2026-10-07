@@ -9,6 +9,7 @@ import {
   useDashboardData,
   type NewDashboardListing
 } from "@/components/dashboard/DashboardProvider";
+import { claimListingFaqs, claimListingSteps, claimListingSummary } from "@/lib/claim-listing-content";
 import { routes } from "@/lib/routes";
 import { createClient } from "@/utils/supabase/client";
 
@@ -238,6 +239,30 @@ function ClaimListingForm() {
               <h2>Complete ownership review</h2>
               <p>Ownership and provenance checks protect customers and prevent sample, duplicate or unapproved records from ranking.</p>
             </article>
+          </div>
+        </section>
+        <section className="section">
+          <div className="container fact-panel">
+            <h2>How to add your business to Nepali Directory</h2>
+            <p>{claimListingSummary}</p>
+            <ol>
+              {claimListingSteps.map((step, index) => (
+                <li id={`step-${index + 1}`} key={step.name}>
+                  <strong>{step.name}.</strong> {step.text}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+        <section className="section section--soft">
+          <div className="container article-faq">
+            <h2>Business listing questions</h2>
+            {claimListingFaqs.map((faq) => (
+              <details key={faq.question}>
+                <summary>{faq.question}</summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
           </div>
         </section>
       </main>

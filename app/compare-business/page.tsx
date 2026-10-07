@@ -88,6 +88,7 @@ export default function CompareBusinessPage() {
       description:
         "Use consistent decision criteria across Nepal business categories. Named providers appear only after publication review.",
       url: `${siteUrl}${routes.compareBusiness}`,
+      breadcrumb: true,
       keywords: compareKeywords,
       dateModified: sortedCompareCategories[0].updatedAt
     }),
@@ -101,7 +102,7 @@ export default function CompareBusinessPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd([collectionJsonLd, itemListJsonLd]) }}
       />
-      <Breadcrumbs items={[{ label: "Compare Business" }]} />
+      <Breadcrumbs items={[{ label: "Compare Business" }]} currentPath={routes.compareBusiness} />
       <PageHero
         title="Use the same evidence when comparing businesses"
         subtitle="Open practical checklists for photography, hotels, restaurants, home services, healthcare, contractors and more. Named provider comparisons publish only after review."

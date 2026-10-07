@@ -65,6 +65,28 @@ describe("public listing publication gate", () => {
     expect(schema).not.toHaveProperty("priceRange");
   });
 
+  it("links the business entity to its page, website and map without asserting reputation", () => {
+    const url = "https://www.nepalidirectory.com/business/owner-verified-service";
+    const schema = buildListingLocalBusinessJsonLd(
+      eligibleListing({ website: "https://owner-verified.example.com/", services: ["Wiring", "Repairs"] }),
+      url,
+    );
+    expect(schema.mainEntityOfPage).toEqual({ "@id": `${url}#webpage` });
+    expect(schema.sameAs).toEqual(["https://owner-verified.example.com/"]);
+    expect(schema.hasMap).toContain("mlat=27.68");
+    expect(schema.hasOfferCatalog?.itemListElement).toHaveLength(2);
+    expect(schema.areaServed).toMatchObject({ "@type": "City" });
+    expect(schema).not.toHaveProperty("publisher");
+  });
+
+  it("ignores non-http website values in sameAs", () => {
+    const schema = buildListingLocalBusinessJsonLd(
+      eligibleListing({ website: "javascript:alert(1)" }),
+      "https://www.nepalidirectory.com/business/owner-verified-service",
+    );
+    expect(schema.sameAs).toBeUndefined();
+  });
+
   it.each([
     ["INACTIVE", { active: false }],
     ["REJECTED", { verificationStatus: "rejected" as const }],

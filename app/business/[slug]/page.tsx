@@ -34,6 +34,7 @@ import { selectRelatedListings } from "@/lib/related-listings";
 import { getBusinessHref, getCityCategoryHref, getSearchHref, routes } from "@/lib/routes";
 import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 import { buildBreadcrumbJsonLd, buildListingLocalBusinessJsonLd } from "@/lib/seo-auto";
+import { buildFaqPageJsonLd } from "@/lib/structured-data";
 
 type BusinessPageProps = {
   params: Promise<{ slug: string }>;
@@ -143,20 +144,27 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
     ? getCityCategoryHref(cityPage.slug, primaryCategory.slug)
     : (primaryCategory && categoryHubHref(primaryCategory.slug)) ?? routes.categories;
   const keywords = uniqueKeywords([listing.name, listing.area, listing.neighborhood ?? "", ...categories]);
-  const webPageJsonLd = buildWebPageJsonLd({
-    name: `${listing.name} in ${listing.area}`,
-    description,
-    url,
-    keywords,
-    dateModified: factsCheckedAt,
-  });
+  const webPageJsonLd = {
+    ...buildWebPageJsonLd({
+      name: `${listing.name} in ${listing.area}`,
+      description,
+      url,
+      keywords,
+      dateModified: factsCheckedAt,
+      breadcrumb: true,
+      image: publicListingImage(listing),
+    }),
+    // Only qualified profiles assert a business entity; previews stay plain WebPages.
+    ...(indexable ? { mainEntity: { "@id": `${url}#localbusiness` } } : {}),
+  };
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
     { name: "Home", url: siteUrl },
     { name: cityPage?.name ?? listing.area, url: `${siteUrl}${locationHref}` },
     { name: primaryCategory?.name ?? categories[0] ?? "Businesses", url: `${siteUrl}${primaryCategoryHref}` },
     { name: listing.name, url },
-  ]);
+  ], url);
   const localBusinessJsonLd = indexable ? buildListingLocalBusinessJsonLd(listing, url) : null;
+  const faqJsonLd = indexable ? buildFaqPageJsonLd(listing.faqs, url) : null;
   const safeWebsite = indexable ? listing.website : undefined;
   const safeEmail = indexable ? listing.email : undefined;
   const safePhone = indexable ? listing.phone : undefined;
@@ -168,10 +176,11 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: serializeJsonLd([webPageJsonLd, breadcrumbJsonLd, localBusinessJsonLd].filter(Boolean)),
+          __html: serializeJsonLd([webPageJsonLd, breadcrumbJsonLd, localBusinessJsonLd, faqJsonLd].filter(Boolean)),
         }}
       />
       <Breadcrumbs
+        schema={false}
         items={[
           { label: cityPage?.name ?? listing.area, href: locationHref },
           { label: primaryCategory?.name ?? categories[0] ?? "Businesses", href: primaryCategoryHref },

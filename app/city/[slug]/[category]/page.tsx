@@ -26,8 +26,9 @@ import {
   listingVerificationLabel,
 } from "@/lib/public-listings";
 import { getBusinessHref, getCityCategoryHref, routes } from "@/lib/routes";
-import { serializeJsonLd } from "@/lib/seo";
+import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 import { buildBreadcrumbJsonLd, buildListingItemListJsonLd } from "@/lib/seo-auto";
+import { buildFaqPageJsonLd, buildPlaceJsonLd } from "@/lib/structured-data";
 
 type CityCategoryPageProps = {
   params: Promise<{ slug: string; category: string }>;
@@ -119,7 +120,25 @@ export default async function CityCategoryPage({ params, searchParams }: CityCat
     { name: "Home", url: siteUrl },
     { name: city.name, url: `${siteUrl}${city.href}` },
     { name: category.name, url: canonicalUrl },
-  ]);
+  ], canonicalUrl);
+  const collectionPageJsonLd = {
+    ...buildWebPageJsonLd({
+      name: `${category.name} in ${city.name}`,
+      description: `Browse ${listings.length} reviewed ${category.name.toLowerCase()} profiles in ${city.name}, Nepal, listed alphabetically with published contact and location details.`,
+      url: canonicalUrl,
+      keywords: uniqueKeywords([
+        `${category.name} in ${city.name}`,
+        `${category.priorityKeyword} ${city.name}`,
+        `best ${category.name.toLowerCase()} ${city.name}`,
+        `${category.name.toLowerCase()} near me ${city.name}`,
+      ]),
+      breadcrumb: true,
+      image: city.image,
+      about: [buildPlaceJsonLd(city), { "@type": "Thing", name: category.priorityKeyword }],
+    }),
+    "@type": "CollectionPage",
+    mainEntity: { "@id": `${canonicalUrl}#itemlist` },
+  };
   const faqItems = [
     {
       question: `How are ${category.name.toLowerCase()} profiles selected for this ${city.name} page?`,
@@ -130,25 +149,17 @@ export default async function CityCategoryPage({ params, searchParams }: CityCat
       answer: "Yes. Confirm current hours, availability, prices, credentials and service coverage directly with the business before booking, travelling or paying.",
     },
   ];
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: { "@type": "Answer", text: faq.answer },
-    })),
-  };
+  const faqJsonLd = buildFaqPageJsonLd(faqItems, canonicalUrl);
 
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: serializeJsonLd([itemListJsonLd, breadcrumbJsonLd, faqJsonLd]),
+          __html: serializeJsonLd([collectionPageJsonLd, itemListJsonLd, breadcrumbJsonLd, faqJsonLd].filter(Boolean)),
         }}
       />
-      <Breadcrumbs items={[{ label: city.name, href: city.href }, { label: category.name }]} />
+      <Breadcrumbs schema={false} items={[{ label: city.name, href: city.href }, { label: category.name }]} />
 
       <section className="page-head">
         <div className="container">

@@ -9,14 +9,27 @@ import { robotsDisallowPaths } from "@/lib/seo-config";
  * from training-only scrapers (CCBot, anthropic-ai, cohere-ai) if that becomes a requirement.
  */
 const explicitlyAllowedBots = [
+  // Search engines
   "Googlebot",
   "Bingbot",
-  "GPTBot",
+  "Applebot",
+  "DuckDuckBot",
+  "YandexBot",
+  // AI search, citation and user-initiated fetchers
   "OAI-SearchBot",
   "ChatGPT-User",
-  "ClaudeBot",
+  "Claude-SearchBot",
+  "Claude-User",
   "PerplexityBot",
+  "Perplexity-User",
+  "DuckAssistBot",
+  "MistralAI-User",
+  "Amazonbot",
+  // AI model crawlers and opt-in tokens
+  "GPTBot",
+  "ClaudeBot",
   "Google-Extended",
+  "Applebot-Extended",
 ];
 
 export default function robots(): MetadataRoute.Robots {

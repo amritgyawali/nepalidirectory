@@ -26,7 +26,8 @@ import { cityDirectoryPages } from "@/lib/city-pages";
 import { getIndexableHubSlugsOrNone, isLiveHubHref } from "@/lib/indexable-hubs";
 import { getDirectoryCategory } from "@/lib/directory-categories";
 import { routes } from "@/lib/routes";
-import { relatedCompareHubsForPost } from "@/lib/seo-auto";
+import { buildBreadcrumbJsonLd, relatedCompareHubsForPost } from "@/lib/seo-auto";
+import { buildFaqPageJsonLd } from "@/lib/structured-data";
 import {
   buildBlogItemListJsonLd,
   buildBlogKeywords,
@@ -160,9 +161,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   ].filter((link) => isLiveHubHref(link.href, hubs))
     .map((link) => [link.href, link] as const)).values()];
 
+  const postUrl = getBlogPostUrl(post);
+  const authorUrl = getAuthorUrl(author);
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${postUrl}#article`,
     headline: post.title,
     alternativeHeadline: post.seoTitle,
     description: post.description,
@@ -174,17 +178,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     isAccessibleForFree: true,
     author: {
       "@type": "Organization",
+      "@id": `${authorUrl}#author`,
       name: author.name,
-      url: getAuthorUrl(author),
+      url: authorUrl,
       description: author.description,
       knowsAbout: author.knowsAbout,
       parentOrganization: publisher
     },
     publisher,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": getBlogPostUrl(post)
-    },
+    mainEntityOfPage: { "@id": `${postUrl}#webpage` },
+    isPartOf: { "@type": "Blog", "@id": `${siteUrl}/blog#blog`, name: "Nepali Directory Blog", url: `${siteUrl}/blog` },
     keywords: keywords.join(", "),
     articleSection: post.category,
     wordCount: estimateWordCount(post),
@@ -204,56 +207,34 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
   };
 
-  const itemListJsonLd = buildBlogItemListJsonLd(post, getBlogPostUrl(post));
+  const itemListJsonLd = buildBlogItemListJsonLd(post, postUrl);
   const webPageJsonLd = {
     ...buildWebPageJsonLd({
       name: post.seoTitle,
       description: post.description,
-      url: getBlogPostUrl(post),
+      url: postUrl,
       keywords,
-      dateModified: post.modifiedAt
+      datePublished: post.publishedAt,
+      dateModified: post.modifiedAt,
+      breadcrumb: true,
+      image: post.image,
+      speakable: null
     }),
-    // List posts are "about" their list, which lets answer engines lift the entries directly.
-    ...(itemListJsonLd ? { mainEntity: { "@id": itemListJsonLd["@id"] } } : {})
+    // List posts are "about" their list, which lets answer engines lift the entries directly;
+    // every other post's primary entity is the article itself.
+    mainEntity: { "@id": itemListJsonLd ? itemListJsonLd["@id"] : `${postUrl}#article` }
   };
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteUrl
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Blog",
-        item: `${siteUrl}/blog`
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: post.title,
-        item: getBlogPostUrl(post)
-      }
-    ]
-  };
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd(
+    [
+      { name: "Home", url: siteUrl },
+      { name: "Blog", url: `${siteUrl}/blog` },
+      { name: post.title, url: postUrl }
+    ],
+    postUrl
+  );
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: post.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer
-      }
-    }))
-  };
+  const faqJsonLd = buildFaqPageJsonLd(post.faqs, postUrl);
 
   return (
     <main>
@@ -264,12 +245,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             webPageJsonLd,
             articleJsonLd,
             breadcrumbJsonLd,
-            faqJsonLd,
+            ...(faqJsonLd ? [faqJsonLd] : []),
             ...(itemListJsonLd ? [itemListJsonLd] : [])
           ])
         }}
       />
-      <Breadcrumbs items={[{ label: "Blog", href: routes.blog }, { label: post.title }]} />
+      <Breadcrumbs schema={false} items={[{ label: "Blog", href: routes.blog }, { label: post.title }]} />
       <article className="article-page">
         <header className="article-hero">
           <div className="container">
