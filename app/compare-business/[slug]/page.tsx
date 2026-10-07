@@ -13,6 +13,8 @@ import { getGuidesForCategory } from "@/lib/content-clusters";
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
 import { buildCompareKeywords, buildWebPageJsonLd, getCompareQuickAnswer, publisher, serializeJsonLd } from "@/lib/seo";
+import { buildBreadcrumbJsonLd } from "@/lib/seo-auto";
+import { buildFaqPageJsonLd } from "@/lib/structured-data";
 
 type CompareCategoryPageProps = { params: Promise<{ slug: string }> };
 
@@ -83,9 +85,11 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
       answer: `Use the same evidence for every option: ${category.criteria.join(", ").toLowerCase()}. Confirm current prices, availability, credentials and terms directly before booking.`,
     },
   ];
+  const pageUrl = `${siteUrl}${category.href}`;
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `${pageUrl}#article`,
     headline: category.title,
     description: category.description,
     image: category.image,
@@ -93,43 +97,36 @@ export default async function CompareCategoryPage({ params }: CompareCategoryPag
     inLanguage: "en",
     author: publisher,
     publisher,
-    mainEntityOfPage: `${siteUrl}${category.href}`,
+    mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
     articleSection: category.category,
     keywords: keywords.join(", "),
   };
-  const webPageJsonLd = buildWebPageJsonLd({
-    name: category.seoTitle,
-    description: category.description,
-    url: `${siteUrl}${category.href}`,
-    keywords,
-    dateModified: category.updatedAt,
-  });
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
-      { "@type": "ListItem", position: 2, name: "Compare Business", item: `${siteUrl}${routes.compareBusiness}` },
-      { "@type": "ListItem", position: 3, name: category.category, item: `${siteUrl}${category.href}` },
-    ],
+  const webPageJsonLd = {
+    ...buildWebPageJsonLd({
+      name: category.seoTitle,
+      description: category.description,
+      url: pageUrl,
+      keywords,
+      dateModified: category.updatedAt,
+      breadcrumb: true,
+      image: category.image,
+    }),
+    mainEntity: { "@id": `${pageUrl}#article` },
   };
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: comparisonFaqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: { "@type": "Answer", text: faq.answer },
-    })),
-  };
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "Home", url: siteUrl },
+    { name: "Compare Business", url: `${siteUrl}${routes.compareBusiness}` },
+    { name: category.category, url: pageUrl },
+  ], pageUrl);
+  const faqJsonLd = buildFaqPageJsonLd(comparisonFaqs, pageUrl);
 
   return (
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd([webPageJsonLd, articleJsonLd, breadcrumbJsonLd, faqJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([webPageJsonLd, articleJsonLd, breadcrumbJsonLd, faqJsonLd].filter(Boolean)) }}
       />
-      <Breadcrumbs items={[{ label: "Compare Business", href: routes.compareBusiness }, { label: category.category }]} />
+      <Breadcrumbs schema={false} items={[{ label: "Compare Business", href: routes.compareBusiness }, { label: category.category }]} />
       <section className="compare-hero">
         <div className="container compare-hero__grid">
           <div>

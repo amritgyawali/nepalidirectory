@@ -1,8 +1,19 @@
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { siteUrl } from "@/lib/blog";
 import { plans } from "@/lib/data";
 import { routes } from "@/lib/routes";
+import { buildWebPageJsonLd, uniqueKeywords } from "@/lib/seo";
+import { buildFaqPageJsonLd, buildPlanServiceJsonLd } from "@/lib/structured-data";
+
+const pageUrl = `${siteUrl}${routes.pricing}`;
+const [starterPlan, ...paidPlans] = plans;
+const paidPlanSummary = paidPlans.map((plan) => `${plan.name} (${plan.price})`).join(" and ");
+const quickAnswer =
+  `A basic ${starterPlan.name} profile on Nepali Directory is ${starterPlan.price.toLowerCase()}. ` +
+  `Optional ${paidPlanSummary} plans add clearly labelled promotion and management tools, but no plan buys an organic ranking or skips verification.`;
 
 const faqs = [
   {
@@ -14,15 +25,37 @@ const faqs = [
     answer: "No. Payment never guarantees an organic ranking. Relevance, profile quality, verified details, customer evidence, site authority and competition all affect visibility. Sponsored placement must be labeled."
   },
   {
+    question: "How much does it cost to list a business in Nepal on Nepali Directory?",
+    answer: `A ${starterPlan.name} business profile is ${starterPlan.price.toLowerCase()}. Paid options are ${paidPlanSummary}; confirm current terms before paying.`
+  },
+  {
     question: "Should I confirm the final price before subscribing?",
     answer: "Yes. Contact the directory team for current availability, billing period, taxes, included placements, cancellation terms and support scope before payment."
   }
 ];
 
 export default function PricingPage() {
+  const webPageJsonLd = {
+    ...buildWebPageJsonLd({
+      name: "Business listing plans and pricing",
+      description: quickAnswer,
+      url: pageUrl,
+      keywords: uniqueKeywords([
+        "business listing price Nepal",
+        "free business listing Nepal",
+        "Nepal directory advertising cost",
+        ...plans.map((plan) => `${plan.name} plan`),
+      ]),
+      dateModified: "2026-10-07",
+      breadcrumb: true,
+    }),
+    mainEntity: { "@id": `${pageUrl}#service` },
+  };
+
   return (
     <main>
-      <Breadcrumbs items={[{ label: "Pricing" }]} />
+      <JsonLd data={[webPageJsonLd, buildPlanServiceJsonLd(plans, pageUrl), buildFaqPageJsonLd(faqs, pageUrl)]} />
+      <Breadcrumbs items={[{ label: "Pricing" }]} currentPath={routes.pricing} />
       <section className="page-head">
         <div className="container">
           <span className="eyebrow">For Nepal business owners</span>
@@ -36,6 +69,15 @@ export default function PricingPage() {
             <Link className="button button--primary" href={routes.claimListing}>Add your business</Link>
             <Link className="button button--outline" href={routes.contact}>Confirm current terms</Link>
           </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <section className="answer-summary" aria-labelledby="pricing-summary">
+            <h2 id="pricing-summary">Pricing at a glance</h2>
+            <p>{quickAnswer}</p>
+          </section>
         </div>
       </section>
 

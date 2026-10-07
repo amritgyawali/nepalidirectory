@@ -49,6 +49,7 @@ export default async function CityIndexPage() {
       name: "Nepal Business Directory by City",
       description: "Browse reviewed city guides and qualified public business profiles across Nepal city hubs.",
       url: `${siteUrl}/city`,
+      breadcrumb: true,
       keywords: ["Nepal business directory by city", "Kathmandu businesses", "Pokhara businesses", "Nepal city guides"],
       dateModified: "2026-07-11",
     }),
@@ -59,7 +60,7 @@ export default async function CityIndexPage() {
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd([collectionPage, itemList]) }} />
-      <Breadcrumbs items={[{ label: "Cities" }]} />
+      <Breadcrumbs items={[{ label: "Cities" }]} currentPath={routes.city} />
       <section className="page-head">
         <div className="container">
           <span className="eyebrow">Reviewed city hubs</span>

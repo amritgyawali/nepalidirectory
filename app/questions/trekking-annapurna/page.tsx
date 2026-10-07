@@ -23,29 +23,34 @@ export const metadata: Metadata = buildPublicPageMetadata({
 
 export default function QuestionDetailPage() {
   const keywords = uniqueKeywords(["Annapurna Circuit", "Nepal trekking", "trekking season", "Thorong La"]);
-  const webPageJsonLd = buildWebPageJsonLd({
-    name: question,
-    description: questionBody,
-    url: canonicalUrl,
-    keywords,
-    dateModified: "2026-07-16",
-  });
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "Home", url: siteUrl },
     { name: "Q&A Hub", url: `${siteUrl}${routes.qa}` },
     { name: "Annapurna Circuit", url: canonicalUrl },
-  ]);
+  ], canonicalUrl);
+  // One QAPage node for the URL: the shared builder supplies @id, site, breadcrumb and speakable.
   const qaPageJsonLd = {
-    "@context": "https://schema.org",
+    ...buildWebPageJsonLd({
+      name: question,
+      description: questionBody,
+      url: canonicalUrl,
+      keywords,
+      dateModified: "2026-07-16",
+      breadcrumb: true,
+      speakable: ["h1", ".answer-card p"],
+    }),
     "@type": "QAPage",
     mainEntity: {
       "@type": "Question",
       name: question,
       text: questionBody,
+      dateCreated: "2026-07-16",
       answerCount: 1,
       acceptedAnswer: {
         "@type": "Answer",
         text: answerText,
-        url: canonicalUrl,
+        dateCreated: "2026-07-16",
+        url: `${canonicalUrl}#accepted-answer`,
       },
     },
   };
@@ -54,15 +59,15 @@ export default function QuestionDetailPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd([webPageJsonLd, breadcrumbJsonLd, qaPageJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd([qaPageJsonLd, breadcrumbJsonLd]) }}
       />
-      <Breadcrumbs items={[{ label: "Q&A Hub", href: routes.qa }, { label: "Annapurna Circuit" }]} />
+      <Breadcrumbs schema={false} items={[{ label: "Q&A Hub", href: routes.qa }, { label: "Annapurna Circuit" }]} />
       <section className="section">
         <div className="container prose-card">
           <span className="eyebrow">Travel</span>
           <h1 className="page-title">{question}</h1>
           <p>{questionBody}</p>
-          <div className="answer-card">
+          <div className="answer-card" id="accepted-answer">
             <strong>Best answer</strong>
             <p>{answerText}</p>
           </div>

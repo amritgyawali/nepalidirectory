@@ -31,6 +31,7 @@ import {
 } from "@/lib/directory-pagination";
 import { getBusinessHref, getCityCategoryHref, getSearchHref, routes } from "@/lib/routes";
 import { serializeJsonLd } from "@/lib/seo";
+import { buildSpeakable } from "@/lib/structured-data";
 import {
   buildBreadcrumbJsonLd,
   buildListingItemListJsonLd,
@@ -174,6 +175,10 @@ export default async function DirectoryCategoryPage({
       name: "NepaliDirectory",
       url: siteUrl,
     },
+    publisher: { "@id": `${siteUrl}/#organization` },
+    breadcrumb: { "@id": `${canonicalUrl}#breadcrumb` },
+    speakable: buildSpeakable(),
+    primaryImageOfPage: { "@type": "ImageObject", url: socialImage },
     about: {
       "@type": "Thing",
       name: category.priorityKeyword,
@@ -192,7 +197,7 @@ export default async function DirectoryCategoryPage({
     { name: "Home", url: siteUrl },
     { name: "Categories", url: `${siteUrl}${routes.categories}` },
     { name: category.name, url: canonicalUrl },
-  ]);
+  ], canonicalUrl);
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -222,6 +227,7 @@ export default async function DirectoryCategoryPage({
       />
 
       <Breadcrumbs
+        schema={false}
         items={[
           { label: "Categories", href: routes.categories },
           { label: category.name },

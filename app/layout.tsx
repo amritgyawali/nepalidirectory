@@ -120,13 +120,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${manrope.variable} ${anekLatin.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        {/* Preconnect to critical third-party origins for faster LCP / font loads */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* next/font self-hosts both typefaces, so no font-origin preconnect is needed. City hero
+            backgrounds load straight from Unsplash, which benefits from an early connection. */}
         <link rel="preconnect" href="https://images.unsplash.com" />
-        {/* DNS-prefetch for Supabase (non-blocking, benefits API calls) */}
+        {/* DNS-prefetch for the map tile server (non-blocking, used by /map) */}
         <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
-        {/* Machine-readable pointers for AI platforms */}
+        {/* Machine-readable discovery pointers for feed readers, crawlers and AI platforms */}
+        <link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="NepaliDirectory guides" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" title="Sitemap" />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM context guide" />
         <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM full context" />
       </head>

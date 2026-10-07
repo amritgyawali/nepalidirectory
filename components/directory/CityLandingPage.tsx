@@ -20,6 +20,7 @@ type CityLandingPageProps = {
   currentPage: number;
   totalPages: number;
   cityCategoryLinks: Record<string, string>;
+  canonicalPath: string;
 };
 
 function getCategoryDestination(
@@ -40,12 +41,13 @@ export function CityLandingPageView({
   currentPage,
   totalPages,
   cityCategoryLinks,
+  canonicalPath,
 }: CityLandingPageProps) {
   const detail = getCityEditorialDetail(city.slug);
   const relatedGuides = getGuidesForCity(city.slug);
   return (
     <main>
-      <Breadcrumbs items={[{ label: city.province, href: routes.province }, { label: city.name }]} />
+      <Breadcrumbs items={[{ label: "Cities", href: routes.city }, { label: city.name }]} currentPath={canonicalPath} />
       <section
         className="city-directory-hero"
         style={{

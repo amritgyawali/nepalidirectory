@@ -13,16 +13,23 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#0f1c2e",
     categories: ["business", "travel", "food", "medical", "utilities"],
     lang: "en",
+    dir: "ltr",
+    id: "/",
+    shortcuts: [
+      { name: "Browse categories", url: "/categories" },
+      { name: "Browse cities", url: "/city" },
+      { name: "Add your business", url: "/claim-listing" }
+    ],
     icons: [
       {
         src: "/icon.svg",
-        sizes: "192x192",
+        sizes: "any",
         type: "image/svg+xml",
         purpose: "any"
       },
       {
         src: "/logo.svg",
-        sizes: "512x512",
+        sizes: "any",
         type: "image/svg+xml",
         purpose: "any"
       }

@@ -8,6 +8,7 @@ import { directoryCategories } from "@/lib/directory-categories";
 import { getIndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getIndexableListings, listingMatchesCity } from "@/lib/public-listings";
 import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
+import { buildFaqPageJsonLd, buildPlaceJsonLd } from "@/lib/structured-data";
 import { buildListingItemListJsonLd } from "@/lib/seo-auto";
 import { getCityCategoryHref } from "@/lib/routes";
 import {
@@ -115,20 +116,6 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
   const canonicalUrl = `${siteUrl}${canonicalPath}`;
   const detail = getCityEditorialDetail(city.slug);
   const keywords = uniqueKeywords([...city.keywords, ...city.popularSearches, city.name, city.province]);
-  const webPageJsonLd = {
-    ...buildWebPageJsonLd({
-      name: city.seoTitle,
-      description: city.description,
-      url: canonicalUrl,
-      keywords,
-    }),
-    "@type": "CollectionPage",
-    about: {
-      "@type": "City",
-      name: city.name,
-      containedInPlace: city.province
-    }
-  };
   const itemListJsonLd = pagination.items.length
     ? buildListingItemListJsonLd(
         `Qualified businesses in ${city.name}`,
@@ -137,15 +124,20 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
         (requestedPage - 1) * DIRECTORY_PAGE_SIZE,
       )
     : null;
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: detail.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: { "@type": "Answer", text: faq.answer },
-    })),
+  const webPageJsonLd = {
+    ...buildWebPageJsonLd({
+      name: city.seoTitle,
+      description: city.description,
+      url: canonicalUrl,
+      keywords,
+      breadcrumb: true,
+      image: city.image,
+    }),
+    "@type": "CollectionPage",
+    about: buildPlaceJsonLd(city),
+    ...(itemListJsonLd ? { mainEntity: { "@id": `${canonicalUrl}#itemlist` } } : {}),
   };
+  const faqJsonLd = buildFaqPageJsonLd(detail.faqs, canonicalUrl);
 
   return (
     <>
@@ -161,6 +153,7 @@ export default async function CityPage({ params, searchParams }: CityPageProps) 
         currentPage={pagination.currentPage}
         totalPages={pagination.totalPages}
         cityCategoryLinks={cityCategoryLinks}
+        canonicalPath={canonicalPath}
       />
     </>
   );

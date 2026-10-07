@@ -4,6 +4,7 @@ import { GuideCard } from "@/components/content/GuideCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PageHero } from "@/components/directory/PageHero";
 import { contentAuthors, getAuthorBySlug, getAuthorUrl, getPostsByAuthor } from "@/lib/authors";
+import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
 import { buildBlogKeywords, buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
@@ -50,36 +51,40 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
 
   const posts = getPostsByAuthor(author);
   const keywords = uniqueKeywords([...author.knowsAbout, ...posts.flatMap((post) => buildBlogKeywords(post))]);
+  const authorUrl = getAuthorUrl(author);
+  // One ProfilePage node per URL: the shared WebPage builder supplies @id, site and breadcrumb links.
   const profileJsonLd = {
-    "@context": "https://schema.org",
+    ...buildWebPageJsonLd({
+      name: `${author.name}: ${author.role}`,
+      description: author.description,
+      url: authorUrl,
+      breadcrumb: true,
+      keywords,
+    }),
     "@type": "ProfilePage",
-    name: author.name,
-    url: getAuthorUrl(author),
-    description: author.description,
-    publisher,
     mainEntity: {
       "@type": "Organization",
+      "@id": `${authorUrl}#author`,
       name: author.name,
-      url: getAuthorUrl(author),
-      parentOrganization: publisher,
+      url: authorUrl,
+      parentOrganization: { "@id": publisher["@id"] },
       description: author.description,
-      knowsAbout: author.knowsAbout
-    }
+      knowsAbout: author.knowsAbout,
+    },
+    hasPart: posts.slice(0, 20).map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      url: `${siteUrl}${post.href}`,
+    })),
   };
-  const webPageJsonLd = buildWebPageJsonLd({
-    name: `${author.name}: ${author.role}`,
-    description: author.description,
-    url: getAuthorUrl(author),
-    keywords
-  });
 
   return (
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd([webPageJsonLd, profileJsonLd]) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(profileJsonLd) }}
       />
-      <Breadcrumbs items={[{ label: "Authors", href: "/authors" }, { label: author.name }]} />
+      <Breadcrumbs items={[{ label: "Authors", href: "/authors" }, { label: author.name }]} currentPath={`/authors/${author.slug}`} />
       <PageHero title={author.name} subtitle={author.description} cta={{ label: "Editorial policy", href: routes.editorialPolicy }} />
       <section className="section">
         <div className="container author-profile">

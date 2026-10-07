@@ -192,6 +192,7 @@ export default async function BestDirectoryInNepalPage() {
       name: seoTitle,
       description,
       url: canonicalUrl,
+      breadcrumb: true,
       keywords,
       dateModified,
     }),
@@ -207,6 +208,7 @@ export default async function BestDirectoryInNepalPage() {
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
       { "@type": "ListItem", position: 2, name: "Best Directory in Nepal", item: canonicalUrl },
@@ -241,7 +243,7 @@ export default async function BestDirectoryInNepalPage() {
           __html: JSON.stringify([webPageJsonLd, breadcrumbJsonLd, faqJsonLd, hubListJsonLd]),
         }}
       />
-      <Breadcrumbs items={[{ label: "Best Directory in Nepal" }]} />
+      <Breadcrumbs schema={false} items={[{ label: "Best Directory in Nepal" }]} />
       <PageHero
         title={pageTitle}
         subtitle="Seven checks that separate a useful Nepal business directory from a list of names — and how Nepali Directory applies each one."

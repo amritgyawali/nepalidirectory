@@ -97,6 +97,7 @@ export default async function BlogPage() {
   const blogJsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
+    "@id": `${siteUrl}/blog#blog`,
     name: "Nepali Directory Blog",
     url: `${siteUrl}/blog`,
     description:
@@ -117,6 +118,7 @@ export default async function BlogPage() {
       description:
         "Read Nepal guides for travel, restaurants, hotels, healthcare, home services, business listings and local SEO.",
       url: `${siteUrl}/blog`,
+      breadcrumb: true,
       keywords: blogKeywords,
       dateModified: getLatestBlogModifiedAt()
     }),
@@ -130,7 +132,7 @@ export default async function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd([collectionJsonLd, blogJsonLd, itemListJsonLd]) }}
       />
-      <Breadcrumbs items={[{ label: "Blog" }]} />
+      <Breadcrumbs items={[{ label: "Blog" }]} currentPath={routes.blog} />
       <PageHero
         title="Nepal local guides and business advice"
         subtitle="Travel notes, restaurant roundups, service checklists, city guides and local SEO advice written for people searching in Nepal."

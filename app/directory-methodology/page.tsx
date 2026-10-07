@@ -93,6 +93,7 @@ export default function DirectoryMethodologyPage() {
       name: title,
       description,
       url: canonicalUrl,
+      breadcrumb: true,
       keywords,
       dateModified: "2026-07-15",
     }),
@@ -101,6 +102,7 @@ export default function DirectoryMethodologyPage() {
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${canonicalUrl}#breadcrumb`,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
       { "@type": "ListItem", position: 2, name: "Directory Methodology", item: canonicalUrl },
@@ -124,7 +126,7 @@ export default function DirectoryMethodologyPage() {
           __html: serializeJsonLd([webPageJsonLd, breadcrumbJsonLd, faqJsonLd]),
         }}
       />
-      <Breadcrumbs items={[{ label: "Directory Methodology" }]} />
+      <Breadcrumbs schema={false} items={[{ label: "Directory Methodology" }]} />
       <PageHero
         title="How business listings are reviewed"
         subtitle="The sources, minimum evidence, publication gates and limits behind Nepali Directory profiles."

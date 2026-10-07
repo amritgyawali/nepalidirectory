@@ -32,6 +32,7 @@ export async function SeoLandingPageView({ page }: SeoLandingPageProps) {
     name: page.seoTitle,
     description: page.description,
     url: `${siteUrl}${page.href}`,
+    breadcrumb: true,
     keywords,
   });
   const collectionJsonLd = {
@@ -56,7 +57,7 @@ export async function SeoLandingPageView({ page }: SeoLandingPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(collectionJsonLd) }}
       />
-      <Breadcrumbs items={[{ label: page.title }]} />
+      <Breadcrumbs items={[{ label: page.title }]} currentPath={page.href} />
       <section className="seo-hero">
         <div className="container seo-hero__grid">
           <div className="seo-hero__copy">
