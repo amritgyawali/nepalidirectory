@@ -18,6 +18,7 @@ import {
   paginatedDirectoryHref,
   parseDirectoryPage,
 } from "@/lib/directory-pagination";
+import { metaDescription, seoTitle } from "@/lib/meta-text";
 
 type CityPageProps = {
   params: Promise<{ slug: string }>;
@@ -56,8 +57,8 @@ export async function generateMetadata({ params, searchParams }: CityPageProps):
     : city.seoTitle;
 
   return {
-    title,
-    description: city.description,
+    title: seoTitle(title),
+    description: metaDescription(city.description),
     alternates: { canonical },
     robots: {
       index: indexable,

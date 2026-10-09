@@ -30,7 +30,7 @@ export default function AttributionPage() {
       "@type": "Dataset",
       name: "OpenStreetMap",
       url: "https://www.openstreetmap.org/",
-      creator: { "@type": "Organization", name: "OpenStreetMap contributors" },
+      creator: { "@type": "Organization", name: "OpenStreetMap contributors", url: "https://www.openstreetmap.org/copyright" },
       license: "https://opendatacommons.org/licenses/odbl/",
     },
   };

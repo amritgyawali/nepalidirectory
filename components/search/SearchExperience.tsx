@@ -16,6 +16,7 @@ import { FormEvent, useCallback, useMemo, useState } from "react";
 import { AiConcierge } from "@/components/ai/AiConcierge";
 import { BusinessCard } from "@/components/directory/BusinessCard";
 import { categories, cityLinks, popularSearches, type Business } from "@/lib/data";
+import { isLiveHubHref, type IndexableHubSlugs } from "@/lib/hub-links";
 import { routes } from "@/lib/routes";
 import { searchRecords, type SearchKind } from "@/lib/search";
 
@@ -47,6 +48,8 @@ type SearchExperienceProps = {
   initialQuery: string;
   initialLocation: string;
   businesses: Business[];
+  /** Published hubs; unpublished city/category hubs 404, so their results are hidden. */
+  hubs: IndexableHubSlugs;
 };
 
 function iconForKind(kind: SearchKind) {
@@ -56,7 +59,7 @@ function iconForKind(kind: SearchKind) {
   return FileText;
 }
 
-export function SearchExperience({ initialQuery, initialLocation, businesses }: SearchExperienceProps) {
+export function SearchExperience({ initialQuery, initialLocation, businesses, hubs }: SearchExperienceProps) {
   const router = useRouter();
   const [query, setQuery] = useState(initialQuery);
   const [location, setLocation] = useState(initialLocation);
@@ -77,7 +80,7 @@ export function SearchExperience({ initialQuery, initialLocation, businesses }: 
     const filterQuery = [query, ...activeFilters.filter((filter) => !specialFilters.has(filter))]
       .filter(Boolean)
       .join(" ");
-    let records = searchRecords(filterQuery, location, kind, businesses);
+    let records = searchRecords(filterQuery, location, kind, businesses).filter((record) => isLiveHubHref(record.href, hubs));
 
     if (activeFilters.includes("Open Now")) {
       records = records.filter((record) => record.kind !== "business" || record.status === "open" || record.status === "24h");
@@ -102,7 +105,7 @@ export function SearchExperience({ initialQuery, initialLocation, businesses }: 
       if (sort === "name") return a.title.localeCompare(b.title);
       return 0;
     });
-  }, [activeFilters, businessFromRecord, businesses, kind, location, query, sort]);
+  }, [activeFilters, businessFromRecord, businesses, hubs, kind, location, query, sort]);
 
   const businessResults = results.filter((record) => record.kind === "business");
   const otherResults = results.filter((record) => record.kind !== "business");

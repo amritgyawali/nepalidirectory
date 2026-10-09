@@ -7,6 +7,7 @@ import { contentAuthors, getAuthorBySlug, getAuthorUrl, getPostsByAuthor } from 
 import { siteUrl } from "@/lib/blog";
 import { routes } from "@/lib/routes";
 import { buildBlogKeywords, buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
+import { metaDescription, seoTitle } from "@/lib/meta-text";
 
 type AuthorPageProps = {
   params: Promise<{ slug: string }>;
@@ -27,16 +28,25 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
   const titleName = author.name.replace(/^Nepali\s*Directory\s*/i, "").trim() || "Editorial Team";
   const title = `${titleName}: ${author.role}`;
 
+  const description = metaDescription(author.description);
+
   return {
-    title,
-    description: author.description,
+    title: seoTitle(title),
+    description,
     alternates: { canonical: `/authors/${author.slug}` },
     openGraph: {
       title,
-      description: author.description,
+      description,
       url: getAuthorUrl(author),
       siteName: "NepaliDirectory",
-      type: "profile"
+      type: "profile",
+      images: [{ url: "/nepali-directory-og.png", width: 1729, height: 909, alt: `${author.name}, NepaliDirectory` }]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/nepali-directory-og.png"]
     }
   };
 }
@@ -50,7 +60,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
   }
 
   const posts = getPostsByAuthor(author);
-  const keywords = uniqueKeywords([...author.knowsAbout, ...posts.flatMap((post) => buildBlogKeywords(post))]);
+  const keywords = uniqueKeywords([...author.knowsAbout, ...posts.flatMap((post) => buildBlogKeywords(post))]).slice(0, 30);
   const authorUrl = getAuthorUrl(author);
   // One ProfilePage node per URL: the shared WebPage builder supplies @id, site and breadcrumb links.
   const profileJsonLd = {
@@ -73,8 +83,13 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
     },
     hasPart: posts.slice(0, 20).map((post) => ({
       "@type": "BlogPosting",
+      "@id": `${siteUrl}${post.href}#article`,
       headline: post.title,
       url: `${siteUrl}${post.href}`,
+      image: post.image,
+      datePublished: post.publishedAt,
+      dateModified: post.modifiedAt,
+      author: { "@id": `${authorUrl}#author` },
     })),
   };
 

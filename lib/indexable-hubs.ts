@@ -8,6 +8,10 @@ import {
 import { MIN_INDEXABLE_DIRECTORY_RESULTS } from "@/lib/directory-pagination";
 import type { Listing } from "@/lib/enrich";
 import { getIndexableListings, listingMatchesCity } from "@/lib/public-listings";
+import { isLiveHubHref, type IndexableHubSlugs } from "@/lib/hub-links";
+
+export type { IndexableHubSlugs };
+export { isLiveHubHref };
 
 /**
  * City, category and city+category hubs that currently have enough reviewed listings to be
@@ -15,13 +19,6 @@ import { getIndexableListings, listingMatchesCity } from "@/lib/public-listings"
  * site may link to it: every crawlable link to a hub goes through this list. That keeps Google
  * from discovering thin hubs and reporting them as "Excluded by 'noindex' tag" in Search Console.
  */
-export type IndexableHubSlugs = {
-  cities: string[];
-  categories: string[];
-  /** `${citySlug}/${categorySlug}` pairs. */
-  cityCategories: string[];
-};
-
 export function computeIndexableHubSlugs(listings: readonly Listing[]): IndexableHubSlugs {
   const qualifies = (count: number) => count >= MIN_INDEXABLE_DIRECTORY_RESULTS;
   const cityListings = new Map(
@@ -89,19 +86,4 @@ export function filterIndexableDirectoryCategories(hubs: IndexableHubSlugs): Dir
 
 export async function getIndexableCityPages(): Promise<CityDirectoryPage[]> {
   return filterIndexableCityPages(await getIndexableHubSlugs());
-}
-
-/**
- * False for a city, category or city+category hub URL that is not currently published.
- * Every other URL passes, so content link lists can be filtered with it wholesale.
- */
-export function isLiveHubHref(href: string, hubs: IndexableHubSlugs): boolean {
-  const path = href.split(/[?#]/, 1)[0].replace(/\/+$/, "");
-  const cityCategory = path.match(/^\/city\/([^/]+)\/([^/]+)$/);
-  if (cityCategory) return hubs.cityCategories.includes(`${cityCategory[1]}/${cityCategory[2]}`);
-  const city = path.match(/^\/city\/([^/]+)$/);
-  if (city) return hubs.cities.includes(city[1]);
-  const category = path.match(/^\/category\/([^/]+)$/);
-  if (category) return hubs.categories.includes(category[1]);
-  return true;
 }

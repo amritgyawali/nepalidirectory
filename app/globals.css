@@ -6609,3 +6609,46 @@ body.superadmin-mode > .footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* Compact archive under the /blog card grid: every older guide stays one click from the index. */
+.blog-archive {
+  margin-top: 40px;
+}
+
+.blog-archive h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.blog-archive ul {
+  display: grid;
+  gap: 12px 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.blog-archive li {
+  border-bottom: 1px solid var(--color-border);
+  display: grid;
+  gap: 4px;
+  padding-bottom: 12px;
+}
+
+.blog-archive li a {
+  color: var(--color-text);
+  font-weight: 800;
+}
+
+.blog-archive li span {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .blog-archive ul {
+    grid-template-columns: 1fr;
+  }
+}

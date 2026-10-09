@@ -108,7 +108,7 @@ export async function SeoLandingPageView({ page }: SeoLandingPageProps) {
           />
           <div className="seo-category-cards">
             {categories.slice(0, 8).map((category) => (
-              <Link key={category.name} href={category.href}>
+              <Link key={category.name} href={isLiveHubHref(category.href, hubs) ? category.href : getSearchHref(category.name)}>
                 <span>Open guide</span>
                 <strong>{category.name}</strong>
               </Link>

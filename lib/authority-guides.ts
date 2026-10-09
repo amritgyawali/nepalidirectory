@@ -310,7 +310,7 @@ export const authorityGuidePosts: BlogPost[] = [
     contextLinks: [
       { href: "/claim-listing", label: "Add or claim your business profile" },
       { href: "/blog/nepal-local-seo-checklist-small-businesses", label: "Local SEO checklist for Nepal businesses" },
-      { href: "/blog/google-business-profile-nepal-setup-verification", label: "Set up a Google Business Profile in Nepal" },
+      { href: "/blog/google-business-profile-nepal-setup-guide", label: "Set up a Google Business Profile in Nepal" },
       { href: "/best-directory-in-nepal", label: "What makes a directory trustworthy" },
     ],
     sources: [
@@ -325,106 +325,6 @@ export const authorityGuidePosts: BlogPost[] = [
       {
         label: "IndexNow protocol documentation",
         url: "https://www.indexnow.org/documentation",
-      },
-    ],
-  },
-  {
-    ...publication,
-    title: "Google Business Profile for Nepal Businesses: Setup, Verification and Upkeep",
-    seoTitle: "Google Business Profile Nepal: Setup and Verification Guide",
-    slug: "google-business-profile-nepal-setup-verification",
-    href: "/blog/google-business-profile-nepal-setup-verification",
-    category: "SEO",
-    excerpt:
-      "A Nepal-specific walkthrough for creating, verifying and maintaining a Google Business Profile when your street has no name and your number changes.",
-    description:
-      "Set up and verify a Google Business Profile in Nepal: pin locations without street names, pass video verification, choose categories and keep hours and photos current.",
-    image: image("photo-1586953208448-b95a79798f07"),
-    imageAlt: "Smartphone on a desk displaying a business profile page",
-    readTime: "10 min read",
-    author: "Nepali Directory SEO Desk",
-    keywords: [
-      "Google Business Profile Nepal",
-      "Google My Business Nepal",
-      "verify business on Google Nepal",
-      "Google Maps listing Nepal",
-      "add business to Google Maps Nepal",
-      "Google business video verification",
-      "Plus Code address Nepal",
-      "Google Business Profile categories",
-    ],
-    tags: ["Google Business Profile", "Local SEO", "Google Maps", "Business Growth"],
-    citySlugs: ["kathmandu", "pokhara"],
-    sections: [
-      {
-        heading: "Why a Google Business Profile matters in Nepal",
-        paragraphs: [
-          "When someone in Nepal searches for a pharmacy near me or a hotel in Lakeside, Google often shows a map pack before any website. Those results come from Google Business Profiles. The same profile data also feeds Google Maps directions, Gemini answers and AI Overviews, so a missing or incorrect profile can make a real business invisible at the moment a customer is ready to act.",
-          "A profile is free to create and manage. It does not replace your website or directory listings, but it is usually the single highest-impact local listing for walk-in and phone-call businesses such as restaurants, clinics, repair shops, schools and hotels.",
-        ],
-      },
-      {
-        heading: "Before you start: decide your official details",
-        paragraphs: [
-          "Choose the exact business name used on your signboard and documents, without adding keywords such as best or cheap, which violates Google's guidelines and can lead to suspension. Pick the primary phone number customers should call and a website or social page you control.",
-          "Decide whether you serve customers at your premises, at their location, or both. A cafe or clinic shows its address. A plumber or tutor who visits homes can hide the address and define a service area instead, such as Kathmandu, Lalitpur and Bhaktapur. Choosing correctly avoids verification problems later.",
-        ],
-      },
-      {
-        heading: "Pinning a location when streets have no names",
-        paragraphs: [
-          "Many Nepal addresses rely on ward numbers, tole names and landmarks rather than street names and house numbers. Write the address the way customers understand it, for example the tole, ward, municipality and district, then drag the map pin to the exact entrance of your premises rather than accepting the default position.",
-          "Google Plus Codes, the short codes shown when you drop a pin in Google Maps, give a precise location even without a formal address. Add the Plus Code to your website and directory profiles, and include a landmark in the description, such as opposite the ward office or beside a well-known temple. Customers arriving by bike or taxi will thank you.",
-        ],
-      },
-      {
-        heading: "Getting through verification",
-        paragraphs: [
-          "Google decides which verification methods to offer, and in Nepal video verification is common. You record a short continuous video showing the street or landmark, the business exterior with signage, and proof you manage the business, such as opening the shop, showing equipment or documents with a business name. Plan the route before recording, because the video must be unbroken.",
-          "Postcards are unreliable where addresses are informal, and phone or email options appear only for some businesses. If verification fails, check that your name matches your signage, your pin is precise and your category fits what the video shows. Avoid creating a second profile, which usually triggers duplicate problems rather than solving them.",
-        ],
-      },
-      {
-        heading: "Categories, hours, photos and services",
-        paragraphs: [
-          "Your primary category has the largest effect on which searches you appear for, so choose the most specific accurate option, such as dental clinic rather than medical clinic. Add a few secondary categories only when you genuinely offer those services. List services and products with plain descriptions that match what customers search for.",
-          "Set regular hours and add special hours for Dashain, Tihar and other public holidays, when customers most often find a closed door. Upload real photographs of the exterior, interior, team and work, and add new photos every month or two. Real, recent photos build trust far more than stock images.",
-        ],
-      },
-      {
-        heading: "Ongoing upkeep: reviews, questions and consistency",
-        paragraphs: [
-          "Reply politely to reviews, both positive and negative, and focus replies on the facts and the fix. Answer questions customers post on the profile, because those answers are public and are sometimes summarized by AI tools. Never offer discounts or gifts in exchange for reviews.",
-          "Finally, keep the profile consistent with every other listing. When your number or hours change, update Google, Bing Places, your website and your [Nepali Directory profile](/claim-listing) on the same day. The guide to [appearing in AI search answers](/blog/get-business-recommended-ai-search-nepal) explains why consistency across platforms now matters more than ever.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: "Is Google Business Profile free in Nepal?",
-        answer:
-          "Yes. Creating, verifying and managing a Google Business Profile is free. Be cautious of anyone charging to guarantee top Google Maps rankings, because nobody can promise a position.",
-      },
-      {
-        question: "How do I verify my business on Google in Nepal?",
-        answer:
-          "Google chooses the method, and video verification is common in Nepal. Record one continuous video showing the nearby street or landmark, your signage and proof that you manage the business, such as tools, stock or business documents.",
-      },
-      {
-        question: "What address should I use if my street has no name?",
-        answer:
-          "Use the tole, ward, municipality and district, place the map pin at your exact entrance, and add a nearby landmark and Plus Code in your description and on other listings.",
-      },
-    ],
-    contextLinks: [
-      { href: "/blog/nepal-local-seo-checklist-small-businesses", label: "Local SEO checklist for small businesses" },
-      { href: "/blog/get-business-recommended-ai-search-nepal", label: "Appear in ChatGPT and AI search answers" },
-      { href: "/claim-listing", label: "Claim your Nepali Directory profile" },
-    ],
-    sources: [
-      {
-        label: "Google Business Profile Help: guidelines for representing your business",
-        url: "https://support.google.com/business/answer/3038177",
       },
     ],
   },

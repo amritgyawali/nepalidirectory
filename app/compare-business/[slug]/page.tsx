@@ -15,6 +15,7 @@ import { routes } from "@/lib/routes";
 import { buildCompareKeywords, buildWebPageJsonLd, getCompareQuickAnswer, publisher, serializeJsonLd } from "@/lib/seo";
 import { buildBreadcrumbJsonLd } from "@/lib/seo-auto";
 import { buildFaqPageJsonLd } from "@/lib/structured-data";
+import { metaDescription, seoTitle } from "@/lib/meta-text";
 
 type CompareCategoryPageProps = { params: Promise<{ slug: string }> };
 
@@ -29,8 +30,8 @@ export async function generateMetadata({ params }: CompareCategoryPageProps): Pr
   // advice with no comparison on it, which is exactly the thin result the gate exists to withhold.
   const indexable = (await getComparedBusinesses(category.slug)).length > 0;
   return {
-    title: category.seoTitle,
-    description: category.description,
+    title: seoTitle(category.seoTitle),
+    description: metaDescription(category.description),
     category: category.category,
     alternates: { canonical: category.href },
     robots: {

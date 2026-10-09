@@ -19,10 +19,10 @@ const compareKeywords = uniqueKeywords([
   "compare clinics Kathmandu",
   "compare contractors Nepal",
   ...sortedCompareCategories.flatMap((category) => buildCompareKeywords(category))
-]);
+]).slice(0, 30);
 
 export const metadata: Metadata = {
-  title: "Business Comparison Guides for Nepal: Hotels, Services and More",
+  title: "Compare Businesses in Nepal by Service",
   description:
     "Use consistent checklists to compare Nepal business categories. Named providers appear only after their profiles pass publication review.",
   alternates: {
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Business Comparison Guides for Nepal: Hotels, Services and More",
+    title: "Compare Businesses in Nepal by Service",
     description:
       "Practical category checklists with review-gated provider comparisons.",
     url: `${siteUrl}${routes.compareBusiness}`,

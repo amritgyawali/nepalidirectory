@@ -16,6 +16,10 @@ export const duplicateBlogRedirects: Readonly<Record<string, string>> = {
     "/blog/how-to-compare-clinics-and-appointments-in-nepal",
   "/blog/compare-plumbers-and-electricians-in-nepal-a-guide-to-hiring-the-right-repair-pr":
     "/blog/how-to-compare-repair-providers-in-nepal-before-hiring",
+  // 2026-10: a second Google Business Profile guide shared the original's title and search
+  // intent; its one unique section (Plus Codes for unnamed streets) was merged into the original.
+  "/blog/google-business-profile-nepal-setup-verification":
+    "/blog/google-business-profile-nepal-setup-guide",
 };
 
 export function isRetiredDuplicateBlogPath(pathname: string): boolean {

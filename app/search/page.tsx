@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SearchExperience } from "@/components/search/SearchExperience";
+import { getIndexableHubSlugsOrNone } from "@/lib/indexable-hubs";
 import { getIndexableListings, listingToBusiness } from "@/lib/public-listings";
 import { routes } from "@/lib/routes";
 
@@ -29,6 +30,7 @@ export const dynamic = "force-dynamic";
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = (await searchParams) ?? {};
   const businesses = (await getIndexableListings()).map(listingToBusiness);
+  const hubs = await getIndexableHubSlugsOrNone();
 
   return (
     <>
@@ -42,6 +44,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         initialQuery={params.q ?? ""}
         initialLocation={params.location ?? ""}
         businesses={businesses}
+        hubs={hubs}
       />
     </>
   );

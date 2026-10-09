@@ -36,6 +36,7 @@ import {
   buildBreadcrumbJsonLd,
   buildListingItemListJsonLd,
 } from "@/lib/seo-auto";
+import { metaDescription, seoTitle } from "@/lib/meta-text";
 
 type DirectoryCategoryPageProps = {
   params: Promise<{ slug: string }>;
@@ -87,8 +88,8 @@ export async function generateMetadata({
     : category.title;
 
   return {
-    title,
-    description: category.metaDescription,
+    title: seoTitle(title),
+    description: metaDescription(category.metaDescription),
     category: category.name,
     alternates: { canonical },
     robots: {
