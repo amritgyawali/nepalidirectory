@@ -8,15 +8,19 @@ import { FillImage } from "@/components/ui/FillImage";
 import { getBlogCategories, getBlogPostUrl, getLatestBlogModifiedAt, getSortedBlogPosts, siteUrl } from "@/lib/blog";
 import { getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
+import { isIndexableBlogCategory } from "@/lib/blog-quality";
 import { routes } from "@/lib/routes";
-import { buildBlogKeywords, buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
+import { buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 // AI-generated posts publish after a human editorial review (prompt §8.5); revalidate
 // periodically so a freshly-published post appears in the index without a full redeploy.
 export const revalidate = 300;
 
 const curatedPosts = getSortedBlogPosts();
-const categories = getBlogCategories();
+// Only categories with enough posts to be indexed; thinner ones are noindex and not worth a crawl.
+const categories = getBlogCategories().filter((category) => isIndexableBlogCategory(category.posts));
+/** Cards with images; older guides follow as a compact text list so the page stays light. */
+const IMAGE_CARD_COUNT = 18;
 const blogKeywords = uniqueKeywords([
   "Nepal blog",
   "Nepal travel guide",
@@ -26,11 +30,12 @@ const blogKeywords = uniqueKeywords([
   "Nepal local SEO",
   "Nepal hotels guide",
   "Kathmandu home services",
-  ...curatedPosts.flatMap((post) => buildBlogKeywords(post))
+  // Topic-level terms only: every post's keyword list here added ~200 KB of JSON-LD to /blog.
+  ...categories.map((category) => `${category.name} guides Nepal`)
 ]);
 
 export const metadata: Metadata = {
-  title: "Nepal Blog: Travel, Restaurants, Local Services, Hotels and SEO Guides",
+  title: "Nepal Local Guides and Business Advice",
   description:
     "Read Nepal guides for travel, restaurants, hotels, healthcare, home services, business listings and local SEO with practical answers and FAQs.",
   alternates: {
@@ -48,7 +53,7 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Nepal Blog: Travel, Restaurants, Local Services, Hotels and SEO Guides",
+    title: "Nepal Local Guides and Business Advice",
     description:
       "Practical Nepal guides with quick answers, FAQs and local decision help.",
     url: `${siteUrl}/blog`,
@@ -83,9 +88,14 @@ export default async function BlogPage() {
   const allPosts = removeRetiredDuplicatePosts([...curatedPosts, ...enginePosts])
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
   const [featuredPost, ...remainingPosts] = allPosts;
+  const cardPosts = remainingPosts.slice(0, IMAGE_CARD_COUNT);
+  const archivePosts = remainingPosts.slice(IMAGE_CARD_COUNT);
+  // Each post appears once in structured data (this ItemList); the Blog and CollectionPage nodes
+  // reference it by @id instead of repeating 140 entries, which had pushed the page past 1 MB.
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    "@id": `${siteUrl}/blog#posts`,
     name: "Nepali Directory Blog Posts",
     itemListElement: allPosts.map((post, index) => ({
       "@type": "ListItem",
@@ -104,17 +114,11 @@ export default async function BlogPage() {
       "Practical Nepal guides for travel, restaurants, home services, healthcare and local business growth.",
     publisher,
     keywords: blogKeywords.join(", "),
-    blogPost: allPosts.map((post) => ({
-      "@type": "BlogPosting",
-      headline: post.title,
-      url: getBlogPostUrl(post),
-      datePublished: post.publishedAt,
-      dateModified: post.modifiedAt
-    }))
+    mainEntityOfPage: { "@id": `${siteUrl}/blog#webpage` }
   };
   const collectionJsonLd = {
     ...buildWebPageJsonLd({
-      name: "Nepal Blog: Travel, Restaurants, Local Services, Hotels and SEO Guides",
+      name: "Nepal Local Guides and Business Advice",
       description:
         "Read Nepal guides for travel, restaurants, hotels, healthcare, home services, business listings and local SEO.",
       url: `${siteUrl}/blog`,
@@ -123,7 +127,7 @@ export default async function BlogPage() {
       dateModified: getLatestBlogModifiedAt()
     }),
     "@type": "CollectionPage",
-    mainEntity: itemListJsonLd
+    mainEntity: { "@id": itemListJsonLd["@id"] }
   };
 
   return (
@@ -179,7 +183,7 @@ export default async function BlogPage() {
           </nav>
 
           <div className="blog-grid" aria-label="Latest blog posts">
-            {remainingPosts.map((post) => (
+            {cardPosts.map((post) => (
               <GuideCard
                 key={post.slug}
                 href={post.href}
@@ -193,6 +197,22 @@ export default async function BlogPage() {
               />
             ))}
           </div>
+
+          {archivePosts.length ? (
+            <section className="blog-archive" aria-labelledby="blog-archive-title">
+              <h2 id="blog-archive-title">More Nepal guides</h2>
+              <ul>
+                {archivePosts.map((post) => (
+                  <li key={post.slug}>
+                    <Link href={post.href}>{post.title}</Link>
+                    <span>
+                      {post.category} · <time dateTime={post.publishedAt}>{post.date}</time>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
         </div>
       </section>
     </main>

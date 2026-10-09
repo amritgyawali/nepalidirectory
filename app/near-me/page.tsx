@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { SeoLandingPageView } from "@/components/directory/SeoLandingPage";
 import { siteUrl } from "@/lib/blog";
 import { getLandingPage } from "@/lib/landing";
+import { metaDescription, seoTitle } from "@/lib/meta-text";
 
 const page = getLandingPage("near-me")!;
 
 export const metadata: Metadata = {
-  title: page.seoTitle,
-  description: page.description,
+  title: seoTitle(page.seoTitle),
+  description: metaDescription(page.description),
   alternates: { canonical: page.href },
   openGraph: {
     title: page.seoTitle,

@@ -8,10 +8,10 @@ import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 const title = "How Nepali Directory Reviews and Publishes Business Listings";
 const description =
-  "Read Nepali Directory's listing methodology: accepted sources, publication checks, verification limits, duplicate handling, corrections, reviews and sponsored placement rules.";
+  "How Nepali Directory reviews listings: accepted sources, publication checks, verification limits, duplicates, corrections, reviews and sponsored placement.";
 
 export const metadata: Metadata = {
-  title: "Directory Methodology: How Business Listings Are Reviewed",
+  title: "How Business Listings Are Reviewed",
   description,
   alternates: { canonical: routes.directoryMethodology },
   openGraph: {

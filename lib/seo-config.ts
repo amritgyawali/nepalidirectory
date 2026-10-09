@@ -42,13 +42,10 @@ export const robotsDisallowPaths = [
   "/super-admin/",
   "/dashboard/",
   "/account/",
-  // /search remains crawlable so bots can read its noindex directive; it is still excluded from
-  // every sitemap and canonical category hubs carry the indexable search intent.
-  routes.profile,
-  routes.login,
-  routes.register,
-  routes.forgotPassword,
-  routes.gallery,
+  // Public noindex pages (/search, /login, /register, /forgot-password, /profile, /gallery) stay
+  // crawlable on purpose. The header links them from every page; blocking them here hid their
+  // noindex tag from Google, which then reported them as "Indexed, though blocked by robots.txt".
+  // Google can only drop a URL from the index when it is allowed to read the noindex directive.
 ] as const;
 
 function matchesRoutePrefix(pathname: string, prefix: string): boolean {

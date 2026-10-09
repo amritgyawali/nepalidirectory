@@ -136,6 +136,7 @@ export default async function HomePage() {
     }),
     "@type": "CollectionPage",
     publisher,
+    // An ItemList with no entries is invalid structured data, so empty lists are left out.
     mainEntity: [
       {
         "@type": "ItemList",
@@ -167,7 +168,7 @@ export default async function HomePage() {
           url: `${siteUrl}${post.href}`
         }))
       }
-    ]
+    ].filter((list) => list.itemListElement.length > 0)
   };
 
   return (

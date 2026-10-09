@@ -7,7 +7,7 @@ import { buildPublicPageMetadata } from "@/lib/site-metadata";
 import { buildFaqPageJsonLd, buildHowToJsonLd } from "@/lib/structured-data";
 
 export const metadata = buildPublicPageMetadata({
-  title: "Free Nepal Business Listing: Add or Claim a Business",
+  title: "Add or Claim a Free Business Listing",
   description:
     "Add a free Nepal business listing or claim an existing profile. Submit accurate company, service, contact and location details for review.",
   path: routes.claimListing

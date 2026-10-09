@@ -23,7 +23,8 @@ import {
 import { ENGINE_AUTHOR, getPublishedEnginePost, getPublishedEnginePosts } from "@/lib/blog-engine";
 import { removeRetiredDuplicatePosts } from "@/lib/blog-dedup";
 import { cityDirectoryPages } from "@/lib/city-pages";
-import { getIndexableHubSlugsOrNone, isLiveHubHref } from "@/lib/indexable-hubs";
+import { pickMetaDescription, seoTitle } from "@/lib/meta-text";
+import { getIndexableHubSlugsOrNone, isLiveHubHref, type IndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getDirectoryCategory } from "@/lib/directory-categories";
 import { routes } from "@/lib/routes";
 import { buildBreadcrumbJsonLd, relatedCompareHubsForPost } from "@/lib/seo-auto";
@@ -69,10 +70,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const keywords = buildBlogKeywords(post);
+  const description = pickMetaDescription(post.description, post.excerpt);
 
   return {
-    title: post.seoTitle,
-    description: post.description,
+    title: seoTitle(post.seoTitle),
+    description,
     authors: [{ name: post.author }],
     category: post.category,
     alternates: {
@@ -91,7 +93,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     },
     openGraph: {
       title: post.seoTitle,
-      description: post.description,
+      description,
       url: getBlogPostUrl(post),
       siteName: "NepaliDirectory",
       locale: "en_US",
@@ -112,7 +114,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     twitter: {
       card: "summary_large_image",
       title: post.seoTitle,
-      description: post.description,
+      description,
       images: [post.image]
     },
     other: {
@@ -340,12 +342,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.sections.map((section, index) => (
               <Fragment key={section.heading}>
                 {section.entry ? (
-                  <ListEntry section={section} />
+                  <ListEntry section={section} hubs={hubs} />
                 ) : (
                   <section>
                     <h2>{section.heading}</h2>
                     {section.paragraphs.map((paragraph) => (
-                      <SafeRichParagraph key={paragraph}>{paragraph}</SafeRichParagraph>
+                      <SafeRichParagraph key={paragraph} hubs={hubs}>{paragraph}</SafeRichParagraph>
                     ))}
                   </section>
                 )}
@@ -471,7 +473,7 @@ function telHref(phone: string) {
 }
 
 /** A numbered studio on a list post: rank badge, name, area, description and contact row. */
-function ListEntry({ section }: { section: BlogSection }) {
+function ListEntry({ section, hubs }: { section: BlogSection; hubs: IndexableHubSlugs }) {
   const entry = section.entry!;
   const headingId = `list-entry-${entry.rank}`;
   return (
@@ -492,7 +494,7 @@ function ListEntry({ section }: { section: BlogSection }) {
         </div>
       </div>
       {section.paragraphs.map((paragraph) => (
-        <SafeRichParagraph key={paragraph}>{paragraph}</SafeRichParagraph>
+        <SafeRichParagraph key={paragraph} hubs={hubs}>{paragraph}</SafeRichParagraph>
       ))}
       <div className="list-entry__contact">
         {entry.phone ? (

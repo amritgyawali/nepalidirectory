@@ -35,6 +35,7 @@ import { getBusinessHref, getCityCategoryHref, getSearchHref, routes } from "@/l
 import { buildWebPageJsonLd, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 import { buildBreadcrumbJsonLd, buildListingLocalBusinessJsonLd } from "@/lib/seo-auto";
 import { buildFaqPageJsonLd } from "@/lib/structured-data";
+import { metaDescription, seoTitle } from "@/lib/meta-text";
 
 type BusinessPageProps = {
   params: Promise<{ slug: string }>;
@@ -67,13 +68,13 @@ export async function generateMetadata({ params }: BusinessPageProps): Promise<M
   const href = getBusinessHref(listing.slug);
   const indexable = isIndexableListing(listing);
   const description = indexable
-    ? listing.metaDescription ?? listingDescription(listing)
+    ? metaDescription(listing.metaDescription ?? listingDescription(listing))
     : `${listing.name} is awaiting source and content review before public publication.`;
   const title = indexable ? listing.metaTitle ?? `${listing.name} in ${listing.area}` : listing.name;
   const verifiedImage = publicListingImage(listing);
 
   return {
-    title,
+    title: seoTitle(title),
     description,
     alternates: { canonical: href },
     robots: {

@@ -62,6 +62,13 @@ export const ownerSeoGuidePosts: BlogPost[] = [
         ],
       },
       {
+        heading: "Pin the location when the street has no name",
+        paragraphs: [
+          "Many Nepal addresses rely on ward numbers, tole names and landmarks rather than street names and house numbers. Write the address the way customers understand it, for example the tole, ward, municipality and district, then drag the map pin to the exact entrance of the premises rather than accepting the default position.",
+          "Google Plus Codes, the short codes shown when you drop a pin in Google Maps, give a precise location even without a formal address. Add the Plus Code to the business website and directory profiles, and include a stable landmark in the description, such as opposite the ward office or beside a well-known temple, so a customer arriving by bike or taxi can find the entrance.",
+        ],
+      },
+      {
         heading: "Prepare for verification without guessing the method",
         paragraphs: [
           "Google decides which verification options a profile receives, so a guide cannot promise video, phone, email or postal verification for every Nepal business. Before starting, make sure the account owner can access the premises or service equipment, the public name is visible where appropriate, the phone and website work, and any documents you may lawfully show connect the business identity to the location. Follow only the instructions shown inside the profile.",
@@ -112,6 +119,11 @@ export const ownerSeoGuidePosts: BlogPost[] = [
         question: "Can I add service keywords to the business name to rank higher?",
         answer:
           "Use the real-world business name. Put genuine services in the category, services and description fields instead of altering the name for search terms.",
+      },
+      {
+        question: "What address should I use if my street has no name?",
+        answer:
+          "Use the tole, ward, municipality and district, place the map pin at the exact entrance, and add a nearby landmark and Plus Code to the description and to other listings.",
       },
       {
         question: "How long does verification take in Nepal?",

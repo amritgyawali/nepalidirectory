@@ -54,12 +54,13 @@ export default async function CityIndexPage() {
       dateModified: "2026-07-11",
     }),
     "@type": "CollectionPage",
-    mainEntity: itemList,
+    // An ItemList with no entries is invalid structured data.
+    mainEntity: cityDirectoryPages.length ? itemList : undefined,
   };
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd([collectionPage, itemList]) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(cityDirectoryPages.length ? [collectionPage, itemList] : [collectionPage]) }} />
       <Breadcrumbs items={[{ label: "Cities" }]} currentPath={routes.city} />
       <section className="page-head">
         <div className="container">

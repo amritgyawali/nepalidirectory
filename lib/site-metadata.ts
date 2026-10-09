@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteUrl } from "@/lib/blog";
+import { fullSeoTitle, metaDescription, seoTitle } from "@/lib/meta-text";
 import { noIndexRoutes } from "@/lib/seo-config";
 
 type PublicPageMetadataInput = {
@@ -12,15 +13,16 @@ type PublicPageMetadataInput = {
 /** Complete metadata graph for public pages so social tags never fall back to homepage content. */
 export function buildPublicPageMetadata({
   title,
-  description,
+  description: rawDescription,
   path,
   image = "/nepali-directory-og.png",
 }: PublicPageMetadataInput): Metadata {
   const url = new URL(path, `${siteUrl}/`).toString();
-  const socialTitle = `${title} | NepaliDirectory`;
+  const socialTitle = fullSeoTitle(title);
+  const description = metaDescription(rawDescription);
   const indexable = !noIndexRoutes.has(path);
   return {
-    title,
+    title: seoTitle(title),
     description,
     alternates: { canonical: path },
     openGraph: {

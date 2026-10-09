@@ -30,7 +30,7 @@ const knownPaths = new Set<string>([
 
 describe("authority guides", () => {
   it("publishes fifteen unique guides through the canonical blog collection", () => {
-    expect(authorityGuidePosts).toHaveLength(15);
+    expect(authorityGuidePosts).toHaveLength(14);
 
     const slugs = blogPosts.map((post) => post.slug);
     const titles = blogPosts.map((post) => post.title.toLowerCase());

@@ -19,7 +19,14 @@ export const metadata: Metadata = {
       "Editorial desks and subject areas behind Nepali Directory guides and local comparison content.",
     url: `${siteUrl}/authors`,
     siteName: "NepaliDirectory",
-    type: "website"
+    type: "website",
+    images: [{ url: "/nepali-directory-og.png", width: 1729, height: 909, alt: "NepaliDirectory editorial desks" }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Editorial Authors and Review Desks",
+    description: "Editorial desks and subject areas behind Nepali Directory guides and local comparison content.",
+    images: ["/nepali-directory-og.png"]
   }
 };
 

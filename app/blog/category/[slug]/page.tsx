@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GuideCard } from "@/components/content/GuideCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -62,12 +63,13 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
     notFound();
   }
 
-  const keywords = uniqueKeywords(category.posts.flatMap((post) => buildBlogKeywords(post)));
+  const keywords = uniqueKeywords(category.posts.flatMap((post) => buildBlogKeywords(post))).slice(0, 30);
   const title = `${category.name} guides`;
   const description = `Browse ${category.posts.length} ${category.name.toLowerCase()} guides with quick answers, practical local context and related Nepal directory links.`;
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    "@id": `${siteUrl}${category.href}#posts`,
     name: `${category.name} guides`,
     itemListElement: category.posts.map((post, index) => ({
       "@type": "ListItem",
@@ -86,8 +88,17 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
       dateModified: category.posts[0].modifiedAt
     }),
     "@type": "CollectionPage",
-    mainEntity: itemListJsonLd
+    mainEntity: { "@id": itemListJsonLd["@id"] }
   };
+  // Real questions the guides answer, each linking to the guide: gives the hub its own
+  // substance beyond a card grid and sends readers straight to the matching answer.
+  const answeredQuestions = category.posts
+    .flatMap((post) => (post.faqs ?? []).slice(0, 2).map((faq) => ({ question: faq.question, post })))
+    .slice(0, 12);
+  const latestUpdate = category.posts.reduce(
+    (latest, post) => (post.modifiedAt > latest ? post.modifiedAt : latest),
+    category.posts[0].modifiedAt,
+  );
 
   return (
     <main>
@@ -114,6 +125,26 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
           ))}
         </div>
       </section>
+      {answeredQuestions.length ? (
+        <section className="section section--soft">
+          <div className="container blog-archive">
+            <h2>Questions these {category.name.toLowerCase()} guides answer</h2>
+            <p>
+              {category.posts.length} guides in this collection, last updated{" "}
+              <time dateTime={latestUpdate}>{latestUpdate.slice(0, 10)}</time>. Each answer links to the
+              guide that explains it in full.
+            </p>
+            <ul>
+              {answeredQuestions.map(({ question, post }) => (
+                <li key={`${post.slug}-${question}`}>
+                  <Link href={post.href}>{question}</Link>
+                  <span>{post.title}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }

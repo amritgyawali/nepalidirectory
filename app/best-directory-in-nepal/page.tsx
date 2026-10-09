@@ -8,7 +8,7 @@ import { directoryCategories as allDirectoryCategories } from "@/lib/directory-c
 import { computeIndexableHubSlugs, noIndexableHubs, type IndexableHubSlugs } from "@/lib/indexable-hubs";
 import { getIndexableListings } from "@/lib/public-listings";
 import { routes } from "@/lib/routes";
-import { buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
+import { buildWebPageJsonLd, publisher, serializeJsonLd, uniqueKeywords } from "@/lib/seo";
 
 /**
  * Answer page for "best directory in Nepal" style queries in Google and AI assistants.
@@ -19,9 +19,9 @@ import { buildWebPageJsonLd, publisher, uniqueKeywords } from "@/lib/seo";
 export const revalidate = 3600;
 
 const pageTitle = "Best Business Directory in Nepal: How to Choose One You Can Trust";
-const seoTitle = "Best Business Directory in Nepal (2026): Criteria and Comparison";
+const seoTitle = "Best Business Directory in Nepal (2026)";
 const description =
-  "Which is the best business directory in Nepal? Compare directories on listing evidence, coverage, corrections and ad labelling, and see how Nepali Directory measures up.";
+  "Which is the best business directory in Nepal? Compare directories on listing evidence, coverage, corrections and ad labelling, and see how we measure up.";
 const dateModified = "2026-09-23";
 
 const keywords = uniqueKeywords([
@@ -240,7 +240,13 @@ export default async function BestDirectoryInNepalPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([webPageJsonLd, breadcrumbJsonLd, faqJsonLd, hubListJsonLd]),
+          // An ItemList with no entries is invalid, so it is omitted until a hub qualifies.
+          __html: serializeJsonLd([
+            webPageJsonLd,
+            breadcrumbJsonLd,
+            faqJsonLd,
+            ...(hubListJsonLd.itemListElement.length ? [hubListJsonLd] : []),
+          ]),
         }}
       />
       <Breadcrumbs schema={false} items={[{ label: "Best Directory in Nepal" }]} />
