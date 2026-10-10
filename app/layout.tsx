@@ -51,9 +51,15 @@ export const metadata: Metadata = {
   category: "Local business directory",
   classification: "Local search, business directory, Nepal city guides",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg"
+    // SVG for modern browsers, with ICO/PNG fallbacks: iOS ignores SVG touch icons, and crawlers
+    // and older clients still request /favicon.ico directly.
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" }
+    ],
+    shortcut: "/favicon.ico",
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
   },
   openGraph: {
     title: "Nepali Directory: Nepal Business Directory & Local Listings",

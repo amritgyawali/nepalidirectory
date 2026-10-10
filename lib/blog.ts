@@ -242,7 +242,7 @@ const coreBlogPosts: BlogPost[] = [
   },
   {
     title: "How to Choose a Verified Contractor in Nepal",
-    seoTitle: "How to Choose a Verified Contractor in Nepal: Checklist and Red Flags",
+    seoTitle: "Verified Contractors in Nepal: Checklist and Red Flags",
     slug: "verified-contractor-nepal",
     href: "/blog/verified-contractor-nepal",
     category: "Home Services",
@@ -297,7 +297,7 @@ const coreBlogPosts: BlogPost[] = [
   },
   {
     title: "Kathmandu Restaurant Guide: Best Areas for Every Meal",
-    seoTitle: "Kathmandu Restaurant Guide: Best Areas for Breakfast, Lunch and Dinner",
+    seoTitle: "Kathmandu Restaurant Guide: Best Areas to Eat",
     slug: "kathmandu-restaurant-guide",
     href: "/blog/kathmandu-restaurant-guide",
     category: "Restaurants",
@@ -517,7 +517,7 @@ const coreBlogPosts: BlogPost[] = [
   },
   {
     title: "Home Services in Kathmandu: Costs, Booking and Safety",
-    seoTitle: "Home Services in Kathmandu: Plumber, Electrician and Repair Checklist",
+    seoTitle: "Kathmandu Home Services: Plumber and Electrician Guide",
     slug: "home-services-kathmandu-costs-booking-safety",
     href: "/blog/home-services-kathmandu-costs-booking-safety",
     category: "Home Services",
@@ -572,7 +572,7 @@ const coreBlogPosts: BlogPost[] = [
   },
   {
     title: "Nepal Local SEO Checklist for Small Businesses",
-    seoTitle: "Nepal Local SEO Checklist: Rank Better in Maps, Search and Directories",
+    seoTitle: "Nepal Local SEO Checklist: Rank in Maps and Search",
     slug: "nepal-local-seo-checklist-small-businesses",
     href: "/blog/nepal-local-seo-checklist-small-businesses",
     category: "SEO",
@@ -792,7 +792,7 @@ const coreBlogPosts: BlogPost[] = [
   },
   {
     title: "Nepal Wedding Planning Checklist: Venues, Photography and Budget",
-    seoTitle: "Nepal Wedding Planning Checklist: Venues, Photography, Decor and Budget",
+    seoTitle: "Nepal Wedding Planning Checklist: Venues and Budget",
     slug: "nepal-wedding-planning-checklist",
     href: "/blog/nepal-wedding-planning-checklist",
     category: "Wedding Planning",

@@ -2051,7 +2051,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Choosing an IT Outsourcing Company in Kathmandu: A Founder's Vetting Guide",
-    seoTitle: "IT Outsourcing Companies in Kathmandu: How to Vet and Hire the Right Team",
+    seoTitle: "IT Outsourcing in Kathmandu: How to Vet and Hire",
     slug: "kathmandu-it-outsourcing-software-company-guide",
     href: "/blog/kathmandu-it-outsourcing-software-company-guide",
     category: "IT Services",
@@ -2159,7 +2159,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Booking Paragliding and Adventure Sports in Pokhara Safely",
-    seoTitle: "Pokhara Paragliding and Adventure Sports: Safety and Booking Guide",
+    seoTitle: "Pokhara Paragliding: Safety and Booking Guide",
     slug: "pokhara-paragliding-adventure-sports-guide",
     href: "/blog/pokhara-paragliding-adventure-sports-guide",
     category: "Adventure Sports",
@@ -2268,7 +2268,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Renting a Car or Bike in Nepal: A Practical Safety and Cost Guide",
-    seoTitle: "Car and Bike Rental in Nepal: Costs, Licenses and Safety Checklist",
+    seoTitle: "Car and Bike Rental in Nepal: Costs and Licenses",
     slug: "nepal-car-bike-rental-guide",
     href: "/blog/nepal-car-bike-rental-guide",
     category: "Transport",
@@ -2484,7 +2484,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Hiring Movers and Packers in Nepal Without Losing or Damaging Your Belongings",
-    seoTitle: "Movers and Packers in Nepal: How to Choose a Safe Relocation Company",
+    seoTitle: "Movers and Packers in Nepal: How to Choose Safely",
     slug: "nepal-movers-packers-relocation-guide",
     href: "/blog/nepal-movers-packers-relocation-guide",
     category: "Moving Services",
@@ -2698,7 +2698,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Hiring an Interior Designer or Architect in Kathmandu and Lalitpur",
-    seoTitle: "Interior Designers and Architects in Kathmandu: Selection Checklist",
+    seoTitle: "Interior Designers and Architects in Kathmandu",
     slug: "kathmandu-lalitpur-interior-designer-architect-guide",
     href: "/blog/kathmandu-lalitpur-interior-designer-architect-guide",
     category: "Professional Services",
@@ -2807,7 +2807,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Choosing a Study Abroad Consultancy in Nepal Without Getting Misled",
-    seoTitle: "Study Abroad Consultancy in Nepal: Verification and Selection Guide",
+    seoTitle: "Study Abroad Consultancy in Nepal: How to Choose",
     slug: "nepal-study-abroad-visa-consultancy-guide",
     href: "/blog/nepal-study-abroad-visa-consultancy-guide",
     category: "Education Consultancy",
@@ -2915,7 +2915,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Choosing an IELTS or English Language Institute in Kathmandu",
-    seoTitle: "IELTS and English Institutes in Kathmandu: How to Compare and Enroll",
+    seoTitle: "IELTS Institutes in Kathmandu: Compare and Enroll",
     slug: "kathmandu-ielts-english-institute-guide",
     href: "/blog/kathmandu-ielts-english-institute-guide",
     category: "Education",
@@ -3023,7 +3023,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Hiring a Chartered Accountant or Tax Consultant for a Small Business in Nepal",
-    seoTitle: "Chartered Accountant and Tax Consultant Guide for Nepal Small Businesses",
+    seoTitle: "Chartered Accountants and Tax Consultants in Nepal",
     slug: "nepal-chartered-accountant-tax-consultant-guide",
     href: "/blog/nepal-chartered-accountant-tax-consultant-guide",
     category: "Professional Services",
@@ -3455,7 +3455,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Using Pharmacies and Medicine Delivery Services in Nepal Safely",
-    seoTitle: "Nepal Pharmacy and Medicine Delivery: A Safety and Verification Guide",
+    seoTitle: "Pharmacy and Medicine Delivery in Nepal: Safety Guide",
     slug: "nepal-pharmacy-medicine-delivery-guide",
     href: "/blog/nepal-pharmacy-medicine-delivery-guide",
     category: "Pharmacy",
@@ -3563,7 +3563,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Choosing a Veterinary Clinic and Pet Care Service in Kathmandu",
-    seoTitle: "Kathmandu Veterinary Clinics and Pet Care: A Pet Owner's Checklist",
+    seoTitle: "Veterinary Clinics in Kathmandu: Pet Owner Checklist",
     slug: "kathmandu-veterinary-clinic-pet-care-guide",
     href: "/blog/kathmandu-veterinary-clinic-pet-care-guide",
     category: "Pet Care",
@@ -3671,7 +3671,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Renting Trekking Gear in Kathmandu and Pokhara: What to Check First",
-    seoTitle: "Trekking Gear Rental in Kathmandu and Pokhara: A Practical Checklist",
+    seoTitle: "Trekking Gear Rental in Kathmandu and Pokhara",
     slug: "kathmandu-pokhara-trekking-gear-rental-guide",
     href: "/blog/kathmandu-pokhara-trekking-gear-rental-guide",
     category: "Trekking Gear",
@@ -5626,7 +5626,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Choosing a Photography Studio in Kathmandu for Portraits and Passport Photos",
-    seoTitle: "Kathmandu Photography Studios: Portrait and Commercial Booking Guide",
+    seoTitle: "Photography Studios in Kathmandu: Booking Guide",
     slug: "kathmandu-photography-studio-portrait-guide",
     href: "/blog/kathmandu-photography-studio-portrait-guide",
     category: "Photography",
@@ -5950,7 +5950,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Choosing a Laundry and Dry Cleaning Service in Kathmandu",
-    seoTitle: "Kathmandu Laundry and Dry Cleaning: A Safety and Booking Checklist",
+    seoTitle: "Laundry and Dry Cleaning in Kathmandu: Checklist",
     slug: "kathmandu-laundry-dry-cleaning-guide",
     href: "/blog/kathmandu-laundry-dry-cleaning-guide",
     category: "Home Services",
@@ -6058,7 +6058,7 @@ export const expansionGuidePosts: BlogPost[] = [
   },
   {
     title: "Choosing a SIM Card and Mobile Network in Nepal",
-    seoTitle: "Nepal SIM Card and Mobile Network Guide for Residents and Visitors",
+    seoTitle: "Nepal SIM Card and Mobile Network Guide",
     slug: "nepal-sim-card-mobile-network-guide",
     href: "/blog/nepal-sim-card-mobile-network-guide",
     category: "Telecom",

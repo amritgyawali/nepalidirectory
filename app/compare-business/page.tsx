@@ -108,8 +108,11 @@ export default function CompareBusinessPage() {
         subtitle="Open practical checklists for photography, hotels, restaurants, home services, healthcare, contractors and more. Named provider comparisons publish only after review."
         cta={{ label: "Browse all categories", href: routes.categories }}
       />
-      <section className="section compare-index">
+      <section className="section compare-index" aria-labelledby="compare-guides-title">
         <div className="container">
+          <h2 id="compare-guides-title" className="sr-only">
+            Business comparison guides by category
+          </h2>
           <div className="compare-grid">
             {sortedCompareCategories.map((category) => (
               <GuideCard
