@@ -4,9 +4,11 @@ import { ArrowRight, MapPin } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { FillImage } from "@/components/ui/FillImage";
 import { siteUrl } from "@/lib/blog";
+import { getCityEditorialDetail } from "@/lib/city-pages";
 import { getIndexableCityPages } from "@/lib/indexable-hubs";
 import { routes } from "@/lib/routes";
 import { buildWebPageJsonLd, serializeJsonLd } from "@/lib/seo";
+import { buildFaqPageJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Nepal Business Directory by City",
@@ -23,6 +25,29 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 300;
+
+const faqs = [
+  {
+    question: "Which Nepal cities does NepaliDirectory cover?",
+    answer:
+      "City guides cover Kathmandu, Lalitpur and Bhaktapur in the Kathmandu Valley, plus Pokhara, Chitwan, Bharatpur, Biratnagar, Dharan, Butwal, Birgunj and Nepalgunj. A city page is published only once it has enough reviewed business profiles to be useful.",
+  },
+  {
+    question: "Why is my city not listed yet?",
+    answer:
+      "Each city hub needs a minimum number of active, reviewed listings before it goes live, so visitors never land on an empty or sample-filled page. Business owners can speed this up by claiming or adding their listing.",
+  },
+  {
+    question: "Should I search by city or by neighborhood?",
+    answer:
+      "Start with the city, then narrow to a named area such as Thamel, Lakeside or Patan. Travel time, service coverage and opening hours often matter more than the city name, so confirm that a business serves your exact address.",
+  },
+  {
+    question: "Are businesses in city guides ranked by payment?",
+    answer:
+      "No. Public results only include profiles with active status, a reviewed location and category, adequate completeness and a trustworthy data source. Paid plans never change the publication review.",
+  },
+];
 
 export default async function CityIndexPage() {
   // Cities below the listing threshold 404 until they qualify, so they are not linked here.
@@ -57,10 +82,11 @@ export default async function CityIndexPage() {
     // An ItemList with no entries is invalid structured data.
     mainEntity: cityDirectoryPages.length ? itemList : undefined,
   };
+  const faqJsonLd = buildFaqPageJsonLd(faqs, `${siteUrl}/city`);
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(cityDirectoryPages.length ? [collectionPage, itemList] : [collectionPage]) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(cityDirectoryPages.length ? [collectionPage, itemList, faqJsonLd] : [collectionPage, faqJsonLd]) }} />
       <Breadcrumbs items={[{ label: "Cities" }]} currentPath={routes.city} />
       <section className="page-head">
         <div className="container">
@@ -90,6 +116,7 @@ export default async function CityIndexPage() {
                   <small><MapPin size={13} aria-hidden /> {city.province}</small>
                   <strong>{city.name}</strong>
                   <span>{city.description}</span>
+                  <span>Key areas: {getCityEditorialDetail(city.slug).localAreas.join(", ")}</span>
                   <em>Open city guide <ArrowRight size={14} aria-hidden /></em>
                 </span>
               </Link>
@@ -104,7 +131,7 @@ export default async function CityIndexPage() {
           <div className="seo-answer-grid">
             {provinces.map((province) => (
               <article className="answer-summary" key={province}>
-                <h2>{province}</h2>
+                <h3>{province}</h3>
                 <div className="seo-link-strip">
                   {cityDirectoryPages.filter((city) => city.province === province).map((city) => (
                     <Link href={city.href} key={city.slug}>{city.name}</Link>
@@ -126,6 +153,18 @@ export default async function CityIndexPage() {
             <h2>How to use a city guide</h2>
             <p>Start with the service and a specific area, compare the same evidence, then confirm current hours, price and availability directly.</p>
           </article>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container article-faq">
+          <h2>City directory questions</h2>
+          {faqs.map((faq) => (
+            <details key={faq.question}>
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
         </div>
       </section>
     </main>

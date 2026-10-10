@@ -35,7 +35,7 @@ export const landingPages: SeoLandingPage[] = [
     slug: "near-me",
     href: "/near-me",
     title: "Find businesses near me in Nepal",
-    seoTitle: "Businesses Near Me in Nepal: Restaurants, Doctors, Hotels and Services",
+    seoTitle: "Businesses Near Me in Nepal: Food, Doctors, Hotels",
     description:
       "Find nearby restaurants, doctors, plumbers, electricians, hotels, salons and local services across Nepal with area-based discovery links.",
     image: image("photo-1524661135-423995f22d0b"),

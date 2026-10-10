@@ -27,7 +27,7 @@ export default function DealsPage() {
         <div className="container">
           <div className="deal-toolbar">
             {["All", "Restaurants", "Home Services", "Hotels", "Near Me"].map((filter) => (
-              <a className={filter === "All" ? "chip chip--active" : "chip"} href={filter === "All" ? routes.deals : `${routes.search}?q=${encodeURIComponent(filter)} offers`} key={filter}>
+              <a className={filter === "All" ? "chip chip--active" : "chip"} href={filter === "All" ? routes.deals : `${routes.search}?q=${encodeURIComponent(`${filter} offers`)}`} key={filter}>
                 {filter}
               </a>
             ))}

@@ -108,7 +108,10 @@ export default async function BlogCategoryPage({ params }: BlogCategoryPageProps
       />
       <Breadcrumbs items={[{ label: "Blog", href: routes.blog }, { label: category.name }]} currentPath={category.href} />
       <PageHero title={title} subtitle={description} cta={{ label: "All guides", href: routes.blog }} />
-      <section className="section">
+      <section className="section" aria-labelledby="category-guides-title">
+        <h2 id="category-guides-title" className="sr-only">
+          All {category.name.toLowerCase()} guides
+        </h2>
         <div className="container blog-grid">
           {category.posts.map((post) => (
             <GuideCard
